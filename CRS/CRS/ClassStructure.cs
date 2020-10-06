@@ -31,6 +31,7 @@ namespace CRS
 
         }
         private List<course> RegisteredCourses = new List<course>();
+        private List<PreviousCourse> CourseHistory = new List<PreviousCourse>();
     }
 
     public class faculty : baseUser
@@ -115,7 +116,7 @@ namespace CRS
             switch (usertype)
             {
                 case "student":
-                    foreach(student stu in StudentsList)
+                    foreach (student stu in StudentsList)
                     {
                         if (stu.username == username && stu.password == password)
                             return true;
@@ -147,7 +148,7 @@ namespace CRS
 
 
 
- public class courseDatabase
+    public class courseDatabase
     {
         public courseDatabase()
         {
@@ -188,26 +189,26 @@ namespace CRS
 
         private List<course> CourseLst;
     }
-public class course
-{
-    private string name;
-    private string title;
-    private string instructor;
-    private string credit;
-    private string seats;
-    private int num_time;
-    private List<string> time_blocks;
-
-    public course(string nme, string ttl, string ist, string crdt, string sea, int num_time_b, List<string> time_bs)
+    public class course
     {
-        name = nme;
-        title = ttl;
-        instructor = ist;
-        credit = crdt;
-        seats = sea;
-        num_time = num_time_b;
-        time_blocks = time_bs;
-    }
+        private string name;
+        private string title;
+        private string instructor;
+        private string credit;
+        private string seats;
+        private int num_time;
+        private List<string> time_blocks;
+
+        public course(string nme, string ttl, string ist, string crdt, string sea, int num_time_b, List<string> time_bs)
+        {
+            name = nme;
+            title = ttl;
+            instructor = ist;
+            credit = crdt;
+            seats = sea;
+            num_time = num_time_b;
+            time_blocks = time_bs;
+        }
 
         public string getCode()
         {
@@ -233,7 +234,7 @@ public class course
         public string getBlocks()
         {
             string tempString = "";
-            foreach(string crsBlock in time_blocks)
+            foreach (string crsBlock in time_blocks)
             {
                 tempString = tempString + Decode(crsBlock) + " | ";
             }
@@ -305,36 +306,53 @@ public class course
             return Convert.ToString(timeHour).PadLeft(2, '0') + ":" + Convert.ToString(timeMin).PadLeft(2, '0') + ampm + " to " + Convert.ToString(endTimeHour).PadLeft(2, '0') + ":" + Convert.ToString(endTimeMin).PadLeft(2, '0') + endampm;
         }
     }
+
+    public class PreviousCourse
+    {
+        public string student;
+        public string name;
+        public string semester;
+        public float credit;
+        public string grade;
+        public PreviousCourse(string stud, string nme, string semes, float crdt, string grd)
+        {
+            student = stud;
+            name = nme;
+            semester = semes;
+            credit = crdt;
+            grade = grd;
+        }
+    }
+    public class PreviousCourseDB
+        {
+            public List<PreviousCourse> AllPreviousCourses = new List<PreviousCourse>;
+            public PreviousCourseDB(string filepath)
+            {
+                string line;
+                System.IO.StreamReader input = new System.IO.StreamReader(filepath);
+                while ((line = input.ReadLine()) != null)
+                {
+                    string username = line.Substring(0, 10).Trim();
+                    string courseNumStr = line.Substring(11, 2).Trim();
+                    int courseNum = int.Parse(courseNumStr);
+                    int loc = 14;
+                    for(int i = 0; i < courseNum; i++)
+                    {
+                        string courseName = line.Substring(loc, 10);
+                        loc += 11;
+                        string semester = line.Substring(loc, 3);
+                        loc += 4;
+                        string creditStr = line.Substring(loc, 4);
+                        float credit = float.Parse(creditStr);
+                        loc += 4;
+                        string grade = line.Substring(loc, 3);
+                        loc += 4;
+                        PreviousCourse currentCourse = new PreviousCourse(username, courseName, semester, credit, grade);
+                        AllPreviousCourses.Add(currentCourse); 
+                    }
+                }
+        }
+    }
 }
 
-    //class baseUser
-    //{
-    //    private string user;
-    //    private string password;
-    //}
-//    class student : baseUser
-//{
-   
-//        private List<course> RegisteredCourses = new List<course>;
-//        bool register()
-//        {
-//            return true;
-//        }
-//}
-//    class faculty : baseUser 
-//    {
-  
-//        private List<course> CourseSchedule = new List<course>;
-//    }
-//    class admin : baseUser 
-//    {
-//        //list of current schedule and registered courses
-//        private List<course> CourseSchedule = new List<course>;
-//        private List<course> RegisteredCourses = new List<course>;
-//        bool register()
-//            {
-//                return true;
-//            }
-//    }
 
-//}
