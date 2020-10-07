@@ -20,6 +20,8 @@ namespace CRS
     public class student : baseUser
     {
         private string advisor;
+        private List<course> RegisteredCourses = new List<course>();
+        private List<PreviousCourse> CourseHistory = new List<PreviousCourse>();
         public student(string f, string m, string l, string adv, string usrname, string psw)
         {
             fname = f;
@@ -30,8 +32,14 @@ namespace CRS
             password = psw;
 
         }
-        private List<course> RegisteredCourses = new List<course>();
-        private List<PreviousCourse> CourseHistory = new List<PreviousCourse>();
+        public bool register(course currentCourse)
+        {
+            //Needs to check is course is valid given current schedule.
+            currentCourse.registerUser();
+            RegisteredCourses.Add(currentCourse);
+            return true;
+        }
+       
     }
 
     public class faculty : baseUser
@@ -195,9 +203,10 @@ namespace CRS
         private string title;
         private string instructor;
         private string credit;
-        private string seats;
+        private int seats;
         private int num_time;
         private List<string> time_blocks;
+        private int seatsAvailable;
 
         public course(string nme, string ttl, string ist, string crdt, string sea, int num_time_b, List<string> time_bs)
         {
@@ -205,11 +214,19 @@ namespace CRS
             title = ttl;
             instructor = ist;
             credit = crdt;
-            seats = sea;
+            seats = int.Parse(sea);
             num_time = num_time_b;
             time_blocks = time_bs;
+            seatsAvailable = int.Parse(sea);
         }
-
+        public void registerUser()
+        {
+            seatsAvailable--;
+        }
+        public int getSeatsAvailable()
+        {
+            return seatsAvailable;
+        }
         public string getCode()
         {
             return name;
@@ -226,7 +243,7 @@ namespace CRS
         {
             return credit;
         }
-        public string getSeats()
+        public int getSeats()
         {
             return seats;
         }
