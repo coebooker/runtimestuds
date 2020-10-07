@@ -322,10 +322,17 @@ namespace CRS
             credit = crdt;
             grade = grd;
         }
+        public void ListCourse(){
+            Console.WriteLine(student);
+            Console.WriteLine(name);
+            Console.WriteLine(semester);
+            Console.WriteLine(credit);
+            Console.WriteLine(grade);
+        }
     }
     public class PreviousCourseDB
         {
-            public List<PreviousCourse> AllPreviousCourses = new List<PreviousCourse>;
+            public List<PreviousCourse> AllPreviousCourses = new List<PreviousCourse>();
             public PreviousCourseDB(string filepath)
             {
                 string line;
@@ -336,7 +343,7 @@ namespace CRS
                     string courseNumStr = line.Substring(11, 2).Trim();
                     int courseNum = int.Parse(courseNumStr);
                     int loc = 14;
-                    for(int i = 0; i < courseNum; i++)
+                    for(int i = 0; i < courseNum-1; i++)
                     {
                         string courseName = line.Substring(loc, 10);
                         loc += 11;

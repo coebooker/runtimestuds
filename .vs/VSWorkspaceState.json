@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CRS",
+    "\\CRS\\CRS"
   ],
+  "SelectedNode": "\\CRS\\CRS\\ClassStructure.cs",
   "PreviewInSolutionExplorer": false
 }
