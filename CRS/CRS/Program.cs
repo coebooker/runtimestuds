@@ -15,14 +15,23 @@ namespace CRS
         static void Main()
         {
             PreviousCourseDB PrevCourseDB = new PreviousCourseDB(@"C:\Users\Coe\Downloads\historyDB.in");
-            foreach(PreviousCourse PrevCourse in PrevCourseDB.AllPreviousCourses){
-                PrevCourse.ListCourse();
+            userDatabase usrDB = new userDatabase();
+            List < student > studentLst = usrDB.getStudentList();
+            foreach(student currentStudent in studentLst)
+            {
+                foreach(PreviousCourse currentCourse in PrevCourseDB.AllPreviousCourses)
+                {
+                    if (currentCourse.student == currentStudent.username)
+                    {
+                        currentStudent.AddPreviousCourse(currentCourse);
+                    }
+                }
             }
-            /*userDatabase usrDB = new userDatabase();
+
             usrDB.readInData(@"C:\Users\mikit\Downloads\userDB.in");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm(usrDB)); // An instance of LoginForm class*/
+            Application.Run(new LoginForm(usrDB)); // An instance of LoginForm class
         }
     }
 }

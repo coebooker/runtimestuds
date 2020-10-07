@@ -39,6 +39,10 @@ namespace CRS
             RegisteredCourses.Add(currentCourse);
             return true;
         }
+        public void AddPreviousCourse(PreviousCourse crse)
+        {
+            CourseHistory.Add(crse);
+        }
        
     }
 
