@@ -1,0 +1,9 @@
+C:\Users\cmbooker\Desktop\CourseDatabase\CourseDatabase\bin\Debug\CourseDatabase.dacpac
+C:\Users\cmbooker\Desktop\CourseDatabase\CourseDatabase\bin\Debug\CourseDatabase.dll
+C:\Users\cmbooker\Desktop\CourseDatabase\CourseDatabase\bin\Debug\CourseDatabase.pdb
+C:\Users\cmbooker\Desktop\CourseDatabase\CourseDatabase\obj\Debug\CourseDatabase.dll
+C:\Users\cmbooker\Desktop\CourseDatabase\CourseDatabase\obj\Debug\CourseDatabase.pdb
+C:\Users\cmbooker\Desktop\CourseDatabase\CourseDatabase\obj\Debug\Model.xml
+C:\Users\cmbooker\Desktop\CourseDatabase\CourseDatabase\obj\Debug\refactor.xml
+C:\Users\cmbooker\Desktop\CourseDatabase\CourseDatabase\obj\Debug\postdeploy.sql
+C:\Users\cmbooker\Desktop\CourseDatabase\CourseDatabase\obj\Debug\predeploy.sql
