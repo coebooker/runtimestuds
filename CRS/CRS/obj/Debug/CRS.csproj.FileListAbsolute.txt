@@ -58,3 +58,4 @@ C:\Users\Coe\Source\Repos\runtimestuds\CRS\CRS\bin\Debug\CRS.pdb
 C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\bin\Debug\CRS.exe.config
 C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.exe
 C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.pdb
+C:\Users\Coe\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.csprojAssemblyReference.cache
