@@ -58,7 +58,7 @@ namespace CRS
             }
 
             data_grid_view.DataSource = table;
-            data_grid_view.EnableHeadersVisualStyles = false;
+            crs_hist_table.EnableHeadersVisualStyles = false;
         }
 
         private void create_crs_hist_table(DataGridView dgv)
@@ -97,6 +97,8 @@ namespace CRS
                 del_crs_std.Location = trd_btn;
                 crs_hist.Visible = true;
                 crs_hist.Location = fth_btn;
+                view_sch_std.Visible = true;
+                view_sch_std.Location = fft_btn;
             }
             else if (userType == "faculty")
             {
@@ -154,7 +156,6 @@ namespace CRS
                     // For Admin account, probably pass by reference the student instance into AdminStudentSelect form DONE
 
                     usrDB.addCourseToStudent(username, crs_lst_table.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB);
-                    
 
                     new addedCourse(crs_lst_table.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString()).Show();
                     create_crs_lst_table(crs_lst_table);
@@ -217,7 +218,10 @@ namespace CRS
 
         private void del_crs_click(object sender, EventArgs e)
         {
+            student currentStd = usrDB.getStudent(username);
+            List<course> stdCrsLst = currentStd.getRegisteredCrs();
 
+            new StudentCourses(stdCrsLst).Show();
         }
 
         private void view_sch_fac_click(object sender, EventArgs e)
@@ -244,6 +248,14 @@ namespace CRS
             }
             create_crs_lst_table(crs_lst_table);
             create_crs_hist_table(crs_hist_table);
+        }
+
+        private void view_sch_std_click(object sender, EventArgs e)
+        {
+            student currentStd = usrDB.getStudent(username);
+            List<course> stdCrsLst = currentStd.getRegisteredCrs();
+
+            new StudentCourses(stdCrsLst).Show();
         }
     }
 }

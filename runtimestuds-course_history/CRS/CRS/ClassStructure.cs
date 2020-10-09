@@ -52,6 +52,10 @@ namespace CRS
         {
             return CourseHistory;
         }
+        public List<course> getRegisteredCrs()
+        {
+            return RegisteredCourses;
+        }
 
         public void add_crs_hist(PreviousCourse pcrs)
         {
@@ -256,10 +260,11 @@ namespace CRS
         public void addCourseToStudent(string studentName, string courseID, string currentSemester, ref courseDatabase courseDB)
         {
             course courseAdding = courseDB.GetCourseList()[0];
-            foreach(course selectedCourse in courseDB.GetCourseList())
+            foreach(course crs in courseDB.GetCourseList())
             {
-                if(courseID.Trim() == selectedCourse.getCode().Trim())
+                if(courseID.Trim() == crs.getCode().Trim())
                 {
+                    course selectedCourse = crs;
                     selectedCourse.seatDecrement();
                     courseAdding = selectedCourse;
                 }
