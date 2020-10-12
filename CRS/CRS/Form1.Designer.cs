@@ -30,167 +30,143 @@ namespace CRS
         /// </summary>
         private void InitializeComponent()
         {
-            this.Username = new System.Windows.Forms.TextBox();
-            this.Password = new System.Windows.Forms.TextBox();
-            this.ExitButton = new System.Windows.Forms.Button();
-            this.LoginButton = new System.Windows.Forms.Button();
-            this.UsernameLabel = new System.Windows.Forms.Label();
-            this.PasswordLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.AdminButton = new System.Windows.Forms.RadioButton();
-            this.FacultyButton = new System.Windows.Forms.RadioButton();
-            this.StudentButton = new System.Windows.Forms.RadioButton();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
+            this.username = new System.Windows.Forms.TextBox();
+            this.password = new System.Windows.Forms.TextBox();
+            this.login = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.close = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.close)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
-            // Username
+            // username
             // 
-            this.Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Username.ForeColor = System.Drawing.Color.Silver;
-            this.Username.Location = new System.Drawing.Point(250, 175);
-            this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(438, 39);
-            this.Username.TabIndex = 0;
-            this.Username.Text = "Username";
-            this.Username.Enter += new System.EventHandler(this.UsernameEnter);
-            this.Username.Leave += new System.EventHandler(this.UsernameLeave);
+            this.username.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.username.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.username.Font = new System.Drawing.Font("Arial Narrow", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.username.ForeColor = System.Drawing.Color.Silver;
+            this.username.Location = new System.Drawing.Point(124, 180);
+            this.username.Name = "username";
+            this.username.Size = new System.Drawing.Size(360, 53);
+            this.username.TabIndex = 0;
+            this.username.Text = "Username";
+            this.username.Enter += new System.EventHandler(this.UsernameEnter);
+            this.username.Leave += new System.EventHandler(this.UsernameLeave);
             // 
-            // Password
+            // password
             // 
-            this.Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Password.ForeColor = System.Drawing.Color.Silver;
-            this.Password.Location = new System.Drawing.Point(250, 238);
-            this.Password.Name = "Password";
-            this.Password.Size = new System.Drawing.Size(438, 39);
-            this.Password.TabIndex = 1;
-            this.Password.Text = "Password";
-            this.Password.Enter += new System.EventHandler(this.PasswordEnter);
-            this.Password.Leave += new System.EventHandler(this.PasswordLeave);
+            this.password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.password.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.password.Font = new System.Drawing.Font("Arial Narrow", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password.ForeColor = System.Drawing.Color.Silver;
+            this.password.Location = new System.Drawing.Point(124, 276);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(360, 53);
+            this.password.TabIndex = 1;
+            this.password.Text = "Password";
+            this.password.Enter += new System.EventHandler(this.PasswordEnter);
+            this.password.Leave += new System.EventHandler(this.PasswordLeave);
             // 
-            // ExitButton
+            // login
             // 
-            this.ExitButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(225)))));
-            this.ExitButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ExitButton.Font = new System.Drawing.Font("Bauhaus 93", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.ForeColor = System.Drawing.Color.White;
-            this.ExitButton.Location = new System.Drawing.Point(488, 323);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(200, 50);
-            this.ExitButton.TabIndex = 2;
-            this.ExitButton.Text = "Exit";
-            this.ExitButton.UseVisualStyleBackColor = false;
-            this.ExitButton.Click += new System.EventHandler(this.ExitClick);
+            this.login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.login.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.login.FlatAppearance.BorderSize = 0;
+            this.login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.login.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.login.ForeColor = System.Drawing.Color.White;
+            this.login.Location = new System.Drawing.Point(47, 404);
+            this.login.Name = "login";
+            this.login.Size = new System.Drawing.Size(437, 63);
+            this.login.TabIndex = 3;
+            this.login.Text = "Login";
+            this.login.UseVisualStyleBackColor = false;
+            this.login.Click += new System.EventHandler(this.LoginClick);
             // 
-            // LoginButton
+            // panel1
             // 
-            this.LoginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(225)))));
-            this.LoginButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LoginButton.Font = new System.Drawing.Font("Bauhaus 93", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginButton.ForeColor = System.Drawing.Color.White;
-            this.LoginButton.Location = new System.Drawing.Point(250, 323);
-            this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(200, 50);
-            this.LoginButton.TabIndex = 3;
-            this.LoginButton.Text = "Login";
-            this.LoginButton.UseVisualStyleBackColor = false;
-            this.LoginButton.Click += new System.EventHandler(this.LoginClick);
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.panel1.Controls.Add(this.close);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(530, 86);
+            this.panel1.TabIndex = 4;
             // 
-            // UsernameLabel
+            // close
             // 
-            this.UsernameLabel.AutoSize = true;
-            this.UsernameLabel.Font = new System.Drawing.Font("Bauhaus 93", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UsernameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(225)))));
-            this.UsernameLabel.Location = new System.Drawing.Point(54, 175);
-            this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(153, 36);
-            this.UsernameLabel.TabIndex = 4;
-            this.UsernameLabel.Text = "Username";
+            this.close.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("close.BackgroundImage")));
+            this.close.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.close.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.close.Location = new System.Drawing.Point(434, 20);
+            this.close.Name = "close";
+            this.close.Size = new System.Drawing.Size(50, 50);
+            this.close.TabIndex = 5;
+            this.close.TabStop = false;
+            this.close.Click += new System.EventHandler(this.close_click);
             // 
-            // PasswordLabel
+            // label1
             // 
-            this.PasswordLabel.AutoSize = true;
-            this.PasswordLabel.Font = new System.Drawing.Font("Bauhaus 93", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PasswordLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(225)))));
-            this.PasswordLabel.Location = new System.Drawing.Point(59, 238);
-            this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(148, 36);
-            this.PasswordLabel.TabIndex = 5;
-            this.PasswordLabel.Text = "Password";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(176, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(179, 37);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "USER LOGIN";
             // 
-            // textBox1
+            // pictureBox1
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Bauhaus 93", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(255)))));
-            this.textBox1.Location = new System.Drawing.Point(138, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(467, 65);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "LOG IN";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(50, 183);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
-            // AdminButton
+            // pictureBox2
             // 
-            this.AdminButton.AutoSize = true;
-            this.AdminButton.BackColor = System.Drawing.Color.White;
-            this.AdminButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AdminButton.Font = new System.Drawing.Font("Bauhaus 93", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AdminButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(225)))));
-            this.AdminButton.Location = new System.Drawing.Point(538, 110);
-            this.AdminButton.Name = "AdminButton";
-            this.AdminButton.Size = new System.Drawing.Size(91, 27);
-            this.AdminButton.TabIndex = 9;
-            this.AdminButton.Text = "Admin";
-            this.AdminButton.UseVisualStyleBackColor = false;
-            // 
-            // FacultyButton
-            // 
-            this.FacultyButton.AutoSize = true;
-            this.FacultyButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FacultyButton.Font = new System.Drawing.Font("Bauhaus 93", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FacultyButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(225)))));
-            this.FacultyButton.Location = new System.Drawing.Point(325, 113);
-            this.FacultyButton.Name = "FacultyButton";
-            this.FacultyButton.Size = new System.Drawing.Size(103, 27);
-            this.FacultyButton.TabIndex = 8;
-            this.FacultyButton.Text = "Faculty";
-            this.FacultyButton.UseVisualStyleBackColor = true;
-            // 
-            // StudentButton
-            // 
-            this.StudentButton.AutoSize = true;
-            this.StudentButton.Checked = true;
-            this.StudentButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.StudentButton.Font = new System.Drawing.Font("Bauhaus 93", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StudentButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(117)))), ((int)(((byte)(225)))));
-            this.StudentButton.Location = new System.Drawing.Point(113, 113);
-            this.StudentButton.Name = "StudentButton";
-            this.StudentButton.Size = new System.Drawing.Size(102, 27);
-            this.StudentButton.TabIndex = 7;
-            this.StudentButton.TabStop = true;
-            this.StudentButton.Text = "Student";
-            this.StudentButton.UseVisualStyleBackColor = true;
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Location = new System.Drawing.Point(48, 279);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
             // 
             // LoginForm
             // 
-            this.AcceptButton = this.LoginButton;
+            this.AcceptButton = this.login;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(742, 451);
-            this.Controls.Add(this.FacultyButton);
-            this.Controls.Add(this.StudentButton);
-            this.Controls.Add(this.AdminButton);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.PasswordLabel);
-            this.Controls.Add(this.UsernameLabel);
-            this.Controls.Add(this.LoginButton);
-            this.Controls.Add(this.ExitButton);
-            this.Controls.Add(this.Password);
-            this.Controls.Add(this.Username);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.ClientSize = new System.Drawing.Size(530, 545);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.login);
+            this.Controls.Add(this.password);
+            this.Controls.Add(this.username);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
             this.Name = "LoginForm";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.close)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,16 +174,14 @@ namespace CRS
 
         #endregion
 
-        private System.Windows.Forms.TextBox Username;
-        private System.Windows.Forms.TextBox Password;
-        private System.Windows.Forms.Button ExitButton;
-        private System.Windows.Forms.Button LoginButton;
-        private System.Windows.Forms.Label UsernameLabel;
-        private System.Windows.Forms.Label PasswordLabel;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RadioButton AdminButton;
-        private System.Windows.Forms.RadioButton FacultyButton;
-        private System.Windows.Forms.RadioButton StudentButton;
+        private System.Windows.Forms.TextBox username;
+        private System.Windows.Forms.TextBox password;
+        private System.Windows.Forms.Button login;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox close;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

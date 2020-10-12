@@ -13,12 +13,20 @@ namespace CRS
     
     public partial class AdminStudentSelect : Form
     {
+        validity validityResult;
         string coursePass;
-        public AdminStudentSelect(string courseAdding)
+        userDatabase usrDB;
+        courseDatabase crsDB;
+        string currentSemester;
+        string courseAdding;
+        public AdminStudentSelect(string crsAdding, ref userDatabase userDB, ref courseDatabase courseDB, string crntSmst)
         {
             InitializeComponent();
-            userDatabase usrDB = new userDatabase();
-            usrDB.readInData(@"C:\Users\mikit\Downloads\userDB.in");
+
+            usrDB = userDB;
+            crsDB = courseDB;
+            currentSemester = crntSmst;
+            courseAdding = crsAdding;
 
             coursePass = courseAdding;
 
@@ -53,7 +61,57 @@ namespace CRS
         private void button1_Click(object sender, EventArgs e)
         {
             string studentPass = dataGridView1.SelectedRows[0].Cells["First Name"].FormattedValue.ToString() +" "+ dataGridView1.SelectedRows[0].Cells["Middle Name"].FormattedValue.ToString() +" "+ dataGridView1.SelectedRows[0].Cells["Last Name"].FormattedValue.ToString();
-            new AdminStudentCourse(coursePass, studentPass).Show();
+
+
+
+
+            validityResult = usrDB.getStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString()).isValidAdd(currentSemester, crsDB.getCourse(courseAdding));
+            if (validityResult.valid)
+            {
+                if (validityResult.warning)
+                {
+                    //Pop up warning message
+                    MessageBox.Show(validityResult.message,
+                    "Warning",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    if (dataGridView1.Visible == false)
+                    {
+                        dataGridView1.Visible = true;
+                    }
+                }
+
+                // THINGS TO DO
+
+                // Actually add course to student account DONE
+
+                // -> Add it to RegisteredCourse List under the student class DONE
+
+                // -> Add it to course history with X as status under the student class DONE
+
+                // Decrement number of seats for the class DONE
+
+                // All the above should be done with pass by reference to mitigate data-overwrite every course addition/deletion
+
+                // For Admin account, probably pass by reference the student instance into AdminStudentSelect form
+
+                usrDB.addCourseToStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString(), courseAdding.Trim(), currentSemester, ref crsDB);
+
+
+                new AdminStudentCourse(coursePass, studentPass).Show();
+            }
+            else
+            {
+                // Display that it's a invalid add
+                MessageBox.Show(validityResult.message,
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+                if (dataGridView1.Visible == false)
+                {
+                    dataGridView1.Visible = true;
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

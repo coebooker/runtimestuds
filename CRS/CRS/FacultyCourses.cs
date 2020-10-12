@@ -29,7 +29,7 @@ namespace CRS
             {
                 if (crs.getInstructor() == userNameIn)
                 {
-                    table.Rows.Add(crs.getCode(), crs.getName(), crs.getCredit(), crs.getSeats(), crs.getBlocks());
+                    table.Rows.Add(crs.getCode(), crs.getTitle(), crs.getCredit(), crs.getSeats(), crs.getBlocks());
                 }
             }
 
