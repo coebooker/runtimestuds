@@ -105,3 +105,6 @@ C:\Users\mikit\source\runtimestuds\CRS\CRS\obj\Debug\CRS.csproj.GenerateResource
 C:\Users\mikit\source\runtimestuds\CRS\CRS\obj\Debug\CRS.csproj.CoreCompileInputs.cache
 C:\Users\mikit\source\runtimestuds\CRS\CRS\obj\Debug\CRS.exe
 C:\Users\mikit\source\runtimestuds\CRS\CRS\obj\Debug\CRS.pdb
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\bin\Debug\CRS.exe.config
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.exe
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.pdb

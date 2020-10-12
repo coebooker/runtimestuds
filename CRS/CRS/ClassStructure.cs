@@ -65,7 +65,18 @@ namespace CRS
         {
             return credits;
         }
-
+        public List<PreviousCourse> GetCurrentTermList()
+        {
+            List<PreviousCourse> CurrentTermList = new List<PreviousCourse>();
+            foreach (PreviousCourse crs in CourseHistory)
+            {
+                if(crs.semester == "F14")
+                {
+                    CurrentTermList.Add(crs);
+                }
+            }
+            return CurrentTermList;
+        }
         public void add_crs_hist(PreviousCourse pcrs)
         {
             CourseHistory.Add(pcrs);
@@ -243,6 +254,7 @@ namespace CRS
             password = psw;
         }
         private List<course> CourseSchedule = new List<course>();
+        
     }
 
     public class admin : baseUser
@@ -519,6 +531,7 @@ namespace CRS
         private int num_time;
         private List<string> time_blocks;
         private List<classTime> time_blocks_alternative;
+        private List<student> EnrolledStudents = new List<student>();
 
         public course(string nme, string ttl, string ist, string crdt, string sea, int num_time_b, List<string> time_bs)
         {
