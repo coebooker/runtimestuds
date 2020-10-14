@@ -468,6 +468,20 @@ namespace CRS
                 course crs = new course(code, title, instructor, credit, seats, num_time_blocks, BlockLst);
                 CourseLst.Add(crs);
             }
+   
+        }
+        public List<course> GetFacultyCourse(faculty currentFaculty)
+        {
+            List<course> FacultyLst = new List<course>();
+            string username = currentFaculty.username;
+            foreach (course CurrentCourse in CourseLst)
+            {
+                if (CurrentCourse.getInstructor() == username)
+                {
+                    FacultyLst.Add(CurrentCourse);
+                }
+            }
+            return FacultyLst;
         }
 
         public List<course> GetCourseList()
