@@ -312,7 +312,7 @@ namespace CRS
             return StudentsLst;
         }
 
-        public void addCourseToStudent(string studentName, string courseID, string currentSemester, ref courseDatabase courseDB)
+        public void addCourseToStudent(string studentName, string courseID, string currentSemester, ref courseDatabase courseDB, student currentStudent)
         {
             course courseAdding = courseDB.GetCourseList()[0];
             foreach(course crs in courseDB.GetCourseList())
@@ -320,7 +320,7 @@ namespace CRS
                 if(courseID.Trim() == crs.getCode().Trim())
                 {
                     course selectedCourse = crs;
-                    selectedCourse.seatDecrement();
+                    selectedCourse.disenrollUser(currentStudent);
                     courseAdding = selectedCourse;
                 }
             }
@@ -336,7 +336,7 @@ namespace CRS
             }
         }
 
-        public void deleteCourseFromStudnet(string studentName, string courseID, string currentSemester, ref courseDatabase courseDB)
+        public void deleteCourseFromStudent(string studentName, string courseID, string currentSemester, ref courseDatabase courseDB,student currentStudent)
         {
             course courseDeleting = courseDB.GetCourseList()[0];
             foreach(course crs in courseDB.GetCourseList())
@@ -344,7 +344,7 @@ namespace CRS
                 if (courseID.Trim() == crs.getCode().Trim())
                 {
                     course selectedCourse = crs;
-                    selectedCourse.seatIncrement();
+                    selectedCourse.enrollUser(currentStudent);
                     courseDeleting = selectedCourse;
                 }
             }
@@ -602,13 +602,15 @@ namespace CRS
             return seats;
         }
 
-        public void seatDecrement()
+        public void disenrollUser(student currentStudent)
         {
+            EnrolledStudents.Remove(currentStudent);
             seats = Convert.ToString(Convert.ToInt32(seats) - 1);
         }
 
-        public void seatIncrement()
+        public void enrollUser(student currentStudent)
         {
+            EnrolledStudents.Add(currentStudent);
             seats = Convert.ToString(Convert.ToInt32(seats) + 1);
         }
 

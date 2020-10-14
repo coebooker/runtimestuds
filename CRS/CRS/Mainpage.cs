@@ -234,8 +234,8 @@ namespace CRS
                     // All the above should be done with pass by reference to mitigate data-overwrite every course addition/deletion
 
                     // For Admin account, probably pass by reference the student instance into AdminStudentSelect form DONE
-
-                    usrDB.addCourseToStudent(username, crs_lst_table.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB);
+                    student currentStd = usrDB.getStudent(username);
+                    usrDB.addCourseToStudent(username, crs_lst_table.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB,currentStd);
 
                     new addedCourse(crs_lst_table.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString()).Show();
                     create_crs_lst_table(crs_lst_table);
@@ -292,10 +292,10 @@ namespace CRS
 
             if (std_sch_table.SelectedRows.Count == 1)
             {
-                usrDB.deleteCourseFromStudnet(username, std_sch_table.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB);
+                student curStd = usrDB.getStudent(username);
+                usrDB.deleteCourseFromStudent(username, std_sch_table.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB,curStd);
                 create_crs_lst_table(crs_lst_table);
                 create_crs_hist_table(crs_hist_table);
-                student curStd = usrDB.getStudent(username);
                 List<course> studentCrsLst = curStd.getRegisteredCrs();
                 create_std_sch_table(std_sch_table, studentCrsLst);
             }
