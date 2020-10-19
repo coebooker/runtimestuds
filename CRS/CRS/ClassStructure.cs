@@ -320,18 +320,10 @@ namespace CRS
                 if(courseID.Trim() == crs.getCode().Trim())
                 {
                     course selectedCourse = crs;
-                    selectedCourse.disenrollUser(currentStudent);
+                    selectedCourse.enrollUser(currentStudent);
                     courseAdding = selectedCourse;
-                }
-            }
-
-            foreach(student studentAccount in StudentsLst)
-            {
-                if(studentAccount.username == studentName)
-                {
-                    studentAccount.addClassToCurrent(courseAdding);
-                    studentAccount.addClassToHistory(courseAdding, currentSemester);
-
+                    currentStudent.addClassToCurrent(courseAdding);
+                    currentStudent.addClassToHistory(courseAdding, currentSemester);
                 }
             }
         }
@@ -344,16 +336,10 @@ namespace CRS
                 if (courseID.Trim() == crs.getCode().Trim())
                 {
                     course selectedCourse = crs;
-                    selectedCourse.enrollUser(currentStudent);
+                    selectedCourse.disenrollUser(currentStudent);
                     courseDeleting = selectedCourse;
-                }
-            }
-            foreach(student studentAccount in StudentsLst)
-            {
-                if (studentAccount.username == studentName)
-                {
-                    studentAccount.deleteCourseFromCurrent(courseDeleting);
-                    studentAccount.deleteClassFromHistory(courseDeleting, currentSemester);
+                    currentStudent.deleteCourseFromCurrent(courseDeleting);
+                    currentStudent.deleteClassFromHistory(courseDeleting, currentSemester);
                 }
             }
         }
@@ -470,7 +456,7 @@ namespace CRS
             }
    
         }
-        public List<course> GetFacultyCourse(faculty currentFaculty)
+        public List<course> GetFacultyCourseLst(faculty currentFaculty)
         {
             List<course> FacultyLst = new List<course>();
             string username = currentFaculty.username;

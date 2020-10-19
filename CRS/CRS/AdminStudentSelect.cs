@@ -94,8 +94,9 @@ namespace CRS
                 // All the above should be done with pass by reference to mitigate data-overwrite every course addition/deletion
 
                 // For Admin account, probably pass by reference the student instance into AdminStudentSelect form
+                student currentStudent = usrDB.getStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString());
 
-                usrDB.addCourseToStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString(), courseAdding.Trim(), currentSemester, ref crsDB);
+                usrDB.addCourseToStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString(), courseAdding.Trim(), currentSemester, ref crsDB, currentStudent);
 
 
                 new AdminStudentCourse(coursePass, studentPass).Show();
