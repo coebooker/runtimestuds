@@ -12,99 +12,88 @@ namespace CRS
 {
     public partial class LoginForm : Form
     {
-        // Class Constructor
-        public LoginForm(userDatabase userDB)
+        private userDatabase usrDB;
+        string usrf_path;
+        string crsf_path;
+        string prevcrsf_path;
+        public LoginForm(string upath, string cpath, string pcpath)
         {
-            InitializeComponent(); // Initialize components
+            InitializeComponent();
+            usrf_path = upath;
+            crsf_path = cpath;
+            prevcrsf_path = pcpath;
+
+            userDatabase userDB = new userDatabase(usrf_path);
             usrDB = userDB;
+            Bitmap bmp = ((Bitmap)close.BackgroundImage);
+            bmp.MakeTransparent();
         }
 
-        // When entering the username box
         private void UsernameEnter(object sender, EventArgs e)
         {
-            if (Username.Text == "Username")
+            if (username.Text == "Username")
             {
-                Username.Text = "";
-                Username.ForeColor = Color.Black;
+                username.Text = "";
+                username.ForeColor = Color.White;
             }
         }
 
-        // When leaving the username box
         private void UsernameLeave(object sender, EventArgs e)
         {
-            if (Username.Text == "")
+            if (username.Text == "")
             {
-                Username.Text = "Username";
-                Username.ForeColor = Color.Silver;
+                username.Text = "Username";
+                username.ForeColor = Color.Silver;
             }
         }
-        
-        // When entering the password box
+
         private void PasswordEnter(object sender, EventArgs e)
         {
-            if (Password.Text == "Password")
+            if (password.Text == "Password")
             {
-                Password.Text = "";
-                Password.PasswordChar = '*';
-                Password.ForeColor = Color.Black;
+                password.Text = "";
+                password.PasswordChar = '*';
+                password.ForeColor = Color.White;
             }
         }
 
-        // When leaving the password box
         private void PasswordLeave(object sender, EventArgs e)
         {
-            if (Password.Text == "")
+            if (password.Text == "")
             {
-                Password.Text = "Password";
-                Password.PasswordChar = '\0';
-                Password.ForeColor = Color.Silver;
+                password.Text = "Password";
+                password.PasswordChar = '\0';
+                password.ForeColor = Color.Silver;
             }
         }
 
-        private void ExitClick(object sender, EventArgs e)
-        {
-            // Add some notification telling the program about to terminate
-            this.Close();
-        }
-
-        // When Login button is clicked
         private void LoginClick(object sender, EventArgs e)
         {
-            string usertype;
-            // Change the order especially else part
-            if (StudentButton.Checked)
-                usertype = "student";
-            else if (FacultyButton.Checked)
-                usertype = "faculty";
-            else
-                usertype = "admin";
+            string usertype = "student";    //Default
+            string username = this.username.Text.ToLower();
+            string pswd = password.Text.ToLower();
 
-            if (usrDB.isValidUser(Username.Text, Password.Text, usertype))
+            if (usrDB.isValidUser(username, pswd, ref usertype))
             {
-                string userPassIn = Username.Text;
                 this.Hide();
-                courseDatabase crsDB = new courseDatabase();
-                crsDB.readInCourse(@"C:\Users\mikit\Downloads\courseDB.in");
-                new Mainpage(crsDB,usertype,userPassIn).ShowDialog();
+                new mainpage(usertype, username, usrDB, usrf_path, crsf_path, prevcrsf_path).ShowDialog();
                 this.Close();
             }
-            else // Invalid credential
+            else
             {
                 MessageBox.Show("Your username or password is incorrect.",
                     "Invalid Credential",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Question);
-                Password.Text = "";
-                Password.PasswordChar = '*';
-                Password.ForeColor = Color.Black;
+                password.Text = "";
+                password.PasswordChar = '*';
+                password.ForeColor = Color.White;
             }
         }
 
-        private userDatabase usrDB;
-
-        private void LoginForm_Load(object sender, EventArgs e)
+        private void close_click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

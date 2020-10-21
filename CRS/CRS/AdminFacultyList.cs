@@ -12,11 +12,12 @@ namespace CRS
 {
     public partial class AdminFacultyList : Form
     {
-        public AdminFacultyList()
+        courseDatabase crsDB;
+        public AdminFacultyList(userDatabase userDB, courseDatabase courseDB)
         {
             InitializeComponent();
-            userDatabase usrDB = new userDatabase();
-            usrDB.readInData(@"C:\Users\mikit\Downloads\userDB.in");
+            userDatabase usrDB = userDB;
+            crsDB = courseDB;
 
             DataTable table = new DataTable();
             List<faculty> facultyDBInstance = usrDB.getFacultyList();
@@ -38,9 +39,7 @@ namespace CRS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            courseDatabase crsDB = new courseDatabase();
-            crsDB.readInCourse(@"C:\Users\mikit\Downloads\courseDB.in");
-            new FacultyCourses(crsDB.GetCourses(), dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString()).Show();
+            new FacultyCourses(crsDB.GetCourseList(), dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString().Trim()).Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

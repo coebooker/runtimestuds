@@ -16,7 +16,7 @@ namespace CRS
         {
             InitializeComponent();
             string tempString = courseAdded + " has been added";
-            textBox1.Text = tempString;
+            label1.Text = tempString;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -25,6 +25,11 @@ namespace CRS
         }
 
         private void addedCourse_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

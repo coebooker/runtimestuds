@@ -14,24 +14,12 @@ namespace CRS
         [STAThread]
         static void Main()
         {
-            PreviousCourseDB PrevCourseDB = new PreviousCourseDB(@"C:\Users\Coe\Downloads\historyDB.in");
-            userDatabase usrDB = new userDatabase();
-            List < student > studentLst = usrDB.getStudentList();
-            foreach(student currentStudent in studentLst)
-            {
-                foreach(PreviousCourse currentCourse in PrevCourseDB.AllPreviousCourses)
-                {
-                    if (currentCourse.student == currentStudent.username)
-                    {
-                        currentStudent.AddPreviousCourse(currentCourse);
-                    }
-                }
-            }
-
-            usrDB.readInData(@"C:\Users\mikit\Downloads\userDB.in");
+            string userfile_path = @"C:\Users\mikit\Downloads\userDB.in";
+            string coursefile_path = @"C:\Users\mikit\Downloads\courseDB.in";
+            string prevcoursefile_path = @"C:\Users\mikit\Downloads\historyDB.in";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm(usrDB)); // An instance of LoginForm class
+            Application.Run(new LoginForm(userfile_path, coursefile_path, prevcoursefile_path));
         }
     }
 }
