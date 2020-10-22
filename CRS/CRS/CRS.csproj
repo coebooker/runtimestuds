@@ -72,11 +72,11 @@
       <DependentUpon>AdminStudentSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="ClassStructure.cs" />
-    <Compile Include="FacultyCourses.cs">
+    <Compile Include="facultySchedule.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FacultyCourses.Designer.cs">
-      <DependentUpon>FacultyCourses.cs</DependentUpon>
+    <Compile Include="facultySchedule.Designer.cs">
+      <DependentUpon>facultySchedule.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -110,8 +110,8 @@
     <EmbeddedResource Include="AdminStudentSelect.resx">
       <DependentUpon>AdminStudentSelect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FacultyCourses.resx">
-      <DependentUpon>FacultyCourses.cs</DependentUpon>
+    <EmbeddedResource Include="facultySchedule.resx">
+      <DependentUpon>facultySchedule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

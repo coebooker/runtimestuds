@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,11 @@ namespace CRS
     {
         private string advisor;
         private float GPA;
-        private float credits;
+        private float totalCredits;
+        private float gradedCredits;
+        private float gradePoints;
+
+        // Class constructor
         public student(string f, string m, string l, string adv, string usrname, string psw)
         {
             fname = f;
@@ -47,9 +52,11 @@ namespace CRS
             username = usrname;
             password = psw;
             RegisteredCourses = new List<course>();
-            CourseHistory = new List<PreviousCourse>();
+            CourseHistory = new List<previousCourse>();
         }
-        public List<PreviousCourse> getCrsHist()
+
+        // Extracting info from the object
+        public List<previousCourse> getCrsHist()
         {
             return CourseHistory;
         }
@@ -63,12 +70,12 @@ namespace CRS
         }
         public float getCredits()
         {
-            return credits;
+            return totalCredits;
         }
-        public List<PreviousCourse> GetCurrentTermList()
+        public List<previousCourse> GetCurrentTermList()
         {
-            List<PreviousCourse> CurrentTermList = new List<PreviousCourse>();
-            foreach (PreviousCourse crs in CourseHistory)
+            List<previousCourse> CurrentTermList = new List<previousCourse>();
+            foreach (previousCourse crs in CourseHistory)
             {
                 if(crs.semester == "F14")
                 {
@@ -77,18 +84,34 @@ namespace CRS
             }
             return CurrentTermList;
         }
-        public void add_crs_hist(PreviousCourse pcrs)
+        public string getAdvisor()
+        {
+            return advisor;
+        }
+        public string getFName()
+        {
+            return fname;
+        }
+        public string getMName()
+        {
+            return mname;
+        }
+        public string getLName()
+        {
+            return lname;
+        }
+
+        // Making changes to the object //
+        public void addCrsHist(previousCourse pcrs)
         {
             CourseHistory.Add(pcrs);
-            float gp = credits * GPA;
-            credits += pcrs.credit;
-            string grade = pcrs.grade;
-            if (grade == "S")
+            totalCredits += pcrs.credit;
+            if (pcrs.grade != "S")
             {
-                GPA = gp / credits;
+                gradedCredits += pcrs.credit;
+                gradePoints += gradeDict[pcrs.grade];
+                GPA = gradePoints / gradedCredits;
             }
-            else
-                GPA = (gp + gradeDict[grade]) / credits;
         }
 
         public void addClassToCurrent(course courseAdded)
@@ -97,7 +120,7 @@ namespace CRS
         }
         public void addClassToHistory(course courseAdded, string currentSemester)
         {
-            PreviousCourse courseAddedHistory = new PreviousCourse(username, courseAdded.getCode().Trim(), currentSemester, Convert.ToSingle(courseAdded.getCredit().Trim()), "N");
+            previousCourse courseAddedHistory = new previousCourse(username, courseAdded.getCode().Trim(), currentSemester, Convert.ToSingle(courseAdded.getCredit().Trim()), "N");
             CourseHistory.Add(courseAddedHistory);
         }
         public void deleteCourseFromCurrent(course courseDeleted)
@@ -106,10 +129,9 @@ namespace CRS
         }
         public void deleteClassFromHistory(course courseDeleted, string currentSemester)
         {
-            PreviousCourse courseDeletedHistory = new PreviousCourse(username, courseDeleted.getCode().Trim(), currentSemester, Convert.ToSingle(courseDeleted.getCredit().Trim()), "N");
+            previousCourse courseDeletedHistory = new previousCourse(username, courseDeleted.getCode().Trim(), currentSemester, Convert.ToSingle(courseDeleted.getCredit().Trim()), "N");
             CourseHistory.Remove(courseDeletedHistory);
         }
-
 
         public validity isValidAdd(string crntSmst, course crsBngAdded) 
         {
@@ -199,7 +221,7 @@ namespace CRS
             if (validAdd)
             {
                 
-                foreach (PreviousCourse prvCrs in CourseHistory)
+                foreach (previousCourse prvCrs in CourseHistory)
                 {
                     if (prvCrs.name.Trim().Substring(0, prvCrs.name.Trim().Length - 3) == crsBngAdded.getCode().Trim().Substring(0, crsBngAdded.getCode().Trim().Length - 3))
                     {
@@ -212,7 +234,7 @@ namespace CRS
                 }
             }
             //check number of seats avaialble
-            if (Convert.ToInt32(crsBngAdded.getSeats()) == 0)
+            if (crsBngAdded.getSeats() == 0)
             {
                 validAdd = false;
                 warningMessage = "There are no seats available for the class";
@@ -224,7 +246,7 @@ namespace CRS
         }
 
         private List<course> RegisteredCourses;
-        private List<PreviousCourse> CourseHistory;
+        private List<previousCourse> CourseHistory;
         public Dictionary<string, float> gradeDict = new Dictionary<string, float>()
         {
             {"A",4.0f},
@@ -247,13 +269,26 @@ namespace CRS
     {
         public faculty(string f, string m, string l, string usrname, string psw)
         {
+            courseSchedule = new List<course>();
+            adviseesLst = new List<student>();
             fname = f;
             mname = m;
             lname = l;
             username = usrname;
             password = psw;
         }
-        private List<course> CourseSchedule = new List<course>();
+
+        public List<student> getAdviseesLst()
+        {
+            return adviseesLst;
+        }
+
+        public void addAdvisee(student std)
+        {
+            adviseesLst.Add(std);
+        }
+        private List<course> courseSchedule;
+        private List<student> adviseesLst;
         
     }
 
@@ -273,17 +308,18 @@ namespace CRS
 
     public class userDatabase
     {
+        // Class constructor
         public userDatabase(string filepath)
         {
             StudentsLst = new List<student>();
-            FacultyList = new List<faculty>();
+            FacultyLst = new List<faculty>();
             AdminList = new List<admin>();
             string line;
             System.IO.StreamReader input = new System.IO.StreamReader(filepath);
             while ((line = input.ReadLine()) != null)
             {
-                string username = line.Substring(0, 10).Trim().ToLower();
-                string password = line.Substring(11, 10).Trim().ToLower();
+                string username = line.Substring(0, 10).Trim();
+                string password = line.Substring(11, 10).Trim();
                 string firstName = line.Substring(22, 15).Trim();
                 string middleName = line.Substring(38, 15).Trim();
                 string lastName = line.Substring(54, 15).Trim();
@@ -292,7 +328,7 @@ namespace CRS
                 if (status == "faculty")
                 {
                     faculty fac = new faculty(firstName, middleName, lastName, username, password);
-                    FacultyList.Add(fac);
+                    FacultyLst.Add(fac);
                 }
                 else if (status == "admin")
                 {
@@ -305,17 +341,49 @@ namespace CRS
                     StudentsLst.Add(std);
                 }
             }
+            foreach (student std in StudentsLst)
+            {
+                for (int i = 0; i < FacultyLst.Count(); i++)
+                {
+                    if (std.getAdvisor() == FacultyLst[i].username)
+                    {
+                        FacultyLst[i].addAdvisee(std);
+                        break;
+                    }
+                }
+            }
         }
 
         public List<student> getStudentList()
         {
             return StudentsLst;
         }
+        public List<faculty> getFacultyList()
+        {
+            return FacultyLst;
+        }
+        public student getStudent(string username)
+        {
+            student std = StudentsLst[0]; // Default value
+            foreach (student stu in StudentsLst)
+                if (stu.username.ToLower() == username)
+                    return stu;
+            return std;
+        }
+        public faculty getFaculty(string username)
+        {
+            faculty fac = FacultyLst[0]; // Default value
+            foreach (faculty f in FacultyLst)
+                if (f.username.ToLower() == username)
+                    return f;
+            return fac;
+        }
+
 
         public void addCourseToStudent(string studentName, string courseID, string currentSemester, ref courseDatabase courseDB, student currentStudent)
         {
-            course courseAdding = courseDB.GetCourseList()[0];
-            foreach(course crs in courseDB.GetCourseList())
+            course courseAdding = courseDB.getCourseList()[0];
+            foreach(course crs in courseDB.getCourseList())
             {
                 if(courseID.Trim() == crs.getCode().Trim())
                 {
@@ -327,11 +395,10 @@ namespace CRS
                 }
             }
         }
-
         public void deleteCourseFromStudent(string studentName, string courseID, string currentSemester, ref courseDatabase courseDB,student currentStudent)
         {
-            course courseDeleting = courseDB.GetCourseList()[0];
-            foreach(course crs in courseDB.GetCourseList())
+            course courseDeleting = courseDB.getCourseList()[0];
+            foreach(course crs in courseDB.getCourseList())
             {
                 if (courseID.Trim() == crs.getCode().Trim())
                 {
@@ -343,55 +410,29 @@ namespace CRS
                 }
             }
         }
-
-        public List<faculty> getFacultyList()
-        {
-            return FacultyList;
-        }
-
-        public student getStudent(string username)
-        {
-            student std = StudentsLst[0]; // Default value
-            foreach (student stu in StudentsLst)
-            {
-                if (stu.username == username)
-                {
-                    return stu;
-                }
-            }
-            return std;
-        }
-
         public bool isValidUser(string username, string password, ref string usertype)
         {
             foreach (student std in StudentsLst)
-            {
-                if (std.username == username && std.password == password)
+                if (std.username.ToLower() == username && std.password.ToLower() == password)
                 {
                     usertype = "student";
                     return true;
                 }
-            }
-            foreach (faculty fac in FacultyList)
-            {
-                if (fac.username == username && fac.password == password)
+            foreach (faculty fac in FacultyLst)
+                if (fac.username.ToLower() == username && fac.password.ToLower() == password)
                 {
                     usertype = "faculty";
                     return true;
                 }
-            }
             foreach (admin adm in AdminList)
-            {
-                if (adm.username == username && adm.password == password)
+                if (adm.username.ToLower() == username && adm.password.ToLower() == password)
                 {
                     usertype = "admin";
                     return true;
                 }
-            }
             return false;
         }
-
-        public void add_prev_courses(string filepath)
+        public void addPrevCourses(string filepath)
         {
             string line;
             System.IO.StreamReader input = new System.IO.StreamReader(filepath);
@@ -402,7 +443,7 @@ namespace CRS
                 int courseNum = int.Parse(courseNumStr);
                 int loc = 14;
 
-                student std = StudentsLst.Find(s => s.username == username);
+                student std = StudentsLst.Find(s => s.username.ToLower() == username);
                 int std_index = StudentsLst.IndexOf(std);
 
                 for (int i = 0; i < courseNum - 1; i++)
@@ -416,15 +457,15 @@ namespace CRS
                     loc += 4;
                     string grade = line.Substring(loc, 3).Trim().ToString();
                     loc += 5;
-                    PreviousCourse currentCourse = new PreviousCourse(username, courseName, semester, credit, grade);
-                    std.add_crs_hist(currentCourse);
+                    previousCourse currentCourse = new previousCourse(username, courseName, semester, credit, grade);
+                    std.addCrsHist(currentCourse);
                     StudentsLst[std_index] = std;
                 }
             }
         }
 
         private List<student> StudentsLst;
-        private List<faculty> FacultyList;
+        private List<faculty> FacultyLst;
         private List<admin> AdminList;
     }
 
@@ -432,7 +473,7 @@ namespace CRS
     {
         public courseDatabase(string filepath)
         {
-            CourseLst = new List<course>();
+            this.crsLst = new List<course>();
             string line;
             System.IO.StreamReader input = new System.IO.StreamReader(filepath);
             while ((line = input.ReadLine()) != null)
@@ -441,7 +482,7 @@ namespace CRS
                 string title = line.Substring(11, 15).Trim();
                 string instructor = line.Substring(27, 10).Trim();
                 string credit = line.Substring(38, 4).Trim();
-                string seats = line.Substring(43, 3).Trim();
+                int seats = Convert.ToInt32(line.Substring(43, 3).Trim());
                 int num_time_blocks = int.Parse(line.Substring(47, 1).Trim());
                 int index = 49;
                 List<string> BlockLst = new List<string>();
@@ -452,33 +493,27 @@ namespace CRS
                     index += 6;
                 }
                 course crs = new course(code, title, instructor, credit, seats, num_time_blocks, BlockLst);
-                CourseLst.Add(crs);
+                crsLst.Add(crs);
             }
    
         }
-        public List<course> GetFacultyCourseLst(faculty currentFaculty)
-        {
-            List<course> FacultyLst = new List<course>();
-            string username = currentFaculty.username;
-            foreach (course CurrentCourse in CourseLst)
-            {
-                if (CurrentCourse.getInstructor() == username)
-                {
-                    FacultyLst.Add(CurrentCourse);
-                }
-            }
-            return FacultyLst;
-        }
 
-        public List<course> GetCourseList()
+        public List<course> getFacultyCourseLst(string username)
         {
-            return CourseLst;
+            List<course> crsLst = new List<course>();
+            foreach (course crs in this.crsLst)
+                if (crs.getInstructor().ToLower() == username)
+                    crsLst.Add(crs);
+            return crsLst;
         }
-
+        public List<course> getCourseList()
+        {
+            return crsLst;
+        }
         public course getCourse(string courseID)
         {
-            course crs = CourseLst[0]; // Default value
-            foreach (course courses in CourseLst)
+            course crs = crsLst[0]; // Default value
+            foreach (course courses in crsLst)
             {
                 if (courses.getCode() == courseID)
                 {
@@ -488,9 +523,8 @@ namespace CRS
             return crs;
         }
 
-        private List<course> CourseLst;
+        private List<course> crsLst;
     }
-
 
     public class classTime
     {
@@ -519,29 +553,18 @@ namespace CRS
             return endTime;
         }
     }
-
-
     public class course
     {
-        private string code;
-        private string title;
-        private string instructor;
-        private string credit;
-        private string seats;
-        private int num_time;
-        private List<string> time_blocks;
-        private List<classTime> time_blocks_alternative;
-        private List<student> EnrolledStudents = new List<student>();
-
-        public course(string nme, string ttl, string ist, string crdt, string sea, int num_time_b, List<string> time_bs)
+        public course(string nme, string ttl, string ist, string crdt, int sea, int num_time_b, List<string> time_bs)
         {
             code = nme;
             title = ttl;
             instructor = ist;
             credit = crdt;
             seats = sea;
+            maxSeats = sea;
             num_time = num_time_b;
-            time_blocks = time_bs;
+            timeBlocks = time_bs;
             time_blocks_alternative = new List<classTime> { };
 
             foreach (string timeBlock in time_bs)
@@ -561,55 +584,55 @@ namespace CRS
         {
             return time_blocks_alternative;
         }
-
-
         public string getCode()
         {
             return code;
         }
-
         public string getTitle()
         {
             return title;
         }
-
         public string getInstructor()
         {
             return instructor;
         }
-
         public string getCredit()
         {
             return credit;
         }
-
-        public string getSeats()
+        public int getSeats()
         {
             return seats;
+        }
+        public int getMaxSeats()
+        {
+            return maxSeats;
+        }
+        public string getBlocks()
+        {
+            string tempString = "";
+            foreach (string crsBlock in timeBlocks)
+                tempString = tempString + Decode(crsBlock) + Environment.NewLine;
+            tempString = tempString.Trim();
+            return tempString;
+        }
+        public List<student> getStudents()
+        {
+            return enrolledStudents;
         }
 
         public void disenrollUser(student currentStudent)
         {
-            EnrolledStudents.Remove(currentStudent);
-            seats = Convert.ToString(Convert.ToInt32(seats) - 1);
+            student std = enrolledStudents.Find(s => currentStudent.username == s.username);
+            enrolledStudents.Remove(std);
+            seats += 1;
         }
-
         public void enrollUser(student currentStudent)
         {
-            EnrolledStudents.Add(currentStudent);
-            seats = Convert.ToString(Convert.ToInt32(seats) + 1);
+            enrolledStudents.Add(currentStudent);
+            seats -= 1;
         }
 
-
-        public string getBlocks()
-        {
-            string tempString = "";
-            foreach(string crsBlock in time_blocks)
-            {
-                tempString = tempString + Decode(crsBlock) + "\n";
-            }
-            return tempString;
-        }
 
         public string Decode(string encoded)
         {
@@ -617,19 +640,14 @@ namespace CRS
             int time = Convert.ToInt32(encoded.Substring(2, 2));
             int length = Convert.ToInt32(encoded.Substring(4, 1));
 
-            string outputDecoded = string.Format("{0, -5}: {1,-20}", DecodeDay(days), DecodeTime(time, length));
+            //string outputDecoded = string.Format("{0, -5}: {1,-30}", DecodeDay(days), DecodeTime(time, length));
+            string outputDecoded = DecodeDay(days) + " : "+ DecodeTime(time, length);
             return outputDecoded;
         }
-
-
         public string Decode2(string encoded)
         {
-            
-
             return "placeholder";
         }
-
-
         public string DecodeDay(int dayEncoded)
         {
             int dayEncodedCopy = dayEncoded;
@@ -647,7 +665,6 @@ namespace CRS
             }
             return daysClasses;
         }
-
         public string DecodeTime(int timeEncoded, int lengthEncoded)
         {
             string ampm = "AM";
@@ -670,13 +687,9 @@ namespace CRS
             {
                 endTimeInMin = endTimeInMin - 720;
                 if (ampm == "AM")
-                {
                     endampm = "PM";
-                }
                 else
-                {
                     endampm = "AM";
-                }
             }
 
             int endTimeHour = endTimeInMin / 60;
@@ -684,16 +697,26 @@ namespace CRS
 
             return Convert.ToString(timeHour).PadLeft(2, '0') + ":" + Convert.ToString(timeMin).PadLeft(2, '0') + ampm + " to " + Convert.ToString(endTimeHour).PadLeft(2, '0') + ":" + Convert.ToString(endTimeMin).PadLeft(2, '0') + endampm;
         }
-    }
 
-    public class PreviousCourse
+        private string code;
+        private string title;
+        private string instructor;
+        private string credit;
+        private int seats;
+        private int maxSeats;
+        private int num_time;
+        private List<string> timeBlocks;
+        private List<classTime> time_blocks_alternative;
+        private List<student> enrolledStudents = new List<student>();
+    }
+    public class previousCourse
     {
         public string student;
         public string name;
         public string semester;
         public float credit;
         public string grade;
-        public PreviousCourse(string stud, string nme, string semes, float crdt, string grd)
+        public previousCourse(string stud, string nme, string semes, float crdt, string grd)
         {
             student = stud;
             name = nme;

@@ -13,18 +13,17 @@ namespace CRS
     public partial class LoginForm : Form
     {
         private userDatabase usrDB;
-        string usrf_path;
-        string crsf_path;
-        string prevcrsf_path;
-        public LoginForm(string upath, string cpath, string pcpath)
+        string upath;
+        string cpath;
+        string ppath;
+        public LoginForm(string upath, string cpath, string ppath)
         {
             InitializeComponent();
-            usrf_path = upath;
-            crsf_path = cpath;
-            prevcrsf_path = pcpath;
+            this.upath = upath;
+            this.cpath = cpath;
+            this.ppath = ppath;
+            usrDB = new userDatabase(upath);
 
-            userDatabase userDB = new userDatabase(usrf_path);
-            usrDB = userDB;
             Bitmap bmp = ((Bitmap)close.BackgroundImage);
             bmp.MakeTransparent();
         }
@@ -71,12 +70,12 @@ namespace CRS
         {
             string usertype = "student";    //Default
             string username = this.username.Text.ToLower();
-            string pswd = password.Text.ToLower();
+            string password = this.password.Text.ToLower();
 
-            if (usrDB.isValidUser(username, pswd, ref usertype))
+            if (usrDB.isValidUser(username, password, ref usertype))
             {
                 this.Hide();
-                new mainpage(usertype, username, usrDB, usrf_path, crsf_path, prevcrsf_path).ShowDialog();
+                new mainpage(usertype, username, usrDB, upath, cpath, ppath).ShowDialog();
                 this.Close();
             }
             else
@@ -85,9 +84,9 @@ namespace CRS
                     "Invalid Credential",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Question);
-                password.Text = "";
-                password.PasswordChar = '*';
-                password.ForeColor = Color.White;
+                this.password.Text = "";
+                this.password.PasswordChar = '*';
+                this.password.ForeColor = Color.White;
             }
         }
 

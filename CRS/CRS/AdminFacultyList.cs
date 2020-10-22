@@ -39,7 +39,7 @@ namespace CRS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new FacultyCourses(crsDB.GetCourseList(), dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString().Trim()).Show();
+            new facultySchedule(crsDB.getCourseList(), dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString().Trim()).Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
