@@ -17,7 +17,7 @@ namespace CRS
         string coursePass;
         userDatabase usrDB;
         courseDatabase crsDB;
-        string currentSemester;
+        string nextSemester;
         string courseAdding;
         public AdminStudentSelect(string crsAdding, ref userDatabase userDB, ref courseDatabase courseDB, string crntSmst)
         {
@@ -25,7 +25,7 @@ namespace CRS
 
             usrDB = userDB;
             crsDB = courseDB;
-            currentSemester = crntSmst;
+            nextSemester = crntSmst;
             courseAdding = crsAdding;
 
             coursePass = courseAdding;
@@ -65,7 +65,7 @@ namespace CRS
 
 
 
-            validityResult = usrDB.getStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString()).isValidAdd(currentSemester, crsDB.getCourse(courseAdding));
+            validityResult = usrDB.getStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString()).isValidAdd(nextSemester, crsDB.getCourse(courseAdding));
             if (validityResult.valid)
             {
                 if (validityResult.warning)
@@ -96,7 +96,7 @@ namespace CRS
                 // For Admin account, probably pass by reference the student instance into AdminStudentSelect form
                 student currentStudent = usrDB.getStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString());
 
-                usrDB.addCourseToStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString(), courseAdding.Trim(), currentSemester, ref crsDB, currentStudent);
+                usrDB.addCourseToStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString(), courseAdding.Trim(), nextSemester, ref crsDB, currentStudent);
 
 
                 new AdminStudentCourse(coursePass, studentPass).Show();

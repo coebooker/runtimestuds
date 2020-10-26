@@ -51,9 +51,10 @@ namespace CRS
             this.username.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.username.Font = new System.Drawing.Font("Arial Narrow", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.username.ForeColor = System.Drawing.Color.Silver;
-            this.username.Location = new System.Drawing.Point(124, 180);
+            this.username.Location = new System.Drawing.Point(110, 144);
+            this.username.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(360, 53);
+            this.username.Size = new System.Drawing.Size(320, 46);
             this.username.TabIndex = 0;
             this.username.Text = "Username";
             this.username.Enter += new System.EventHandler(this.UsernameEnter);
@@ -65,9 +66,10 @@ namespace CRS
             this.password.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.password.Font = new System.Drawing.Font("Arial Narrow", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password.ForeColor = System.Drawing.Color.Silver;
-            this.password.Location = new System.Drawing.Point(124, 276);
+            this.password.Location = new System.Drawing.Point(110, 221);
+            this.password.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(360, 53);
+            this.password.Size = new System.Drawing.Size(320, 46);
             this.password.TabIndex = 1;
             this.password.Text = "Password";
             this.password.Enter += new System.EventHandler(this.PasswordEnter);
@@ -81,9 +83,10 @@ namespace CRS
             this.login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.login.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.login.ForeColor = System.Drawing.Color.White;
-            this.login.Location = new System.Drawing.Point(47, 404);
+            this.login.Location = new System.Drawing.Point(42, 323);
+            this.login.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.login.Name = "login";
-            this.login.Size = new System.Drawing.Size(437, 63);
+            this.login.Size = new System.Drawing.Size(388, 50);
             this.login.TabIndex = 3;
             this.login.Text = "Login";
             this.login.UseVisualStyleBackColor = false;
@@ -96,8 +99,9 @@ namespace CRS
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(530, 86);
+            this.panel1.Size = new System.Drawing.Size(471, 69);
             this.panel1.TabIndex = 4;
             // 
             // close
@@ -105,9 +109,10 @@ namespace CRS
             this.close.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("close.BackgroundImage")));
             this.close.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.close.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.close.Location = new System.Drawing.Point(434, 20);
+            this.close.Location = new System.Drawing.Point(386, 16);
+            this.close.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.close.Name = "close";
-            this.close.Size = new System.Drawing.Size(50, 50);
+            this.close.Size = new System.Drawing.Size(44, 40);
             this.close.TabIndex = 5;
             this.close.TabStop = false;
             this.close.Click += new System.EventHandler(this.close_click);
@@ -117,19 +122,21 @@ namespace CRS
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(176, 38);
+            this.label1.Location = new System.Drawing.Point(156, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 37);
+            this.label1.Size = new System.Drawing.Size(150, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "USER LOGIN";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(50, 183);
+            this.pictureBox1.Location = new System.Drawing.Point(44, 146);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox1.Size = new System.Drawing.Size(43, 38);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
@@ -137,19 +144,20 @@ namespace CRS
             // 
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(48, 279);
+            this.pictureBox2.Location = new System.Drawing.Point(43, 223);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox2.Size = new System.Drawing.Size(43, 38);
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
             // 
             // LoginForm
             // 
             this.AcceptButton = this.login;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(530, 545);
+            this.ClientSize = new System.Drawing.Size(471, 436);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
@@ -157,6 +165,7 @@ namespace CRS
             this.Controls.Add(this.password);
             this.Controls.Add(this.username);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "LoginForm";
             this.ShowIcon = false;
