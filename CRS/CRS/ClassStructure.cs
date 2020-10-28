@@ -282,6 +282,10 @@ namespace CRS
         {
             return adviseesLst;
         }
+        public List<course> getCourseSchedule()
+        {
+            return courseSchedule;
+        }
 
         public void addAdvisee(student std)
         {
@@ -302,8 +306,20 @@ namespace CRS
             username = usrname;
             password = psw;
         }
-        private List<course> CourseSchedule = new List<course>();
-        private List<course> RegisteredCourses = new List<course>();
+        public void deleteCourse(course DeletedCourse, userDatabase userDB, courseDatabase courseDB)
+        {
+            //Removes the course from registered students
+            foreach (student currentStudent in DeletedCourse.getStudents())
+            {
+                //NEEDS TO UPDATE historyDB.in for users that are deregistered
+                currentStudent.deleteCourseFromCurrent(DeletedCourse);
+            }
+            //Removes the course from the faculty
+            faculty CourseFaculty = userDB.getFaculty(DeletedCourse.getInstructor());
+            CourseFaculty.getCourseSchedule().Remove(DeletedCourse);
+            //Removes the course from the Course Database
+            courseDB.getCourseList().Remove(DeletedCourse);
+        }
     }
 
     public class userDatabase
