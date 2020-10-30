@@ -195,3 +195,4 @@ C:\Users\mikit\Downloads\20201023\20201023\CRS\CRS\obj\Debug\CRS.csproj.Generate
 C:\Users\mikit\Downloads\20201023\20201023\CRS\CRS\obj\Debug\CRS.csproj.CoreCompileInputs.cache
 C:\Users\mikit\Downloads\20201023\20201023\CRS\CRS\obj\Debug\CRS.exe
 C:\Users\mikit\Downloads\20201023\20201023\CRS\CRS\obj\Debug\CRS.pdb
+C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.adviseeSch.resources

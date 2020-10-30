@@ -424,7 +424,7 @@ namespace CRS
             if (stdSchTable.SelectedRows.Count == 1)
             {
                 student curStd = usrDB.getStudent(username);
-                usrDB.deleteCourseFromStudent(username, stdSchTable.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), nextSemester, ref crsDB,curStd);
+                usrDB.deleteCourseFromStudent(stdSchTable.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), nextSemester, ref crsDB,curStd);
                 DataGridViewRow row = crsLstTable.SelectedRows[0];
                 course crs = crsDB.getCourse(row.Cells["Course"].Value.ToString());
                 row.Cells["Seats"].Value = crs.getSeats() + " / " + crs.getMaxSeats();
