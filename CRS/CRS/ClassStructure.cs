@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Text;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Schema;
@@ -22,7 +23,275 @@ namespace CRS
             warning = isWarning;
             message = warningMessage;
         }
+    }
 
+    public class userDatabase
+    {
+        // Class constructor
+        public userDatabase(string filepath)
+        {
+            StudentsLst = new List<student>();
+            FacultyLst = new List<faculty>();
+            AdminList = new List<admin>();
+            string line;
+            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
+            while ((line = input.ReadLine()) != null)
+            {
+                string username = line.Substring(0, 10).Trim();
+                string password = line.Substring(11, 10).Trim();
+                string firstName = line.Substring(22, 15).Trim();
+                string middleName = line.Substring(38, 15).Trim();
+                string lastName = line.Substring(54, 15).Trim();
+                string status = line.Substring(70).Trim();
+
+                if (status == "faculty")
+                {
+                    faculty fac = new faculty(firstName, middleName, lastName, username, password);
+                    FacultyLst.Add(fac);
+                }
+                else if (status == "admin")
+                {
+                    admin adm = new admin(firstName, middleName, lastName, username, password);
+                    AdminList.Add(adm);
+                }
+                else
+                {
+                    student std = new student(firstName, middleName, lastName, status, username, password);
+                    StudentsLst.Add(std);
+                }
+            }
+            foreach (student std in StudentsLst)
+                for (int i = 0; i < FacultyLst.Count(); i++)
+                    if (std.getAdvisor() == FacultyLst[i].username)
+                    {
+                        FacultyLst[i].addAdvisee(std);
+                        break;
+                    }
+        }
+
+        public List<student> getStudentList()
+        {
+            return StudentsLst;
+        }
+        public List<faculty> getFacultyList()
+        {
+            return FacultyLst;
+        }
+        public student getStudent(string username)
+        {
+            student std = StudentsLst[0]; // Default value
+            foreach (student stu in StudentsLst)
+                if (stu.username.ToLower() == username.ToLower())
+                    return stu;
+            return std;
+        }
+        public faculty getFaculty(string username)
+        {
+            faculty fac = FacultyLst[0]; // Default value
+            foreach (faculty f in FacultyLst)
+                if (f.username.ToLower() == username.ToLower())
+                    return f;
+            return fac;
+        }
+
+        // Change the database
+        public void addCourseToStudent(string studentName, string courseID, string nextSemester, ref courseDatabase courseDB, student currentStudent)
+        {
+            int stdIndex = StudentsLst.IndexOf(currentStudent);
+            foreach (course crs in courseDB.getCourseList())
+                if (courseID.Trim() == crs.getCode().Trim())
+                {
+                    course selectedCourse = crs;
+                    selectedCourse.enrollUser(currentStudent);
+                    course courseAdding = selectedCourse;
+                    currentStudent.addClassToNext(courseAdding);
+                    currentStudent.addClassToHistory(courseAdding, nextSemester);
+                    StudentsLst[stdIndex] = currentStudent;
+                    return;
+                }
+        }
+        public void deleteCourseFromStudent(string courseID, string nextSemester, ref courseDatabase courseDB, student currentStudent)
+        {
+            course courseDeleting = courseDB.getCourseList()[0];
+            int stdIndex = StudentsLst.IndexOf(currentStudent);
+            foreach (course crs in courseDB.getCourseList())
+                if (courseID.Trim() == crs.getCode().Trim())
+                {
+                    course selectedCourse = crs;
+                    selectedCourse.disenrollUser(currentStudent);
+                    courseDeleting = selectedCourse;
+                    currentStudent.deleteCourseFromNext(courseDeleting);
+                    currentStudent.deleteClassFromHistory(courseDeleting, nextSemester);
+                    StudentsLst[stdIndex] = currentStudent;
+                    return;
+                }
+        }
+        public void removeStd(string username, ref courseDatabase crsDB)
+        {
+            student std = getStudent(username);
+
+            // Increment the number of seats available for each course the student has registered for
+            List<course> registeredCrsLst = std.getRegisteredCrs();
+            foreach (course registeredCrs in registeredCrsLst)
+                foreach (course crs in crsDB.getCourseList())
+                    if (registeredCrs.getCode() == crs.getCode())
+                    {
+                        crs.disenrollUser(std);
+                        break;
+                    }
+
+            // Remove the student from the advisees list of his advisor
+            faculty advisor = getFaculty(std.getAdvisor());
+            advisor.removeAdvisee(username);
+
+            // Remove the student from the database
+            StudentsLst.Remove(std);
+        }
+        public void updateStd(int stdIndex, student std)
+        {
+            StudentsLst[stdIndex] = std;
+        }
+        public void updateFac(int facIndex, faculty fac)
+        {
+            FacultyLst[facIndex] = fac;
+        }
+        public bool isValidUser(string username, string password, ref string usertype)
+        {
+            foreach (student std in StudentsLst)
+                if (std.username.ToLower() == username && std.password.ToLower() == password)
+                {
+                    usertype = "student";
+                    return true;
+                }
+            foreach (faculty fac in FacultyLst)
+                if (fac.username.ToLower() == username && fac.password.ToLower() == password)
+                {
+                    usertype = "faculty";
+                    return true;
+                }
+            foreach (admin adm in AdminList)
+                if (adm.username.ToLower() == username && adm.password.ToLower() == password)
+                {
+                    usertype = "admin";
+                    return true;
+                }
+            return false;
+        }
+        public void addPrevCourses(string filepath, ref courseDatabase crsDB)
+        {
+            string line;
+            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
+            while ((line = input.ReadLine()) != null)
+            {
+                string username = line.Substring(0, 10).Trim();
+                string courseNumStr = line.Substring(11, 2).Trim();
+                int courseNum = int.Parse(courseNumStr);
+                int loc = 14;
+
+                student std = StudentsLst.Find(s => s.username.ToLower() == username.ToLower());
+                int std_index = StudentsLst.IndexOf(std);
+
+                for (int i = 0; i < courseNum; i++)
+                {
+                    string courseName = line.Substring(loc, 10).Trim();
+                    loc += 11;
+                    string semester = line.Substring(loc, 3).Trim();
+                    loc += 4;
+                    string creditStr = line.Substring(loc, 4).Trim();
+                    float credit = float.Parse(creditStr);
+                    loc += 4;
+                    string grade = line.Substring(loc, 3).Trim().ToString();
+                    loc += 5;
+                    previousCourse currentCourse = new previousCourse(username, courseName, semester, credit, grade);
+                    std.createCrsHist(currentCourse, ref crsDB);
+                    StudentsLst[std_index] = std;
+                }
+            }
+            input.Close();
+        }
+
+        private List<student> StudentsLst;
+        private List<faculty> FacultyLst;
+        private List<admin> AdminList;
+    }
+    public class courseDatabase
+    {
+        public courseDatabase(string filepath)
+        {
+            this.crsLst = new List<course>();
+            string line;
+            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
+            while ((line = input.ReadLine()) != null)
+            {
+                string code = line.Substring(0, 10).Trim();
+                string title = line.Substring(11, 15).Trim();
+                string instructor = line.Substring(27, 10).Trim();
+                string credit = line.Substring(38, 4).Trim();
+                int seats = Convert.ToInt32(line.Substring(43, 3).Trim());
+                int num_time_blocks = int.Parse(line.Substring(47, 1).Trim());
+                int index = 49;
+                List<string> BlockLst = new List<string>();
+                for (int i = 0; i < num_time_blocks; i++)
+                {
+                    string time_block = line.Substring(index, 5);
+                    BlockLst.Add(time_block);
+                    index += 6;
+                }
+                course crs = new course(code, title, instructor, credit, seats, num_time_blocks, BlockLst);
+                crsLst.Add(crs);
+            }
+
+        }
+
+        // Retrieve information
+        public List<course> getNextFacCrsLst(string username)
+        {
+            List<course> crsLst = new List<course>();
+            foreach (course crs in this.crsLst)
+                if (crs.getInstructor().ToLower() == username)
+                    crsLst.Add(crs);
+            return crsLst;
+        }
+        public List<course> getCourseList()
+        {
+            return crsLst;
+        }
+        public course getCourse(string courseID)
+        {
+            course crs = crsLst[0]; // Default value
+            foreach (course courses in crsLst)
+            {
+                if (courses.getCode() == courseID)
+                {
+                    return courses;
+                }
+            }
+            return crs;
+        }
+
+
+        // Change the database
+        public void removeCrs(string crsID, ref userDatabase usrDB, string nextSemester)
+        {
+            course removedCrs = getCourse(crsID);
+            crsLst.Remove(removedCrs);
+            List<student> enrolledStdLst = removedCrs.getStudents();
+            List<student> stdLst = usrDB.getStudentList();
+            foreach (student std in enrolledStdLst)
+            {
+                int stdIndex = stdLst.IndexOf(std);
+                std.deleteClassFromHistory(removedCrs, nextSemester);
+                std.deleteCourseFromNext(removedCrs);
+                usrDB.updateStd(stdIndex, std);
+            }
+
+            faculty fac = usrDB.getFaculty(removedCrs.getInstructor());
+            int facIndex = usrDB.getFacultyList().IndexOf(fac);
+            fac.removeCrsFromSch(removedCrs);
+            usrDB.updateFac(facIndex, fac);
+        }
+        //public void updateCrs(int crsIndex, course crs)
+        private List<course> crsLst;
     }
 
     public class baseUser
@@ -33,7 +302,6 @@ namespace CRS
         public string mname;
         public string lname;
     }
-
     public class student : baseUser
     {
         private string advisor;
@@ -41,6 +309,8 @@ namespace CRS
         private float totalCredits;
         private float gradedCredits;
         private float gradePoints;
+        private List<course> RegisteredCourses;
+        private List<previousCourse> CourseHistory;
 
         // Class constructor
         public student(string f, string m, string l, string adv, string usrname, string psw)
@@ -55,7 +325,7 @@ namespace CRS
             CourseHistory = new List<previousCourse>();
         }
 
-        // Extracting info from the object
+        // Extracting info from the object //
         public List<previousCourse> getCrsHist()
         {
             return CourseHistory;
@@ -72,16 +342,41 @@ namespace CRS
         {
             return totalCredits;
         }
+        public void updateCourseFiles(string filepath)
+        {
+            List<string> newLines = new List<string>();
+            string[] lines = File.ReadAllLines(filepath);
+            foreach(string user in lines)
+            {
+                string currentUsername = user.Substring(0, 10);
+                if (currentUsername.Trim() == username){
+                    string newLine = "";
+                    newLine += currentUsername + ' ';
+                    int numCourses = CourseHistory.Count();
+                    newLine += numCourses.ToString() + "  ";
+                    foreach(previousCourse currentCourse in CourseHistory)
+                    {
+                        newLine += currentCourse.coursename.PadRight(11);
+                        newLine += currentCourse.semester + ' ';
+                        newLine += currentCourse.credit.ToString().PadRight(5);
+                        newLine += currentCourse.grade.PadRight(4);
+                    }
+                    newLines.Add(newLine);
+                }
+                else
+                {
+                    newLines.Add(user);
+                }
+            }
+            string[] lineArr = newLines.ToArray();
+            System.IO.File.WriteAllLines(filepath, lineArr);
+        }
         public List<previousCourse> GetCurrentTermList()
         {
             List<previousCourse> CurrentTermList = new List<previousCourse>();
             foreach (previousCourse crs in CourseHistory)
-            {
-                if(crs.semester == "F14")
-                {
+                if(crs.semester.Trim() == "F14")
                     CurrentTermList.Add(crs);
-                }
-            }
             return CurrentTermList;
         }
         public string getAdvisor()
@@ -100,21 +395,25 @@ namespace CRS
         {
             return lname;
         }
-
-        // Making changes to the object //
-        public void addCrsHist(previousCourse pcrs)
+        public string getUName()
         {
-            CourseHistory.Add(pcrs);
-            totalCredits += pcrs.credit;
-            if (pcrs.grade != "S")
-            {
-                gradedCredits += pcrs.credit;
-                gradePoints += gradeDict[pcrs.grade];
-                GPA = gradePoints / gradedCredits;
-            }
+            return username;
         }
 
-        public void addClassToCurrent(course courseAdded)
+
+        // Making changes to the object //
+        public void createCrsHist(previousCourse pcrs, ref courseDatabase crsDB)
+        {
+            CourseHistory.Add(pcrs);
+            if (pcrs.semester == "S15")
+                foreach (course crs in crsDB.getCourseList())
+                    if (pcrs.coursename == crs.getCode())
+                    {
+                        RegisteredCourses.Add(crs);
+                        crs.enrollUser(this);
+                    }
+        }
+        public void addClassToNext(course courseAdded)
         {
             RegisteredCourses.Add(courseAdded);
         }
@@ -123,16 +422,67 @@ namespace CRS
             previousCourse courseAddedHistory = new previousCourse(username, courseAdded.getCode().Trim(), currentSemester, Convert.ToSingle(courseAdded.getCredit().Trim()), "N");
             CourseHistory.Add(courseAddedHistory);
         }
-        public void deleteCourseFromCurrent(course courseDeleted)
+        public void deleteCourseFromNext(course courseDeleted)
         {
             RegisteredCourses.Remove(courseDeleted);
         }
-        public void deleteClassFromHistory(course courseDeleted, string currentSemester)
+        public void deleteClassFromHistory(course courseDeleted, string nextSemester)
         {
-            previousCourse courseDeletedHistory = new previousCourse(username, courseDeleted.getCode().Trim(), currentSemester, Convert.ToSingle(courseDeleted.getCredit().Trim()), "N");
-            CourseHistory.Remove(courseDeletedHistory);
+            previousCourse c = new previousCourse(
+                username.Trim(), 
+                courseDeleted.getCode().Trim(), 
+                nextSemester, 
+                float.Parse(courseDeleted.getCredit().Trim()), 
+                "N");
+            foreach (previousCourse crs in CourseHistory)
+                if (crs.username == c.username && crs.semester == c.semester &&
+                    crs.credit == c.credit && crs.coursename == c.coursename
+                    && crs.grade == c.grade)
+                {
+                    CourseHistory.Remove(crs);
+                    return;
+                }
         }
 
+        public string timeCheck()
+        {
+            string message = "There is no time conflict";
+            foreach (course courseA in RegisteredCourses)
+            {
+                List<classTime> timeBlocksA = courseA.getClassTime();
+                foreach (course courseB in RegisteredCourses)
+                {
+                    List<classTime> timeBlocksB = courseB.getClassTime();
+                    if (courseA != courseB)
+                        foreach (classTime timeA in timeBlocksA)
+                            foreach (classTime timeB in timeBlocksB)
+                                if (timeA.getDays().Intersect(timeB.getDays()).Count() != 0)
+                                {
+                                    double startA = timeA.getStartTime();
+                                    double startB = timeB.getStartTime();
+                                    double endA = timeA.getEndTime();
+                                    double endB = timeB.getEndTime();
+                                    
+                                    if (!(startA == endB || startB == endA))
+                                    {
+                                        //    |-----|   A
+                                        // |-----|      B
+                                        if (startA >= startB)
+                                            if (startA <= endB)
+                                                message = "There is a time overlap between " + courseA.getCode() + " and " + courseB.getCode()+" for next semester";
+                                        
+                                        // |-----|      A
+                                        //    |-----|   B
+                                        if (startB >= startA)
+                                            if (startB <= endA)
+                                                message = "There is a time overlap between " + courseA.getCode() + " and " + courseB.getCode()+ " for next semester";
+                                    }
+
+                                }
+                }
+            }
+            return message;
+        }
         public validity isValidAdd(string crntSmst, course crsBngAdded) 
         {
             bool validAdd = true;
@@ -223,7 +573,7 @@ namespace CRS
                 
                 foreach (previousCourse prvCrs in CourseHistory)
                 {
-                    if (prvCrs.name.Trim().Substring(0, prvCrs.name.Trim().Length - 3) == crsBngAdded.getCode().Trim().Substring(0, crsBngAdded.getCode().Trim().Length - 3))
+                    if (prvCrs.coursename.Trim().Substring(0, prvCrs.coursename.Trim().Length - 3) == crsBngAdded.getCode().Trim().Substring(0, crsBngAdded.getCode().Trim().Length - 3))
                     {
                         warning = true;
                         if (validAdd)
@@ -245,8 +595,6 @@ namespace CRS
             return returningVal;
         }
 
-        private List<course> RegisteredCourses;
-        private List<previousCourse> CourseHistory;
         public Dictionary<string, float> gradeDict = new Dictionary<string, float>()
         {
             {"A",4.0f},
@@ -259,12 +607,9 @@ namespace CRS
             {"C-",1.7f},
             {"D+",1.3f},
             {"D",1.0f},
-            {"D-",0.7f},
-            {"F",0.0f},
-            {"WF",0.0f},
+            {"D-",0.7f}
         };
     }
-
     public class faculty : baseUser
     {
         public faculty(string f, string m, string l, string usrname, string psw)
@@ -282,20 +627,27 @@ namespace CRS
         {
             return adviseesLst;
         }
-        public List<course> getCourseSchedule()
-        {
-            return courseSchedule;
-        }
 
         public void addAdvisee(student std)
         {
             adviseesLst.Add(std);
         }
+        public void removeAdvisee(string username)
+        {
+            foreach (student advisee in adviseesLst)
+                if (username.ToLower().Trim() == advisee.username.ToLower().Trim())
+                {
+                    adviseesLst.Remove(advisee);
+                    return;
+                }
+        }
+        public void removeCrsFromSch(course removedCrs)
+        {
+            courseSchedule.Remove(removedCrs);
+        }
         private List<course> courseSchedule;
         private List<student> adviseesLst;
-        
     }
-
     public class admin : baseUser
     {
         public admin(string f, string m, string l, string usrname, string psw)
@@ -306,240 +658,8 @@ namespace CRS
             username = usrname;
             password = psw;
         }
-        public void deleteCourse(course DeletedCourse, userDatabase userDB, courseDatabase courseDB)
-        {
-            //Removes the course from registered students
-            foreach (student currentStudent in DeletedCourse.getStudents())
-            {
-                //NEEDS TO UPDATE historyDB.in for users that are deregistered
-                currentStudent.deleteCourseFromCurrent(DeletedCourse);
-            }
-            //Removes the course from the faculty
-            faculty CourseFaculty = userDB.getFaculty(DeletedCourse.getInstructor());
-            CourseFaculty.getCourseSchedule().Remove(DeletedCourse);
-            //Removes the course from the Course Database
-            courseDB.getCourseList().Remove(DeletedCourse);
-        }
-    }
-
-    public class userDatabase
-    {
-        // Class constructor
-        public userDatabase(string filepath)
-        {
-            StudentsLst = new List<student>();
-            FacultyLst = new List<faculty>();
-            AdminList = new List<admin>();
-            string line;
-            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
-            while ((line = input.ReadLine()) != null)
-            {
-                string username = line.Substring(0, 10).Trim();
-                string password = line.Substring(11, 10).Trim();
-                string firstName = line.Substring(22, 15).Trim();
-                string middleName = line.Substring(38, 15).Trim();
-                string lastName = line.Substring(54, 15).Trim();
-                string status = line.Substring(70).Trim();
-
-                if (status == "faculty")
-                {
-                    faculty fac = new faculty(firstName, middleName, lastName, username, password);
-                    FacultyLst.Add(fac);
-                }
-                else if (status == "admin")
-                {
-                    admin adm = new admin(firstName, middleName, lastName, username, password);
-                    AdminList.Add(adm);
-                }
-                else
-                {
-                    student std = new student(firstName, middleName, lastName, status, username, password);
-                    StudentsLst.Add(std);
-                }
-            }
-            foreach (student std in StudentsLst)
-            {
-                for (int i = 0; i < FacultyLst.Count(); i++)
-                {
-                    if (std.getAdvisor() == FacultyLst[i].username)
-                    {
-                        FacultyLst[i].addAdvisee(std);
-                        break;
-                    }
-                }
-            }
-        }
-
-        public List<student> getStudentList()
-        {
-            return StudentsLst;
-        }
-        public List<faculty> getFacultyList()
-        {
-            return FacultyLst;
-        }
-        public student getStudent(string username)
-        {
-            student std = StudentsLst[0]; // Default value
-            foreach (student stu in StudentsLst)
-                if (stu.username.ToLower() == username)
-                    return stu;
-            return std;
-        }
-        public faculty getFaculty(string username)
-        {
-            faculty fac = FacultyLst[0]; // Default value
-            foreach (faculty f in FacultyLst)
-                if (f.username.ToLower() == username)
-                    return f;
-            return fac;
-        }
-
-
-        public void addCourseToStudent(string studentName, string courseID, string currentSemester, ref courseDatabase courseDB, student currentStudent)
-        {
-            course courseAdding = courseDB.getCourseList()[0];
-            foreach(course crs in courseDB.getCourseList())
-            {
-                if(courseID.Trim() == crs.getCode().Trim())
-                {
-                    course selectedCourse = crs;
-                    selectedCourse.enrollUser(currentStudent);
-                    courseAdding = selectedCourse;
-                    currentStudent.addClassToCurrent(courseAdding);
-                    currentStudent.addClassToHistory(courseAdding, currentSemester);
-                }
-            }
-        }
-        public void deleteCourseFromStudent(string studentName, string courseID, string currentSemester, ref courseDatabase courseDB,student currentStudent)
-        {
-            course courseDeleting = courseDB.getCourseList()[0];
-            foreach(course crs in courseDB.getCourseList())
-            {
-                if (courseID.Trim() == crs.getCode().Trim())
-                {
-                    course selectedCourse = crs;
-                    selectedCourse.disenrollUser(currentStudent);
-                    courseDeleting = selectedCourse;
-                    currentStudent.deleteCourseFromCurrent(courseDeleting);
-                    currentStudent.deleteClassFromHistory(courseDeleting, currentSemester);
-                }
-            }
-        }
-        public bool isValidUser(string username, string password, ref string usertype)
-        {
-            foreach (student std in StudentsLst)
-                if (std.username.ToLower() == username && std.password.ToLower() == password)
-                {
-                    usertype = "student";
-                    return true;
-                }
-            foreach (faculty fac in FacultyLst)
-                if (fac.username.ToLower() == username && fac.password.ToLower() == password)
-                {
-                    usertype = "faculty";
-                    return true;
-                }
-            foreach (admin adm in AdminList)
-                if (adm.username.ToLower() == username && adm.password.ToLower() == password)
-                {
-                    usertype = "admin";
-                    return true;
-                }
-            return false;
-        }
-        public void addPrevCourses(string filepath)
-        {
-            string line;
-            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
-            while ((line = input.ReadLine()) != null)
-            {
-                string username = line.Substring(0, 10).Trim().ToLower();
-                string courseNumStr = line.Substring(11, 2).Trim();
-                int courseNum = int.Parse(courseNumStr);
-                int loc = 14;
-
-                student std = StudentsLst.Find(s => s.username.ToLower() == username);
-                int std_index = StudentsLst.IndexOf(std);
-
-                for (int i = 0; i < courseNum - 1; i++)
-                {
-                    string courseName = line.Substring(loc, 10);
-                    loc += 11;
-                    string semester = line.Substring(loc, 3);
-                    loc += 4;
-                    string creditStr = line.Substring(loc, 4);
-                    float credit = float.Parse(creditStr);
-                    loc += 4;
-                    string grade = line.Substring(loc, 3).Trim().ToString();
-                    loc += 5;
-                    previousCourse currentCourse = new previousCourse(username, courseName, semester, credit, grade);
-                    std.addCrsHist(currentCourse);
-                    StudentsLst[std_index] = std;
-                }
-            }
-        }
-
-        private List<student> StudentsLst;
-        private List<faculty> FacultyLst;
-        private List<admin> AdminList;
-    }
-
-    public class courseDatabase
-    {
-        public courseDatabase(string filepath)
-        {
-            this.crsLst = new List<course>();
-            string line;
-            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
-            while ((line = input.ReadLine()) != null)
-            {
-                string code = line.Substring(0, 10).Trim();
-                string title = line.Substring(11, 15).Trim();
-                string instructor = line.Substring(27, 10).Trim();
-                string credit = line.Substring(38, 4).Trim();
-                int seats = Convert.ToInt32(line.Substring(43, 3).Trim());
-                int num_time_blocks = int.Parse(line.Substring(47, 1).Trim());
-                int index = 49;
-                List<string> BlockLst = new List<string>();
-                for (int i = 0; i < num_time_blocks; i++)
-                {
-                    string time_block = line.Substring(index, 5);
-                    BlockLst.Add(time_block);
-                    index += 6;
-                }
-                course crs = new course(code, title, instructor, credit, seats, num_time_blocks, BlockLst);
-                crsLst.Add(crs);
-            }
-   
-        }
-
-        public List<course> getFacultyCourseLst(string username)
-        {
-            List<course> crsLst = new List<course>();
-            foreach (course crs in this.crsLst)
-                if (crs.getInstructor().ToLower() == username)
-                    crsLst.Add(crs);
-            return crsLst;
-        }
-        public List<course> getCourseList()
-        {
-            return crsLst;
-        }
-        public course getCourse(string courseID)
-        {
-            course crs = crsLst[0]; // Default value
-            foreach (course courses in crsLst)
-            {
-                if (courses.getCode() == courseID)
-                {
-                    return courses;
-                }
-            }
-            return crs;
-        }
-
-        private List<course> crsLst;
+        private List<course> CourseSchedule = new List<course>();
+        private List<course> RegisteredCourses = new List<course>();
     }
 
     public class classTime
@@ -571,6 +691,16 @@ namespace CRS
     }
     public class course
     {
+        private string code;
+        private string title;
+        private string instructor;
+        private string credit;
+        private int seats;
+        private int maxSeats;
+        private int num_time;
+        private List<string> timeBlocks;
+        private List<classTime> time_blocks_alternative;
+        private List<student> enrolledStudents = new List<student>();
         public course(string nme, string ttl, string ist, string crdt, int sea, int num_time_b, List<string> time_bs)
         {
             code = nme;
@@ -713,29 +843,18 @@ namespace CRS
 
             return Convert.ToString(timeHour).PadLeft(2, '0') + ":" + Convert.ToString(timeMin).PadLeft(2, '0') + ampm + " to " + Convert.ToString(endTimeHour).PadLeft(2, '0') + ":" + Convert.ToString(endTimeMin).PadLeft(2, '0') + endampm;
         }
-
-        private string code;
-        private string title;
-        private string instructor;
-        private string credit;
-        private int seats;
-        private int maxSeats;
-        private int num_time;
-        private List<string> timeBlocks;
-        private List<classTime> time_blocks_alternative;
-        private List<student> enrolledStudents = new List<student>();
     }
     public class previousCourse
     {
-        public string student;
-        public string name;
+        public string username;
+        public string coursename;
         public string semester;
         public float credit;
         public string grade;
         public previousCourse(string stud, string nme, string semes, float crdt, string grd)
         {
-            student = stud;
-            name = nme;
+            username = stud;
+            coursename = nme;
             semester = semes;
             credit = crdt;
             grade = grd;
