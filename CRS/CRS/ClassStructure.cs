@@ -291,7 +291,7 @@ namespace CRS
             usrDB.updateFac(facIndex, fac);
         }
          // Change the database
-        public void removeCrs(string crsID, ref userDatabase usrDB, string nextSemester)
+        public void removeCrs(string crsID, ref userDatabase usrDB, string nextSemester, string filepath)
         {
             course removedCrs = getCourse(crsID);
             crsLst.Remove(removedCrs);
@@ -309,6 +309,28 @@ namespace CRS
             int facIndex = usrDB.getFacultyList().IndexOf(fac);
             fac.removeCrsFromSch(removedCrs);
             usrDB.updateFac(facIndex, fac);
+            
+            //Updates the coursedb.in file to remove the removed course from it
+            string[] courseLines = File.ReadAllLines(filepath);
+            string[] newCourseLinesArr;
+            List<string> newCourseLines = new List<string>();
+            foreach(string courseString in courseLines)
+            {
+                string courseID = courseString.Substring(4, 10);
+                if (courseID == DeletedCourse.getCode())
+                {
+                    //skips the iteration if it’s the course that’s being deleted
+                    continue;
+                }
+                else
+                {
+                    newCourseLines.Add(courseString);
+                }
+                newCourseLinesArr = newCourseLines.ToArray();
+                File.WriteAllLines(filepath, newCourseLinesArr);
+            }
+        }
+
         }
         //public void updateCrs(int crsIndex, course crs)
         private List<course> crsLst;
