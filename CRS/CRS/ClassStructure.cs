@@ -290,6 +290,26 @@ namespace CRS
             fac.removeCrsFromSch(removedCrs);
             usrDB.updateFac(facIndex, fac);
         }
+         // Change the database
+        public void removeCrs(string crsID, ref userDatabase usrDB, string nextSemester)
+        {
+            course removedCrs = getCourse(crsID);
+            crsLst.Remove(removedCrs);
+            List<student> enrolledStdLst = removedCrs.getStudents();
+            List<student> stdLst = usrDB.getStudentList();
+            foreach (student std in enrolledStdLst)
+            {
+                int stdIndex = stdLst.IndexOf(std);
+                std.deleteClassFromHistory(removedCrs, nextSemester);
+                std.deleteCourseFromNext(removedCrs);
+                usrDB.updateStd(stdIndex, std);
+            }
+
+            faculty fac = usrDB.getFaculty(removedCrs.getInstructor());
+            int facIndex = usrDB.getFacultyList().IndexOf(fac);
+            fac.removeCrsFromSch(removedCrs);
+            usrDB.updateFac(facIndex, fac);
+        }
         //public void updateCrs(int crsIndex, course crs)
         private List<course> crsLst;
     }
