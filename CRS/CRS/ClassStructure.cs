@@ -94,6 +94,63 @@ namespace CRS
             return fac;
         }
 
+        public void removeFaculty(string facultyUsername, string userFilepath, string courseFilepath, ref courseDatabase coursedb)
+        {
+            //Loops through their advisees and changes the students' advisor to "Staff"
+            faculty currectFac = getFaculty(facultyUsername);
+            foreach(student currentStudent in currectFac.getAdviseesLst())
+            {
+                currentStudent.setAdvisor("Staff");
+            }
+            //Loops through their courses and the instructor to "Staff", also needs to update the file
+            List<course> courseLst = coursedb.getNextFacCrsLst(facultyUsername);
+            foreach(course currentCourse in courseLst)
+            {
+                currentCourse.setInstructor("Staff");
+            }
+            //Updates the UserDB.in file to remove the faculty member from it
+            string[] userLines = File.ReadAllLines(userFilepath);
+            string[] newUserLinesArr;
+            List<string> newUserLines = new List<string>();
+            foreach (string userString in userLines)
+            {
+                string username = userString.Substring(0, 10);
+                if (facultyUsername == username)
+                {
+                    //skips the iteration if it’s the course that’s being deleted
+                    continue;
+                }
+                else
+                {
+                    newUserLines.Add(userString);
+                }
+                newUserLinesArr = newUserLines.ToArray();
+                File.WriteAllLines(userFilepath, newUserLinesArr);
+            }
+            //Changes the all of this instructor's courses in courseDB.in instructor to "Staff"
+            string[] CourseLines = File.ReadAllLines(courseFilepath);
+            string[] newCourseLinesArr;
+            List<string> newCourseLines = new List<string>();
+            foreach (string courseString in userLines)
+            {
+                string username = courseString.Substring(31, 10).Trim();
+                if (facultyUsername == username)
+                {
+                    //if this function doesn't work the first thing to check will be grabbing 31 characters, not sure if it should be 30 or 31 depends on how the compiler handles it
+                    string beforeInstructor = courseString.Substring(0, 31);
+                    string afterInstructor = courseString.Substring(42);
+                    string newCourseString = beforeInstructor + "Staff      " + afterInstructor;
+                    newCourseLines.Add(newCourseString);
+                }
+                else
+                {
+                    newCourseLines.Add(courseString);
+                }
+                newCourseLinesArr = newUserLines.ToArray();
+                File.WriteAllLines(courseFilepath, newCourseLinesArr);
+            }
+        }
+
         // Change the database
         public void addCourseToStudent(string studentName, string courseID, string nextSemester, ref courseDatabase courseDB, student currentStudent)
         {
@@ -269,27 +326,6 @@ namespace CRS
             return crs;
         }
 
-
-        // Change the database
-        public void removeCrs(string crsID, ref userDatabase usrDB, string nextSemester)
-        {
-            course removedCrs = getCourse(crsID);
-            crsLst.Remove(removedCrs);
-            List<student> enrolledStdLst = removedCrs.getStudents();
-            List<student> stdLst = usrDB.getStudentList();
-            foreach (student std in enrolledStdLst)
-            {
-                int stdIndex = stdLst.IndexOf(std);
-                std.deleteClassFromHistory(removedCrs, nextSemester);
-                std.deleteCourseFromNext(removedCrs);
-                usrDB.updateStd(stdIndex, std);
-            }
-
-            faculty fac = usrDB.getFaculty(removedCrs.getInstructor());
-            int facIndex = usrDB.getFacultyList().IndexOf(fac);
-            fac.removeCrsFromSch(removedCrs);
-            usrDB.updateFac(facIndex, fac);
-        }
          // Change the database
         public void removeCrs(string crsID, ref userDatabase usrDB, string nextSemester, string filepath)
         {
@@ -317,7 +353,7 @@ namespace CRS
             foreach(string courseString in courseLines)
             {
                 string courseID = courseString.Substring(4, 10);
-                if (courseID == DeletedCourse.getCode())
+                if (courseID == removedCrs.getCode())
                 {
                     //skips the iteration if it’s the course that’s being deleted
                     continue;
@@ -331,7 +367,6 @@ namespace CRS
             }
         }
 
-        }
         //public void updateCrs(int crsIndex, course crs)
         private List<course> crsLst;
     }
@@ -383,6 +418,11 @@ namespace CRS
         public float getCredits()
         {
             return totalCredits;
+        }
+        
+        public void setAdvisor(string advisorStr)
+        {
+            advisor = advisorStr;
         }
         public void updateCourseFiles(string filepath)
         {
@@ -783,6 +823,10 @@ namespace CRS
         public string getInstructor()
         {
             return instructor;
+        }
+        public void setInstructor(string instructorUsername)
+        {
+            instructor = instructorUsername;
         }
         public string getCredit()
         {
