@@ -75,7 +75,12 @@ namespace CRS
             if (usrDB.isValidUser(username, password, ref usertype))
             {
                 this.Hide();
-                new mainpage(usertype, username, usrDB, upath, cpath, ppath).ShowDialog();
+                if (usertype == "admin")
+                    new admMainpage(usrDB, cpath, ppath).ShowDialog();
+                else if (usertype == "manager")
+                    return;
+                else
+                    new mainpage(usertype, username, usrDB, upath, cpath, ppath).ShowDialog();
                 this.Close();
             }
             else

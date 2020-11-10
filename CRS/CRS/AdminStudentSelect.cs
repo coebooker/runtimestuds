@@ -61,10 +61,6 @@ namespace CRS
         private void button1_Click(object sender, EventArgs e)
         {
             string studentPass = dataGridView1.SelectedRows[0].Cells["First Name"].FormattedValue.ToString() +" "+ dataGridView1.SelectedRows[0].Cells["Middle Name"].FormattedValue.ToString() +" "+ dataGridView1.SelectedRows[0].Cells["Last Name"].FormattedValue.ToString();
-
-
-
-
             validityResult = usrDB.getStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString()).isValidAdd(currentSemester, crsDB.getCourse(courseAdding));
             if (validityResult.valid)
             {
@@ -96,10 +92,7 @@ namespace CRS
                 // For Admin account, probably pass by reference the student instance into AdminStudentSelect form
                 student currentStudent = usrDB.getStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString());
 
-                usrDB.addCourseToStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString(), courseAdding.Trim(), currentSemester, ref crsDB, currentStudent);
-
-
-                new AdminStudentCourse(coursePass, studentPass).Show();
+                usrDB.addCrsToStd(courseAdding.Trim(), currentSemester, ref crsDB, currentStudent);
             }
             else
             {

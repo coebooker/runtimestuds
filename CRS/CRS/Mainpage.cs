@@ -15,24 +15,17 @@ namespace CRS
     {
         private userDatabase usrDB;
         private courseDatabase crsDB;
-        //private List<course> crsLst;
         private string username;
-        string upath;
-        string cpath;
-        string ppath;
-        string currentSemester = "F20";
+        string currentSemester = "F14";
+        string nextSemester = "S15";
         validity validityResult;
 
         public mainpage(string usertype, string username, userDatabase usrDB, string upath, string cpath, string ppath)
         {
-            this.upath = upath;
-            this.cpath = cpath;
-            this.ppath = ppath;
             this.username = username;
             crsDB = new courseDatabase(cpath);
-            usrDB.addPrevCourses(ppath);
+            usrDB.addPrevCourses(ppath, ref this.crsDB, nextSemester);
             this.usrDB = usrDB;
-
             InitializeComponent();
 
             createCrsLstTable(crsLstTable);
@@ -61,7 +54,7 @@ namespace CRS
             table.Columns.Add("Schedule", typeof(string));
 
             foreach (course crs in crsDB.getCourseList())
-                table.Rows.Add(crs.getCode(), crs.getTitle(), crs.getInstructor(), crs.getCredit(), crs.getSeats() + " / " + crs.getMaxSeats(), crs.getBlocks());
+                table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats + " / " + crs.maxSeats, crs.getBlocks());
 
             dataGridView.DataSource = table;
         }
@@ -78,7 +71,7 @@ namespace CRS
 
             foreach (previousCourse pcrs in crsHist)
             {
-                table.Rows.Add(pcrs.name, pcrs.semester, pcrs.credit, pcrs.grade);
+                table.Rows.Add(pcrs.crsID, pcrs.semester, pcrs.credit, pcrs.grade);
             }
 
             crs_hist_table.DataSource = table;
@@ -95,7 +88,7 @@ namespace CRS
 
             foreach (course crs in crsLst)
             {
-                table.Rows.Add(crs.getCode(), crs.getTitle(), crs.getInstructor(), crs.getCredit(), crs.getSeats(), crs.getBlocks());
+                table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats, crs.getBlocks());
             }
 
             stdSchTable.DataSource = table;
@@ -109,22 +102,22 @@ namespace CRS
             table.Columns.Add("Title", typeof(string));
             table.Columns.Add("Schedule", typeof(string));
 
-            foreach (course crs in crsDB.getFacultyCourseLst(username))
-                table.Rows.Add(crs.getCode(), crs.getTitle(), crs.getBlocks());
+            foreach (course crs in crsDB.getNextFacCrsLst(username))
+                table.Rows.Add(crs.crsID, crs.title, crs.getBlocks());
 
             dgv.DataSource = table;
         }
         private void createFacDropDown(ComboBox dd)
         {
-            List<course> crsLst = crsDB.getFacultyCourseLst(username);
+            List<course> crsLst = crsDB.getNextFacCrsLst(username);
             foreach (course crs in crsLst)
-                dd.Items.Add(crs.getCode());
+                dd.Items.Add(crs.crsID);
             dd.Items.Add("");
         }
         private void createEnrolledStdTable(DataGridView dgv, string course)
         {
-            List<course> crsLst = crsDB.getFacultyCourseLst(username);
-            course crs = crsLst.Find(s => s.getCode() == course);
+            List<course> crsLst = crsDB.getNextFacCrsLst(username);
+            course crs = crsLst.Find(s => s.crsID == course);
             DataTable table = new DataTable();
             table.Columns.Add("First Name");
             table.Columns.Add("Middle Name");
@@ -132,7 +125,7 @@ namespace CRS
 
             List<student> stdLst = crs.getStudents();
             foreach (student std in stdLst)
-                table.Rows.Add(std.getFName(), std.getMName(), std.getLName());
+                table.Rows.Add(std.fname, std.mname, std.lname);
 
             dgv.DataSource = table;
         }
@@ -147,7 +140,7 @@ namespace CRS
             table.Columns.Add("Last Name");
 
             foreach (student std in adviseesLst)
-                table.Rows.Add(std.getFName(), std.getMName(), std.getLName());
+                table.Rows.Add(std.fname, std.mname, std.lname);
 
             adviseeTable.DataSource = table;
         }
@@ -178,8 +171,6 @@ namespace CRS
             }
             else if (userType == "admin")
             {
-                add_crs_adm.Visible = true;
-                add_crs_adm.Location = sec_btn;
                 view_sch_admin.Visible = true;
                 view_sch_admin.Location = trd_btn;
             }
@@ -282,12 +273,12 @@ namespace CRS
 
                     // For Admin account, probably pass by reference the student instance into AdminStudentSelect form DONE
                     student currentStd = usrDB.getStudent(username);
-                    usrDB.addCourseToStudent(username, crsLstTable.SelectedRows[0].Cells["Course"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB,currentStd);
+                    usrDB.addCrsToStd(crsLstTable.SelectedRows[0].Cells["Course"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB, currentStd);
 
                     new addedCourse(crsLstTable.SelectedRows[0].Cells["Course"].FormattedValue.ToString()).Show();
                     DataGridViewRow row = crsLstTable.SelectedRows[0];
                     course crs = crsDB.getCourse(row.Cells["Course"].Value.ToString());
-                    row.Cells["Seats"].Value = crs.getSeats() + " / " + crs.getMaxSeats();
+                    row.Cells["Seats"].Value = crs.seats + " / " + crs.maxSeats;
                     //createCrsLstTable(crsLstTable);
                     createCrsHistTable(crs_hist_table);}
                 else
@@ -318,11 +309,6 @@ namespace CRS
             }
         }
 
-        private void ViewScheduleAdminClick(object sender, EventArgs e)
-        {
-            new AdminFacultyList(usrDB, crsDB).Show();
-        }
-
         private void delCrsClickStd(object sender, EventArgs e)
         {
             credits.Visible = false;
@@ -343,37 +329,16 @@ namespace CRS
             if (stdSchTable.SelectedRows.Count == 1)
             {
                 student curStd = usrDB.getStudent(username);
-                usrDB.deleteCourseFromStudent(username, stdSchTable.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB,curStd);
+                usrDB.dropCrsFromStd(stdSchTable.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB,curStd);
                 DataGridViewRow row = crsLstTable.SelectedRows[0];
                 course crs = crsDB.getCourse(row.Cells["Course"].Value.ToString());
-                row.Cells["Seats"].Value = crs.getSeats() + " / " + crs.getMaxSeats();
+                row.Cells["Seats"].Value = crs.seats + " / " + crs.maxSeats;
                 //createCrsLstTable();
                 createCrsHistTable(crs_hist_table);
                 List<course> studentCrsLst = curStd.getRegisteredCrs();
                 createStdSchTable(stdSchTable, studentCrsLst);
             }
     }
-
-        private void add_crs_adm_click(object sender, EventArgs e)
-        {
-            if (crsLstTable.SelectedRows.Count == 1)
-            {
-                new AdminStudentSelect(crsLstTable.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString(), ref usrDB, ref crsDB, currentSemester).Show();
-            }
-            else
-            {
-                MessageBox.Show("Select a class",
-                    "No Class",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                if (crsLstTable.Visible == false)
-                {
-                    crsLstTable.Visible = true;
-                }
-            }
-            createCrsLstTable(crsLstTable);
-            createCrsHistTable(crs_hist_table);
-        }
         private void viewFacSchClick(object sender, EventArgs e)
         {
             if (facSchTable.Visible == false)
