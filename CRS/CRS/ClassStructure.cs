@@ -118,7 +118,7 @@ namespace CRS
                     return;
                 }
         }
-        public void removeStd(string username, ref courseDatabase crsDB)
+        public void removeStd(string username, ref courseDatabase crsDB, string filepath)
         {
             student std = getStudent(username);
 
@@ -138,6 +138,26 @@ namespace CRS
 
             // Remove the student from the database
             StudentsLst.Remove(std);
+
+            //Updates the UserDB.in file to remove the student from it
+            string[] userLines = File.ReadAllLines(filepath);
+            string[] newUserLinesArr;
+            List<string> newUserLines = new List<string>();
+            foreach (string userString in userLines)
+            {
+                string currentUsername = userString.Substring(0, 10);
+                if (currentUsername == username)
+                {
+                    //skips the iteration if it’s the course that’s being deleted
+                    continue;
+                }
+                else
+                {
+                    newUserLines.Add(userString);
+                }
+                newUserLinesArr = newUserLines.ToArray();
+                File.WriteAllLines(filepath, newUserLinesArr);
+            }
         }
         public void removeFac(string facultyUsername, string userFilepath, string courseFilepath, ref courseDatabase coursedb)
         {
@@ -700,7 +720,24 @@ namespace CRS
         private List<course> CourseSchedule = new List<course>();
         private List<course> RegisteredCourses = new List<course>();
     }
-
+    public class manager : admin
+    {
+        public manager(string f, string m, string l, string usrname, string psw) : base(f, m, l, usrname, psw)
+        {
+        }
+        private void removeCourse(ref courseDatabase courseDB,ref userDatabase userDB, string courseID,string nextSemester,string filepath)
+        {
+            courseDB.removeCrs(courseID, ref userDB, nextSemester, filepath);
+        }
+        private void removeStudent(ref userDatabase userDB,string username, ref courseDatabase courseDB, string filepath)
+        {
+            userDB.removeStd(username, ref courseDB, filepath);
+        }
+        private void removeFaculty(ref userDatabase userDB,string facultyUsername, string userFilepath, string courseFilepath,ref courseDatabase courseDB)
+        {
+            userDB.removeFac(facultyUsername, userFilepath, courseFilepath, ref courseDB);
+        }
+    }
     public class classTime
     {
         public classTime(List<char> day, double start, double end)
