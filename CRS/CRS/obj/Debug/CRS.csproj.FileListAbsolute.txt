@@ -101,7 +101,6 @@ C:\Users\mikit\source\runtimestuds\CRS\CRS\obj\Debug\CRS.csproj.GenerateResource
 C:\Users\mikit\source\runtimestuds\CRS\CRS\obj\Debug\CRS.csproj.CoreCompileInputs.cache
 C:\Users\mikit\source\runtimestuds\CRS\CRS\obj\Debug\CRS.exe
 C:\Users\mikit\source\runtimestuds\CRS\CRS\obj\Debug\CRS.pdb
-C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\bin\Debug\CRS.exe.config
 C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.exe
 C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.pdb
 C:\Users\cmbooker\Source\Repos\runtimestuds2\CRS\CRS\bin\Debug\CRS.exe.config
@@ -137,3 +136,13 @@ C:\Users\cmbooker\Source\Repos\runtimestuds3\CRS\CRS\obj\Debug\CRS.StudentCourse
 C:\Users\cmbooker\Source\Repos\runtimestuds3\CRS\CRS\obj\Debug\CRS.csproj.GenerateResource.Cache
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admMainpage.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admCrsHist.resources
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\bin\Debug\CRS.exe
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\bin\Debug\CRS.pdb
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.addedCourse.resources
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admCrsHist.resources
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.AdminStudentSelect.resources
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admMainpage.resources
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.LoginForm.resources
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.mainpage.resources
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.Properties.Resources.resources
+C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.csproj.GenerateResource.Cache

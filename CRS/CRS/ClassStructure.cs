@@ -408,10 +408,47 @@ namespace CRS
         {
             return registeredCourses;
         }
-        public float getGPA()
+        public float calculateGPA()
         {
+            List<float> GPACredits = new List<float>();
+            foreach (previousCourse oldCrs in crsHistory)
+            {
+                string currentGrade = oldCrs.grade;
+                if (currentGrade.Substring(0, 1) == "R")
+                {
+                    string gradeStr = currentGrade.Substring(1);
+                    bool applicableGrade = gradeDict.ContainsKey(gradeStr);
+                    if (applicableGrade)
+                    {
+                        float currentGPA = gradeDict[gradeStr];
+                        GPACredits.Add(currentGPA);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                }
+                else
+                {
+                    bool applicableGrade = gradeDict.ContainsKey(currentGrade);
+                    if (applicableGrade)
+                    {
+                        float currentGPA = gradeDict[currentGrade];
+                        GPACredits.Add(currentGPA);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }                
+                }
+            float GPA = GPACredits.Sum() / GPACredits.Count();
             return GPA;
         }
+
+            
+        
         public float getCredits()
         {
             return totalCredits;

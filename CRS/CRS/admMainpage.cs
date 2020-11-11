@@ -56,7 +56,7 @@ namespace CRS
             table.Columns.Add("Credits");
 
             foreach (student std in usrDB.getStudentList())
-                table.Rows.Add(std.username, std.fname, std.lname, std.advisor, std.getGPA(), std.getCredits());
+                table.Rows.Add(std.username, std.fname, std.lname, std.advisor, std.calculateGPA(), std.getCredits());
 
             stdLst.DataSource = table;
             stdLst.Columns["Username"].Visible = false;
