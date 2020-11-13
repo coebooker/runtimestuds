@@ -223,7 +223,7 @@ namespace CRS
                 crsLstTable.Visible = false;
             credits.Text = "Total Credits: " + usrDB.getStudent(username).getCredits().ToString();
             credits.Visible = true;
-            gpa.Text = "GPA: " + usrDB.getStudent(username).getGPA().ToString();
+            gpa.Text = "GPA: " + usrDB.getStudent(username).calculateGPA().ToString();
             gpa.Visible = true;
             if (stdSchTable.Visible == true)
                 stdSchTable.Visible = false;
