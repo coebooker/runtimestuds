@@ -137,3 +137,5 @@ C:\Users\cmbooker\Source\Repos\runtimestuds3\CRS\CRS\obj\Debug\CRS.StudentCourse
 C:\Users\cmbooker\Source\Repos\runtimestuds3\CRS\CRS\obj\Debug\CRS.csproj.GenerateResource.Cache
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admMainpage.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admCrsHist.resources
+C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admAdvisees.resources
+C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.manMainpage.resources

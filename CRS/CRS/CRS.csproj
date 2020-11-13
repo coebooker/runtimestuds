@@ -107,6 +107,9 @@
     <EmbeddedResource Include="addedCourse.resx">
       <DependentUpon>addedCourse.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="admAdvisees.resx">
+      <DependentUpon>admAdvisees.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="admCrsHist.resx">
       <DependentUpon>admCrsHist.cs</DependentUpon>
     </EmbeddedResource>

@@ -108,6 +108,17 @@ namespace CRS
             createStdLst();
             createRegisteredCrsLst();
 
+            // Hide everything of faculties' interactions
+            facLst.Visible = false;
+            facLstLabel.Visible = false;
+
+            facSch.Visible = false;
+            registeredCrsLstLabel.Visible = false;
+
+            showEnrolledStd.Visible = false;
+            showAdvisees.Visible = false;
+            checkAdviseeSchedule.Visible = false;
+
             // Display tables for students' interactions
             stdLst.Visible = true;
             stdLstLabel.Visible = true;
@@ -118,6 +129,7 @@ namespace CRS
             dropCrs.Visible = true;
             addCrs.Visible = true;
             stdActions.Visible = true;
+            stdActions.BringToFront();
             crsHist.Visible = true;
             conflictCheck.Visible = true;
         }
@@ -148,6 +160,11 @@ namespace CRS
 
             showEnrolledStd.Visible = true;
             showAdvisees.Visible = true;
+            checkAdviseeSchedule.Visible = true;
+        }
+        private void manSelectClick(object sender, EventArgs e)
+        {
+
         }
 
 
@@ -306,7 +323,7 @@ namespace CRS
             {
                 string username = facLst.SelectedRows[0].Cells["Username"].Value.ToString();
                 faculty fac = usrDB.getFaculty(username);
-                new admAdvisees(fac);
+                new admAdvisees(fac, usrDB).Show();
             }
             else
                 MessageBox.Show("Select a faculty from the faculties list",
@@ -314,14 +331,13 @@ namespace CRS
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
-
         private void checkAdviseeScheduleClick(object sender, EventArgs e)
         {
             if (facLst.SelectedRows.Count == 1)
             {
                 string username = facLst.SelectedRows[0].Cells["Username"].Value.ToString();
                 faculty fac = usrDB.getFaculty(username);
-                new admAdvisees(fac);
+                new admAdvisees(fac, usrDB).Show();
             }
             else
                 MessageBox.Show("Select a faculty from the faculties list",

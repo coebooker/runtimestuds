@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.crsLst = new System.Windows.Forms.DataGridView();
             this.stdSelect = new System.Windows.Forms.Button();
-            this.facSelect = new System.Windows.Forms.Button();
+            this.manSelect = new System.Windows.Forms.Button();
             this.addCrs = new System.Windows.Forms.Button();
             this.crsLstLabel = new System.Windows.Forms.Label();
             this.stdLst = new System.Windows.Forms.DataGridView();
@@ -52,6 +52,7 @@
             this.facLst = new System.Windows.Forms.DataGridView();
             this.facSch = new System.Windows.Forms.DataGridView();
             this.showEnrolledStd = new System.Windows.Forms.Button();
+            this.facSelect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.crsLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stdLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.registeredCrsLst)).BeginInit();
@@ -73,14 +74,14 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.crsLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.crsLst.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.crsLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.crsLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.crsLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.crsLst.EnableHeadersVisualStyles = false;
             this.crsLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
@@ -99,6 +100,7 @@
             // 
             this.stdSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.stdSelect.FlatAppearance.BorderSize = 0;
+            this.stdSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.stdSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stdSelect.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stdSelect.ForeColor = System.Drawing.Color.White;
@@ -111,27 +113,30 @@
             this.stdSelect.UseVisualStyleBackColor = false;
             this.stdSelect.Click += new System.EventHandler(this.stdSelectClick);
             // 
-            // facSelect
+            // manSelect
             // 
-            this.facSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facSelect.FlatAppearance.BorderSize = 0;
-            this.facSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.facSelect.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.facSelect.ForeColor = System.Drawing.Color.White;
-            this.facSelect.Location = new System.Drawing.Point(204, 0);
-            this.facSelect.Margin = new System.Windows.Forms.Padding(0);
-            this.facSelect.Name = "facSelect";
-            this.facSelect.Size = new System.Drawing.Size(204, 47);
-            this.facSelect.TabIndex = 3;
-            this.facSelect.Text = "Faculty";
-            this.facSelect.UseVisualStyleBackColor = false;
-            this.facSelect.Click += new System.EventHandler(this.facSelectClick);
+            this.manSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.manSelect.FlatAppearance.BorderSize = 0;
+            this.manSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.manSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.manSelect.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manSelect.ForeColor = System.Drawing.Color.White;
+            this.manSelect.Location = new System.Drawing.Point(408, 0);
+            this.manSelect.Margin = new System.Windows.Forms.Padding(0);
+            this.manSelect.Name = "manSelect";
+            this.manSelect.Size = new System.Drawing.Size(204, 47);
+            this.manSelect.TabIndex = 3;
+            this.manSelect.Text = "Manager";
+            this.manSelect.UseVisualStyleBackColor = false;
+            this.manSelect.Visible = false;
+            this.manSelect.Click += new System.EventHandler(this.manSelectClick);
             // 
             // addCrs
             // 
             this.addCrs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addCrs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.addCrs.FlatAppearance.BorderSize = 0;
+            this.addCrs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.addCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addCrs.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCrs.ForeColor = System.Drawing.Color.White;
@@ -165,14 +170,14 @@
             this.stdLst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.stdLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.stdLst.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.stdLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.stdLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.stdLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.stdLst.EnableHeadersVisualStyles = false;
             this.stdLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
@@ -194,7 +199,7 @@
             this.stdLstLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.stdLstLabel.AutoSize = true;
             this.stdLstLabel.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stdLstLabel.Location = new System.Drawing.Point(1086, 138);
+            this.stdLstLabel.Location = new System.Drawing.Point(1086, 129);
             this.stdLstLabel.Name = "stdLstLabel";
             this.stdLstLabel.Size = new System.Drawing.Size(178, 30);
             this.stdLstLabel.TabIndex = 18;
@@ -226,7 +231,7 @@
             this.registeredCrsLstLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.registeredCrsLstLabel.AutoSize = true;
             this.registeredCrsLstLabel.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registeredCrsLstLabel.Location = new System.Drawing.Point(1086, 462);
+            this.registeredCrsLstLabel.Location = new System.Drawing.Point(1086, 461);
             this.registeredCrsLstLabel.Name = "registeredCrsLstLabel";
             this.registeredCrsLstLabel.Size = new System.Drawing.Size(198, 30);
             this.registeredCrsLstLabel.TabIndex = 20;
@@ -241,7 +246,7 @@
             this.dropCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropCrs.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dropCrs.ForeColor = System.Drawing.Color.White;
-            this.dropCrs.Location = new System.Drawing.Point(1330, 451);
+            this.dropCrs.Location = new System.Drawing.Point(1330, 450);
             this.dropCrs.Margin = new System.Windows.Forms.Padding(0);
             this.dropCrs.Name = "dropCrs";
             this.dropCrs.Size = new System.Drawing.Size(254, 50);
@@ -258,8 +263,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.facSelect, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.stdSelect, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.facSelect, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.manSelect, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 50);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -285,6 +291,7 @@
             this.conflictCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.conflictCheck.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.conflictCheck.FlatAppearance.BorderSize = 0;
+            this.conflictCheck.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.conflictCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.conflictCheck.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.conflictCheck.ForeColor = System.Drawing.Color.White;
@@ -303,6 +310,7 @@
             this.crsHist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.crsHist.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.crsHist.FlatAppearance.BorderSize = 0;
+            this.crsHist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.crsHist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.crsHist.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crsHist.ForeColor = System.Drawing.Color.White;
@@ -320,8 +328,7 @@
             // 
             this.facActions.AutoSize = true;
             this.facActions.Controls.Add(this.checkAdviseeSchedule);
-            this.facActions.Controls.Add(this.showAdvisees);
-            this.facActions.Location = new System.Drawing.Point(42, 399);
+            this.facActions.Location = new System.Drawing.Point(0, 138);
             this.facActions.Margin = new System.Windows.Forms.Padding(0);
             this.facActions.Name = "facActions";
             this.facActions.Size = new System.Drawing.Size(254, 160);
@@ -332,6 +339,7 @@
             this.checkAdviseeSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.checkAdviseeSchedule.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.checkAdviseeSchedule.FlatAppearance.BorderSize = 0;
+            this.checkAdviseeSchedule.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.checkAdviseeSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkAdviseeSchedule.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkAdviseeSchedule.ForeColor = System.Drawing.Color.White;
@@ -347,16 +355,18 @@
             // 
             // showAdvisees
             // 
+            this.showAdvisees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.showAdvisees.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.showAdvisees.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.showAdvisees.FlatAppearance.BorderSize = 0;
+            this.showAdvisees.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.showAdvisees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showAdvisees.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showAdvisees.ForeColor = System.Drawing.Color.White;
-            this.showAdvisees.Location = new System.Drawing.Point(0, 0);
+            this.showAdvisees.Location = new System.Drawing.Point(1330, 118);
             this.showAdvisees.Margin = new System.Windows.Forms.Padding(0);
             this.showAdvisees.Name = "showAdvisees";
-            this.showAdvisees.Size = new System.Drawing.Size(254, 80);
+            this.showAdvisees.Size = new System.Drawing.Size(254, 50);
             this.showAdvisees.TabIndex = 24;
             this.showAdvisees.Text = "Show Advisees";
             this.showAdvisees.UseVisualStyleBackColor = false;
@@ -368,7 +378,7 @@
             this.facLstLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.facLstLabel.AutoSize = true;
             this.facLstLabel.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.facLstLabel.Location = new System.Drawing.Point(1086, 138);
+            this.facLstLabel.Location = new System.Drawing.Point(1086, 129);
             this.facLstLabel.Name = "facLstLabel";
             this.facLstLabel.Size = new System.Drawing.Size(180, 30);
             this.facLstLabel.TabIndex = 25;
@@ -385,14 +395,14 @@
             this.facLst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.facLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.facLst.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.facLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.facLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.facLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facLst.EnableHeadersVisualStyles = false;
             this.facLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
@@ -422,6 +432,7 @@
             this.facSch.EnableHeadersVisualStyles = false;
             this.facSch.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.facSch.Location = new System.Drawing.Point(1082, 509);
+            this.facSch.Margin = new System.Windows.Forms.Padding(0);
             this.facSch.Name = "facSch";
             this.facSch.RowHeadersWidth = 30;
             this.facSch.RowTemplate.Height = 28;
@@ -434,10 +445,11 @@
             this.showEnrolledStd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.showEnrolledStd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.showEnrolledStd.FlatAppearance.BorderSize = 0;
+            this.showEnrolledStd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.showEnrolledStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showEnrolledStd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showEnrolledStd.ForeColor = System.Drawing.Color.White;
-            this.showEnrolledStd.Location = new System.Drawing.Point(1330, 451);
+            this.showEnrolledStd.Location = new System.Drawing.Point(1330, 450);
             this.showEnrolledStd.Margin = new System.Windows.Forms.Padding(0);
             this.showEnrolledStd.Name = "showEnrolledStd";
             this.showEnrolledStd.Size = new System.Drawing.Size(254, 50);
@@ -447,6 +459,23 @@
             this.showEnrolledStd.Visible = false;
             this.showEnrolledStd.Click += new System.EventHandler(this.showEnrolledStdClick);
             // 
+            // facSelect
+            // 
+            this.facSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.facSelect.FlatAppearance.BorderSize = 0;
+            this.facSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.facSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.facSelect.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.facSelect.ForeColor = System.Drawing.Color.White;
+            this.facSelect.Location = new System.Drawing.Point(204, 0);
+            this.facSelect.Margin = new System.Windows.Forms.Padding(0);
+            this.facSelect.Name = "facSelect";
+            this.facSelect.Size = new System.Drawing.Size(204, 47);
+            this.facSelect.TabIndex = 4;
+            this.facSelect.Text = "Faculty";
+            this.facSelect.UseVisualStyleBackColor = false;
+            this.facSelect.Click += new System.EventHandler(this.facSelectClick);
+            // 
             // admMainpage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -454,6 +483,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1616, 796);
             this.Controls.Add(this.showEnrolledStd);
+            this.Controls.Add(this.showAdvisees);
             this.Controls.Add(this.facSch);
             this.Controls.Add(this.facLst);
             this.Controls.Add(this.facLstLabel);
@@ -490,7 +520,7 @@
 
         private System.Windows.Forms.DataGridView crsLst;
         private System.Windows.Forms.Button stdSelect;
-        private System.Windows.Forms.Button facSelect;
+        private System.Windows.Forms.Button manSelect;
         private System.Windows.Forms.Button addCrs;
         private System.Windows.Forms.Label crsLstLabel;
         private System.Windows.Forms.DataGridView stdLst;
@@ -509,5 +539,6 @@
         private System.Windows.Forms.DataGridView facLst;
         private System.Windows.Forms.DataGridView facSch;
         private System.Windows.Forms.Button showEnrolledStd;
+        private System.Windows.Forms.Button facSelect;
     }
 }
