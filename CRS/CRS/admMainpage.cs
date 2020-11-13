@@ -87,12 +87,22 @@ namespace CRS
             foreach (faculty fac in usrDB.getFacultyList())
                 table.Rows.Add(fac.username, fac.fname, fac.lname);
 
-            stdLst.DataSource = table;
-            stdLst.Columns["Username"].Visible = false;
+            facLst.DataSource = table;
+            facLst.Columns["Username"].Visible = false;
         }
+        public void createFacSch()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Course ID", typeof(string));
+            table.Columns.Add("Title", typeof(string));
+            table.Columns.Add("Schedule", typeof(string));
+
+            facSch.DataSource = table;
+        }   // Create the frame of the table
 
 
         // Select the user type
+        //--------------------------------
         private void stdSelectClick(object sender, System.EventArgs e)
         {
             createStdLst();
@@ -114,10 +124,35 @@ namespace CRS
         private void facSelectClick(object sender, System.EventArgs e)
         {
             createFacLst();
+            createFacSch();
+
+            // Hide everything of students' interactions
+            stdLst.Visible = false;
+            stdLstLabel.Visible = false;
+
+            registeredCrsLst.Visible = false;
+            registeredCrsLstLabel.Visible = false;
+
+            dropCrs.Visible = false;
+            addCrs.Visible = false;
+            stdActions.Visible = false;
+            crsHist.Visible = false;
+            conflictCheck.Visible = false;
+
+            // Show everything of faculties' interactions
+            facLst.Visible = true;
+            facLstLabel.Visible = true;
+
+            facSch.Visible = true;
+            registeredCrsLstLabel.Visible = true;
+
+            showEnrolledStd.Visible = true;
+            showAdvisees.Visible = true;
         }
 
 
         // Student interactions
+        //---------------------------------------------------------
         private void dropCrsClick(object sender, System.EventArgs e)
         {
             if (registeredCrsLst.SelectedRows.Count == 1)
@@ -224,6 +259,73 @@ namespace CRS
             else
                 MessageBox.Show("Select a student from the student list",
                     "No student selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+
+
+        // Faculty interactions
+        //----------------------------------------------------------------------
+        private void facSelected(object sender, DataGridViewCellEventArgs e)
+        {
+            if (facLst.SelectedRows.Count == 1)
+            {
+                string username = facLst.SelectedRows[0].Cells["Username"].Value.ToString().Trim();
+
+                // Get the list of courses the faculty is scheduled to teach
+                List<course> crsLst = new List<course>();
+                foreach (course crs in crsDB.getCourseList())
+                    if (crs.instructor.Trim() == username)
+                        crsLst.Add(crs);
+
+                // Update the faculty schedule table
+                DataTable table = (DataTable)facSch.DataSource;
+                table.Rows.Clear();
+                foreach (course crs in crsLst)
+                    table.Rows.Add(crs.crsID, crs.title, crs.getBlocks());
+            }
+        }
+        private void showEnrolledStdClick(object sender, EventArgs e)
+        {
+            if (facSch.SelectedRows.Count == 1)
+            {
+                string crsID = facSch.SelectedRows[0].Cells["Course ID"].Value.ToString();
+                course crs = crsDB.getCourse(crsID);
+                new admEnrolledStd(crs).Show();
+            }
+            else
+                MessageBox.Show("Select a class from the schedule list",
+                    "No class selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+
+        private void showAdviseesClick(object sender, EventArgs e)
+        {
+            if (facLst.SelectedRows.Count == 1)
+            {
+                string username = facLst.SelectedRows[0].Cells["Username"].Value.ToString();
+                faculty fac = usrDB.getFaculty(username);
+                new admAdvisees(fac);
+            }
+            else
+                MessageBox.Show("Select a faculty from the faculties list",
+                    "No faculty selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+
+        private void checkAdviseeScheduleClick(object sender, EventArgs e)
+        {
+            if (facLst.SelectedRows.Count == 1)
+            {
+                string username = facLst.SelectedRows[0].Cells["Username"].Value.ToString();
+                faculty fac = usrDB.getFaculty(username);
+                new admAdvisees(fac);
+            }
+            else
+                MessageBox.Show("Select a faculty from the faculties list",
+                    "No faculty selected",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }

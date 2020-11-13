@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.crsLst = new System.Windows.Forms.DataGridView();
             this.stdSelect = new System.Windows.Forms.Button();
             this.facSelect = new System.Windows.Forms.Button();
@@ -45,14 +46,20 @@
             this.conflictCheck = new System.Windows.Forms.Button();
             this.crsHist = new System.Windows.Forms.Button();
             this.facActions = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.checkAdviseeSchedule = new System.Windows.Forms.Button();
+            this.showAdvisees = new System.Windows.Forms.Button();
+            this.facLstLabel = new System.Windows.Forms.Label();
+            this.facLst = new System.Windows.Forms.DataGridView();
+            this.facSch = new System.Windows.Forms.DataGridView();
+            this.showEnrolledStd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.crsLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stdLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.registeredCrsLst)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.stdActions.SuspendLayout();
             this.facActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.facLst)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facSch)).BeginInit();
             this.SuspendLayout();
             // 
             // crsLst
@@ -66,14 +73,14 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.crsLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.crsLst.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.crsLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.crsLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.crsLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.crsLst.EnableHeadersVisualStyles = false;
             this.crsLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
@@ -159,14 +166,14 @@
             this.stdLst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.stdLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.stdLst.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.stdLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.stdLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.stdLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.stdLst.EnableHeadersVisualStyles = false;
             this.stdLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
@@ -316,54 +323,144 @@
             // facActions
             // 
             this.facActions.AutoSize = true;
-            this.facActions.Controls.Add(this.button1);
-            this.facActions.Controls.Add(this.button2);
-            this.facActions.Location = new System.Drawing.Point(9, 213);
+            this.facActions.Controls.Add(this.checkAdviseeSchedule);
+            this.facActions.Controls.Add(this.showAdvisees);
+            this.facActions.Location = new System.Drawing.Point(42, 399);
             this.facActions.Margin = new System.Windows.Forms.Padding(0);
             this.facActions.Name = "facActions";
             this.facActions.Size = new System.Drawing.Size(169, 107);
             this.facActions.TabIndex = 24;
             // 
-            // button1
+            // checkAdviseeSchedule
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(0, 53);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(169, 53);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "Check for Time Conflict";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
+            this.checkAdviseeSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.checkAdviseeSchedule.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.checkAdviseeSchedule.FlatAppearance.BorderSize = 0;
+            this.checkAdviseeSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkAdviseeSchedule.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkAdviseeSchedule.ForeColor = System.Drawing.Color.White;
+            this.checkAdviseeSchedule.Location = new System.Drawing.Point(0, 80);
+            this.checkAdviseeSchedule.Margin = new System.Windows.Forms.Padding(0);
+            this.checkAdviseeSchedule.Name = "checkAdviseeSchedule";
+            this.checkAdviseeSchedule.Size = new System.Drawing.Size(254, 80);
+            this.checkAdviseeSchedule.TabIndex = 24;
+            this.checkAdviseeSchedule.Text = "Check Advisee Schedule";
+            this.checkAdviseeSchedule.UseVisualStyleBackColor = false;
+            this.checkAdviseeSchedule.Visible = false;
+            this.checkAdviseeSchedule.Click += new System.EventHandler(this.checkAdviseeScheduleClick);
             // 
-            // button2
+            // showAdvisees
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(0, 2);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(169, 53);
-            this.button2.TabIndex = 24;
-            this.button2.Text = "Course History";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Visible = false;
+            this.showAdvisees.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.showAdvisees.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.showAdvisees.FlatAppearance.BorderSize = 0;
+            this.showAdvisees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showAdvisees.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showAdvisees.ForeColor = System.Drawing.Color.White;
+            this.showAdvisees.Location = new System.Drawing.Point(0, 0);
+            this.showAdvisees.Margin = new System.Windows.Forms.Padding(0);
+            this.showAdvisees.Name = "showAdvisees";
+            this.showAdvisees.Size = new System.Drawing.Size(254, 80);
+            this.showAdvisees.TabIndex = 24;
+            this.showAdvisees.Text = "Show Advisees";
+            this.showAdvisees.UseVisualStyleBackColor = false;
+            this.showAdvisees.Visible = false;
+            this.showAdvisees.Click += new System.EventHandler(this.showAdviseesClick);
+            // 
+            // facLstLabel
+            // 
+            this.facLstLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.facLstLabel.AutoSize = true;
+            this.facLstLabel.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.facLstLabel.Location = new System.Drawing.Point(1086, 138);
+            this.facLstLabel.Name = "facLstLabel";
+            this.facLstLabel.Size = new System.Drawing.Size(180, 30);
+            this.facLstLabel.TabIndex = 25;
+            this.facLstLabel.Text = "Faculties List";
+            this.facLstLabel.Visible = false;
+            // 
+            // facLst
+            // 
+            this.facLst.AllowUserToAddRows = false;
+            this.facLst.AllowUserToDeleteRows = false;
+            this.facLst.AllowUserToOrderColumns = true;
+            this.facLst.AllowUserToResizeColumns = false;
+            this.facLst.AllowUserToResizeRows = false;
+            this.facLst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.facLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.facLst.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.facLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.facLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.facLst.EnableHeadersVisualStyles = false;
+            this.facLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.facLst.Location = new System.Drawing.Point(1082, 180);
+            this.facLst.Margin = new System.Windows.Forms.Padding(0);
+            this.facLst.MultiSelect = false;
+            this.facLst.Name = "facLst";
+            this.facLst.ReadOnly = true;
+            this.facLst.RowHeadersWidth = 30;
+            this.facLst.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.facLst.RowTemplate.Height = 28;
+            this.facLst.Size = new System.Drawing.Size(502, 220);
+            this.facLst.TabIndex = 26;
+            this.facLst.Visible = false;
+            this.facLst.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.facSelected);
+            // 
+            // facSch
+            // 
+            this.facSch.AllowUserToAddRows = false;
+            this.facSch.AllowUserToDeleteRows = false;
+            this.facSch.AllowUserToOrderColumns = true;
+            this.facSch.AllowUserToResizeColumns = false;
+            this.facSch.AllowUserToResizeRows = false;
+            this.facSch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.facSch.BackgroundColor = System.Drawing.Color.White;
+            this.facSch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.facSch.EnableHeadersVisualStyles = false;
+            this.facSch.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.facSch.Location = new System.Drawing.Point(1082, 509);
+            this.facSch.Name = "facSch";
+            this.facSch.RowHeadersWidth = 30;
+            this.facSch.RowTemplate.Height = 28;
+            this.facSch.Size = new System.Drawing.Size(502, 220);
+            this.facSch.TabIndex = 27;
+            this.facSch.Visible = false;
+            // 
+            // showEnrolledStd
+            // 
+            this.showEnrolledStd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.showEnrolledStd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.showEnrolledStd.FlatAppearance.BorderSize = 0;
+            this.showEnrolledStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showEnrolledStd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showEnrolledStd.ForeColor = System.Drawing.Color.White;
+            this.showEnrolledStd.Location = new System.Drawing.Point(1330, 451);
+            this.showEnrolledStd.Margin = new System.Windows.Forms.Padding(0);
+            this.showEnrolledStd.Name = "showEnrolledStd";
+            this.showEnrolledStd.Size = new System.Drawing.Size(254, 50);
+            this.showEnrolledStd.TabIndex = 28;
+            this.showEnrolledStd.Text = "View Students";
+            this.showEnrolledStd.UseVisualStyleBackColor = false;
+            this.showEnrolledStd.Visible = false;
+            this.showEnrolledStd.Click += new System.EventHandler(this.showEnrolledStdClick);
             // 
             // admMainpage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(913, 499);
+            this.ClientSize = new System.Drawing.Size(1616, 796);
+            this.Controls.Add(this.showEnrolledStd);
+            this.Controls.Add(this.facSch);
+            this.Controls.Add(this.facLst);
+            this.Controls.Add(this.facLstLabel);
             this.Controls.Add(this.facActions);
             this.Controls.Add(this.stdActions);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -387,6 +484,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.stdActions.ResumeLayout(false);
             this.facActions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.facLst)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facSch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -409,7 +508,11 @@
         private System.Windows.Forms.Button conflictCheck;
         private System.Windows.Forms.Button crsHist;
         private System.Windows.Forms.Panel facActions;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button checkAdviseeSchedule;
+        private System.Windows.Forms.Button showAdvisees;
+        private System.Windows.Forms.Label facLstLabel;
+        private System.Windows.Forms.DataGridView facLst;
+        private System.Windows.Forms.DataGridView facSch;
+        private System.Windows.Forms.Button showEnrolledStd;
     }
 }

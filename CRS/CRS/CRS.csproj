@@ -59,6 +59,18 @@
     <Compile Include="admCrsHist.Designer.cs">
       <DependentUpon>admCrsHist.cs</DependentUpon>
     </Compile>
+    <Compile Include="admAdvisees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admAdvisees.Designer.cs">
+      <DependentUpon>admAdvisees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="admEnrolledStd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admEnrolledStd.Designer.cs">
+      <DependentUpon>admEnrolledStd.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminStudentSelect.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,17 +84,23 @@
       <DependentUpon>admMainpage.cs</DependentUpon>
     </Compile>
     <Compile Include="ClassStructure.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Mainpage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Mainpage.Designer.cs">
       <DependentUpon>Mainpage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="manMainpage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="manMainpage.Designer.cs">
+      <DependentUpon>manMainpage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,11 +116,14 @@
     <EmbeddedResource Include="admMainpage.resx">
       <DependentUpon>admMainpage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mainpage.resx">
       <DependentUpon>Mainpage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="manMainpage.resx">
+      <DependentUpon>manMainpage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
