@@ -49,6 +49,11 @@ namespace CRS
                     admin adm = new admin(firstName, middleName, lastName, username, password);
                     AdminList.Add(adm);
                 }
+                else if (status == "manager")
+                {
+                    manager man = new manager(firstName, middleName, lastName, username, password);
+                    ManagerLst.Add(man);
+                }
                 else
                 {
                     student std = new student(firstName, middleName, lastName, status, username, password);
