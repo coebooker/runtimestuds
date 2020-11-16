@@ -23,7 +23,7 @@ namespace CRS
             table.Columns.Add("Credits", typeof(string));
             table.Columns.Add("Grade", typeof(string));
 
-            List<previousCourse> crsHistLst = std.getCrsHist();
+            List<previousCourse> crsHistLst = std.crsHist;
 
             foreach (previousCourse pcrs in crsHistLst)
                 table.Rows.Add(pcrs.crsID, pcrs.semester, pcrs.credit, pcrs.grade);

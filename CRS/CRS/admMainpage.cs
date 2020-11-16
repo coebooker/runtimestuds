@@ -57,7 +57,7 @@ namespace CRS
             table.Columns.Add("Credits");
 
             foreach (student std in usrDB.getStudentList())
-                table.Rows.Add(std.username, std.fname, std.lname, std.advisor, std.calculateGPA(), std.getCredits());
+                table.Rows.Add(std.username, std.fname, std.lname, std.advisor, std.calculateGPA(), std.totalCredits);
 
             stdLst.DataSource = table;
             stdLst.Columns["Username"].Visible = false;
@@ -118,8 +118,6 @@ namespace CRS
 
             dropCrs.Visible = true;
             addCrs.Visible = true;
-            stdActions.Visible = true;
-            stdActions.BringToFront();
             crsHist.Visible = true;
             conflictCheck.Visible = true;
             crrSch.Visible = true;
@@ -129,8 +127,6 @@ namespace CRS
             facLst.Visible = false;
             facLstLabel.Visible = false;
 
-            facActions.Visible = false;
-            facActions.BringToFront();
 
             checkAdviseeSchedule.Visible = false;
 
@@ -154,7 +150,6 @@ namespace CRS
 
             dropCrs.Visible = false;
             addCrs.Visible = false;
-            stdActions.Visible = false;
             crsHist.Visible = false;
             conflictCheck.Visible = false;
             crrSch.Visible = false;
@@ -163,9 +158,6 @@ namespace CRS
             facLst.Visible = true;
             facLstLabel.Visible = true;
 
-            facActions.Visible = true;
-            facActions.BringToFront();
-
             checkAdviseeSchedule.Visible = true;
 
             facSch.Visible = true;
@@ -173,6 +165,21 @@ namespace CRS
 
             showEnrolledStd.Visible = true;
             showAdvisees.Visible = true;
+        }
+        private void manSelectClick(object sender, EventArgs e)
+        {
+            createStdLst();
+            createFacLst();
+
+            Point p = facSch.Location;
+            facLst.Location = p;
+
+            facLst.Visible = true;
+            stdLst.Visible = true;
+            stdLstLabel.Visible = true;
+
+            removeStd.Visible = true;
+            removeFac.Visible = true;
         }
 
 
@@ -267,7 +274,7 @@ namespace CRS
                 // Update the registered courses list
                 DataTable table = (DataTable)registeredCrsLst.DataSource;
                 table.Rows.Clear();
-                foreach (course crs in std.getRegisteredCrs())
+                foreach (course crs in std.registeredCrs)
                     table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats, crs.getBlocks());
             }
         }
@@ -293,6 +300,8 @@ namespace CRS
             {
                 string username = stdLst.SelectedRows[0].Cells["Username"].Value.ToString();
                 student std = usrDB.getStudent(username);
+
+                new admStdSch(std).Show();
             }
             else
                 MessageBox.Show("Select a student from the student list",
@@ -345,7 +354,7 @@ namespace CRS
             {
                 string username = facLst.SelectedRows[0].Cells["Username"].Value.ToString();
                 faculty fac = usrDB.getFaculty(username);
-                new admAdvisees(fac);
+                new admAdvisees(fac, usrDB).Show();
             }
             else
                 MessageBox.Show("Select a faculty from the faculties list",
@@ -360,13 +369,70 @@ namespace CRS
             {
                 string username = facLst.SelectedRows[0].Cells["Username"].Value.ToString();
                 faculty fac = usrDB.getFaculty(username);
-                new admAdvisees(fac);
+                new admAdvisees(fac, usrDB);
             }
             else
                 MessageBox.Show("Select a faculty from the faculties list",
                     "No faculty selected",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+        }
+
+
+        // Manager interactions
+        //----------------------------------------------------------------------
+        private void removeStdClick(object sender, EventArgs e)
+        {
+            if (stdLst.SelectedRows.Count == 1)
+            {
+                string username = stdLst.SelectedRows[0].Cells["Username"].Visible.ToString();
+                usrDB.removeStd(username, ref crsDB, "filepath");
+            }
+            else
+                MessageBox.Show("Select a student from the faculties list",
+                    "No student selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+        private void removeFacClick(object sender, EventArgs e)
+        {
+            if (facLst.SelectedRows.Count == 1)
+            {
+                string username = facLst.SelectedRows[0].Cells["Username"].Visible.ToString();
+                usrDB.removeStd(username, ref crsDB, "filepath");
+            }
+            else
+                MessageBox.Show("Select a faculty from the faculties list",
+                    "No faculty selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+        private void removeCrsClick(object sender, EventArgs e)
+        {
+            if (crsLst.SelectedRows.Count == 1)
+            {
+                string crsID = crsLst.SelectedRows[0].Cells["Course ID"].Value.ToString();
+                crsDB.removeCrs(crsID, nextSemester, "filepath");
+            }
+        }
+        private void changeAdvisorClick(object sender, EventArgs e)
+        {
+            if (stdLst.SelectedRows.Count == 1)
+            {
+                string username = stdLst.SelectedRows[0].Cells["Username"].Value.ToString();
+                var form = new changeAdvisor(username, ref usrDB);
+                form.ShowDialog();
+                string facName = form.facName;
+
+                usrDB.changeAdvisor(username, facName);
+            }
+        }
+        private void createUserClick(object sender, EventArgs e)
+        {
+            var form = new admAddUser(usrDB);
+            form.ShowDialog();
+
+            usrDB.addUser(form.uname, form.pword, form.fName, form.mName, form.lName, form.uType, "filepath");
         }
     }
 }

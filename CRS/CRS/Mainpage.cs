@@ -67,7 +67,7 @@ namespace CRS
             table.Columns.Add("Grade", typeof(string));
 
             student std = usrDB.getStudent(username);
-            List<previousCourse> crsHist = std.getCrsHist();
+            List<previousCourse> crsHist = std.crsHist;
 
             foreach (previousCourse pcrs in crsHist)
             {
@@ -200,7 +200,7 @@ namespace CRS
             credits.Visible = false;
             gpa.Visible = false;
             student currentStd = usrDB.getStudent(username);
-            List<course> stdCrsLst = currentStd.getRegisteredCrs();
+            List<course> stdCrsLst = currentStd.registeredCrs;
             createStdSchTable(stdSchTable, stdCrsLst);
 
             if (crsLstTable.Visible == true)
@@ -221,7 +221,7 @@ namespace CRS
             createCrsHistTable(crs_hist_table);
             if (crsLstTable.Visible == true)
                 crsLstTable.Visible = false;
-            credits.Text = "Total Credits: " + usrDB.getStudent(username).getCredits().ToString();
+            credits.Text = "Total Credits: " + usrDB.getStudent(username).totalCredits.ToString();
             credits.Visible = true;
             gpa.Text = "GPA: " + usrDB.getStudent(username).calculateGPA().ToString();
             gpa.Visible = true;
@@ -321,7 +321,7 @@ namespace CRS
             if (stdSchTable.Visible == false)
             {
                 student currentStd = usrDB.getStudent(username);
-                List<course> stdCrsLst = currentStd.getRegisteredCrs();
+                List<course> stdCrsLst = currentStd.registeredCrs;
                 createStdSchTable(stdSchTable, stdCrsLst);
                 stdSchTable.Visible = true;
             }
@@ -335,7 +335,7 @@ namespace CRS
                 row.Cells["Seats"].Value = crs.seats + " / " + crs.maxSeats;
                 //createCrsLstTable();
                 createCrsHistTable(crs_hist_table);
-                List<course> studentCrsLst = curStd.getRegisteredCrs();
+                List<course> studentCrsLst = curStd.registeredCrs;
                 createStdSchTable(stdSchTable, studentCrsLst);
             }
     }
