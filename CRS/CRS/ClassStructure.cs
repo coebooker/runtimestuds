@@ -901,9 +901,8 @@ namespace CRS
         {
             string tempString = "";
             foreach (string crsBlock in timeBlocks)
-                tempString = tempString + Decode(crsBlock) + Environment.NewLine;
-            tempString = tempString.Trim();
-            return tempString;
+                tempString = tempString + Decode(crsBlock) + '\n';
+            return tempString.Remove(tempString.Length-1, 1);
         }
         public List<student> getStudents()
         {

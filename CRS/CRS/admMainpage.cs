@@ -42,10 +42,12 @@ namespace CRS
                 table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats + " / " + crs.maxSeats, crs.getBlocks());
 
             crsLst.DataSource = table;
+            crsLst.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
 
         // Create tables for students' interactions
+        //--------------------------------------------------------------------
         public void createStdLst()
         {
             DataTable table = new DataTable();
@@ -76,7 +78,9 @@ namespace CRS
         } // Create the frame of the table
 
 
+
         // Create tables for faculties' interactions
+        //----------------------------------------------------------------------
         public void createFacLst()
         {
             DataTable table = new DataTable();
@@ -103,7 +107,7 @@ namespace CRS
 
 
         // Select the user type
-        //--------------------------------
+        //-----------------------------------------------------------------
         private void stdSelectClick(object sender, System.EventArgs e)
         {
             createStdLst();
@@ -347,7 +351,6 @@ namespace CRS
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
-
         private void showAdviseesClick(object sender, EventArgs e)
         {
             if (facLst.SelectedRows.Count == 1)
@@ -362,7 +365,6 @@ namespace CRS
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
-
         private void checkAdviseeScheduleClick(object sender, EventArgs e)
         {
             if (facLst.SelectedRows.Count == 1)
