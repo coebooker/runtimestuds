@@ -15,6 +15,7 @@ namespace CRS
         private userDatabase usrDB;
         private courseDatabase crsDB;
         string nextSemester = "S15";
+        string currentSemester = "F14";
 
         public admMainpage(userDatabase usrDB, string cpath, string ppath)
         {
@@ -118,8 +119,26 @@ namespace CRS
             dropCrs.Visible = true;
             addCrs.Visible = true;
             stdActions.Visible = true;
+            stdActions.BringToFront();
             crsHist.Visible = true;
             conflictCheck.Visible = true;
+            crrSch.Visible = true;
+
+
+            // Hide everything of faculties' interactions
+            facLst.Visible = false;
+            facLstLabel.Visible = false;
+
+            facActions.Visible = false;
+            facActions.BringToFront();
+
+            checkAdviseeSchedule.Visible = false;
+
+            facSch.Visible = false;
+            registeredCrsLstLabel.Visible = false;
+
+            showEnrolledStd.Visible = false;
+            showAdvisees.Visible = false;
         }
         private void facSelectClick(object sender, System.EventArgs e)
         {
@@ -138,10 +157,16 @@ namespace CRS
             stdActions.Visible = false;
             crsHist.Visible = false;
             conflictCheck.Visible = false;
+            crrSch.Visible = false;
 
             // Show everything of faculties' interactions
             facLst.Visible = true;
             facLstLabel.Visible = true;
+
+            facActions.Visible = true;
+            facActions.BringToFront();
+
+            checkAdviseeSchedule.Visible = true;
 
             facSch.Visible = true;
             registeredCrsLstLabel.Visible = true;
@@ -262,6 +287,20 @@ namespace CRS
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
+        private void crrSchClick(object sender, EventArgs e)
+        {
+            if (stdLst.SelectedRows.Count == 1)
+            {
+                string username = stdLst.SelectedRows[0].Cells["Username"].Value.ToString();
+                student std = usrDB.getStudent(username);
+            }
+            else
+                MessageBox.Show("Select a student from the student list",
+                    "No student selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+
 
 
         // Faculty interactions
