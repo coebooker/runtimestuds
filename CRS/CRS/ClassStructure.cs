@@ -443,6 +443,38 @@ namespace CRS
                 File.WriteAllLines(filepath, newCourseLinesArr);
             }
         }
+         public void changeCourse(string newInstructor, string courseID, List<string> newTimeBlocks, course changedCourse, string filepath)
+        {
+            changedCourse.setInstructor(newInstructor);
+            changedCourse.setTimeBlocks(newTimeBlocks);
+
+            //Opens courseDB file to change the course
+            string[] CourseLines = File.ReadAllLines(filepath);
+            string[] newCourseLinesArr;
+            List<string> newCourseLines = new List<string>();
+            foreach(string line in CourseLines)
+            {
+                string currentCourseID = line.Substring(0, 10).Trim();
+                if (currentCourseID == courseID)
+                {
+                    string courseBeforeBlocks = line.Substring(0, 47);
+                    string blockNum = newTimeBlocks.Count().ToString() + " ";
+                    foreach (string timeBlocks in newTimeBlocks)
+                    {
+                        blockNum += timeBlocks.PadRight(6);
+                    }
+                    //Making the blockNum subtring to it's length -1 cuts off the last space that shouldn't be there
+                    string newCourseLine = courseBeforeBlocks + blockNum.Substring(0, blockNum.Length - 1);
+                    newCourseLines.Add(newCourseLine);
+                }
+                else
+                {
+                    newCourseLines.Add(line);
+                }
+                newCourseLinesArr = newCourseLines.ToArray();
+                System.IO.File.WriteAllLines(filepath, newCourseLinesArr);
+            }
+        }
     }
 
     public class baseUser
@@ -892,6 +924,11 @@ namespace CRS
         public List<classTime> getClassTime()
         {
             return time_blocks_alternative;
+        }
+        public void setTimeBlocks(List<string> newTimeBlocks)
+        {
+            timeBlocks = newTimeBlocks;
+            //Shige if you could implement the time class list here that'd be pretty cash money
         }
         public void setInstructor(string instructorUsername)
         {
