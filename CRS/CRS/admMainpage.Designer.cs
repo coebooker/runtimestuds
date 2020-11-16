@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.crsLst = new System.Windows.Forms.DataGridView();
             this.stdSelect = new System.Windows.Forms.Button();
             this.manSelect = new System.Windows.Forms.Button();
@@ -42,6 +42,7 @@
             this.registeredCrsLstLabel = new System.Windows.Forms.Label();
             this.dropCrs = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.facSelect = new System.Windows.Forms.Button();
             this.crrSch = new System.Windows.Forms.Button();
             this.crsHist = new System.Windows.Forms.Button();
             this.conflictCheck = new System.Windows.Forms.Button();
@@ -51,15 +52,19 @@
             this.facLst = new System.Windows.Forms.DataGridView();
             this.facSch = new System.Windows.Forms.DataGridView();
             this.showEnrolledStd = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.stdActions = new System.Windows.Forms.Panel();
+            this.removeStd = new System.Windows.Forms.Button();
+            this.removeFac = new System.Windows.Forms.Button();
+            this.removeCrs = new System.Windows.Forms.Button();
+            this.changeAdvisor = new System.Windows.Forms.Button();
+            this.createUser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.crsLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stdLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.registeredCrsLst)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.facLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.facSch)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.stdActions.SuspendLayout();
             this.SuspendLayout();
             // 
             // crsLst
@@ -73,14 +78,14 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.crsLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.crsLst.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.crsLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.crsLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.crsLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.crsLst.EnableHeadersVisualStyles = false;
             this.crsLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
@@ -167,14 +172,14 @@
             this.stdLst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.stdLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.stdLst.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.stdLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.stdLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.stdLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.stdLst.EnableHeadersVisualStyles = false;
             this.stdLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
@@ -227,10 +232,10 @@
             // 
             this.registeredCrsLstLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.registeredCrsLstLabel.AutoSize = true;
-            this.registeredCrsLstLabel.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registeredCrsLstLabel.Location = new System.Drawing.Point(1086, 489);
+            this.registeredCrsLstLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.registeredCrsLstLabel.Location = new System.Drawing.Point(1028, 484);
             this.registeredCrsLstLabel.Name = "registeredCrsLstLabel";
-            this.registeredCrsLstLabel.Size = new System.Drawing.Size(198, 30);
+            this.registeredCrsLstLabel.Size = new System.Drawing.Size(218, 33);
             this.registeredCrsLstLabel.TabIndex = 20;
             this.registeredCrsLstLabel.Text = "Schedule SP15";
             this.registeredCrsLstLabel.Visible = false;
@@ -244,7 +249,7 @@
             this.dropCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropCrs.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dropCrs.ForeColor = System.Drawing.Color.White;
-            this.dropCrs.Location = new System.Drawing.Point(1330, 475);
+            this.dropCrs.Location = new System.Drawing.Point(1388, 475);
             this.dropCrs.Margin = new System.Windows.Forms.Padding(0);
             this.dropCrs.Name = "dropCrs";
             this.dropCrs.Size = new System.Drawing.Size(254, 50);
@@ -262,7 +267,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.facSelect, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.stdSelect, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.manSelect, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -273,6 +278,23 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1925, 46);
             this.tableLayoutPanel1.TabIndex = 22;
+            // 
+            // facSelect
+            // 
+            this.facSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.facSelect.FlatAppearance.BorderSize = 0;
+            this.facSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.facSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.facSelect.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.facSelect.ForeColor = System.Drawing.Color.White;
+            this.facSelect.Location = new System.Drawing.Point(240, 0);
+            this.facSelect.Margin = new System.Windows.Forms.Padding(0);
+            this.facSelect.Name = "facSelect";
+            this.facSelect.Size = new System.Drawing.Size(204, 46);
+            this.facSelect.TabIndex = 4;
+            this.facSelect.Text = "Faculty";
+            this.facSelect.UseVisualStyleBackColor = false;
+            this.facSelect.Click += new System.EventHandler(this.facSelectClick);
             // 
             // crrSch
             // 
@@ -340,7 +362,7 @@
             this.checkAdviseeSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkAdviseeSchedule.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkAdviseeSchedule.ForeColor = System.Drawing.Color.White;
-            this.checkAdviseeSchedule.Location = new System.Drawing.Point(1661, 80);
+            this.checkAdviseeSchedule.Location = new System.Drawing.Point(1671, 421);
             this.checkAdviseeSchedule.Margin = new System.Windows.Forms.Padding(0);
             this.checkAdviseeSchedule.Name = "checkAdviseeSchedule";
             this.checkAdviseeSchedule.Size = new System.Drawing.Size(254, 80);
@@ -392,14 +414,14 @@
             this.facLst.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.facLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.facLst.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.facLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.facLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.facLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facLst.EnableHeadersVisualStyles = false;
             this.facLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
@@ -455,32 +477,105 @@
             this.showEnrolledStd.Visible = false;
             this.showEnrolledStd.Click += new System.EventHandler(this.showEnrolledStdClick);
             // 
-            // panel1
+            // stdActions
             // 
-            this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.crrSch);
-            this.panel1.Controls.Add(this.crsHist);
-            this.panel1.Controls.Add(this.conflictCheck);
-            this.panel1.Location = new System.Drawing.Point(1671, 180);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(254, 377);
-            this.panel1.TabIndex = 29;
+            this.stdActions.AutoSize = true;
+            this.stdActions.Controls.Add(this.crrSch);
+            this.stdActions.Controls.Add(this.crsHist);
+            this.stdActions.Controls.Add(this.conflictCheck);
+            this.stdActions.Location = new System.Drawing.Point(1671, 180);
+            this.stdActions.Name = "stdActions";
+            this.stdActions.Size = new System.Drawing.Size(254, 241);
+            this.stdActions.TabIndex = 29;
             // 
-            // button1
+            // removeStd
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(240, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(204, 46);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Faculty";
-            this.button1.UseVisualStyleBackColor = false;
+            this.removeStd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.removeStd.FlatAppearance.BorderSize = 0;
+            this.removeStd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.removeStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removeStd.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeStd.ForeColor = System.Drawing.Color.White;
+            this.removeStd.Location = new System.Drawing.Point(1671, 501);
+            this.removeStd.Margin = new System.Windows.Forms.Padding(0);
+            this.removeStd.Name = "removeStd";
+            this.removeStd.Size = new System.Drawing.Size(254, 80);
+            this.removeStd.TabIndex = 30;
+            this.removeStd.Text = "Remove Student";
+            this.removeStd.UseVisualStyleBackColor = false;
+            this.removeStd.Visible = false;
+            this.removeStd.Click += new System.EventHandler(this.removeStdClick);
+            // 
+            // removeFac
+            // 
+            this.removeFac.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.removeFac.FlatAppearance.BorderSize = 0;
+            this.removeFac.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.removeFac.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removeFac.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeFac.ForeColor = System.Drawing.Color.White;
+            this.removeFac.Location = new System.Drawing.Point(1671, 581);
+            this.removeFac.Margin = new System.Windows.Forms.Padding(0);
+            this.removeFac.Name = "removeFac";
+            this.removeFac.Size = new System.Drawing.Size(254, 80);
+            this.removeFac.TabIndex = 31;
+            this.removeFac.Text = "Remove Faculty";
+            this.removeFac.UseVisualStyleBackColor = false;
+            this.removeFac.Visible = false;
+            this.removeFac.Click += new System.EventHandler(this.removeFacClick);
+            // 
+            // removeCrs
+            // 
+            this.removeCrs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.removeCrs.FlatAppearance.BorderSize = 0;
+            this.removeCrs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.removeCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removeCrs.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeCrs.ForeColor = System.Drawing.Color.White;
+            this.removeCrs.Location = new System.Drawing.Point(1671, 661);
+            this.removeCrs.Margin = new System.Windows.Forms.Padding(0);
+            this.removeCrs.Name = "removeCrs";
+            this.removeCrs.Size = new System.Drawing.Size(254, 80);
+            this.removeCrs.TabIndex = 32;
+            this.removeCrs.Text = "Remove Course";
+            this.removeCrs.UseVisualStyleBackColor = false;
+            this.removeCrs.Visible = false;
+            this.removeCrs.Click += new System.EventHandler(this.removeCrsClick);
+            // 
+            // changeAdvisor
+            // 
+            this.changeAdvisor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.changeAdvisor.FlatAppearance.BorderSize = 0;
+            this.changeAdvisor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.changeAdvisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.changeAdvisor.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeAdvisor.ForeColor = System.Drawing.Color.White;
+            this.changeAdvisor.Location = new System.Drawing.Point(1671, 103);
+            this.changeAdvisor.Margin = new System.Windows.Forms.Padding(0);
+            this.changeAdvisor.Name = "changeAdvisor";
+            this.changeAdvisor.Size = new System.Drawing.Size(254, 80);
+            this.changeAdvisor.TabIndex = 33;
+            this.changeAdvisor.Text = "Change Advisor";
+            this.changeAdvisor.UseVisualStyleBackColor = false;
+            this.changeAdvisor.Visible = false;
+            this.changeAdvisor.Click += new System.EventHandler(this.changeAdvisorClick);
+            // 
+            // createUser
+            // 
+            this.createUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.createUser.FlatAppearance.BorderSize = 0;
+            this.createUser.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.createUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.createUser.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createUser.ForeColor = System.Drawing.Color.White;
+            this.createUser.Location = new System.Drawing.Point(1370, 581);
+            this.createUser.Margin = new System.Windows.Forms.Padding(0);
+            this.createUser.Name = "createUser";
+            this.createUser.Size = new System.Drawing.Size(254, 80);
+            this.createUser.TabIndex = 34;
+            this.createUser.Text = "Create User";
+            this.createUser.UseVisualStyleBackColor = false;
+            this.createUser.Click += new System.EventHandler(this.createUserClick);
             // 
             // admMainpage
             // 
@@ -488,7 +583,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1924, 803);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.createUser);
+            this.Controls.Add(this.changeAdvisor);
+            this.Controls.Add(this.removeCrs);
+            this.Controls.Add(this.removeFac);
+            this.Controls.Add(this.removeStd);
+            this.Controls.Add(this.stdActions);
             this.Controls.Add(this.checkAdviseeSchedule);
             this.Controls.Add(this.showEnrolledStd);
             this.Controls.Add(this.showAdvisees);
@@ -515,7 +615,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.facLst)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.facSch)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.stdActions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,7 +643,12 @@
         private System.Windows.Forms.DataGridView facSch;
         private System.Windows.Forms.Button showEnrolledStd;
         private System.Windows.Forms.Button crrSch;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel stdActions;
+        private System.Windows.Forms.Button facSelect;
+        private System.Windows.Forms.Button removeStd;
+        private System.Windows.Forms.Button removeFac;
+        private System.Windows.Forms.Button removeCrs;
+        private System.Windows.Forms.Button changeAdvisor;
+        private System.Windows.Forms.Button createUser;
     }
 }

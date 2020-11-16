@@ -149,3 +149,5 @@ C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.pdb
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admStdSch.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admAdvisees.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admEnrolledStd.resources
+C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admAddUser.resources
+C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.changeAdvisor.resources

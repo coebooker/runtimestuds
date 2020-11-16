@@ -111,6 +111,45 @@ namespace CRS
                     return;
                 }
         }
+        private void addUser(string username, string password, string fname, string mname, string lname, string status, string filepath)
+        {
+            string fileLine = username.PadRight(11) + password.PadRight(11) + fname.PadRight(16) + mname.PadRight(16) + lname.PadRight(16) + status.PadRight(10);
+            if (status == "admin")
+            {
+                admin newAdmin = new admin(fname, mname, lname, username, password);
+                addAdmin(fileLine, filepath, ref newAdmin);
+            }
+            else if (status == "faculty")
+            {
+                faculty newFaculty = new faculty(fname, mname, lname, username, password);
+                addFaculty(fileLine, filepath, ref newFaculty);
+            }
+            else if (status == "manager")
+            {
+                manager newManager = new manager(fname, mname, lname, username, password);
+                addManager(fileLine, filepath, ref newManager);
+            }
+            else
+            {
+                student newStudent = new student(fname, mname, lname, status, username, password);
+                addStudent(fileLine, filepath, ref newStudent);
+            }
+        }
+        public void changeAdvisor(string stdName, string facName)
+        {
+            // Change the student's advisor
+            student std = getStudent(stdName);
+            string curAdvisor = std.advisor;
+            std.setAdvisor(facName);
+
+            // Add the student to the new faulty's advisee list
+            faculty fac = getFaculty(facName);
+            fac.addAdvisee(std);
+
+            // Remove the student from the previous faculty's advisee list
+            fac = getFaculty(curAdvisor);
+            fac.removeAdvisee(stdName);
+        }
         public void dropCrsFromStd(string courseID, string nextSemester, ref courseDatabase courseDB, student currentStudent)
         {
             foreach (course crs in courseDB.getCourseList())
@@ -197,7 +236,6 @@ namespace CRS
             }
             StudentsLst.Add(newStudent);
         }
-
         public void removeFac(string facultyUsername, string userFilepath, string courseFilepath, ref courseDatabase coursedb)
         {
             //Loops through their advisees and changes the students' advisor to "Staff"
@@ -308,7 +346,6 @@ namespace CRS
         private List<student> StudentsLst;
         private List<faculty> FacultyLst;
         private List<admin> AdminList;
-
         public List<manager> ManagerLst { get; private set; }
     }
     public class courseDatabase
@@ -372,7 +409,7 @@ namespace CRS
 
 
          // Change the database
-        public void removeCrs(string crsID, ref userDatabase usrDB, string nextSemester, string filepath)
+        public void removeCrs(string crsID, string nextSemester, string filepath)
         {
             // Remove the course from the list
             course removedCrs = getCourse(crsID);
@@ -765,6 +802,7 @@ namespace CRS
         {
             courseSchedule.Remove(removedCrs);
         }
+
         private List<course> courseSchedule;
         private List<student> adviseesLst;
     }
@@ -785,43 +823,6 @@ namespace CRS
     {
         public manager(string f, string m, string l, string usrname, string psw) : base(f, m, l, usrname, psw)
         {
-        }
-        private void removeCourse(ref courseDatabase courseDB,ref userDatabase userDB, string courseID,string nextSemester,string filepath)
-        {
-            courseDB.removeCrs(courseID, ref userDB, nextSemester, filepath);
-        }
-        private void removeStudent(ref userDatabase userDB,string username, ref courseDatabase courseDB, string filepath)
-        {
-            userDB.removeStd(username, ref courseDB, filepath);
-        }
-        private void removeFaculty(ref userDatabase userDB,string facultyUsername, string userFilepath, string courseFilepath,ref courseDatabase courseDB)
-        {
-            userDB.removeFac(facultyUsername, userFilepath, courseFilepath, ref courseDB);
-        }
-        private void addUser(string username, string password, string fname, string mname, string lname, string status, ref userDatabase userDB, string filepath)
-        {
-            string fileLine = username.PadRight(11) + password.PadRight(11) + fname.PadRight(16) + mname.PadRight(16) + lname.PadRight(16) + status.PadRight(10);
-            if (status == "admin")
-            {
-                admin newAdmin = new admin(fname, mname, lname, username, password);
-                userDB.addAdmin(fileLine, filepath,ref newAdmin);
-            }
-            else if (status == "faculty"){
-                faculty newFaculty = new faculty(fname, mname, lname, username, password);
-                userDB.addFaculty(fileLine, filepath, ref newFaculty);
-            }
-            else if ( status == "manager")
-            {
-                manager newManager = new manager(fname, mname, lname, username, password);
-                userDB.addManager(fileLine, filepath, ref newManager);
-            }
-            else
-            {
-                student newStudent = new student(fname, mname, lname, status, username, password);
-                userDB.addStudent(fileLine, filepath, ref newStudent);
-            }
-            
-            
         }
     }
     public class classTime
