@@ -27,6 +27,7 @@ namespace CRS
             StudentsLst = new List<student>();
             FacultyLst = new List<faculty>();
             AdminList = new List<admin>();
+            ManagerLst = new List<manager>();
             string line;
             System.IO.StreamReader input = new System.IO.StreamReader(filepath);
             while ((line = input.ReadLine()) != null)
@@ -47,6 +48,11 @@ namespace CRS
                 {
                     admin adm = new admin(firstName, middleName, lastName, username, password);
                     AdminList.Add(adm);
+                }
+                else if (status == "manager")
+                {
+                    manager man = new manager(firstName, middleName, lastName, username, password);
+                    ManagerLst.Add(man);
                 }
                 else
                 {
@@ -159,6 +165,39 @@ namespace CRS
                 File.WriteAllLines(filepath, newUserLinesArr);
             }
         }
+        public void addAdmin(string fileline, string filepath,  ref admin newAdmin)
+        {
+            using (StreamWriter sw = File.AppendText(filepath))
+            {
+                sw.WriteLine(fileline);
+            }
+            AdminList.Add(newAdmin);
+        }
+        public void addFaculty(string fileline, string filepath, ref faculty newFaculty)
+        {
+            using (StreamWriter sw = File.AppendText(filepath))
+            {
+                sw.WriteLine(fileline);
+            }
+            FacultyLst.Add(newFaculty);
+        }
+        public void addManager(string fileline, string filepath, ref manager newManager)
+        {
+            using (StreamWriter sw = File.AppendText(filepath))
+            {
+                sw.WriteLine(fileline);
+            }
+            ManagerLst.Add(newManager);
+        }
+        public void addStudent(string fileline, string filepath, ref student newStudent)
+        {
+            using (StreamWriter sw = File.AppendText(filepath))
+            {
+                sw.WriteLine(fileline);
+            }
+            StudentsLst.Add(newStudent);
+        }
+
         public void removeFac(string facultyUsername, string userFilepath, string courseFilepath, ref courseDatabase coursedb)
         {
             //Loops through their advisees and changes the students' advisor to "Staff"
@@ -269,6 +308,8 @@ namespace CRS
         private List<student> StudentsLst;
         private List<faculty> FacultyLst;
         private List<admin> AdminList;
+
+        public List<manager> ManagerLst { get; private set; }
     }
     public class courseDatabase
     {
@@ -773,6 +814,31 @@ namespace CRS
         private void removeFaculty(ref userDatabase userDB,string facultyUsername, string userFilepath, string courseFilepath,ref courseDatabase courseDB)
         {
             userDB.removeFac(facultyUsername, userFilepath, courseFilepath, ref courseDB);
+        }
+        private void addUser(string username, string password, string fname, string mname, string lname, string status, ref userDatabase userDB, string filepath)
+        {
+            string fileLine = username.PadRight(11) + password.PadRight(11) + fname.PadRight(16) + mname.PadRight(16) + lname.PadRight(16) + status.PadRight(10);
+            if (status == "admin")
+            {
+                admin newAdmin = new admin(fname, mname, lname, username, password);
+                userDB.addAdmin(fileLine, filepath,ref newAdmin);
+            }
+            else if (status == "faculty"){
+                faculty newFaculty = new faculty(fname, mname, lname, username, password);
+                userDB.addFaculty(fileLine, filepath, ref newFaculty);
+            }
+            else if ( status == "manager")
+            {
+                manager newManager = new manager(fname, mname, lname, username, password);
+                userDB.addManager(fileLine, filepath, ref newManager);
+            }
+            else
+            {
+                student newStudent = new student(fname, mname, lname, status, username, password);
+                userDB.addStudent(fileLine, filepath, ref newStudent);
+            }
+            
+            
         }
     }
     public class classTime
