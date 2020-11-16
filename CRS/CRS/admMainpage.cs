@@ -427,12 +427,12 @@ namespace CRS
                 usrDB.changeAdvisor(username, facName);
             }
         }
-
         private void createUserClick(object sender, EventArgs e)
         {
-            var form = new admAddUser();
+            var form = new admAddUser(usrDB);
             form.ShowDialog();
 
+            usrDB.addUser(form.uname, form.pword, form.fName, form.mName, form.lName, form.uType, "filepath");
         }
     }
 }

@@ -111,7 +111,7 @@ namespace CRS
                     return;
                 }
         }
-        private void addUser(string username, string password, string fname, string mname, string lname, string status, string filepath)
+        public void addUser(string username, string password, string fname, string mname, string lname, string status, string filepath)
         {
             string fileLine = username.PadRight(11) + password.PadRight(11) + fname.PadRight(16) + mname.PadRight(16) + lname.PadRight(16) + status.PadRight(10);
             if (status == "admin")

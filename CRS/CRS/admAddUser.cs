@@ -19,9 +19,14 @@ namespace CRS
         public string mName;
         public string lName;
 
-        public admAddUser()
+        public admAddUser(userDatabase usrDB)
         {
             InitializeComponent();
+
+            List < faculty > facultyList = usrDB.getFacultyList();
+
+            foreach (faculty fac in facultyList)
+                advisor.Items.Add(fac.fname + fac.lname);
         }
 
         private void confirmClick(object sender, EventArgs e)
@@ -33,14 +38,17 @@ namespace CRS
                     MessageBoxIcon.Error);
             this.uname = username.Text;
             this.pword = password.Text;
-            this.uType = userType.Text;
+            if (userType.Text == "Student")
+                this.uType = advisor.Text;
+            else
+                this.uType = userType.Text;
             this.fName = fname.Text;
             if (mname.Text == "Middle Name")
                 this.mName = "";
-            this.mName = mname.Text;
+            else
+                this.mName = mname.Text;
             this.lName = lname.Text;
         }
-
         private void usernameEnter(object sender, EventArgs e)
         {
             if (username.Text == "Username")
