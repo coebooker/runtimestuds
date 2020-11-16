@@ -443,7 +443,7 @@ namespace CRS
                 File.WriteAllLines(filepath, newCourseLinesArr);
             }
         }
-         public void changeCourse(string newInstructor, string courseID, List<string> newTimeBlocks, course changedCourse, string filepath)
+        public void changeCourse(string newInstructor, string courseID, List<string> newTimeBlocks, course changedCourse, string filepath)
         {
             changedCourse.setInstructor(newInstructor);
             changedCourse.setTimeBlocks(newTimeBlocks);
