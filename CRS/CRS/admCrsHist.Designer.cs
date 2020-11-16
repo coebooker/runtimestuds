@@ -51,6 +51,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.crsHist);
             this.Name = "admCrsHist";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "admCrsHist";
             ((System.ComponentModel.ISupportInitialize)(this.crsHist)).EndInit();
             this.ResumeLayout(false);

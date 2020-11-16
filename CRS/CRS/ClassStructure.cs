@@ -129,7 +129,7 @@ namespace CRS
             student std = getStudent(username);
 
             // Increment the number of seats available for each course the student has registered for
-            List<course> registeredCrsLst = std.getRegisteredCrs();
+            List<course> registeredCrsLst = std.registeredCrs;
             foreach (course registeredCrs in registeredCrsLst)
                 foreach (course crs in crsDB.getCourseList())
                     if (registeredCrs.crsID == crs.crsID)
@@ -419,12 +419,11 @@ namespace CRS
     public class student : baseUser
     {
         public string advisor;
-        private float GPA;
-        private float totalCredits;
-        private float gradedCredits;
-        private float gradePoints;
-        private List<course> registeredCourses;
-        private List<previousCourse> crsHistory;
+        public float GPA;
+        public float totalCredits;
+        public List<course> registeredCrs;
+        public List<previousCourse> currentCrs;
+        public List<previousCourse> crsHist;
 
         // Class constructor
         public student(string f, string m, string l, string adv, string usrname, string psw)
@@ -435,24 +434,17 @@ namespace CRS
             advisor = adv;
             username = usrname;
             password = psw;
-            registeredCourses = new List<course>();
-            crsHistory = new List<previousCourse>();
+            registeredCrs = new List<course>();
+            crsHist = new List<previousCourse>();
+            currentCrs = new List<previousCourse>();
         }
 
 
         // Extracting info from the object //
-        public List<previousCourse> getCrsHist()
-        {
-            return crsHistory;
-        }
-        public List<course> getRegisteredCrs()
-        {
-            return registeredCourses;
-        }
         public float calculateGPA()
         {
             List<float> GPACredits = new List<float>();
-            foreach (previousCourse oldCrs in crsHistory)
+            foreach (previousCourse oldCrs in crsHist)
             {
                 string currentGrade = oldCrs.grade;
                 if (currentGrade.Substring(0, 1) == "R")
@@ -487,18 +479,6 @@ namespace CRS
             float GPA = GPACredits.Sum() / GPACredits.Count();
             return GPA;
         }
-
-            
-        
-        public float getCredits()
-        {
-            return totalCredits;
-        }
-        
-        public void setAdvisor(string advisorStr)
-        {
-            advisor = advisorStr;
-        }
         public void updateCourseFiles(string filepath)
         {
             List<string> newLines = new List<string>();
@@ -509,9 +489,9 @@ namespace CRS
                 if (currentUsername.Trim() == username){
                     string newLine = "";
                     newLine += currentUsername + ' ';
-                    int numCourses = crsHistory.Count();
+                    int numCourses = crsHist.Count();
                     newLine += numCourses.ToString() + "  ";
-                    foreach(previousCourse currentCourse in crsHistory)
+                    foreach(previousCourse currentCourse in crsHist)
                     {
                         newLine += currentCourse.crsID.PadRight(11);
                         newLine += currentCourse.semester + ' ';
@@ -528,40 +508,40 @@ namespace CRS
             string[] lineArr = newLines.ToArray();
             System.IO.File.WriteAllLines(filepath, lineArr);
         }
-        public List<previousCourse> getCurrentTermList(string currentSemester)
-        {
-            List<previousCourse> CurrentTermList = new List<previousCourse>();
-            foreach (previousCourse crs in crsHistory)
-                if(crs.semester.Trim() == currentSemester)
-                    CurrentTermList.Add(crs);
-            return CurrentTermList;
-        }
+        //public List<previousCourse> getCurrentTermList(string currentSemester)
+        //{
+        //    List<previousCourse> CurrentTermList = new List<previousCourse>();
+        //    foreach (previousCourse crs in crsHist)
+        //        if(crs.semester.Trim() == currentSemester)
+        //            CurrentTermList.Add(crs);
+        //    return CurrentTermList;
+        //}
 
 
         // Making changes to the object //
         public void createCrsHist(previousCourse pcrs, ref courseDatabase crsDB, string nextSemester)
         {
-            crsHistory.Add(pcrs);
+            crsHist.Add(pcrs);
             if (pcrs.semester == nextSemester)
                 foreach (course crs in crsDB.getCourseList())
                     if (pcrs.crsID == crs.crsID)
                     {
-                        registeredCourses.Add(crs);
+                        registeredCrs.Add(crs);
                         crs.enrollUser(this);
                     }
         }
         public void addClassToNext(course courseAdded)
         {
-            registeredCourses.Add(courseAdded);
+            registeredCrs.Add(courseAdded);
         }
         public void addClassToHistory(course courseAdded, string currentSemester)
         {
             previousCourse courseAddedHistory = new previousCourse(username, courseAdded.crsID.Trim(), currentSemester, Convert.ToSingle(courseAdded.credit.Trim()), "N");
-            crsHistory.Add(courseAddedHistory);
+            crsHist.Add(courseAddedHistory);
         }
         public void dropCrsFromNext(course courseDeleted)
         {
-            registeredCourses.Remove(courseDeleted);
+            registeredCrs.Remove(courseDeleted);
         }
         public void deleteClassFromHistory(course courseDeleted, string nextSemester)
         {
@@ -571,23 +551,26 @@ namespace CRS
                 nextSemester, 
                 float.Parse(courseDeleted.credit.Trim()), 
                 "N");
-            foreach (previousCourse crs in crsHistory)
+            foreach (previousCourse crs in crsHist)
                 if (crs.username == c.username && crs.semester == c.semester &&
                     crs.credit == c.credit && crs.crsID == c.crsID
                     && crs.grade == c.grade)
                 {
-                    crsHistory.Remove(crs);
+                    crsHist.Remove(crs);
                     return;
                 }
         }
-
+        public void setAdvisor(string advisorStr)
+        {
+            advisor = advisorStr;
+        }
         public string timeCheck()
         {
             string message = "There is no time conflict";
-            foreach (course courseA in registeredCourses)
+            foreach (course courseA in registeredCrs)
             {
                 List<classTime> timeBlocksA = courseA.getClassTime();
-                foreach (course courseB in registeredCourses)
+                foreach (course courseB in registeredCrs)
                 {
                     List<classTime> timeBlocksB = courseB.getClassTime();
                     if (courseA != courseB)
@@ -630,7 +613,7 @@ namespace CRS
             List<classTime> timeBlocksAdding = crsBngAdded.getClassTime();
 
             // Totals current semester credit & checks if course is already taken this semester
-            foreach (course currentCourse in registeredCourses)
+            foreach (course currentCourse in registeredCrs)
             {
                 crntSmstCrdt += Convert.ToDouble(currentCourse.credit);
                 if (crsBngAdded.crsID.Trim().Substring(0, crsBngAdded.crsID.Trim().Length - 3) == currentCourse.crsID.Trim().Substring(0, currentCourse.crsID.Trim().Length - 3))
@@ -708,7 +691,7 @@ namespace CRS
             if (validAdd)
             {
                 
-                foreach (previousCourse prvCrs in crsHistory)
+                foreach (previousCourse prvCrs in crsHist)
                 {
                     if (prvCrs.crsID.Trim().Substring(0, prvCrs.crsID.Trim().Length - 3) == crsBngAdded.crsID.Trim().Substring(0, crsBngAdded.crsID.Trim().Length - 3))
                     {
