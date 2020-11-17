@@ -334,6 +334,38 @@ namespace CRS
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
+        private void crsIDSearchClick(object sender, EventArgs e)
+        {
+            string crsID = crsIDBox.Text;
+
+            for (int i = 0; i < crsLst.RowCount; i++)
+                if (crsLst.Rows[i].Cells["Course ID"].Value.ToString().Trim() == crsID)
+                {
+                    DataTable table = (DataTable)crsLst.DataSource;
+                    DataRow row = table.Rows[i];
+                    DataRow nr = table.NewRow();
+                    nr.ItemArray = row.ItemArray;
+                    table.Rows.Remove(row);
+                    table.Rows.InsertAt(nr, 0);
+                    break;
+                }
+        }
+        private void stdSearchClick(object sender, EventArgs e)
+        {
+            string username = stdBox.Text.ToLower();
+
+            for (int i = 0; i < stdLst.RowCount; i++)
+                if (stdLst.Rows[i].Cells["Username"].Value.ToString().Trim().ToLower() == username)
+                {
+                    DataTable table = (DataTable)stdLst.DataSource;
+                    DataRow row = table.Rows[i];
+                    DataRow nr = table.NewRow();
+                    nr.ItemArray = row.ItemArray;
+                    table.Rows.Remove(row);
+                    table.Rows.InsertAt(nr, 0);
+                    break;
+                }
+        }
 
 
 
@@ -454,36 +486,8 @@ namespace CRS
         {
             var form = new admAddUser(usrDB);
             form.ShowDialog();
-
-            usrDB.addUser(form.uname, form.pword, form.fName, form.mName, form.lName, form.uType, "filepath");
+            if (form.DialogResult == DialogResult.OK)
+                usrDB.addUser(form.uname, form.pword, form.fName, form.mName, form.lName, form.uType, "filepath");
         }
-
-        private void crsLstLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void crsIDSearchClick(object sender, EventArgs e)
-        {
-            string crsID = crsIDBox.Text;
-
-            for (int i = 0; i < crsLst.RowCount; i++)
-                if (crsLst.Rows[i].Cells["Course ID"].Value.ToString().Trim() == crsID)
-                {
-                    DataTable table = (DataTable)crsLst.DataSource;
-                    DataRow row = table.Rows[i];
-                    DataRow nr = table.NewRow();
-                    nr.ItemArray = row.ItemArray;
-                    table.Rows.Remove(row);
-                    table.Rows.InsertAt(nr, 0);
-                    break;
-                }
-        }
-
     }
 }

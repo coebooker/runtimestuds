@@ -261,11 +261,6 @@
             this.advisor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.advisor.ForeColor = System.Drawing.Color.White;
             this.advisor.FormattingEnabled = true;
-            this.advisor.Items.AddRange(new object[] {
-            "Student",
-            "Faculty",
-            "Administrator",
-            "Manager"});
             this.advisor.Location = new System.Drawing.Point(382, 357);
             this.advisor.Margin = new System.Windows.Forms.Padding(0);
             this.advisor.Name = "advisor";

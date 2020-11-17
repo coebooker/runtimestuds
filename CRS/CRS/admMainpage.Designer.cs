@@ -38,6 +38,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(admMainpage));
             this.crsLst = new System.Windows.Forms.DataGridView();
             this.stdSelect = new System.Windows.Forms.Button();
             this.manSelect = new System.Windows.Forms.Button();
@@ -48,7 +49,7 @@
             this.registeredCrsLst = new System.Windows.Forms.DataGridView();
             this.registeredCrsLstLabel = new System.Windows.Forms.Label();
             this.dropCrs = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.header = new System.Windows.Forms.TableLayoutPanel();
             this.facSelect = new System.Windows.Forms.Button();
             this.crrSch = new System.Windows.Forms.Button();
             this.crsHist = new System.Windows.Forms.Button();
@@ -66,22 +67,24 @@
             this.createUser = new System.Windows.Forms.Button();
             this.stdActions = new System.Windows.Forms.Panel();
             this.crsHistContainer = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.enterCrsID = new System.Windows.Forms.Label();
-            this.crsIDBox = new System.Windows.Forms.TextBox();
             this.crsIDSearch = new System.Windows.Forms.Button();
+            this.crsIDBox = new System.Windows.Forms.TextBox();
+            this.enterCrsID = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.stdSearch = new System.Windows.Forms.Button();
+            this.stdBox = new System.Windows.Forms.TextBox();
             this.enterStd = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.bottomSpace = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.quickCommands = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.crsLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stdLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.registeredCrsLst)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.facLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.facSch)).BeginInit();
             this.stdActions.SuspendLayout();
@@ -91,6 +94,7 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // crsLst
@@ -147,6 +151,7 @@
             // 
             // stdSelect
             // 
+            this.stdSelect.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.stdSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.stdSelect.FlatAppearance.BorderSize = 0;
             this.stdSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
@@ -156,7 +161,7 @@
             this.stdSelect.Location = new System.Drawing.Point(0, 0);
             this.stdSelect.Margin = new System.Windows.Forms.Padding(0);
             this.stdSelect.Name = "stdSelect";
-            this.stdSelect.Size = new System.Drawing.Size(240, 46);
+            this.stdSelect.Size = new System.Drawing.Size(240, 94);
             this.stdSelect.TabIndex = 1;
             this.stdSelect.Text = "Student";
             this.stdSelect.UseVisualStyleBackColor = false;
@@ -164,6 +169,7 @@
             // 
             // manSelect
             // 
+            this.manSelect.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.manSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.manSelect.FlatAppearance.BorderSize = 0;
             this.manSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
@@ -173,7 +179,7 @@
             this.manSelect.Location = new System.Drawing.Point(480, 0);
             this.manSelect.Margin = new System.Windows.Forms.Padding(0);
             this.manSelect.Name = "manSelect";
-            this.manSelect.Size = new System.Drawing.Size(240, 46);
+            this.manSelect.Size = new System.Drawing.Size(240, 94);
             this.manSelect.TabIndex = 3;
             this.manSelect.Text = "Manager";
             this.manSelect.UseVisualStyleBackColor = false;
@@ -186,9 +192,9 @@
             this.addCrs.FlatAppearance.BorderSize = 0;
             this.addCrs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.addCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCrs.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addCrs.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCrs.ForeColor = System.Drawing.Color.White;
-            this.addCrs.Location = new System.Drawing.Point(0, 0);
+            this.addCrs.Location = new System.Drawing.Point(0, 80);
             this.addCrs.Margin = new System.Windows.Forms.Padding(0);
             this.addCrs.Name = "addCrs";
             this.addCrs.Size = new System.Drawing.Size(254, 80);
@@ -208,7 +214,6 @@
             this.crsLstLabel.Size = new System.Drawing.Size(290, 33);
             this.crsLstLabel.TabIndex = 16;
             this.crsLstLabel.Text = "Course List for SP15";
-            this.crsLstLabel.Click += new System.EventHandler(this.crsLstLabel_Click);
             // 
             // stdLst
             // 
@@ -326,9 +331,9 @@
             this.dropCrs.FlatAppearance.BorderSize = 0;
             this.dropCrs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.dropCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropCrs.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dropCrs.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dropCrs.ForeColor = System.Drawing.Color.White;
-            this.dropCrs.Location = new System.Drawing.Point(0, 80);
+            this.dropCrs.Location = new System.Drawing.Point(0, 160);
             this.dropCrs.Margin = new System.Windows.Forms.Padding(0);
             this.dropCrs.Name = "dropCrs";
             this.dropCrs.Size = new System.Drawing.Size(254, 80);
@@ -338,28 +343,29 @@
             this.dropCrs.Visible = false;
             this.dropCrs.Click += new System.EventHandler(this.dropCrsClick);
             // 
-            // tableLayoutPanel1
+            // header
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.facSelect, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.stdSelect, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.manSelect, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1925, 46);
-            this.tableLayoutPanel1.TabIndex = 22;
+            this.header.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.header.ColumnCount = 3;
+            this.header.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.header.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.header.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.header.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.header.Controls.Add(this.facSelect, 0, 0);
+            this.header.Controls.Add(this.stdSelect, 0, 0);
+            this.header.Controls.Add(this.manSelect, 1, 0);
+            this.header.Location = new System.Drawing.Point(0, 0);
+            this.header.Margin = new System.Windows.Forms.Padding(0);
+            this.header.Name = "header";
+            this.header.RowCount = 1;
+            this.header.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.header.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
+            this.header.Size = new System.Drawing.Size(1925, 94);
+            this.header.TabIndex = 22;
             // 
             // facSelect
             // 
+            this.facSelect.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.facSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.facSelect.FlatAppearance.BorderSize = 0;
             this.facSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
@@ -369,7 +375,7 @@
             this.facSelect.Location = new System.Drawing.Point(240, 0);
             this.facSelect.Margin = new System.Windows.Forms.Padding(0);
             this.facSelect.Name = "facSelect";
-            this.facSelect.Size = new System.Drawing.Size(240, 46);
+            this.facSelect.Size = new System.Drawing.Size(240, 94);
             this.facSelect.TabIndex = 4;
             this.facSelect.Text = "Faculty";
             this.facSelect.UseVisualStyleBackColor = false;
@@ -382,9 +388,9 @@
             this.crrSch.FlatAppearance.BorderSize = 0;
             this.crrSch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.crrSch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.crrSch.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.crrSch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crrSch.ForeColor = System.Drawing.Color.White;
-            this.crrSch.Location = new System.Drawing.Point(0, 240);
+            this.crrSch.Location = new System.Drawing.Point(0, 400);
             this.crrSch.Margin = new System.Windows.Forms.Padding(0);
             this.crrSch.Name = "crrSch";
             this.crrSch.Size = new System.Drawing.Size(254, 80);
@@ -401,7 +407,7 @@
             this.crsHist.FlatAppearance.BorderSize = 0;
             this.crsHist.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.crsHist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.crsHist.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.crsHist.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crsHist.ForeColor = System.Drawing.Color.White;
             this.crsHist.Location = new System.Drawing.Point(0, 320);
             this.crsHist.Margin = new System.Windows.Forms.Padding(0);
@@ -420,9 +426,9 @@
             this.conflictCheck.FlatAppearance.BorderSize = 0;
             this.conflictCheck.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.conflictCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.conflictCheck.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.conflictCheck.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.conflictCheck.ForeColor = System.Drawing.Color.White;
-            this.conflictCheck.Location = new System.Drawing.Point(0, 160);
+            this.conflictCheck.Location = new System.Drawing.Point(0, 240);
             this.conflictCheck.Margin = new System.Windows.Forms.Padding(0);
             this.conflictCheck.Name = "conflictCheck";
             this.conflictCheck.Size = new System.Drawing.Size(254, 80);
@@ -441,7 +447,7 @@
             this.checkAdviseeSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkAdviseeSchedule.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkAdviseeSchedule.ForeColor = System.Drawing.Color.White;
-            this.checkAdviseeSchedule.Location = new System.Drawing.Point(0, 1015);
+            this.checkAdviseeSchedule.Location = new System.Drawing.Point(0, 1255);
             this.checkAdviseeSchedule.Margin = new System.Windows.Forms.Padding(0);
             this.checkAdviseeSchedule.Name = "checkAdviseeSchedule";
             this.checkAdviseeSchedule.Size = new System.Drawing.Size(254, 80);
@@ -460,7 +466,7 @@
             this.showAdvisees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showAdvisees.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showAdvisees.ForeColor = System.Drawing.Color.White;
-            this.showAdvisees.Location = new System.Drawing.Point(1081, 67);
+            this.showAdvisees.Location = new System.Drawing.Point(480, 221);
             this.showAdvisees.Margin = new System.Windows.Forms.Padding(0);
             this.showAdvisees.Name = "showAdvisees";
             this.showAdvisees.Size = new System.Drawing.Size(254, 50);
@@ -475,7 +481,7 @@
             this.facLstLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.facLstLabel.AutoSize = true;
             this.facLstLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.facLstLabel.Location = new System.Drawing.Point(1325, 327);
+            this.facLstLabel.Location = new System.Drawing.Point(933, 309);
             this.facLstLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.facLstLabel.Name = "facLstLabel";
             this.facLstLabel.Size = new System.Drawing.Size(194, 33);
@@ -504,7 +510,7 @@
             this.facLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facLst.EnableHeadersVisualStyles = false;
             this.facLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facLst.Location = new System.Drawing.Point(1214, 280);
+            this.facLst.Location = new System.Drawing.Point(939, 128);
             this.facLst.Margin = new System.Windows.Forms.Padding(0);
             this.facLst.MultiSelect = false;
             this.facLst.Name = "facLst";
@@ -546,7 +552,7 @@
             this.showEnrolledStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showEnrolledStd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showEnrolledStd.ForeColor = System.Drawing.Color.White;
-            this.showEnrolledStd.Location = new System.Drawing.Point(1997, 793);
+            this.showEnrolledStd.Location = new System.Drawing.Point(1999, 2005);
             this.showEnrolledStd.Margin = new System.Windows.Forms.Padding(0);
             this.showEnrolledStd.Name = "showEnrolledStd";
             this.showEnrolledStd.Size = new System.Drawing.Size(381, 75);
@@ -564,7 +570,7 @@
             this.removeStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeStd.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeStd.ForeColor = System.Drawing.Color.White;
-            this.removeStd.Location = new System.Drawing.Point(0, 775);
+            this.removeStd.Location = new System.Drawing.Point(0, 1015);
             this.removeStd.Margin = new System.Windows.Forms.Padding(0);
             this.removeStd.Name = "removeStd";
             this.removeStd.Size = new System.Drawing.Size(254, 80);
@@ -582,7 +588,7 @@
             this.removeFac.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeFac.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeFac.ForeColor = System.Drawing.Color.White;
-            this.removeFac.Location = new System.Drawing.Point(0, 855);
+            this.removeFac.Location = new System.Drawing.Point(0, 1095);
             this.removeFac.Margin = new System.Windows.Forms.Padding(0);
             this.removeFac.Name = "removeFac";
             this.removeFac.Size = new System.Drawing.Size(254, 80);
@@ -600,7 +606,7 @@
             this.removeCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeCrs.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeCrs.ForeColor = System.Drawing.Color.White;
-            this.removeCrs.Location = new System.Drawing.Point(0, 935);
+            this.removeCrs.Location = new System.Drawing.Point(0, 1175);
             this.removeCrs.Margin = new System.Windows.Forms.Padding(0);
             this.removeCrs.Name = "removeCrs";
             this.removeCrs.Size = new System.Drawing.Size(254, 80);
@@ -618,7 +624,7 @@
             this.changeAdvisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.changeAdvisor.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeAdvisor.ForeColor = System.Drawing.Color.White;
-            this.changeAdvisor.Location = new System.Drawing.Point(791, 52);
+            this.changeAdvisor.Location = new System.Drawing.Point(0, 1349);
             this.changeAdvisor.Margin = new System.Windows.Forms.Padding(0);
             this.changeAdvisor.Name = "changeAdvisor";
             this.changeAdvisor.Size = new System.Drawing.Size(254, 80);
@@ -636,13 +642,14 @@
             this.createUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.createUser.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createUser.ForeColor = System.Drawing.Color.White;
-            this.createUser.Location = new System.Drawing.Point(9, 695);
+            this.createUser.Location = new System.Drawing.Point(0, 920);
             this.createUser.Margin = new System.Windows.Forms.Padding(0);
             this.createUser.Name = "createUser";
             this.createUser.Size = new System.Drawing.Size(254, 80);
             this.createUser.TabIndex = 34;
             this.createUser.Text = "Create User";
             this.createUser.UseVisualStyleBackColor = false;
+            this.createUser.Visible = false;
             this.createUser.Click += new System.EventHandler(this.createUserClick);
             // 
             // stdActions
@@ -650,14 +657,15 @@
             this.stdActions.AutoSize = true;
             this.stdActions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.stdActions.Controls.Add(this.crrSch);
-            this.stdActions.Controls.Add(this.addCrs);
             this.stdActions.Controls.Add(this.conflictCheck);
+            this.stdActions.Controls.Add(this.quickCommands);
             this.stdActions.Controls.Add(this.crsHist);
+            this.stdActions.Controls.Add(this.addCrs);
             this.stdActions.Controls.Add(this.dropCrs);
-            this.stdActions.Location = new System.Drawing.Point(0, 280);
+            this.stdActions.Location = new System.Drawing.Point(0, 429);
             this.stdActions.Margin = new System.Windows.Forms.Padding(0);
             this.stdActions.Name = "stdActions";
-            this.stdActions.Size = new System.Drawing.Size(254, 400);
+            this.stdActions.Size = new System.Drawing.Size(254, 480);
             this.stdActions.TabIndex = 29;
             this.stdActions.Visible = false;
             // 
@@ -670,32 +678,28 @@
             this.crsHistContainer.Controls.Add(this.panel2);
             this.crsHistContainer.Controls.Add(this.crsLst);
             this.crsHistContainer.Controls.Add(this.facSch);
-            this.crsHistContainer.Location = new System.Drawing.Point(289, 135);
+            this.crsHistContainer.Location = new System.Drawing.Point(289, 378);
             this.crsHistContainer.Name = "crsHistContainer";
             this.crsHistContainer.Size = new System.Drawing.Size(836, 959);
             this.crsHistContainer.TabIndex = 35;
             // 
-            // panel2
+            // crsIDSearch
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.panel2.Controls.Add(this.crsLstLabel);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(834, 60);
-            this.panel2.TabIndex = 17;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // enterCrsID
-            // 
-            this.enterCrsID.AutoSize = true;
-            this.enterCrsID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.enterCrsID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.enterCrsID.Location = new System.Drawing.Point(32, 116);
-            this.enterCrsID.Name = "enterCrsID";
-            this.enterCrsID.Size = new System.Drawing.Size(247, 32);
-            this.enterCrsID.TabIndex = 18;
-            this.enterCrsID.Text = "Enter Course ID :";
+            this.crsIDSearch.AutoSize = true;
+            this.crsIDSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.crsIDSearch.FlatAppearance.BorderSize = 0;
+            this.crsIDSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.crsIDSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.crsIDSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.crsIDSearch.ForeColor = System.Drawing.Color.White;
+            this.crsIDSearch.Location = new System.Drawing.Point(632, 110);
+            this.crsIDSearch.Margin = new System.Windows.Forms.Padding(0);
+            this.crsIDSearch.Name = "crsIDSearch";
+            this.crsIDSearch.Size = new System.Drawing.Size(170, 42);
+            this.crsIDSearch.TabIndex = 20;
+            this.crsIDSearch.Text = "Search";
+            this.crsIDSearch.UseVisualStyleBackColor = false;
+            this.crsIDSearch.Click += new System.EventHandler(this.crsIDSearchClick);
             // 
             // crsIDBox
             // 
@@ -708,46 +712,68 @@
             this.crsIDBox.Size = new System.Drawing.Size(283, 39);
             this.crsIDBox.TabIndex = 19;
             // 
-            // crsIDSearch
+            // enterCrsID
             // 
-            this.crsIDSearch.AutoSize = true;
-            this.crsIDSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.crsIDSearch.FlatAppearance.BorderSize = 0;
-            this.crsIDSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
-            this.crsIDSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.crsIDSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.crsIDSearch.ForeColor = System.Drawing.Color.White;
-            this.crsIDSearch.Location = new System.Drawing.Point(649, 110);
-            this.crsIDSearch.Margin = new System.Windows.Forms.Padding(0);
-            this.crsIDSearch.Name = "crsIDSearch";
-            this.crsIDSearch.Size = new System.Drawing.Size(150, 42);
-            this.crsIDSearch.TabIndex = 20;
-            this.crsIDSearch.Text = "Search";
-            this.crsIDSearch.UseVisualStyleBackColor = false;
-            this.crsIDSearch.Click += new System.EventHandler(this.crsIDSearchClick);
+            this.enterCrsID.AutoSize = true;
+            this.enterCrsID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enterCrsID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.enterCrsID.Location = new System.Drawing.Point(32, 116);
+            this.enterCrsID.Name = "enterCrsID";
+            this.enterCrsID.Size = new System.Drawing.Size(247, 32);
+            this.enterCrsID.TabIndex = 18;
+            this.enterCrsID.Text = "Enter Course ID :";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.panel2.Controls.Add(this.crsLstLabel);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(834, 60);
+            this.panel2.TabIndex = 17;
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.stdSearch);
+            this.panel1.Controls.Add(this.stdBox);
             this.panel1.Controls.Add(this.enterStd);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.stdLst);
-            this.panel1.Location = new System.Drawing.Point(1178, 135);
+            this.panel1.Location = new System.Drawing.Point(1182, 379);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(699, 509);
             this.panel1.TabIndex = 36;
             // 
-            // panel3
+            // stdSearch
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.panel3.Controls.Add(this.stdLstLabel);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(697, 61);
-            this.panel3.TabIndex = 17;
+            this.stdSearch.AutoSize = true;
+            this.stdSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.stdSearch.FlatAppearance.BorderSize = 0;
+            this.stdSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.stdSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stdSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stdSearch.ForeColor = System.Drawing.Color.White;
+            this.stdSearch.Location = new System.Drawing.Point(509, 111);
+            this.stdSearch.Margin = new System.Windows.Forms.Padding(0);
+            this.stdSearch.Name = "stdSearch";
+            this.stdSearch.Size = new System.Drawing.Size(170, 42);
+            this.stdSearch.TabIndex = 21;
+            this.stdSearch.Text = "Search";
+            this.stdSearch.UseVisualStyleBackColor = false;
+            this.stdSearch.Click += new System.EventHandler(this.stdSearchClick);
+            // 
+            // stdBox
+            // 
+            this.stdBox.BackColor = System.Drawing.Color.White;
+            this.stdBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stdBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.stdBox.Location = new System.Drawing.Point(240, 114);
+            this.stdBox.Margin = new System.Windows.Forms.Padding(0);
+            this.stdBox.Name = "stdBox";
+            this.stdBox.Size = new System.Drawing.Size(240, 39);
+            this.stdBox.TabIndex = 21;
             // 
             // enterStd
             // 
@@ -759,40 +785,22 @@
             this.enterStd.TabIndex = 18;
             this.enterStd.Text = "Username :";
             // 
-            // textBox1
+            // panel3
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.textBox1.Location = new System.Drawing.Point(240, 114);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(240, 39);
-            this.textBox1.TabIndex = 21;
-            // 
-            // button1
-            // 
-            this.button1.AutoSize = true;
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(532, 111);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 42);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = false;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.panel3.Controls.Add(this.stdLstLabel);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(697, 61);
+            this.panel3.TabIndex = 17;
             // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Controls.Add(this.registeredCrsLst);
-            this.panel4.Location = new System.Drawing.Point(1179, 721);
+            this.panel4.Location = new System.Drawing.Point(1181, 964);
             this.panel4.Margin = new System.Windows.Forms.Padding(0, 0, 0, 50);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(697, 373);
@@ -811,10 +819,32 @@
             // bottomSpace
             // 
             this.bottomSpace.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomSpace.Location = new System.Drawing.Point(0, 1095);
+            this.bottomSpace.Location = new System.Drawing.Point(0, 1429);
             this.bottomSpace.Name = "bottomSpace";
             this.bottomSpace.Size = new System.Drawing.Size(1925, 100);
             this.bottomSpace.TabIndex = 37;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 97);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(284, 284);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 38;
+            this.pictureBox1.TabStop = false;
+            // 
+            // quickCommands
+            // 
+            this.quickCommands.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quickCommands.ForeColor = System.Drawing.Color.White;
+            this.quickCommands.Location = new System.Drawing.Point(0, 0);
+            this.quickCommands.Margin = new System.Windows.Forms.Padding(0);
+            this.quickCommands.Name = "quickCommands";
+            this.quickCommands.Size = new System.Drawing.Size(254, 80);
+            this.quickCommands.TabIndex = 0;
+            this.quickCommands.Text = "Quick Commands";
+            this.quickCommands.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // admMainpage
             // 
@@ -823,22 +853,23 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1924, 803);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bottomSpace);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.crsHistContainer);
             this.Controls.Add(this.createUser);
             this.Controls.Add(this.changeAdvisor);
+            this.Controls.Add(this.showAdvisees);
             this.Controls.Add(this.removeCrs);
             this.Controls.Add(this.removeFac);
             this.Controls.Add(this.removeStd);
             this.Controls.Add(this.stdActions);
             this.Controls.Add(this.checkAdviseeSchedule);
             this.Controls.Add(this.showEnrolledStd);
-            this.Controls.Add(this.showAdvisees);
             this.Controls.Add(this.facLst);
             this.Controls.Add(this.facLstLabel);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.header);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "admMainpage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -847,7 +878,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.crsLst)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stdLst)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.registeredCrsLst)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.header.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.facLst)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.facSch)).EndInit();
             this.stdActions.ResumeLayout(false);
@@ -862,6 +893,7 @@
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -879,7 +911,7 @@
         private System.Windows.Forms.DataGridView registeredCrsLst;
         private System.Windows.Forms.Label registeredCrsLstLabel;
         private System.Windows.Forms.Button dropCrs;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel header;
         private System.Windows.Forms.Button conflictCheck;
         private System.Windows.Forms.Button crsHist;
         private System.Windows.Forms.Button checkAdviseeSchedule;
@@ -902,12 +934,14 @@
         private System.Windows.Forms.TextBox crsIDBox;
         private System.Windows.Forms.Button crsIDSearch;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button stdSearch;
+        private System.Windows.Forms.TextBox stdBox;
         private System.Windows.Forms.Label enterStd;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label bottomSpace;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label quickCommands;
     }
 }

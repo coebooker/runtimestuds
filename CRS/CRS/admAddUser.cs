@@ -48,6 +48,7 @@ namespace CRS
             else
                 this.mName = mname.Text;
             this.lName = lname.Text;
+            this.DialogResult = DialogResult.OK;
         }
         private void usernameEnter(object sender, EventArgs e)
         {
