@@ -43,7 +43,13 @@ namespace CRS
 
             crsLst.DataSource = table;
             crsLst.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            crsLst.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            int width = crsLst.Columns[5].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            crsLst.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            crsLst.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            crsLst.Columns[5].Width = width;
         }
+
 
 
         // Create tables for students' interactions
@@ -113,6 +119,10 @@ namespace CRS
             createStdLst();
             createRegisteredCrsLst();
 
+            stdSelect.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            facSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            manSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+
             // Display tables for students' interactions
             stdLst.Visible = true;
             stdLstLabel.Visible = true;
@@ -120,6 +130,8 @@ namespace CRS
             registeredCrsLst.Visible = true;
             registeredCrsLstLabel.Visible = true;
 
+            stdActions.Visible = true;
+            stdActions.BringToFront();
             dropCrs.Visible = true;
             addCrs.Visible = true;
             crsHist.Visible = true;
@@ -135,7 +147,6 @@ namespace CRS
             checkAdviseeSchedule.Visible = false;
 
             facSch.Visible = false;
-            registeredCrsLstLabel.Visible = false;
 
             showEnrolledStd.Visible = false;
             showAdvisees.Visible = false;
@@ -144,6 +155,11 @@ namespace CRS
         {
             createFacLst();
             createFacSch();
+
+            facSelect.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            stdSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            manSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+
 
             // Hide everything of students' interactions
             stdLst.Visible = false;
@@ -174,6 +190,11 @@ namespace CRS
         {
             createStdLst();
             createFacLst();
+
+            manSelect.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            facSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            stdSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+
 
             Point p = facSch.Location;
             facLst.Location = p;
@@ -436,5 +457,33 @@ namespace CRS
 
             usrDB.addUser(form.uname, form.pword, form.fName, form.mName, form.lName, form.uType, "filepath");
         }
+
+        private void crsLstLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void crsIDSearchClick(object sender, EventArgs e)
+        {
+            string crsID = crsIDBox.Text;
+
+            for (int i = 0; i < crsLst.RowCount; i++)
+                if (crsLst.Rows[i].Cells["Course ID"].Value.ToString().Trim() == crsID)
+                {
+                    DataTable table = (DataTable)crsLst.DataSource;
+                    DataRow row = table.Rows[i];
+                    DataRow nr = table.NewRow();
+                    nr.ItemArray = row.ItemArray;
+                    table.Rows.Remove(row);
+                    table.Rows.InsertAt(nr, 0);
+                    break;
+                }
+        }
+
     }
 }
