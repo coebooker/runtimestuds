@@ -13,13 +13,14 @@ namespace CRS
     public partial class LoginForm : Form
     {
         private userDatabase usrDB;
-        string upath;
+        private courseDatabase crsDB;
         string cpath;
         string ppath;
+        bool flag = false;
+
         public LoginForm(string upath, string cpath, string ppath)
         {
             InitializeComponent();
-            this.upath = upath;
             this.cpath = cpath;
             this.ppath = ppath;
             usrDB = new userDatabase(upath);
@@ -75,13 +76,48 @@ namespace CRS
             if (usrDB.isValidUser(username, password, ref usertype))
             {
                 this.Hide();
-                if (usertype == "admin")
-                    new admMainpage(usrDB, cpath, ppath).ShowDialog();
-                else if (usertype == "manager")
-                    return;
+                if (usertype == "admin" || usertype == "manager")
+                {
+                    if (!flag)
+                    {
+                        var form = new admMainpage(usrDB, ppath);
+                        form.ShowDialog();
+                        this.usrDB = form.usrDB;
+                        this.crsDB = form.crsDB;
+                    }
+                    else
+                    {
+                        var form = new admMainpage(usrDB, crsDB);
+                        form.ShowDialog();
+                        this.usrDB = form.usrDB;
+                        this.crsDB = form.crsDB;
+                    }    
+                }
                 else
-                    new mainpage(usertype, username, usrDB, upath, cpath, ppath).ShowDialog();
-                this.Close();
+                {
+                    if (!flag)
+                    {
+                        var form = new mainpage(usertype, username, usrDB, cpath, ppath);
+                        form.ShowDialog();
+                        this.usrDB = form.usrDB;
+                        this.crsDB = form.crsDB;
+                    }
+                    else
+                    {
+                        var form = new mainpage(usertype, username, usrDB, crsDB);
+                        form.ShowDialog();
+                        this.usrDB = form.usrDB;
+                        this.crsDB = form.crsDB;
+                    }
+                }
+                this.username.Text = "Username";
+                this.username.ForeColor = Color.Silver;
+                this.password.Text = "Password";
+                this.password.PasswordChar = '\0';
+                this.password.ForeColor = Color.Silver;
+
+                flag = true;
+                this.ShowDialog();
             }
             else
             {

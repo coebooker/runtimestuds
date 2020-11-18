@@ -43,10 +43,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainpage));
-            this.stdAddCrs = new System.Windows.Forms.Button();
+            this.stdAddCrsShow = new System.Windows.Forms.Button();
             this.viewFacSch = new System.Windows.Forms.Button();
             this.logout = new System.Windows.Forms.Button();
             this.navBar = new System.Windows.Forms.Panel();
+            this.viewCrsLst = new System.Windows.Forms.Button();
             this.crsHist = new System.Windows.Forms.Button();
             this.stdDropCrs = new System.Windows.Forms.Button();
             this.crs_hist_table = new System.Windows.Forms.DataGridView();
@@ -61,6 +62,7 @@
             this.header = new System.Windows.Forms.TableLayoutPanel();
             this.logo = new System.Windows.Forms.PictureBox();
             this.crsLstContainer = new System.Windows.Forms.Panel();
+            this.stdAddCrs = new System.Windows.Forms.Button();
             this.crsSearch = new System.Windows.Forms.Button();
             this.emptyContainer = new System.Windows.Forms.Panel();
             this.noButton = new System.Windows.Forms.RadioButton();
@@ -93,24 +95,24 @@
             this.schLabelContainer.SuspendLayout();
             this.SuspendLayout();
             // 
-            // stdAddCrs
+            // stdAddCrsShow
             // 
-            this.stdAddCrs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.stdAddCrs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.stdAddCrs.FlatAppearance.BorderSize = 0;
-            this.stdAddCrs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
-            this.stdAddCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stdAddCrs.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stdAddCrs.ForeColor = System.Drawing.Color.White;
-            this.stdAddCrs.Location = new System.Drawing.Point(0, 0);
-            this.stdAddCrs.Margin = new System.Windows.Forms.Padding(0);
-            this.stdAddCrs.Name = "stdAddCrs";
-            this.stdAddCrs.Size = new System.Drawing.Size(254, 80);
-            this.stdAddCrs.TabIndex = 1;
-            this.stdAddCrs.Text = "Add Course";
-            this.stdAddCrs.UseVisualStyleBackColor = false;
-            this.stdAddCrs.Visible = false;
-            this.stdAddCrs.Click += new System.EventHandler(this.addCrsClickStd);
+            this.stdAddCrsShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.stdAddCrsShow.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.stdAddCrsShow.FlatAppearance.BorderSize = 0;
+            this.stdAddCrsShow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.stdAddCrsShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stdAddCrsShow.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stdAddCrsShow.ForeColor = System.Drawing.Color.White;
+            this.stdAddCrsShow.Location = new System.Drawing.Point(0, 80);
+            this.stdAddCrsShow.Margin = new System.Windows.Forms.Padding(0);
+            this.stdAddCrsShow.Name = "stdAddCrsShow";
+            this.stdAddCrsShow.Size = new System.Drawing.Size(254, 80);
+            this.stdAddCrsShow.TabIndex = 1;
+            this.stdAddCrsShow.Text = "Add Course";
+            this.stdAddCrsShow.UseVisualStyleBackColor = false;
+            this.stdAddCrsShow.Visible = false;
+            this.stdAddCrsShow.Click += new System.EventHandler(this.stdAddCrsShowClick);
             // 
             // viewFacSch
             // 
@@ -121,7 +123,7 @@
             this.viewFacSch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.viewFacSch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.viewFacSch.ForeColor = System.Drawing.Color.White;
-            this.viewFacSch.Location = new System.Drawing.Point(0, 240);
+            this.viewFacSch.Location = new System.Drawing.Point(0, 320);
             this.viewFacSch.Margin = new System.Windows.Forms.Padding(0);
             this.viewFacSch.Name = "viewFacSch";
             this.viewFacSch.Size = new System.Drawing.Size(254, 80);
@@ -155,16 +157,36 @@
             this.navBar.AutoSize = true;
             this.navBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.navBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.navBar.Controls.Add(this.viewCrsLst);
             this.navBar.Controls.Add(this.crsHist);
             this.navBar.Controls.Add(this.viewFacSch);
             this.navBar.Controls.Add(this.stdDropCrs);
-            this.navBar.Controls.Add(this.stdAddCrs);
+            this.navBar.Controls.Add(this.stdAddCrsShow);
             this.navBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navBar.Location = new System.Drawing.Point(5, 429);
             this.navBar.Margin = new System.Windows.Forms.Padding(0);
             this.navBar.Name = "navBar";
-            this.navBar.Size = new System.Drawing.Size(254, 320);
+            this.navBar.Size = new System.Drawing.Size(254, 400);
             this.navBar.TabIndex = 9;
+            // 
+            // viewCrsLst
+            // 
+            this.viewCrsLst.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.viewCrsLst.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.viewCrsLst.FlatAppearance.BorderSize = 0;
+            this.viewCrsLst.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.viewCrsLst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.viewCrsLst.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewCrsLst.ForeColor = System.Drawing.Color.White;
+            this.viewCrsLst.Location = new System.Drawing.Point(0, 0);
+            this.viewCrsLst.Margin = new System.Windows.Forms.Padding(0);
+            this.viewCrsLst.Name = "viewCrsLst";
+            this.viewCrsLst.Size = new System.Drawing.Size(254, 80);
+            this.viewCrsLst.TabIndex = 11;
+            this.viewCrsLst.Text = "View Course List";
+            this.viewCrsLst.UseVisualStyleBackColor = false;
+            this.viewCrsLst.Visible = false;
+            this.viewCrsLst.Click += new System.EventHandler(this.viewCrsLstClick);
             // 
             // crsHist
             // 
@@ -173,7 +195,7 @@
             this.crsHist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.crsHist.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crsHist.ForeColor = System.Drawing.Color.White;
-            this.crsHist.Location = new System.Drawing.Point(0, 80);
+            this.crsHist.Location = new System.Drawing.Point(0, 160);
             this.crsHist.Margin = new System.Windows.Forms.Padding(0);
             this.crsHist.Name = "crsHist";
             this.crsHist.Size = new System.Drawing.Size(254, 80);
@@ -181,7 +203,7 @@
             this.crsHist.Text = "Course History";
             this.crsHist.UseVisualStyleBackColor = true;
             this.crsHist.Visible = false;
-            this.crsHist.Click += new System.EventHandler(this.crs_hist_click);
+            this.crsHist.Click += new System.EventHandler(this.crsHistClick);
             // 
             // stdDropCrs
             // 
@@ -191,7 +213,7 @@
             this.stdDropCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stdDropCrs.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stdDropCrs.ForeColor = System.Drawing.Color.White;
-            this.stdDropCrs.Location = new System.Drawing.Point(0, 160);
+            this.stdDropCrs.Location = new System.Drawing.Point(0, 240);
             this.stdDropCrs.Margin = new System.Windows.Forms.Padding(0);
             this.stdDropCrs.Name = "stdDropCrs";
             this.stdDropCrs.Size = new System.Drawing.Size(254, 80);
@@ -363,6 +385,7 @@
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.crsLst.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.crsLst.RowHeadersVisible = false;
             this.crsLst.RowHeadersWidth = 30;
             this.crsLst.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.crsLst.RowTemplate.Height = 28;
@@ -401,7 +424,7 @@
             this.facSchTable.DefaultCellStyle = dataGridViewCellStyle12;
             this.facSchTable.EnableHeadersVisualStyles = false;
             this.facSchTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facSchTable.Location = new System.Drawing.Point(1661, 1699);
+            this.facSchTable.Location = new System.Drawing.Point(1661, 4323);
             this.facSchTable.Name = "facSchTable";
             this.facSchTable.RowHeadersVisible = false;
             this.facSchTable.RowHeadersWidth = 62;
@@ -447,14 +470,14 @@
             this.enrolledStdTable.DefaultCellStyle = dataGridViewCellStyle14;
             this.enrolledStdTable.EnableHeadersVisualStyles = false;
             this.enrolledStdTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.enrolledStdTable.Location = new System.Drawing.Point(1516, 1652);
+            this.enrolledStdTable.Location = new System.Drawing.Point(1516, 4276);
             this.enrolledStdTable.Margin = new System.Windows.Forms.Padding(0);
             this.enrolledStdTable.Name = "enrolledStdTable";
             this.enrolledStdTable.RowHeadersVisible = false;
             this.enrolledStdTable.RowHeadersWidth = 62;
             this.enrolledStdTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.enrolledStdTable.RowTemplate.Height = 28;
-            this.enrolledStdTable.Size = new System.Drawing.Size(78, 95);
+            this.enrolledStdTable.Size = new System.Drawing.Size(0, 95);
             this.enrolledStdTable.TabIndex = 17;
             this.enrolledStdTable.Visible = false;
             // 
@@ -475,7 +498,7 @@
             this.adviseeTable.Name = "adviseeTable";
             this.adviseeTable.RowHeadersWidth = 62;
             this.adviseeTable.RowTemplate.Height = 28;
-            this.adviseeTable.Size = new System.Drawing.Size(74, 53);
+            this.adviseeTable.Size = new System.Drawing.Size(0, 53);
             this.adviseeTable.TabIndex = 18;
             this.adviseeTable.Visible = false;
             // 
@@ -510,6 +533,7 @@
             // 
             this.crsLstContainer.BackColor = System.Drawing.Color.White;
             this.crsLstContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crsLstContainer.Controls.Add(this.stdAddCrs);
             this.crsLstContainer.Controls.Add(this.crsSearch);
             this.crsLstContainer.Controls.Add(this.emptyContainer);
             this.crsLstContainer.Controls.Add(this.emptyLabel);
@@ -519,10 +543,29 @@
             this.crsLstContainer.Controls.Add(this.depBox);
             this.crsLstContainer.Controls.Add(this.crsLstLabelContainer);
             this.crsLstContainer.Controls.Add(this.crsLst);
-            this.crsLstContainer.Location = new System.Drawing.Point(294, 378);
+            this.crsLstContainer.Location = new System.Drawing.Point(1020, 378);
             this.crsLstContainer.Name = "crsLstContainer";
             this.crsLstContainer.Size = new System.Drawing.Size(836, 1126);
             this.crsLstContainer.TabIndex = 40;
+            this.crsLstContainer.Visible = false;
+            // 
+            // stdAddCrs
+            // 
+            this.stdAddCrs.AutoSize = true;
+            this.stdAddCrs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.stdAddCrs.FlatAppearance.BorderSize = 0;
+            this.stdAddCrs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.stdAddCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stdAddCrs.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stdAddCrs.ForeColor = System.Drawing.Color.White;
+            this.stdAddCrs.Location = new System.Drawing.Point(521, 258);
+            this.stdAddCrs.Margin = new System.Windows.Forms.Padding(0);
+            this.stdAddCrs.Name = "stdAddCrs";
+            this.stdAddCrs.Size = new System.Drawing.Size(152, 39);
+            this.stdAddCrs.TabIndex = 25;
+            this.stdAddCrs.Text = "Add Courses";
+            this.stdAddCrs.UseVisualStyleBackColor = false;
+            this.stdAddCrs.Click += new System.EventHandler(this.stdAddCrsClick);
             // 
             // crsSearch
             // 
@@ -677,7 +720,7 @@
             this.schContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.schContainer.Controls.Add(this.schLabelContainer);
             this.schContainer.Controls.Add(this.stdSch);
-            this.schContainer.Location = new System.Drawing.Point(1204, 378);
+            this.schContainer.Location = new System.Drawing.Point(294, 378);
             this.schContainer.Name = "schContainer";
             this.schContainer.Size = new System.Drawing.Size(658, 488);
             this.schContainer.TabIndex = 43;
@@ -756,7 +799,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button stdAddCrs;
+        private System.Windows.Forms.Button stdAddCrsShow;
         private System.Windows.Forms.Button viewFacSch;
         private System.Windows.Forms.Button logout;
         private System.Windows.Forms.Panel navBar;
@@ -790,5 +833,7 @@
         private System.Windows.Forms.Panel schContainer;
         private System.Windows.Forms.Panel schLabelContainer;
         private System.Windows.Forms.Label stdSchLabel;
+        private System.Windows.Forms.Button stdAddCrs;
+        private System.Windows.Forms.Button viewCrsLst;
     }
 }

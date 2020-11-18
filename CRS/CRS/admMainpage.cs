@@ -12,17 +12,25 @@ namespace CRS
 {
     public partial class admMainpage : Form
     {
-        private userDatabase usrDB;
-        private courseDatabase crsDB;
+        public userDatabase usrDB;
+        public courseDatabase crsDB;
         string nextSemester = "S15";
         string currentSemester = "F14";
 
-        public admMainpage(userDatabase usrDB, string cpath, string ppath)
+        public admMainpage(userDatabase usrDB, string ppath)
         {
             // Initialization
             //crsDB = new courseDatabase(cpath);
             usrDB.addPrevCourses(ppath, ref crsDB, nextSemester);
             this.usrDB = usrDB;
+            InitializeComponent();
+
+            createCrsLst();
+        }
+        public admMainpage(userDatabase usrDB, courseDatabase crsDB)
+        {
+            this.usrDB = usrDB;
+            this.crsDB = crsDB;
             InitializeComponent();
 
             createCrsLst();

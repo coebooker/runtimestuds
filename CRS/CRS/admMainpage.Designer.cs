@@ -482,7 +482,7 @@
             this.facLstLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.facLstLabel.AutoSize = true;
             this.facLstLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.facLstLabel.Location = new System.Drawing.Point(881, 309);
+            this.facLstLabel.Location = new System.Drawing.Point(803, 309);
             this.facLstLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.facLstLabel.Name = "facLstLabel";
             this.facLstLabel.Size = new System.Drawing.Size(194, 33);
@@ -511,7 +511,7 @@
             this.facLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facLst.EnableHeadersVisualStyles = false;
             this.facLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facLst.Location = new System.Drawing.Point(887, 128);
+            this.facLst.Location = new System.Drawing.Point(809, 128);
             this.facLst.Margin = new System.Windows.Forms.Padding(0);
             this.facLst.MultiSelect = false;
             this.facLst.Name = "facLst";
@@ -553,7 +553,7 @@
             this.showEnrolledStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showEnrolledStd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showEnrolledStd.ForeColor = System.Drawing.Color.White;
-            this.showEnrolledStd.Location = new System.Drawing.Point(1947, 3457);
+            this.showEnrolledStd.Location = new System.Drawing.Point(1869, 5635);
             this.showEnrolledStd.Margin = new System.Windows.Forms.Padding(0);
             this.showEnrolledStd.Name = "showEnrolledStd";
             this.showEnrolledStd.Size = new System.Drawing.Size(381, 75);
