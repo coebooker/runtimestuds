@@ -400,7 +400,7 @@ namespace CRS
         }
 
 
-        // Retrieve information
+        // Gets the faculty's next semester coures
         public List<course> getNextFacCrsLst(string username)
         {
             List<course> crsLst = new List<course>();
@@ -834,6 +834,11 @@ namespace CRS
         public List<student> getAdviseesLst()
         {
             return adviseesLst;
+        }
+        //Returns a list of the courses this faculty is scheduled to teach next semester
+        public List<course> getNextSemesterCourses(ref courseDatabase courseDB)
+        {
+            return courseDB.getNextFacCrsLst(username);
         }
 
         public void addAdvisee(student std)
