@@ -14,12 +14,9 @@ namespace CRS
         [STAThread]
         static void Main()
         {
-            string userfile_path = @"..\..\userDB.in";
-            string coursefile_path = @"..\..\courseDB.in";
-            string prevcoursefile_path = @"..\..\historyDB.in";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm(userfile_path, coursefile_path, prevcoursefile_path));
+            Application.Run(new LoginForm());
         }
     }
 }

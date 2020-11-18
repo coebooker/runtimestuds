@@ -56,8 +56,8 @@ namespace CRS
             this.username.Size = new System.Drawing.Size(360, 53);
             this.username.TabIndex = 0;
             this.username.Text = "Username";
-            this.username.Enter += new System.EventHandler(this.UsernameEnter);
-            this.username.Leave += new System.EventHandler(this.UsernameLeave);
+            this.username.Enter += new System.EventHandler(this.usernameEnter);
+            this.username.Leave += new System.EventHandler(this.usernameLeave);
             // 
             // password
             // 
@@ -70,8 +70,8 @@ namespace CRS
             this.password.Size = new System.Drawing.Size(360, 53);
             this.password.TabIndex = 1;
             this.password.Text = "Password";
-            this.password.Enter += new System.EventHandler(this.PasswordEnter);
-            this.password.Leave += new System.EventHandler(this.PasswordLeave);
+            this.password.Enter += new System.EventHandler(this.passwordEnter);
+            this.password.Leave += new System.EventHandler(this.passwordLeave);
             // 
             // login
             // 
@@ -87,7 +87,7 @@ namespace CRS
             this.login.TabIndex = 3;
             this.login.Text = "Login";
             this.login.UseVisualStyleBackColor = false;
-            this.login.Click += new System.EventHandler(this.LoginClick);
+            this.login.Click += new System.EventHandler(this.loginClick);
             // 
             // panel1
             // 

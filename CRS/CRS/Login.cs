@@ -18,18 +18,18 @@ namespace CRS
         string ppath;
         bool flag = false;
 
-        public LoginForm(string upath, string cpath, string ppath)
+        public LoginForm()
         {
             InitializeComponent();
-            this.cpath = cpath;
-            this.ppath = ppath;
-            usrDB = new userDatabase(upath);
+            this.cpath = @"..\..\courseDB.in";
+            this.ppath = @"..\..\historyDB.in";
+            usrDB = new userDatabase(@"..\..\userDB.in");
 
             Bitmap bmp = ((Bitmap)close.BackgroundImage);
             bmp.MakeTransparent();
         }
 
-        private void UsernameEnter(object sender, EventArgs e)
+        private void usernameEnter(object sender, EventArgs e)
         {
             if (username.Text == "Username")
             {
@@ -37,8 +37,7 @@ namespace CRS
                 username.ForeColor = Color.White;
             }
         }
-
-        private void UsernameLeave(object sender, EventArgs e)
+        private void usernameLeave(object sender, EventArgs e)
         {
             if (username.Text == "")
             {
@@ -46,8 +45,7 @@ namespace CRS
                 username.ForeColor = Color.Silver;
             }
         }
-
-        private void PasswordEnter(object sender, EventArgs e)
+        private void passwordEnter(object sender, EventArgs e)
         {
             if (password.Text == "Password")
             {
@@ -56,8 +54,7 @@ namespace CRS
                 password.ForeColor = Color.White;
             }
         }
-
-        private void PasswordLeave(object sender, EventArgs e)
+        private void passwordLeave(object sender, EventArgs e)
         {
             if (password.Text == "")
             {
@@ -66,8 +63,7 @@ namespace CRS
                 password.ForeColor = Color.Silver;
             }
         }
-
-        private void LoginClick(object sender, EventArgs e)
+        private void loginClick(object sender, EventArgs e)
         {
             string usertype = "student";    //Default
             string username = this.username.Text.ToLower();
@@ -130,7 +126,6 @@ namespace CRS
                 this.password.ForeColor = Color.White;
             }
         }
-
         private void close_click(object sender, EventArgs e)
         {
             this.Close();
