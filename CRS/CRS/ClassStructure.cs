@@ -363,7 +363,7 @@ namespace CRS
         private List<course> crsLst;
 
         // Class constructor
-        public courseDatabase(string filepath, ref ComboBox cb, ref TextBox tb)
+        public courseDatabase(string filepath, ref ComboBox cb, ref TextBox tb, ref userDatabase userDB)
         {
             this.crsLst = new List<course>();
             string line;
@@ -386,7 +386,8 @@ namespace CRS
                 }
                 course crs = new course(code, title, instructor, credit, seats, num_time_blocks, BlockLst);
                 crsLst.Add(crs);
-
+                faculty courseFac = userDB.getFaculty(instructor.Trim());
+                courseFac.nextSemesterCourses.Add(crs);
                 index = code.IndexOf('-');
                 if (!cb.Items.Contains(code.Substring(0, index)))
                 {
@@ -820,6 +821,7 @@ namespace CRS
     }
     public class faculty : baseUser
     {
+        public List<course> nextSemesterCourses = new List<course>();
         public faculty(string f, string m, string l, string usrname, string psw)
         {
             courseSchedule = new List<course>();
@@ -829,6 +831,7 @@ namespace CRS
             lname = l;
             username = usrname;
             password = psw;
+            
         }
 
         public List<student> getAdviseesLst()
@@ -838,7 +841,7 @@ namespace CRS
         //Returns a list of the courses this faculty is scheduled to teach next semester
         public List<course> getNextSemesterCourses(ref courseDatabase courseDB)
         {
-            return courseDB.getNextFacCrsLst(username);
+            return nextSemesterCourses;
         }
 
         public void addAdvisee(student std)

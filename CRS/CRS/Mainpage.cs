@@ -25,7 +25,7 @@ namespace CRS
         {
             InitializeComponent();
             this.username = username;
-            crsDB = new courseDatabase(cpath, ref depBox, ref titleBox);
+            crsDB = new courseDatabase(cpath, ref depBox, ref titleBox, ref usrDB);
             usrDB.addPrevCourses(ppath, ref this.crsDB, nextSemester);
             this.usrDB = usrDB;
 
