@@ -66,6 +66,7 @@
             this.changeAdvisor = new System.Windows.Forms.Button();
             this.createUser = new System.Windows.Forms.Button();
             this.stdActions = new System.Windows.Forms.Panel();
+            this.quickCommands = new System.Windows.Forms.Label();
             this.crsHistContainer = new System.Windows.Forms.Panel();
             this.crsIDSearch = new System.Windows.Forms.Button();
             this.crsIDBox = new System.Windows.Forms.TextBox();
@@ -80,7 +81,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.bottomSpace = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.quickCommands = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.crsLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stdLst)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.registeredCrsLst)).BeginInit();
@@ -161,7 +161,7 @@
             this.stdSelect.Location = new System.Drawing.Point(0, 0);
             this.stdSelect.Margin = new System.Windows.Forms.Padding(0);
             this.stdSelect.Name = "stdSelect";
-            this.stdSelect.Size = new System.Drawing.Size(240, 94);
+            this.stdSelect.Size = new System.Drawing.Size(237, 94);
             this.stdSelect.TabIndex = 1;
             this.stdSelect.Text = "Student";
             this.stdSelect.UseVisualStyleBackColor = false;
@@ -176,7 +176,7 @@
             this.manSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.manSelect.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manSelect.ForeColor = System.Drawing.Color.White;
-            this.manSelect.Location = new System.Drawing.Point(480, 0);
+            this.manSelect.Location = new System.Drawing.Point(474, 0);
             this.manSelect.Margin = new System.Windows.Forms.Padding(0);
             this.manSelect.Name = "manSelect";
             this.manSelect.Size = new System.Drawing.Size(240, 94);
@@ -354,13 +354,14 @@
             this.header.Controls.Add(this.facSelect, 0, 0);
             this.header.Controls.Add(this.stdSelect, 0, 0);
             this.header.Controls.Add(this.manSelect, 1, 0);
+            this.header.Dock = System.Windows.Forms.DockStyle.Top;
             this.header.Location = new System.Drawing.Point(0, 0);
             this.header.Margin = new System.Windows.Forms.Padding(0);
             this.header.Name = "header";
             this.header.RowCount = 1;
             this.header.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.header.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
-            this.header.Size = new System.Drawing.Size(1925, 94);
+            this.header.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            this.header.Size = new System.Drawing.Size(1898, 94);
             this.header.TabIndex = 22;
             // 
             // facSelect
@@ -372,10 +373,10 @@
             this.facSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.facSelect.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.facSelect.ForeColor = System.Drawing.Color.White;
-            this.facSelect.Location = new System.Drawing.Point(240, 0);
+            this.facSelect.Location = new System.Drawing.Point(237, 0);
             this.facSelect.Margin = new System.Windows.Forms.Padding(0);
             this.facSelect.Name = "facSelect";
-            this.facSelect.Size = new System.Drawing.Size(240, 94);
+            this.facSelect.Size = new System.Drawing.Size(237, 94);
             this.facSelect.TabIndex = 4;
             this.facSelect.Text = "Faculty";
             this.facSelect.UseVisualStyleBackColor = false;
@@ -481,7 +482,7 @@
             this.facLstLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.facLstLabel.AutoSize = true;
             this.facLstLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.facLstLabel.Location = new System.Drawing.Point(933, 309);
+            this.facLstLabel.Location = new System.Drawing.Point(881, 309);
             this.facLstLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.facLstLabel.Name = "facLstLabel";
             this.facLstLabel.Size = new System.Drawing.Size(194, 33);
@@ -510,7 +511,7 @@
             this.facLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facLst.EnableHeadersVisualStyles = false;
             this.facLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facLst.Location = new System.Drawing.Point(939, 128);
+            this.facLst.Location = new System.Drawing.Point(887, 128);
             this.facLst.Margin = new System.Windows.Forms.Padding(0);
             this.facLst.MultiSelect = false;
             this.facLst.Name = "facLst";
@@ -552,7 +553,7 @@
             this.showEnrolledStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showEnrolledStd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showEnrolledStd.ForeColor = System.Drawing.Color.White;
-            this.showEnrolledStd.Location = new System.Drawing.Point(1999, 2005);
+            this.showEnrolledStd.Location = new System.Drawing.Point(1947, 3457);
             this.showEnrolledStd.Margin = new System.Windows.Forms.Padding(0);
             this.showEnrolledStd.Name = "showEnrolledStd";
             this.showEnrolledStd.Size = new System.Drawing.Size(381, 75);
@@ -668,6 +669,18 @@
             this.stdActions.Size = new System.Drawing.Size(254, 480);
             this.stdActions.TabIndex = 29;
             this.stdActions.Visible = false;
+            // 
+            // quickCommands
+            // 
+            this.quickCommands.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quickCommands.ForeColor = System.Drawing.Color.White;
+            this.quickCommands.Location = new System.Drawing.Point(0, 0);
+            this.quickCommands.Margin = new System.Windows.Forms.Padding(0);
+            this.quickCommands.Name = "quickCommands";
+            this.quickCommands.Size = new System.Drawing.Size(254, 80);
+            this.quickCommands.TabIndex = 0;
+            this.quickCommands.Text = "Quick Commands";
+            this.quickCommands.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // crsHistContainer
             // 
@@ -821,7 +834,7 @@
             this.bottomSpace.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomSpace.Location = new System.Drawing.Point(0, 1429);
             this.bottomSpace.Name = "bottomSpace";
-            this.bottomSpace.Size = new System.Drawing.Size(1925, 100);
+            this.bottomSpace.Size = new System.Drawing.Size(1898, 100);
             this.bottomSpace.TabIndex = 37;
             // 
             // pictureBox1
@@ -833,18 +846,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
-            // 
-            // quickCommands
-            // 
-            this.quickCommands.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quickCommands.ForeColor = System.Drawing.Color.White;
-            this.quickCommands.Location = new System.Drawing.Point(0, 0);
-            this.quickCommands.Margin = new System.Windows.Forms.Padding(0);
-            this.quickCommands.Name = "quickCommands";
-            this.quickCommands.Size = new System.Drawing.Size(254, 80);
-            this.quickCommands.TabIndex = 0;
-            this.quickCommands.Text = "Quick Commands";
-            this.quickCommands.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // admMainpage
             // 

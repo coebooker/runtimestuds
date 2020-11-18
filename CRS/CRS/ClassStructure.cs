@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Windows.Forms;
 
 namespace CRS
 {
@@ -335,8 +336,17 @@ namespace CRS
                     loc += 4;
                     string grade = line.Substring(loc, 3).Trim().ToString();
                     loc += 5;
-                    previousCourse currentCourse = new previousCourse(username, crsID, semester, credit, grade);
-                    std.createCrsHist(currentCourse, ref crsDB, nextSemester);
+                    if (semester == nextSemester)
+                    {
+                        course crs = crsDB.getCourse(crsID);
+                        std.addClassToNext(crs);
+                        crs.enrollUser(std);
+                    }
+                    else
+                    {
+                        previousCourse currentCourse = new previousCourse(username, crsID, semester, credit, grade);
+                        std.createCrsHist(currentCourse, ref crsDB, nextSemester);
+                    }
                 }
             }
             input.Close();
@@ -353,7 +363,7 @@ namespace CRS
         private List<course> crsLst;
 
         // Class constructor
-        public courseDatabase(string filepath)
+        public courseDatabase(string filepath, ref ComboBox cb, ref TextBox tb)
         {
             this.crsLst = new List<course>();
             string line;
@@ -376,6 +386,15 @@ namespace CRS
                 }
                 course crs = new course(code, title, instructor, credit, seats, num_time_blocks, BlockLst);
                 crsLst.Add(crs);
+
+                index = code.IndexOf('-');
+                if (!cb.Items.Contains(code.Substring(0, index)))
+                {
+                    cb.Items.Add(code.Substring(0, index));
+                    cb.AutoCompleteCustomSource.Add(code.Substring(0, index));
+                }
+                if (!tb.AutoCompleteCustomSource.Contains(title))
+                    tb.AutoCompleteCustomSource.Add(title);
             }
 
         }

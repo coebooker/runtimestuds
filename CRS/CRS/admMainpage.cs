@@ -20,7 +20,7 @@ namespace CRS
         public admMainpage(userDatabase usrDB, string cpath, string ppath)
         {
             // Initialization
-            crsDB = new courseDatabase(cpath);
+            //crsDB = new courseDatabase(cpath);
             usrDB.addPrevCourses(ppath, ref crsDB, nextSemester);
             this.usrDB = usrDB;
             InitializeComponent();
