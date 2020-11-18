@@ -96,7 +96,7 @@ namespace CRS
                     return f;
             return fac;
         }
-     
+
 
         // Change the database
         public void addCrsToStd(string courseID, string nextSemester, ref courseDatabase courseDB, student currentStudent)
@@ -205,7 +205,7 @@ namespace CRS
                 File.WriteAllLines(filepath, newUserLinesArr);
             }
         }
-        public void addAdmin(string fileline, string filepath,  ref admin newAdmin)
+        public void addAdmin(string fileline, string filepath, ref admin newAdmin)
         {
             using (StreamWriter sw = File.AppendText(filepath))
             {
@@ -428,7 +428,7 @@ namespace CRS
         }
 
 
-         // Change the database
+        // Change the database
         public void removeCrs(string crsID, string nextSemester, string filepath)
         {
             // Remove the course from the list
@@ -442,12 +442,12 @@ namespace CRS
                 std.deleteClassFromHistory(removedCrs, nextSemester);
                 std.dropCrsFromNext(removedCrs);
             }
-            
+
             //Updates the coursedb.in file to remove the removed course from it
             string[] courseLines = File.ReadAllLines(filepath);
             string[] newCourseLinesArr;
             List<string> newCourseLines = new List<string>();
-            foreach(string courseString in courseLines)
+            foreach (string courseString in courseLines)
             {
                 string courseID = courseString.Substring(4, 10);
                 if (courseID == removedCrs.crsID)
@@ -472,7 +472,7 @@ namespace CRS
             string[] CourseLines = File.ReadAllLines(filepath);
             string[] newCourseLinesArr;
             List<string> newCourseLines = new List<string>();
-            foreach(string line in CourseLines)
+            foreach (string line in CourseLines)
             {
                 string currentCourseID = line.Substring(0, 10).Trim();
                 if (currentCourseID == courseID)
@@ -563,8 +563,8 @@ namespace CRS
                     {
                         continue;
                     }
-                }                
                 }
+            }
             float GPA = GPACredits.Sum() / GPACredits.Count();
             return GPA;
         }
@@ -572,15 +572,16 @@ namespace CRS
         {
             List<string> newLines = new List<string>();
             string[] lines = File.ReadAllLines(filepath);
-            foreach(string user in lines)
+            foreach (string user in lines)
             {
                 string currentUsername = user.Substring(0, 10);
-                if (currentUsername.Trim() == username){
+                if (currentUsername.Trim() == username)
+                {
                     string newLine = "";
                     newLine += currentUsername + ' ';
                     int numCourses = crsHist.Count();
                     newLine += numCourses.ToString() + "  ";
-                    foreach(previousCourse currentCourse in crsHist)
+                    foreach (previousCourse currentCourse in crsHist)
                     {
                         newLine += currentCourse.crsID.PadRight(11);
                         newLine += currentCourse.semester + ' ';
@@ -611,13 +612,22 @@ namespace CRS
         public void createCrsHist(previousCourse pcrs, ref courseDatabase crsDB, string nextSemester)
         {
             crsHist.Add(pcrs);
-            if (pcrs.semester == nextSemester)
-                foreach (course crs in crsDB.getCourseList())
-                    if (pcrs.crsID == crs.crsID)
-                    {
-                        registeredCrs.Add(crs);
-                        crs.enrollUser(this);
-                    }
+            if (pcrs.semester == nextSemester) {
+                course currentCourse = crsDB.getCourse(pcrs.crsID);
+                registeredCrs.Add(currentCourse);
+                currentCourse.enrollUser(this);
+            }
+            else if(pcrs.semester == "F14")
+            {
+                currentCrs.Add(pcrs);
+            }
+            //TO-DO UPDATE CALCULATE GPA FUNCTION TO BE HERE. ALSO INCREMENT TOTAL CREDITS
+            else
+            {
+                crsHist.Add(pcrs);
+            }
+                
+               
         }
         public void addClassToNext(course courseAdded)
         {
@@ -635,10 +645,10 @@ namespace CRS
         public void deleteClassFromHistory(course courseDeleted, string nextSemester)
         {
             previousCourse c = new previousCourse(
-                username.Trim(), 
-                courseDeleted.crsID.Trim(), 
-                nextSemester, 
-                float.Parse(courseDeleted.credit.Trim()), 
+                username.Trim(),
+                courseDeleted.crsID.Trim(),
+                nextSemester,
+                float.Parse(courseDeleted.credit.Trim()),
                 "N");
             foreach (previousCourse crs in crsHist)
                 if (crs.username == c.username && crs.semester == c.semester &&
@@ -671,20 +681,20 @@ namespace CRS
                                     double startB = timeB.getStartTime();
                                     double endA = timeA.getEndTime();
                                     double endB = timeB.getEndTime();
-                                    
+
                                     if (!(startA == endB || startB == endA))
                                     {
                                         //    |-----|   A
                                         // |-----|      B
                                         if (startA >= startB)
                                             if (startA <= endB)
-                                                message = "There is a time overlap between " + courseA.crsID + " and " + courseB.crsID+" for next semester";
-                                        
+                                                message = "There is a time overlap between " + courseA.crsID + " and " + courseB.crsID + " for next semester";
+
                                         // |-----|      A
                                         //    |-----|   B
                                         if (startB >= startA)
                                             if (startB <= endA)
-                                                message = "There is a time overlap between " + courseA.crsID + " and " + courseB.crsID+ " for next semester";
+                                                message = "There is a time overlap between " + courseA.crsID + " and " + courseB.crsID + " for next semester";
                                     }
 
                                 }
@@ -692,7 +702,7 @@ namespace CRS
             }
             return message;
         }
-        public validity isValidAdd(string crntSmst, course crsBngAdded) 
+        public validity isValidAdd(string crntSmst, course crsBngAdded)
         {
             bool validAdd = true;
             bool warning = false;
@@ -716,14 +726,14 @@ namespace CRS
 
 
                 List<classTime> timeBlocksCurrent = currentCourse.getClassTime();
-                
 
 
-                foreach (classTime eachCurrentBlock in  timeBlocksCurrent)
+
+                foreach (classTime eachCurrentBlock in timeBlocksCurrent)
                 {
-                    foreach(classTime eachAddingBlock in timeBlocksAdding)
+                    foreach (classTime eachAddingBlock in timeBlocksAdding)
                     {
-                        if(eachCurrentBlock.getDays().Intersect(eachAddingBlock.getDays()).Count() != 0)
+                        if (eachCurrentBlock.getDays().Intersect(eachAddingBlock.getDays()).Count() != 0)
                         {
                             double startA = eachCurrentBlock.getStartTime();
                             double startB = eachAddingBlock.getStartTime();
@@ -740,7 +750,7 @@ namespace CRS
                                     if (startA <= endB)
                                     {
                                         warning = true;
-                                        if(validAdd)
+                                        if (validAdd)
                                         {
                                             warningMessage = "There is a time overlap";
                                         }
@@ -779,7 +789,7 @@ namespace CRS
             // Checks if course has been taken previously
             if (validAdd)
             {
-                
+
                 foreach (previousCourse prvCrs in crsHist)
                 {
                     if (prvCrs.crsID.Trim().Substring(0, prvCrs.crsID.Trim().Length - 3) == crsBngAdded.crsID.Trim().Substring(0, crsBngAdded.crsID.Trim().Length - 3))
@@ -831,7 +841,7 @@ namespace CRS
             lname = l;
             username = usrname;
             password = psw;
-            
+
         }
 
         public List<student> getAdviseesLst()
@@ -940,8 +950,8 @@ namespace CRS
                 List<char> days = new List<char>();
                 days.AddRange(DecodeDay(Convert.ToInt32(timeBlock.Substring(0, 2))));
 
-                double startTime = Convert.ToDouble(timeBlock.Substring(2, 2))/2;
-                double endTime = startTime + Convert.ToDouble(timeBlock.Substring(4, 1))*0.5;
+                double startTime = Convert.ToDouble(timeBlock.Substring(2, 2)) / 2;
+                double endTime = startTime + Convert.ToDouble(timeBlock.Substring(4, 1)) * 0.5;
 
                 classTime timeOfBlock = new classTime(days, startTime, endTime);
                 time_blocks_alternative.Add(timeOfBlock);
@@ -966,7 +976,7 @@ namespace CRS
             string tempString = "";
             foreach (string crsBlock in timeBlocks)
                 tempString = tempString + Decode(crsBlock) + '\n';
-            return tempString.Remove(tempString.Length-1, 1);
+            return tempString.Remove(tempString.Length - 1, 1);
         }
         public List<student> getStudents()
         {
@@ -993,7 +1003,7 @@ namespace CRS
             int length = Convert.ToInt32(encoded.Substring(4, 1));
 
             //string outputDecoded = string.Format("{0, -5}: {1,-30}", DecodeDay(days), DecodeTime(time, length));
-            string outputDecoded = DecodeDay(days) + " : "+ DecodeTime(time, length);
+            string outputDecoded = DecodeDay(days) + " : " + DecodeTime(time, length);
             return outputDecoded;
         }
         public string Decode2(string encoded)
