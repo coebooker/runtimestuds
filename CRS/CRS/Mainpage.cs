@@ -115,7 +115,7 @@ namespace CRS
             table.Columns.Add("Grade", typeof(string));
 
             student std = usrDB.getStudent(username);
-            List<previousCourse> crsHist = std.crsHist;
+            List<previousCourse> crsHist = std.pastCrs;
 
             foreach (previousCourse pcrs in crsHist)
                 table.Rows.Add(pcrs.crsID, pcrs.semester, pcrs.credit, pcrs.grade);
@@ -299,7 +299,7 @@ namespace CRS
         {
             if (crsLst.SelectedRows.Count == 1)
             {
-                validityResult = usrDB.getStudent(username).isValidAdd(currentSemester, crsDB.getCourse(crsLst.SelectedRows[0].Cells["Course"].FormattedValue.ToString()));
+                validityResult = usrDB.getStudent(username).isValidAdd(crsDB.getCourse(crsLst.SelectedRows[0].Cells["Course"].FormattedValue.ToString()));
                 if (validityResult.valid)
                 {
                     if (validityResult.warning)

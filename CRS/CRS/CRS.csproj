@@ -107,7 +107,8 @@
     <Compile Include="changeAdvisor.Designer.cs">
       <DependentUpon>changeAdvisor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClassStructure.cs" />
+    <Compile Include="units.cs" />
+    <Compile Include="courseDatabase.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +129,8 @@
     <Compile Include="stdAddCrs.Designer.cs">
       <DependentUpon>stdAddCrs.cs</DependentUpon>
     </Compile>
+    <Compile Include="user.cs" />
+    <Compile Include="userDatabase.cs" />
     <EmbeddedResource Include="addedCourse.resx">
       <DependentUpon>addedCourse.cs</DependentUpon>
     </EmbeddedResource>

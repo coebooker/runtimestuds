@@ -61,7 +61,7 @@ namespace CRS
         private void button1_Click(object sender, EventArgs e)
         {
             string studentPass = dataGridView1.SelectedRows[0].Cells["First Name"].FormattedValue.ToString() +" "+ dataGridView1.SelectedRows[0].Cells["Middle Name"].FormattedValue.ToString() +" "+ dataGridView1.SelectedRows[0].Cells["Last Name"].FormattedValue.ToString();
-            validityResult = usrDB.getStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString()).isValidAdd(currentSemester, crsDB.getCourse(courseAdding));
+            validityResult = usrDB.getStudent(dataGridView1.SelectedRows[0].Cells["Username"].FormattedValue.ToString()).isValidAdd(crsDB.getCourse(courseAdding));
             if (validityResult.valid)
             {
                 if (validityResult.warning)

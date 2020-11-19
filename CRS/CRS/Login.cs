@@ -137,7 +137,7 @@ namespace CRS
                 if (utype == "student")
                 {
                     student std = usrDB.getStudent(uname);
-                    std.updateCourseFiles(@"..\..\historyDB.in");
+                    std.updateHistoryFile(@"..\..\historyDB.in");
                 }
             }
         }
