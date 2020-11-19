@@ -17,7 +17,7 @@ namespace CRS
         string nextSemester = "S15";
         string currentSemester = "F14";
 
-        public admMainpage(userDatabase usrDB, string ppath)
+        public admMainpage(userDatabase usrDB, string cpath, string ppath)
         {
             // Initialization
             //crsDB = new courseDatabase(cpath);

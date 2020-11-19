@@ -424,7 +424,7 @@
             this.facSchTable.DefaultCellStyle = dataGridViewCellStyle12;
             this.facSchTable.EnableHeadersVisualStyles = false;
             this.facSchTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facSchTable.Location = new System.Drawing.Point(1661, 4323);
+            this.facSchTable.Location = new System.Drawing.Point(1661, 4979);
             this.facSchTable.Name = "facSchTable";
             this.facSchTable.RowHeadersVisible = false;
             this.facSchTable.RowHeadersWidth = 62;
@@ -470,7 +470,7 @@
             this.enrolledStdTable.DefaultCellStyle = dataGridViewCellStyle14;
             this.enrolledStdTable.EnableHeadersVisualStyles = false;
             this.enrolledStdTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.enrolledStdTable.Location = new System.Drawing.Point(1516, 4276);
+            this.enrolledStdTable.Location = new System.Drawing.Point(1516, 4932);
             this.enrolledStdTable.Margin = new System.Windows.Forms.Padding(0);
             this.enrolledStdTable.Name = "enrolledStdTable";
             this.enrolledStdTable.RowHeadersVisible = false;
@@ -775,6 +775,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mainpage";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainpageClosing);
             this.navBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.crs_hist_table)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stdSch)).EndInit();

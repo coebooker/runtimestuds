@@ -14,17 +14,16 @@ namespace CRS
     {
         private userDatabase usrDB;
         private courseDatabase crsDB;
-        string cpath;
-        string ppath;
+        private string uname;
+        private string utype;
         bool flag = false;
 
         public LoginForm()
         {
             InitializeComponent();
-            this.cpath = @"..\..\courseDB.in";
-            this.ppath = @"..\..\historyDB.in";
             usrDB = new userDatabase(@"..\..\userDB.in");
 
+            // Make the close button transparent
             Bitmap bmp = ((Bitmap)close.BackgroundImage);
             bmp.MakeTransparent();
         }
@@ -65,55 +64,55 @@ namespace CRS
         }
         private void loginClick(object sender, EventArgs e)
         {
-            string usertype = "student";    //Default
-            string username = this.username.Text.ToLower();
+            uname = username.Text.ToLower();
+            utype = "student";
             string password = this.password.Text.ToLower();
 
-            if (usrDB.isValidUser(username, password, ref usertype))
+            if (usrDB.isValidUser(uname, password, ref utype))
             {
-                this.Hide();
-                if (usertype == "admin" || usertype == "manager")
+                Hide();
+                if (utype == "admin" || utype == "manager")
                 {
                     if (!flag)
                     {
-                        var form = new admMainpage(usrDB, ppath);
+                        var form = new admMainpage(usrDB, @"..\..\courseDB.in", @"..\..\historyDB.in");
                         form.ShowDialog();
-                        this.usrDB = form.usrDB;
-                        this.crsDB = form.crsDB;
+                        usrDB = form.usrDB;
+                        crsDB = form.crsDB;
                     }
                     else
                     {
                         var form = new admMainpage(usrDB, crsDB);
                         form.ShowDialog();
-                        this.usrDB = form.usrDB;
-                        this.crsDB = form.crsDB;
+                        usrDB = form.usrDB;
+                        crsDB = form.crsDB;
                     }    
                 }
                 else
                 {
                     if (!flag)
                     {
-                        var form = new mainpage(usertype, username, usrDB, cpath, ppath);
+                        var form = new mainpage(utype, uname, usrDB, @"..\..\courseDB.in", @"..\..\historyDB.in");
                         form.ShowDialog();
-                        this.usrDB = form.usrDB;
-                        this.crsDB = form.crsDB;
+                        usrDB = form.usrDB;
+                        crsDB = form.crsDB;
                     }
                     else
                     {
-                        var form = new mainpage(usertype, username, usrDB, crsDB);
+                        var form = new mainpage(utype, uname, usrDB, crsDB);
                         form.ShowDialog();
-                        this.usrDB = form.usrDB;
-                        this.crsDB = form.crsDB;
+                        usrDB = form.usrDB;
+                        crsDB = form.crsDB;
                     }
                 }
-                this.username.Text = "Username";
-                this.username.ForeColor = Color.Silver;
+                username.Text = "Username";
+                username.ForeColor = Color.Silver;
                 this.password.Text = "Password";
                 this.password.PasswordChar = '\0';
                 this.password.ForeColor = Color.Silver;
 
                 flag = true;
-                this.ShowDialog();
+                ShowDialog();
             }
             else
             {
@@ -128,7 +127,23 @@ namespace CRS
         }
         private void close_click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
+        }
+
+        private void loginClosing(object sender, FormClosingEventArgs e)
+        {
+            // If no users have logged in yet, nothing to change.
+            if (!flag)
+                Close();
+            // If at least one user has, there might be something we need to update
+            else
+            {
+                if (utype == "student")
+                {
+                    student std = usrDB.getStudent(uname);
+                    std.updateCourseFiles(@"..\..\userDB.in");
+                }
+            }
         }
     }
 }

@@ -396,5 +396,10 @@ namespace CRS
 
             crsLst.Location = new Point(16, 77);
         }
+
+        private void mainpageClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
