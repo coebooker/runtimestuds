@@ -25,7 +25,7 @@ namespace CRS
         {
             InitializeComponent();
             this.username = username;
-            crsDB = new courseDatabase(cpath, ref depBox, ref titleBox);
+            crsDB = new courseDatabase(cpath, ref depBox, ref titleBox, ref usrDB);
             usrDB.addPrevCourses(ppath, ref this.crsDB, nextSemester);
             this.usrDB = usrDB;
 
@@ -208,7 +208,7 @@ namespace CRS
             }
             else if (userType == "faculty")
             {
-                viewFacSch.Visible = true;
+                facViewSch.Visible = true;
             }
         }
 
@@ -395,11 +395,6 @@ namespace CRS
             crsLst.Columns[0].Visible = false;
 
             crsLst.Location = new Point(16, 77);
-        }
-
-        private void mainpageClosing(object sender, FormClosingEventArgs e)
-        {
-            this.Close();
         }
     }
 }

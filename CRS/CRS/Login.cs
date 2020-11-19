@@ -132,16 +132,12 @@ namespace CRS
 
         private void loginClosing(object sender, FormClosingEventArgs e)
         {
-            // If no users have logged in yet, nothing to change.
-            if (!flag)
-                Close();
-            // If at least one user has, there might be something we need to update
-            else
+            if (flag)
             {
                 if (utype == "student")
                 {
                     student std = usrDB.getStudent(uname);
-                    std.updateCourseFiles(@"..\..\userDB.in");
+                    std.updateCourseFiles(@"..\..\historyDB.in");
                 }
             }
         }

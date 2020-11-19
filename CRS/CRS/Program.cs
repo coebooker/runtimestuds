@@ -14,6 +14,15 @@ namespace CRS
         [STAThread]
         static void Main()
         {
+            string readInChunk(ref string line)
+            {
+                int index = line.IndexOf(" ");
+                if (index == -1)
+                    return line;
+                string s = line.Substring(0, index);
+                line.Trim();
+                return s;
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
