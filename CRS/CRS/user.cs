@@ -105,7 +105,7 @@ namespace CRS
             string[] lineArr = newLines.ToArray();
             System.IO.File.WriteAllLines(filepath, lineArr);
         }
-        public float calculateGPA()
+        public void calculateGPA()
         {
             List<float> GPACredits = new List<float>();
             foreach (previousCourse oldCrs in pastCrs)
@@ -140,8 +140,7 @@ namespace CRS
                     }
                 }
             }
-            float GPA = GPACredits.Sum() / GPACredits.Count();
-            return GPA;
+            this.GPA = GPACredits.Sum() / GPACredits.Count();
         }
         public validity isValidAdd(course crsBngAdded)
         {

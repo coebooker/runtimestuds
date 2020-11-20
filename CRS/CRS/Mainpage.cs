@@ -19,7 +19,9 @@ namespace CRS
         string currentSemester = "F14";
         string nextSemester = "S15";
         validity validityResult;
-        Point p;
+        Point startPosCrsLst;
+        List<int> addCrsLst = new List<int>();
+        List<int> dropCrsLst = new List<int>();
 
         public mainpage(string usertype, string username, userDatabase usrDB, string cpath, string ppath)
         {
@@ -30,7 +32,7 @@ namespace CRS
             this.usrDB = usrDB;
 
             createCrsLst();
-            p = crsLst.Location;
+            startPosCrsLst = crsLst.Location;
 
             if (usertype == "student")
             {
@@ -39,6 +41,10 @@ namespace CRS
                 createStdSch(std.registeredCrs);
                 stdSch.Visible = true;
                 stdSchLabel.Visible = true;
+                conflictCheck.Visible = true;
+                std.calculateGPA();
+                gpa.Text += " " + std.GPA;
+                credits.Text += " " + std.totalCredits;
             }
             else if (usertype == "faculty")
             {
@@ -58,7 +64,7 @@ namespace CRS
             this.crsDB = crsDB;
 
             createCrsLst();
-            p = crsLst.Location;
+            startPosCrsLst = crsLst.Location;
 
             if (usertype == "student")
             {
@@ -82,7 +88,7 @@ namespace CRS
         private void createCrsLst()
         {
             DataTable table = new DataTable();
-            table.Columns.Add("Course", typeof(string));
+            table.Columns.Add("Course ID", typeof(string));
             table.Columns.Add("Title", typeof(string));
             table.Columns.Add("Faculty", typeof(string));
             table.Columns.Add("Credits", typeof(string));
@@ -101,8 +107,10 @@ namespace CRS
             crsLst.Columns[5].Width = width;
 
             DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            btn.ValueType = typeof(bool);
             crsLst.Columns.Insert(0, btn);
             crsLst.Columns[0].HeaderText = "Add";
+            crsLst.ClearSelection();
         }
 
         // Create tables for students
@@ -120,7 +128,7 @@ namespace CRS
             foreach (previousCourse pcrs in crsHist)
                 table.Rows.Add(pcrs.crsID, pcrs.semester, pcrs.credit, pcrs.grade);
 
-            crs_hist_table.DataSource = table;
+            crsHistTable.DataSource = table;
         }
         private void createStdSch(List<course> crsLst)
         {
@@ -141,6 +149,12 @@ namespace CRS
             stdSch.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             stdSch.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             stdSch.Columns[4].Width = width;
+
+            DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            stdSch.Columns.Insert(0, btn);
+            stdSch.Columns[0].HeaderText = "Drop";
+            stdSch.Columns[0].Visible = false;
+            stdSch.ClearSelection();
         }
 
 
@@ -203,7 +217,7 @@ namespace CRS
                 viewCrsLst.Visible = true;
 
                 stdAddCrsShow.Visible = true;
-                stdDropCrs.Visible = true;
+                stdDropCrsShow.Visible = true;
                 crsHist.Visible = true;
             }
             else if (userType == "faculty")
@@ -220,49 +234,7 @@ namespace CRS
         }
         private void crsHistClick(object sender, EventArgs e)
         {
-            createCrsHist();
-            credits.Text = "Total Credits: " + usrDB.getStudent(username).totalCredits.ToString();
-            credits.Visible = true;
-            gpa.Text = "GPA: " + usrDB.getStudent(username).calculateGPA().ToString();
-            gpa.Visible = true;
-            if (crs_hist_table.Visible == false)
-                crs_hist_table.Visible = true;
-            else
-            {
-                crs_hist_table.Visible = false;
-                credits.Visible = false; gpa.Visible = false;
-            }
-                
         }
-
-        private void delCrsClickStd(object sender, EventArgs e)
-        {
-            credits.Visible = false;
-            gpa.Visible = false;
-            if (crs_hist_table.Visible == true)
-                crs_hist_table.Visible = false;
-
-            if (stdSch.Visible == false)
-            {
-                student currentStd = usrDB.getStudent(username);
-                List<course> stdCrsLst = currentStd.registeredCrs;
-                createStdSch(stdCrsLst);
-                stdSch.Visible = true;
-            }
-
-            if (stdSch.SelectedRows.Count == 1)
-            {
-                student curStd = usrDB.getStudent(username);
-                usrDB.dropCrsFromStd(stdSch.SelectedRows[0].Cells["Course ID"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB,curStd);
-                DataGridViewRow row = crsLst.SelectedRows[0];
-                course crs = crsDB.getCourse(row.Cells["Course"].Value.ToString());
-                row.Cells["Seats"].Value = crs.seats + " / " + crs.maxSeats;
-                //createCrsLstTable();
-                createCrsHist();
-                List<course> studentCrsLst = curStd.registeredCrs;
-                createStdSch(studentCrsLst);
-            }
-    }
         private void viewFacSchClick(object sender, EventArgs e)
         {
             if (facSchTable.Visible == false)
@@ -271,6 +243,23 @@ namespace CRS
                 facSchTable.Visible = false;
         }
 
+        private void viewCrsLstClick(object sender, EventArgs e)
+        {
+            if (!crsLstContainer.Visible)
+                crsLstContainer.Visible = true;
+            Size margin = Size.Subtract(crsLstContainer.Size, crsLstLabelContainer.Size);
+            depBox.Visible = false;
+            depLabel.Visible = false;
+            titleBox.Visible = false;
+            titleLabel.Visible = false;
+            emptyLabel.Visible = false;
+            emptyContainer.Visible = false;
+            crsSearch.Visible = false;
+            stdAddCrs.Visible = false;
+            crsLst.Columns[0].Visible = false;
+
+            crsLst.Location = new Point(startPosCrsLst.X, 77);
+        }
         private void dropDownValueChanged(object sender, EventArgs e)
         {
             string course = facDropDown.SelectedItem.ToString();
@@ -280,14 +269,12 @@ namespace CRS
             enrolledStdTable.Visible = true;
         }
 
-        private void crsLstCellClick(object sender, DataGridViewCellEventArgs e)
+        private void conflictCheckClick(object sender, EventArgs e)
         {
-            int rowIndex = crsLst.CurrentCell.RowIndex;
-            for (int i = 0; i < crsLst.Rows.Count; i++)
-                if (i != rowIndex)
-                    crsLst.Rows[i].Cells[0].Value = false;
-            crsLst.ClearSelection();
-            crsLst.Rows[rowIndex].Selected = true;
+            MessageBox.Show(usrDB.getStudent(username).timeCheck(),
+                    "Time Check",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
         }
         private void crsSearchClick(object sender, EventArgs e)
         {
@@ -295,74 +282,68 @@ namespace CRS
             string title = titleBox.Text;
             bool empty = yesButton.Checked;
         }
+
+
         private void stdAddCrsClick(object sender, EventArgs e)
         {
-            if (crsLst.SelectedRows.Count == 1)
+            int count = addCrsLst.Count;
+            
+            if (count == 0)
+                MessageBox.Show("Select a class",
+                    "No Class",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            else
             {
-                validityResult = usrDB.getStudent(username).isValidAdd(crsDB.getCourse(crsLst.SelectedRows[0].Cells["Course"].FormattedValue.ToString()));
-                if (validityResult.valid)
+                for (int i = 0; i < count; i++)
                 {
-                    if (validityResult.warning)
+                    string crsID = crsLst.Rows[i].Cells[1].Value.ToString().Trim();
+                    validityResult = usrDB.getStudent(username).isValidAdd(crsDB.getCourse(crsID));
+                    if (validityResult.valid)
                     {
-                        //Pop up warning message
+                        if (validityResult.warning)
+                        {
+                            //Pop up warning message
+                            MessageBox.Show(validityResult.message,
+                            "Warning",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        }
+
+                        student currentStd = usrDB.getStudent(username);
+                        usrDB.addCrsToStd(crsID, currentSemester, ref crsDB, currentStd);
+
+                        new addedCourse(crsID).Show();
+
+                        // Update the course list table
+                        DataGridViewRow row = crsLst.Rows[i];
+                        course crs = crsDB.getCourse(row.Cells["Course ID"].Value.ToString());
+                        row.Cells["Seats"].Value = crs.seats + " / " + crs.maxSeats;
+
+                        // Update the student schedule table
+                        DataTable table = (DataTable)stdSch.DataSource;
+                        table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.getBlocks());
+                        stdSch.DataSource = table;
+                    }
+                    else
+                    {
+                        // Display that it's a invalid add
                         MessageBox.Show(validityResult.message,
-                        "Warning",
+                        "Error",
                         MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                        MessageBoxIcon.Error);
                         if (crsLst.Visible == false)
                         {
                             crsLst.Visible = true;
                         }
                     }
-
-                    // THINGS TO DO
-
-                    // Actually add course to student account DONE
-
-                    // -> Add it to RegisteredCourse List under the student class DONE
-
-                    // -> Add it to course history with X as status under the student class DONE
-
-                    // Decrement number of seats for the class DONE
-
-                    // All the above should be done with pass by reference to mitigate data-overwrite every course addition/deletion
-
-                    // For Admin account, probably pass by reference the student instance into AdminStudentSelect form DONE
-                    student currentStd = usrDB.getStudent(username);
-                    usrDB.addCrsToStd(crsLst.SelectedRows[0].Cells["Course"].FormattedValue.ToString().Trim(), currentSemester, ref crsDB, currentStd);
-
-                    new addedCourse(crsLst.SelectedRows[0].Cells["Course"].FormattedValue.ToString()).Show();
-                    DataGridViewRow row = crsLst.SelectedRows[0];
-                    course crs = crsDB.getCourse(row.Cells["Course"].Value.ToString());
-                    row.Cells["Seats"].Value = crs.seats + " / " + crs.maxSeats;
-                    //createCrsLstTable(crsLstTable);
-                    createCrsHist();
                 }
-                else
+                for (int i =0; i < count; i++)
                 {
-                    // Display that it's a invalid add
-                    MessageBox.Show(validityResult.message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                    if (crsLst.Visible == false)
-                    {
-                        crsLst.Visible = true;
-                    }
+                    crsLst.Rows[i].Cells[0].Value = null;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Select a class",
-                    "No Class",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                if (crsLst.Visible == false)
-                {
-                    if (stdSch.Visible == true)
-                        stdSch.Visible = false;
-                    crsLst.Visible = true;
-                }
+                addCrsLst.Clear();
+                crsLst.ClearSelection();
             }
         }
         private void stdAddCrsShowClick(object sender, EventArgs e)
@@ -378,23 +359,89 @@ namespace CRS
             stdAddCrs.Visible = true;
             crsLst.Columns[0].Visible = true;
 
-            crsLst.Location = p;
+            crsLst.Location = startPosCrsLst;
+            crsLst.ClearSelection();
         }
-        private void viewCrsLstClick(object sender, EventArgs e)
+        private void stdDropCrsClick(object sender, EventArgs e)
         {
-            if (!crsLstContainer.Visible)
-                crsLstContainer.Visible = true;
-            depBox.Visible = false;
-            depLabel.Visible = false;
-            titleBox.Visible = false;
-            titleLabel.Visible = false;
-            emptyLabel.Visible = false;
-            emptyContainer.Visible = false;
-            crsSearch.Visible = false;
-            stdAddCrs.Visible = false;
-            crsLst.Columns[0].Visible = false;
+            int count = dropCrsLst.Count;
 
-            crsLst.Location = new Point(16, 77);
+            if (count == 0)
+                MessageBox.Show("Select a class",
+                    "No Class",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            else
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    // Get the course id
+                    string crsID = stdSch.Rows[i].Cells["Course ID"].Value.ToString().Trim();
+
+                    // Drop the course from the student
+                    student curStd = usrDB.getStudent(username);
+                    usrDB.dropCrsFromStd(crsID, currentSemester, ref crsDB, curStd);
+
+                    // Update the course list table
+                    foreach (DataGridViewRow row in crsLst.Rows)
+                    {
+                        if (row.Cells["Course ID"].Value.ToString().Trim() == crsID)
+                        {
+                            course crs = crsDB.getCourse(row.Cells["Course ID"].Value.ToString());
+                            row.Cells["Seats"].Value = crs.seats + " / " + crs.maxSeats;
+                        }
+                    }
+
+                    // Remove the course from the student schedule
+                    stdSch.Rows.Remove(stdSch.Rows[i]);
+                }
+
+                for (int i = 0; i < count; i++)
+                    stdSch.Rows[i].Cells[0].Value = null;
+
+                dropCrsLst.Clear();
+                stdSch.ClearSelection();
+            }
+        }
+        private void stdDropShowClick(object sender, EventArgs e)
+        {
+            stdDropCrs.Visible = true;
+            stdSch.Columns[0].Visible = true;
+            stdSch.ClearSelection();
+        }
+        private void crsLstCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex == -1)
+                return;
+            if (Convert.ToBoolean(crsLst.Rows[rowIndex].Cells[0].Value) == true)
+                addCrsLst.Add(rowIndex);
+            else
+                addCrsLst.Remove(rowIndex);
+        }
+        private void crsLstCurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (crsLst.IsCurrentCellDirty)
+            {
+                crsLst.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+        private void stdSchCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex == -1)
+                return;
+            if (Convert.ToBoolean(stdSch.Rows[rowIndex].Cells[0].Value) == true)
+                dropCrsLst.Add(rowIndex);
+            else
+                dropCrsLst.Remove(rowIndex);
+        }
+        private void stdSchCurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (stdSch.IsCurrentCellDirty)
+            {
+                stdSch.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
         }
     }
 }
