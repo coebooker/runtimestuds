@@ -79,7 +79,7 @@ namespace CRS
             this.login.Cursor = System.Windows.Forms.Cursors.Hand;
             this.login.FlatAppearance.BorderSize = 0;
             this.login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.login.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.login.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.login.ForeColor = System.Drawing.Color.White;
             this.login.Location = new System.Drawing.Point(47, 404);
             this.login.Name = "login";
@@ -115,11 +115,11 @@ namespace CRS
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(176, 38);
+            this.label1.Location = new System.Drawing.Point(152, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 37);
+            this.label1.Size = new System.Drawing.Size(226, 46);
             this.label1.TabIndex = 0;
             this.label1.Text = "USER LOGIN";
             // 

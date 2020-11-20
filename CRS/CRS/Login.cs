@@ -26,6 +26,8 @@ namespace CRS
             // Make the close button transparent
             Bitmap bmp = ((Bitmap)close.BackgroundImage);
             bmp.MakeTransparent();
+            bmp = ((Bitmap)pictureBox2.BackgroundImage);
+            bmp.MakeTransparent();
         }
 
         private void usernameEnter(object sender, EventArgs e)
@@ -112,7 +114,7 @@ namespace CRS
                 this.password.ForeColor = Color.Silver;
 
                 flag = true;
-                ShowDialog();
+                Show();
             }
             else
             {
