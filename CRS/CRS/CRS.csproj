@@ -107,6 +107,12 @@
     <Compile Include="changeAdvisor.Designer.cs">
       <DependentUpon>changeAdvisor.cs</DependentUpon>
     </Compile>
+    <Compile Include="facMainpage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="facMainpage.Designer.cs">
+      <DependentUpon>facMainpage.cs</DependentUpon>
+    </Compile>
     <Compile Include="units.cs" />
     <Compile Include="courseDatabase.cs" />
     <Compile Include="Login.cs">
@@ -115,11 +121,11 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Mainpage.cs">
+    <Compile Include="stdMainpage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Mainpage.Designer.cs">
-      <DependentUpon>Mainpage.cs</DependentUpon>
+    <Compile Include="stdMainpage.Designer.cs">
+      <DependentUpon>stdMainpage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -161,8 +167,8 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Mainpage.resx">
-      <DependentUpon>Mainpage.cs</DependentUpon>
+    <EmbeddedResource Include="stdMainpage.resx">
+      <DependentUpon>stdMainpage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

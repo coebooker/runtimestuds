@@ -81,7 +81,7 @@ namespace CRS
                 {
                     string newLine = "";
                     newLine += currentUsername + ' ';
-                    int numCourses = pastCrs.Count() + registeredCrs.Count();
+                    int numCourses = pastCrs.Count() + registeredCrs.Count() + currentCrs.Count();
                     newLine += String.Format("{0,-2}", numCourses.ToString());
                     foreach (previousCourse currentCourse in pastCrs)
                     {
@@ -96,6 +96,13 @@ namespace CRS
                         newLine += "S15 ";
                         newLine += crs.credit.ToString().PadRight(5);
                         newLine += "N  ";
+                    }
+                    foreach(previousCourse currentCourse in currentCrs)
+                    {
+                        newLine += " " + currentCourse.crsID.PadRight(11);
+                        newLine += currentCourse.semester + ' ';
+                        newLine += currentCourse.credit.ToString().PadRight(5);
+                        newLine += currentCourse.grade.PadRight(3);
                     }
                     newLines.Add(newLine);
                 }

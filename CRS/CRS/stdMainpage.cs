@@ -112,6 +112,37 @@ namespace CRS
             crsLst.Columns[0].HeaderText = "Add";
             crsLst.ClearSelection();
         }
+        private void sortCrsLst(string dep)
+        {
+            foreach (DataGridViewRow row in crsLst.Rows)
+            {
+                string crsID = row.Cells[1].Value.ToString();
+                if (dep != "All")
+                {
+                    if (!crsID.StartsWith(dep))
+                    {
+                        CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[crsLst.DataSource];
+                        currencyManager1.SuspendBinding();
+                        row.Visible = false;
+                        currencyManager1.ResumeBinding();
+                    }
+                    else
+                    {
+                        CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[crsLst.DataSource];
+                        currencyManager1.SuspendBinding();
+                        row.Visible = true;
+                        currencyManager1.ResumeBinding();
+                    }
+                }
+                else
+                {
+                    CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[crsLst.DataSource];
+                    currencyManager1.SuspendBinding();
+                    row.Visible = true;
+                    currencyManager1.ResumeBinding();
+                }
+            }
+        }
 
         // Create tables for students
         private void createCrsHist()
@@ -218,7 +249,7 @@ namespace CRS
 
                 stdAddCrsShow.Visible = true;
                 stdDropCrsShow.Visible = true;
-                crsHist.Visible = true;
+                gradeHist.Visible = true;
             }
             else if (userType == "faculty")
             {
@@ -242,6 +273,7 @@ namespace CRS
             else
                 facSchTable.Visible = false;
         }
+
 
         private void viewCrsLstClick(object sender, EventArgs e)
         {
@@ -268,11 +300,26 @@ namespace CRS
             createEnrolledStdTable(enrolledStdTable, course);
             enrolledStdTable.Visible = true;
         }
-
         private void conflictCheckClick(object sender, EventArgs e)
         {
             MessageBox.Show(usrDB.getStudent(username).timeCheck(),
                     "Time Check",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            student std = usrDB.getStudent(username);
+            if (std.currentCrs.Count != 0)
+            {
+                string temp = "You're taking the following courses: \n\n";
+                foreach (previousCourse pcrs in std.currentCrs)
+                    temp += "\t" + pcrs.crsID + "\n";
+                MessageBox.Show(temp,
+                    "Current Semester",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("You are not enrolling in any courses this semester",
+                    "Current Semester",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
         }
@@ -281,6 +328,7 @@ namespace CRS
             string dep = depBox.Text;
             string title = titleBox.Text;
             bool empty = yesButton.Checked;
+            sortCrsLst(dep);
         }
 
 
