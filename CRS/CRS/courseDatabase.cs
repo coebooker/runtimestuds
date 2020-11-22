@@ -106,6 +106,25 @@ namespace CRS
 
 
         // Change the database
+
+        public void updateDatabase()
+        {
+            List<string> CourseDBString = new List<string>();
+            foreach(course currentCourse in crsLst)
+            {
+                string currentLine = currentCourse.crsID.PadRight(11) + currentCourse.title.PadRight(16) + currentCourse.instructor.PadRight(11) + currentCourse.credit.PadRight(5) + currentCourse.seats.ToString().PadRight(4);
+                int courseBlocks = currentCourse.getTimeblockLst().Count();
+                currentLine += courseBlocks.ToString().PadRight(2);
+                foreach(string timeblock in currentCourse.getTimeblockLst())
+                {
+                    currentLine += timeblock.PadRight(6);
+                }
+                CourseDBString.Add(currentLine);
+            }
+            string[] newCourseLinesArr;
+            newCourseLinesArr = CourseDBString.ToArray();
+            File.WriteAllLines(@"..\..\userDB.in", newCourseLinesArr);
+        }
         public void removeCrs(string crsID, string filepath, ref userDatabase usrDB)
         {
             // Remove the course from the offering

@@ -108,6 +108,10 @@ namespace CRS
         {
             return enrolledStudents;
         }
+        public List<string> getTimeblockLst()
+        {
+            return timeBlocks;
+        }
 
         public void disenrollUser(student currentStudent)
         {
