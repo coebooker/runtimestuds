@@ -91,6 +91,35 @@ namespace CRS
 
         // Change the database
         //----------------------------------------
+        //Used on logout to update the userDatabase with all of the current users
+        public void updateDatabase()
+        {
+            List<String> UserDBString = new List<String>();
+            foreach(student currentStudent in stdLst)
+            {
+                string currentLine = currentStudent.username.PadRight(11) + currentStudent.password.PadRight(11) + currentStudent.fname.PadRight(16) + currentStudent.mname.PadRight(16) + currentStudent.lname.PadRight(16) + currentStudent.advisor.PadRight(10);
+                UserDBString.Add(currentLine);
+            }
+            foreach(faculty currentFaculty in facLst)
+            {
+                string currentLine = currentFaculty.username.PadRight(11) + currentFaculty.password.PadRight(11) + currentFaculty.fname.PadRight(16) + currentFaculty.mname.PadRight(16) + currentFaculty.lname.PadRight(16) + "faculty".PadRight(10);
+                UserDBString.Add(currentLine);
+            }
+            foreach (admin currentAdmin in adminLst)
+            {
+                string currentLine = currentAdmin.username.PadRight(11) + currentAdmin.password.PadRight(11) + currentAdmin.fname.PadRight(16) + currentAdmin.mname.PadRight(16) + currentAdmin.lname.PadRight(16) + "admin".PadRight(10);
+                UserDBString.Add(currentLine);
+            }
+            foreach(manager currentManager in manLst)
+            {
+                string currentLine = currentManager.username.PadRight(11) + currentManager.password.PadRight(11) + currentManager.fname.PadRight(16) + currentManager.mname.PadRight(16) + currentManager.lname.PadRight(16) + "manager".PadRight(10);
+                UserDBString.Add(currentLine);
+            }
+            string[] newUserLinesArr;
+            newUserLinesArr = UserDBString.ToArray();
+            File.WriteAllLines(@"..\..\userDB.in", newUserLinesArr);
+            
+        }
         public void addCrsToStd(string crsID, string nextSemester, ref courseDatabase crsDB, student currentStudent)
         {
             foreach (course crs in crsDB.getCourseList())

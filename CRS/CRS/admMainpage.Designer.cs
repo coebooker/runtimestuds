@@ -207,7 +207,7 @@
             this.crsLst.DefaultCellStyle = dataGridViewCellStyle3;
             this.crsLst.EnableHeadersVisualStyles = false;
             this.crsLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.crsLst.Location = new System.Drawing.Point(12, 325);
+            this.crsLst.Location = new System.Drawing.Point(8, 217);
             this.crsLst.Margin = new System.Windows.Forms.Padding(0);
             this.crsLst.Name = "crsLst";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -222,7 +222,7 @@
             this.crsLst.RowHeadersWidth = 30;
             this.crsLst.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.crsLst.RowTemplate.Height = 28;
-            this.crsLst.Size = new System.Drawing.Size(795, 756);
+            this.crsLst.Size = new System.Drawing.Size(530, 504);
             this.crsLst.TabIndex = 13;
             this.crsLst.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.crsLstCellValueChanged);
             this.crsLst.CurrentCellDirtyStateChanged += new System.EventHandler(this.crsLstCurrentCellDirtyStateChanged);
@@ -239,7 +239,7 @@
             this.stdSelect.Location = new System.Drawing.Point(0, 0);
             this.stdSelect.Margin = new System.Windows.Forms.Padding(0);
             this.stdSelect.Name = "stdSelect";
-            this.stdSelect.Size = new System.Drawing.Size(237, 94);
+            this.stdSelect.Size = new System.Drawing.Size(158, 63);
             this.stdSelect.TabIndex = 1;
             this.stdSelect.Text = "Student";
             this.stdSelect.UseVisualStyleBackColor = false;
@@ -254,10 +254,10 @@
             this.manSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.manSelect.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manSelect.ForeColor = System.Drawing.Color.White;
-            this.manSelect.Location = new System.Drawing.Point(480, 0);
+            this.manSelect.Location = new System.Drawing.Point(316, 0);
             this.manSelect.Margin = new System.Windows.Forms.Padding(0);
             this.manSelect.Name = "manSelect";
-            this.manSelect.Size = new System.Drawing.Size(240, 94);
+            this.manSelect.Size = new System.Drawing.Size(160, 63);
             this.manSelect.TabIndex = 3;
             this.manSelect.Text = "Manager";
             this.manSelect.UseVisualStyleBackColor = false;
@@ -273,10 +273,10 @@
             this.showAddCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showAddCrs.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showAddCrs.ForeColor = System.Drawing.Color.White;
-            this.showAddCrs.Location = new System.Drawing.Point(0, 160);
+            this.showAddCrs.Location = new System.Drawing.Point(0, 107);
             this.showAddCrs.Margin = new System.Windows.Forms.Padding(0);
             this.showAddCrs.Name = "showAddCrs";
-            this.showAddCrs.Size = new System.Drawing.Size(254, 80);
+            this.showAddCrs.Size = new System.Drawing.Size(169, 53);
             this.showAddCrs.TabIndex = 15;
             this.showAddCrs.Text = "Add Course";
             this.showAddCrs.UseVisualStyleBackColor = false;
@@ -287,9 +287,10 @@
             this.crsLstLabel.AutoSize = true;
             this.crsLstLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crsLstLabel.ForeColor = System.Drawing.Color.White;
-            this.crsLstLabel.Location = new System.Drawing.Point(3, 12);
+            this.crsLstLabel.Location = new System.Drawing.Point(2, 8);
+            this.crsLstLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.crsLstLabel.Name = "crsLstLabel";
-            this.crsLstLabel.Size = new System.Drawing.Size(290, 33);
+            this.crsLstLabel.Size = new System.Drawing.Size(201, 22);
             this.crsLstLabel.TabIndex = 16;
             this.crsLstLabel.Text = "Course List for SP15";
             // 
@@ -299,9 +300,10 @@
             this.stdLstLabel.AutoSize = true;
             this.stdLstLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stdLstLabel.ForeColor = System.Drawing.Color.White;
-            this.stdLstLabel.Location = new System.Drawing.Point(0, 12);
+            this.stdLstLabel.Location = new System.Drawing.Point(0, 8);
+            this.stdLstLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.stdLstLabel.Name = "stdLstLabel";
-            this.stdLstLabel.Size = new System.Drawing.Size(191, 33);
+            this.stdLstLabel.Size = new System.Drawing.Size(132, 22);
             this.stdLstLabel.TabIndex = 18;
             this.stdLstLabel.Text = "Students List";
             // 
@@ -341,12 +343,13 @@
             this.gradeHist.DefaultCellStyle = dataGridViewCellStyle7;
             this.gradeHist.EnableHeadersVisualStyles = false;
             this.gradeHist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.gradeHist.Location = new System.Drawing.Point(10, 150);
+            this.gradeHist.Location = new System.Drawing.Point(7, 100);
+            this.gradeHist.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gradeHist.Name = "gradeHist";
             this.gradeHist.RowHeadersVisible = false;
             this.gradeHist.RowHeadersWidth = 30;
             this.gradeHist.RowTemplate.Height = 28;
-            this.gradeHist.Size = new System.Drawing.Size(637, 323);
+            this.gradeHist.Size = new System.Drawing.Size(425, 215);
             this.gradeHist.TabIndex = 19;
             // 
             // showDropCrs
@@ -359,10 +362,10 @@
             this.showDropCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showDropCrs.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showDropCrs.ForeColor = System.Drawing.Color.White;
-            this.showDropCrs.Location = new System.Drawing.Point(0, 240);
+            this.showDropCrs.Location = new System.Drawing.Point(0, 160);
             this.showDropCrs.Margin = new System.Windows.Forms.Padding(0);
             this.showDropCrs.Name = "showDropCrs";
-            this.showDropCrs.Size = new System.Drawing.Size(254, 80);
+            this.showDropCrs.Size = new System.Drawing.Size(169, 53);
             this.showDropCrs.TabIndex = 21;
             this.showDropCrs.Text = "Drop Course";
             this.showDropCrs.UseVisualStyleBackColor = false;
@@ -376,7 +379,7 @@
             this.header.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.header.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.header.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.header.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.header.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13F));
             this.header.Controls.Add(this.logout, 3, 0);
             this.header.Controls.Add(this.facSelect, 0, 0);
             this.header.Controls.Add(this.stdSelect, 0, 0);
@@ -387,7 +390,7 @@
             this.header.Name = "header";
             this.header.RowCount = 1;
             this.header.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.header.Size = new System.Drawing.Size(1924, 94);
+            this.header.Size = new System.Drawing.Size(1266, 63);
             this.header.TabIndex = 22;
             // 
             // logout
@@ -401,10 +404,10 @@
             this.logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logout.ForeColor = System.Drawing.Color.White;
-            this.logout.Location = new System.Drawing.Point(1670, 0);
+            this.logout.Location = new System.Drawing.Point(1097, 0);
             this.logout.Margin = new System.Windows.Forms.Padding(0);
             this.logout.Name = "logout";
-            this.logout.Size = new System.Drawing.Size(254, 94);
+            this.logout.Size = new System.Drawing.Size(169, 63);
             this.logout.TabIndex = 28;
             this.logout.Text = "Log Out";
             this.logout.UseVisualStyleBackColor = false;
@@ -419,10 +422,10 @@
             this.facSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.facSelect.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.facSelect.ForeColor = System.Drawing.Color.White;
-            this.facSelect.Location = new System.Drawing.Point(240, 0);
+            this.facSelect.Location = new System.Drawing.Point(158, 0);
             this.facSelect.Margin = new System.Windows.Forms.Padding(0);
             this.facSelect.Name = "facSelect";
-            this.facSelect.Size = new System.Drawing.Size(237, 94);
+            this.facSelect.Size = new System.Drawing.Size(158, 63);
             this.facSelect.TabIndex = 4;
             this.facSelect.Text = "Faculty";
             this.facSelect.UseVisualStyleBackColor = false;
@@ -438,10 +441,10 @@
             this.showGradeHist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showGradeHist.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showGradeHist.ForeColor = System.Drawing.Color.White;
-            this.showGradeHist.Location = new System.Drawing.Point(0, 400);
+            this.showGradeHist.Location = new System.Drawing.Point(0, 267);
             this.showGradeHist.Margin = new System.Windows.Forms.Padding(0);
             this.showGradeHist.Name = "showGradeHist";
-            this.showGradeHist.Size = new System.Drawing.Size(254, 80);
+            this.showGradeHist.Size = new System.Drawing.Size(169, 53);
             this.showGradeHist.TabIndex = 24;
             this.showGradeHist.Text = "Grade History";
             this.showGradeHist.UseVisualStyleBackColor = false;
@@ -457,10 +460,10 @@
             this.conflictCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.conflictCheck.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.conflictCheck.ForeColor = System.Drawing.Color.White;
-            this.conflictCheck.Location = new System.Drawing.Point(0, 320);
+            this.conflictCheck.Location = new System.Drawing.Point(0, 213);
             this.conflictCheck.Margin = new System.Windows.Forms.Padding(0);
             this.conflictCheck.Name = "conflictCheck";
-            this.conflictCheck.Size = new System.Drawing.Size(254, 80);
+            this.conflictCheck.Size = new System.Drawing.Size(169, 53);
             this.conflictCheck.TabIndex = 24;
             this.conflictCheck.Text = "Check for Time Conflict";
             this.conflictCheck.UseVisualStyleBackColor = false;
@@ -475,10 +478,10 @@
             this.checkAdviseeSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkAdviseeSchedule.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkAdviseeSchedule.ForeColor = System.Drawing.Color.White;
-            this.checkAdviseeSchedule.Location = new System.Drawing.Point(0, 1405);
+            this.checkAdviseeSchedule.Location = new System.Drawing.Point(0, 937);
             this.checkAdviseeSchedule.Margin = new System.Windows.Forms.Padding(0);
             this.checkAdviseeSchedule.Name = "checkAdviseeSchedule";
-            this.checkAdviseeSchedule.Size = new System.Drawing.Size(254, 80);
+            this.checkAdviseeSchedule.Size = new System.Drawing.Size(169, 53);
             this.checkAdviseeSchedule.TabIndex = 24;
             this.checkAdviseeSchedule.Text = "Check Advisee Schedule";
             this.checkAdviseeSchedule.UseVisualStyleBackColor = false;
@@ -494,10 +497,10 @@
             this.showAdvisees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showAdvisees.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showAdvisees.ForeColor = System.Drawing.Color.White;
-            this.showAdvisees.Location = new System.Drawing.Point(480, 221);
+            this.showAdvisees.Location = new System.Drawing.Point(320, 147);
             this.showAdvisees.Margin = new System.Windows.Forms.Padding(0);
             this.showAdvisees.Name = "showAdvisees";
-            this.showAdvisees.Size = new System.Drawing.Size(254, 50);
+            this.showAdvisees.Size = new System.Drawing.Size(169, 33);
             this.showAdvisees.TabIndex = 24;
             this.showAdvisees.Text = "Show Advisees";
             this.showAdvisees.UseVisualStyleBackColor = false;
@@ -516,12 +519,11 @@
             this.facSch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facSch.EnableHeadersVisualStyles = false;
             this.facSch.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facSch.Location = new System.Drawing.Point(677, 850);
-            this.facSch.Margin = new System.Windows.Forms.Padding(4);
+            this.facSch.Location = new System.Drawing.Point(451, 567);
             this.facSch.Name = "facSch";
             this.facSch.RowHeadersWidth = 30;
             this.facSch.RowTemplate.Height = 28;
-            this.facSch.Size = new System.Drawing.Size(215, 195);
+            this.facSch.Size = new System.Drawing.Size(143, 130);
             this.facSch.TabIndex = 27;
             this.facSch.Visible = false;
             // 
@@ -533,10 +535,10 @@
             this.showEnrolledStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showEnrolledStd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showEnrolledStd.ForeColor = System.Drawing.Color.White;
-            this.showEnrolledStd.Location = new System.Drawing.Point(878, 32767);
+            this.showEnrolledStd.Location = new System.Drawing.Point(568, 22228);
             this.showEnrolledStd.Margin = new System.Windows.Forms.Padding(0);
             this.showEnrolledStd.Name = "showEnrolledStd";
-            this.showEnrolledStd.Size = new System.Drawing.Size(381, 75);
+            this.showEnrolledStd.Size = new System.Drawing.Size(254, 50);
             this.showEnrolledStd.TabIndex = 28;
             this.showEnrolledStd.Text = "View Students";
             this.showEnrolledStd.UseVisualStyleBackColor = false;
@@ -552,10 +554,10 @@
             this.manChangeAdvisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.manChangeAdvisor.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manChangeAdvisor.ForeColor = System.Drawing.Color.White;
-            this.manChangeAdvisor.Location = new System.Drawing.Point(293, 129);
+            this.manChangeAdvisor.Location = new System.Drawing.Point(195, 86);
             this.manChangeAdvisor.Margin = new System.Windows.Forms.Padding(0);
             this.manChangeAdvisor.Name = "manChangeAdvisor";
-            this.manChangeAdvisor.Size = new System.Drawing.Size(176, 33);
+            this.manChangeAdvisor.Size = new System.Drawing.Size(118, 26);
             this.manChangeAdvisor.TabIndex = 33;
             this.manChangeAdvisor.Text = "Change Advisor";
             this.manChangeAdvisor.UseVisualStyleBackColor = false;
@@ -572,10 +574,10 @@
             this.stdActions.Controls.Add(this.showGradeHist);
             this.stdActions.Controls.Add(this.showAddCrs);
             this.stdActions.Controls.Add(this.showDropCrs);
-            this.stdActions.Location = new System.Drawing.Point(0, 428);
+            this.stdActions.Location = new System.Drawing.Point(0, 285);
             this.stdActions.Margin = new System.Windows.Forms.Padding(0);
             this.stdActions.Name = "stdActions";
-            this.stdActions.Size = new System.Drawing.Size(254, 560);
+            this.stdActions.Size = new System.Drawing.Size(169, 373);
             this.stdActions.TabIndex = 29;
             this.stdActions.Visible = false;
             // 
@@ -589,10 +591,10 @@
             this.stdScrollToTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stdScrollToTop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stdScrollToTop.ForeColor = System.Drawing.Color.White;
-            this.stdScrollToTop.Location = new System.Drawing.Point(0, 480);
+            this.stdScrollToTop.Location = new System.Drawing.Point(0, 320);
             this.stdScrollToTop.Margin = new System.Windows.Forms.Padding(0);
             this.stdScrollToTop.Name = "stdScrollToTop";
-            this.stdScrollToTop.Size = new System.Drawing.Size(254, 80);
+            this.stdScrollToTop.Size = new System.Drawing.Size(169, 53);
             this.stdScrollToTop.TabIndex = 29;
             this.stdScrollToTop.Text = "Scroll To Top";
             this.stdScrollToTop.UseVisualStyleBackColor = false;
@@ -609,10 +611,10 @@
             this.stdViewCrsLst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stdViewCrsLst.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stdViewCrsLst.ForeColor = System.Drawing.Color.White;
-            this.stdViewCrsLst.Location = new System.Drawing.Point(0, 80);
+            this.stdViewCrsLst.Location = new System.Drawing.Point(0, 53);
             this.stdViewCrsLst.Margin = new System.Windows.Forms.Padding(0);
             this.stdViewCrsLst.Name = "stdViewCrsLst";
-            this.stdViewCrsLst.Size = new System.Drawing.Size(254, 80);
+            this.stdViewCrsLst.Size = new System.Drawing.Size(169, 53);
             this.stdViewCrsLst.TabIndex = 28;
             this.stdViewCrsLst.Text = "View Course Offering";
             this.stdViewCrsLst.UseVisualStyleBackColor = false;
@@ -626,7 +628,7 @@
             this.quickCommands.Location = new System.Drawing.Point(0, 0);
             this.quickCommands.Margin = new System.Windows.Forms.Padding(0);
             this.quickCommands.Name = "quickCommands";
-            this.quickCommands.Size = new System.Drawing.Size(254, 80);
+            this.quickCommands.Size = new System.Drawing.Size(169, 53);
             this.quickCommands.TabIndex = 0;
             this.quickCommands.Text = "Quick Commands";
             this.quickCommands.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -643,9 +645,10 @@
             this.crsLstContainer.Controls.Add(this.crsLstHeader);
             this.crsLstContainer.Controls.Add(this.crsLst);
             this.crsLstContainer.Controls.Add(this.facSch);
-            this.crsLstContainer.Location = new System.Drawing.Point(1020, 378);
+            this.crsLstContainer.Location = new System.Drawing.Point(680, 252);
+            this.crsLstContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.crsLstContainer.Name = "crsLstContainer";
-            this.crsLstContainer.Size = new System.Drawing.Size(821, 1126);
+            this.crsLstContainer.Size = new System.Drawing.Size(548, 751);
             this.crsLstContainer.TabIndex = 35;
             this.crsLstContainer.Visible = false;
             // 
@@ -658,10 +661,10 @@
             this.addCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addCrs.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addCrs.ForeColor = System.Drawing.Color.White;
-            this.addCrs.Location = new System.Drawing.Point(217, 259);
+            this.addCrs.Location = new System.Drawing.Point(145, 173);
             this.addCrs.Margin = new System.Windows.Forms.Padding(0);
             this.addCrs.Name = "addCrs";
-            this.addCrs.Size = new System.Drawing.Size(152, 42);
+            this.addCrs.Size = new System.Drawing.Size(101, 28);
             this.addCrs.TabIndex = 30;
             this.addCrs.Text = "Add";
             this.addCrs.UseVisualStyleBackColor = false;
@@ -672,10 +675,10 @@
             this.titleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.titleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.titleBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleBox.Location = new System.Drawing.Point(196, 138);
+            this.titleBox.Location = new System.Drawing.Point(131, 92);
             this.titleBox.Margin = new System.Windows.Forms.Padding(0);
             this.titleBox.Name = "titleBox";
-            this.titleBox.Size = new System.Drawing.Size(236, 30);
+            this.titleBox.Size = new System.Drawing.Size(159, 23);
             this.titleBox.TabIndex = 29;
             // 
             // titleLabel
@@ -683,10 +686,10 @@
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.titleLabel.Location = new System.Drawing.Point(16, 139);
+            this.titleLabel.Location = new System.Drawing.Point(11, 93);
             this.titleLabel.Margin = new System.Windows.Forms.Padding(0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(77, 29);
+            this.titleLabel.Size = new System.Drawing.Size(51, 19);
             this.titleLabel.TabIndex = 28;
             this.titleLabel.Text = "Title :";
             // 
@@ -699,10 +702,10 @@
             this.crsSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.crsSearch.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crsSearch.ForeColor = System.Drawing.Color.White;
-            this.crsSearch.Location = new System.Drawing.Point(21, 258);
+            this.crsSearch.Location = new System.Drawing.Point(14, 172);
             this.crsSearch.Margin = new System.Windows.Forms.Padding(0);
             this.crsSearch.Name = "crsSearch";
-            this.crsSearch.Size = new System.Drawing.Size(152, 42);
+            this.crsSearch.Size = new System.Drawing.Size(101, 28);
             this.crsSearch.TabIndex = 20;
             this.crsSearch.Text = "Search";
             this.crsSearch.UseVisualStyleBackColor = false;
@@ -713,10 +716,10 @@
             this.crsIDBox.BackColor = System.Drawing.Color.White;
             this.crsIDBox.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crsIDBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.crsIDBox.Location = new System.Drawing.Point(196, 73);
+            this.crsIDBox.Location = new System.Drawing.Point(131, 49);
             this.crsIDBox.Margin = new System.Windows.Forms.Padding(0);
             this.crsIDBox.Name = "crsIDBox";
-            this.crsIDBox.Size = new System.Drawing.Size(283, 30);
+            this.crsIDBox.Size = new System.Drawing.Size(190, 23);
             this.crsIDBox.TabIndex = 19;
             // 
             // crsIDLabel
@@ -724,9 +727,10 @@
             this.crsIDLabel.AutoSize = true;
             this.crsIDLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crsIDLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.crsIDLabel.Location = new System.Drawing.Point(16, 77);
+            this.crsIDLabel.Location = new System.Drawing.Point(11, 51);
+            this.crsIDLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.crsIDLabel.Name = "crsIDLabel";
-            this.crsIDLabel.Size = new System.Drawing.Size(140, 29);
+            this.crsIDLabel.Size = new System.Drawing.Size(95, 19);
             this.crsIDLabel.TabIndex = 18;
             this.crsIDLabel.Text = "Course ID :";
             // 
@@ -736,8 +740,9 @@
             this.crsLstHeader.Controls.Add(this.crsLstLabel);
             this.crsLstHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.crsLstHeader.Location = new System.Drawing.Point(0, 0);
+            this.crsLstHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.crsLstHeader.Name = "crsLstHeader";
-            this.crsLstHeader.Size = new System.Drawing.Size(819, 60);
+            this.crsLstHeader.Size = new System.Drawing.Size(546, 40);
             this.crsLstHeader.TabIndex = 17;
             // 
             // stdLstContainer
@@ -750,9 +755,10 @@
             this.stdLstContainer.Controls.Add(this.stdSearchLabel);
             this.stdLstContainer.Controls.Add(this.stdSearchBox);
             this.stdLstContainer.Controls.Add(this.stdSearch);
-            this.stdLstContainer.Location = new System.Drawing.Point(288, 378);
+            this.stdLstContainer.Location = new System.Drawing.Point(192, 252);
+            this.stdLstContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.stdLstContainer.Name = "stdLstContainer";
-            this.stdLstContainer.Size = new System.Drawing.Size(658, 488);
+            this.stdLstContainer.Size = new System.Drawing.Size(439, 326);
             this.stdLstContainer.TabIndex = 36;
             this.stdLstContainer.Visible = false;
             // 
@@ -765,10 +771,10 @@
             this.admChangeAdvisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.admChangeAdvisor.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.admChangeAdvisor.ForeColor = System.Drawing.Color.White;
-            this.admChangeAdvisor.Location = new System.Drawing.Point(293, 129);
+            this.admChangeAdvisor.Location = new System.Drawing.Point(195, 86);
             this.admChangeAdvisor.Margin = new System.Windows.Forms.Padding(0);
             this.admChangeAdvisor.Name = "admChangeAdvisor";
-            this.admChangeAdvisor.Size = new System.Drawing.Size(176, 33);
+            this.admChangeAdvisor.Size = new System.Drawing.Size(118, 26);
             this.admChangeAdvisor.TabIndex = 34;
             this.admChangeAdvisor.Text = "Change Advisor";
             this.admChangeAdvisor.UseVisualStyleBackColor = false;
@@ -783,10 +789,10 @@
             this.stdConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stdConfirm.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stdConfirm.ForeColor = System.Drawing.Color.White;
-            this.stdConfirm.Location = new System.Drawing.Point(490, 128);
+            this.stdConfirm.Location = new System.Drawing.Point(327, 85);
             this.stdConfirm.Margin = new System.Windows.Forms.Padding(0);
             this.stdConfirm.Name = "stdConfirm";
-            this.stdConfirm.Size = new System.Drawing.Size(152, 33);
+            this.stdConfirm.Size = new System.Drawing.Size(101, 26);
             this.stdConfirm.TabIndex = 27;
             this.stdConfirm.Text = "Confirm";
             this.stdConfirm.UseVisualStyleBackColor = false;
@@ -798,8 +804,9 @@
             this.stdLstHeader.Controls.Add(this.stdLstLabel);
             this.stdLstHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.stdLstHeader.Location = new System.Drawing.Point(0, 0);
+            this.stdLstHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.stdLstHeader.Name = "stdLstHeader";
-            this.stdLstHeader.Size = new System.Drawing.Size(656, 61);
+            this.stdLstHeader.Size = new System.Drawing.Size(437, 41);
             this.stdLstHeader.TabIndex = 17;
             // 
             // stdLst
@@ -835,7 +842,7 @@
             this.stdLst.DefaultCellStyle = dataGridViewCellStyle10;
             this.stdLst.EnableHeadersVisualStyles = false;
             this.stdLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.stdLst.Location = new System.Drawing.Point(10, 187);
+            this.stdLst.Location = new System.Drawing.Point(7, 125);
             this.stdLst.Margin = new System.Windows.Forms.Padding(0);
             this.stdLst.MultiSelect = false;
             this.stdLst.Name = "stdLst";
@@ -844,7 +851,7 @@
             this.stdLst.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.stdLst.RowTemplate.Height = 28;
             this.stdLst.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.stdLst.Size = new System.Drawing.Size(637, 286);
+            this.stdLst.Size = new System.Drawing.Size(425, 191);
             this.stdLst.TabIndex = 26;
             this.stdLst.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.stdLstCellClick);
             this.stdLst.CurrentCellDirtyStateChanged += new System.EventHandler(this.stdLstCurrentCellDirtyStateChanged);
@@ -853,9 +860,10 @@
             // 
             this.stdSearchLabel.AutoSize = true;
             this.stdSearchLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stdSearchLabel.Location = new System.Drawing.Point(16, 77);
+            this.stdSearchLabel.Location = new System.Drawing.Point(11, 51);
+            this.stdSearchLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.stdSearchLabel.Name = "stdSearchLabel";
-            this.stdSearchLabel.Size = new System.Drawing.Size(141, 29);
+            this.stdSearchLabel.Size = new System.Drawing.Size(97, 19);
             this.stdSearchLabel.TabIndex = 18;
             this.stdSearchLabel.Text = "Username :";
             // 
@@ -866,10 +874,10 @@
             this.stdSearchBox.BackColor = System.Drawing.Color.White;
             this.stdSearchBox.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stdSearchBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.stdSearchBox.Location = new System.Drawing.Point(180, 78);
+            this.stdSearchBox.Location = new System.Drawing.Point(120, 52);
             this.stdSearchBox.Margin = new System.Windows.Forms.Padding(0);
             this.stdSearchBox.Name = "stdSearchBox";
-            this.stdSearchBox.Size = new System.Drawing.Size(264, 30);
+            this.stdSearchBox.Size = new System.Drawing.Size(177, 23);
             this.stdSearchBox.TabIndex = 21;
             // 
             // stdSearch
@@ -881,10 +889,10 @@
             this.stdSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stdSearch.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stdSearch.ForeColor = System.Drawing.Color.White;
-            this.stdSearch.Location = new System.Drawing.Point(111, 129);
+            this.stdSearch.Location = new System.Drawing.Point(74, 86);
             this.stdSearch.Margin = new System.Windows.Forms.Padding(0);
             this.stdSearch.Name = "stdSearch";
-            this.stdSearch.Size = new System.Drawing.Size(152, 33);
+            this.stdSearch.Size = new System.Drawing.Size(101, 26);
             this.stdSearch.TabIndex = 21;
             this.stdSearch.Text = "Search";
             this.stdSearch.UseVisualStyleBackColor = false;
@@ -896,9 +904,10 @@
             this.stdSchContainer.Controls.Add(this.dropCrs);
             this.stdSchContainer.Controls.Add(this.stdSchLabelContainer);
             this.stdSchContainer.Controls.Add(this.stdSch);
-            this.stdSchContainer.Location = new System.Drawing.Point(288, 378);
+            this.stdSchContainer.Location = new System.Drawing.Point(192, 252);
+            this.stdSchContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.stdSchContainer.Name = "stdSchContainer";
-            this.stdSchContainer.Size = new System.Drawing.Size(658, 488);
+            this.stdSchContainer.Size = new System.Drawing.Size(439, 326);
             this.stdSchContainer.TabIndex = 37;
             this.stdSchContainer.Visible = false;
             // 
@@ -910,9 +919,10 @@
             this.dropCrs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.dropCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropCrs.ForeColor = System.Drawing.Color.White;
-            this.dropCrs.Location = new System.Drawing.Point(459, 91);
+            this.dropCrs.Location = new System.Drawing.Point(306, 61);
+            this.dropCrs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dropCrs.Name = "dropCrs";
-            this.dropCrs.Size = new System.Drawing.Size(152, 39);
+            this.dropCrs.Size = new System.Drawing.Size(101, 26);
             this.dropCrs.TabIndex = 27;
             this.dropCrs.Text = "Drop Course";
             this.dropCrs.UseVisualStyleBackColor = false;
@@ -924,8 +934,9 @@
             this.stdSchLabelContainer.Controls.Add(this.stdSchLabel);
             this.stdSchLabelContainer.Dock = System.Windows.Forms.DockStyle.Top;
             this.stdSchLabelContainer.Location = new System.Drawing.Point(0, 0);
+            this.stdSchLabelContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.stdSchLabelContainer.Name = "stdSchLabelContainer";
-            this.stdSchLabelContainer.Size = new System.Drawing.Size(656, 61);
+            this.stdSchLabelContainer.Size = new System.Drawing.Size(437, 41);
             this.stdSchLabelContainer.TabIndex = 17;
             // 
             // stdSchLabel
@@ -933,9 +944,10 @@
             this.stdSchLabel.AutoSize = true;
             this.stdSchLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stdSchLabel.ForeColor = System.Drawing.Color.White;
-            this.stdSchLabel.Location = new System.Drawing.Point(0, 12);
+            this.stdSchLabel.Location = new System.Drawing.Point(0, 8);
+            this.stdSchLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.stdSchLabel.Name = "stdSchLabel";
-            this.stdSchLabel.Size = new System.Drawing.Size(263, 33);
+            this.stdSchLabel.Size = new System.Drawing.Size(181, 22);
             this.stdSchLabel.TabIndex = 18;
             this.stdSchLabel.Text = "Schedule for SP15";
             // 
@@ -976,7 +988,7 @@
             this.stdSch.DefaultCellStyle = dataGridViewCellStyle13;
             this.stdSch.EnableHeadersVisualStyles = false;
             this.stdSch.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.stdSch.Location = new System.Drawing.Point(10, 167);
+            this.stdSch.Location = new System.Drawing.Point(7, 111);
             this.stdSch.Margin = new System.Windows.Forms.Padding(0);
             this.stdSch.Name = "stdSch";
             this.stdSch.RowHeadersVisible = false;
@@ -984,7 +996,7 @@
             this.stdSch.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.stdSch.RowTemplate.Height = 28;
             this.stdSch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.stdSch.Size = new System.Drawing.Size(637, 306);
+            this.stdSch.Size = new System.Drawing.Size(425, 204);
             this.stdSch.TabIndex = 26;
             this.stdSch.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.stdSchCellValueChanged);
             this.stdSch.CurrentCellDirtyStateChanged += new System.EventHandler(this.stdSchCurrentCellDirtyStateChanged);
@@ -996,10 +1008,10 @@
             this.gradeHistContainer.Controls.Add(this.credits);
             this.gradeHistContainer.Controls.Add(this.gradeHistHeader);
             this.gradeHistContainer.Controls.Add(this.gradeHist);
-            this.gradeHistContainer.Location = new System.Drawing.Point(295, 940);
-            this.gradeHistContainer.Margin = new System.Windows.Forms.Padding(0, 0, 0, 50);
+            this.gradeHistContainer.Location = new System.Drawing.Point(197, 627);
+            this.gradeHistContainer.Margin = new System.Windows.Forms.Padding(0, 0, 0, 33);
             this.gradeHistContainer.Name = "gradeHistContainer";
-            this.gradeHistContainer.Size = new System.Drawing.Size(658, 488);
+            this.gradeHistContainer.Size = new System.Drawing.Size(439, 326);
             this.gradeHistContainer.TabIndex = 0;
             this.gradeHistContainer.Visible = false;
             // 
@@ -1008,9 +1020,10 @@
             this.gpa.AutoSize = true;
             this.gpa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.gpa.Location = new System.Drawing.Point(459, 91);
+            this.gpa.Location = new System.Drawing.Point(306, 61);
+            this.gpa.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.gpa.Name = "gpa";
-            this.gpa.Size = new System.Drawing.Size(74, 29);
+            this.gpa.Size = new System.Drawing.Size(51, 20);
             this.gpa.TabIndex = 23;
             this.gpa.Text = "GPA :";
             this.gpa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1021,9 +1034,10 @@
             this.credits.BackColor = System.Drawing.Color.White;
             this.credits.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.credits.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.credits.Location = new System.Drawing.Point(254, 91);
+            this.credits.Location = new System.Drawing.Point(169, 61);
+            this.credits.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.credits.Name = "credits";
-            this.credits.Size = new System.Drawing.Size(102, 29);
+            this.credits.Size = new System.Drawing.Size(67, 20);
             this.credits.TabIndex = 22;
             this.credits.Text = "Credits :";
             this.credits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1034,8 +1048,9 @@
             this.gradeHistHeader.Controls.Add(this.gradeHistLabel);
             this.gradeHistHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.gradeHistHeader.Location = new System.Drawing.Point(0, 0);
+            this.gradeHistHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gradeHistHeader.Name = "gradeHistHeader";
-            this.gradeHistHeader.Size = new System.Drawing.Size(656, 61);
+            this.gradeHistHeader.Size = new System.Drawing.Size(437, 41);
             this.gradeHistHeader.TabIndex = 21;
             // 
             // gradeHistLabel
@@ -1044,26 +1059,29 @@
             this.gradeHistLabel.AutoSize = true;
             this.gradeHistLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gradeHistLabel.ForeColor = System.Drawing.Color.White;
-            this.gradeHistLabel.Location = new System.Drawing.Point(0, 14);
+            this.gradeHistLabel.Location = new System.Drawing.Point(0, 9);
+            this.gradeHistLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.gradeHistLabel.Name = "gradeHistLabel";
-            this.gradeHistLabel.Size = new System.Drawing.Size(201, 33);
+            this.gradeHistLabel.Size = new System.Drawing.Size(138, 22);
             this.gradeHistLabel.TabIndex = 21;
             this.gradeHistLabel.Text = "Grade History";
             // 
             // footer
             // 
             this.footer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.footer.Location = new System.Drawing.Point(5, 1600);
+            this.footer.Location = new System.Drawing.Point(3, 1067);
+            this.footer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.footer.Name = "footer";
-            this.footer.Size = new System.Drawing.Size(1888, 100);
+            this.footer.Size = new System.Drawing.Size(1259, 67);
             this.footer.TabIndex = 37;
             // 
             // logo
             // 
             this.logo.Image = ((System.Drawing.Image)(resources.GetObject("logo.Image")));
-            this.logo.Location = new System.Drawing.Point(0, 97);
+            this.logo.Location = new System.Drawing.Point(0, 65);
+            this.logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(284, 284);
+            this.logo.Size = new System.Drawing.Size(189, 189);
             this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.logo.TabIndex = 38;
             this.logo.TabStop = false;
@@ -1075,9 +1093,10 @@
             this.facLstLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.facLstLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.facLstLabel.ForeColor = System.Drawing.Color.White;
-            this.facLstLabel.Location = new System.Drawing.Point(-32, 13);
+            this.facLstLabel.Location = new System.Drawing.Point(-21, 9);
+            this.facLstLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.facLstLabel.Name = "facLstLabel";
-            this.facLstLabel.Size = new System.Drawing.Size(194, 33);
+            this.facLstLabel.Size = new System.Drawing.Size(133, 22);
             this.facLstLabel.TabIndex = 21;
             this.facLstLabel.Text = "Faculties List";
             // 
@@ -1089,9 +1108,10 @@
             this.facLstContainer.Controls.Add(this.facSearchLabel);
             this.facLstContainer.Controls.Add(this.facLstHeader);
             this.facLstContainer.Controls.Add(this.facLst);
-            this.facLstContainer.Location = new System.Drawing.Point(289, 378);
+            this.facLstContainer.Location = new System.Drawing.Point(193, 252);
+            this.facLstContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.facLstContainer.Name = "facLstContainer";
-            this.facLstContainer.Size = new System.Drawing.Size(658, 488);
+            this.facLstContainer.Size = new System.Drawing.Size(439, 326);
             this.facLstContainer.TabIndex = 37;
             this.facLstContainer.Visible = false;
             // 
@@ -1104,10 +1124,10 @@
             this.facSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.facSearch.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.facSearch.ForeColor = System.Drawing.Color.White;
-            this.facSearch.Location = new System.Drawing.Point(508, 94);
+            this.facSearch.Location = new System.Drawing.Point(339, 63);
             this.facSearch.Margin = new System.Windows.Forms.Padding(0);
             this.facSearch.Name = "facSearch";
-            this.facSearch.Size = new System.Drawing.Size(152, 33);
+            this.facSearch.Size = new System.Drawing.Size(101, 26);
             this.facSearch.TabIndex = 28;
             this.facSearch.Text = "Search";
             this.facSearch.UseVisualStyleBackColor = false;
@@ -1117,19 +1137,20 @@
             this.facSearchBox.BackColor = System.Drawing.Color.White;
             this.facSearchBox.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.facSearchBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facSearchBox.Location = new System.Drawing.Point(201, 94);
+            this.facSearchBox.Location = new System.Drawing.Point(134, 63);
             this.facSearchBox.Margin = new System.Windows.Forms.Padding(0);
             this.facSearchBox.Name = "facSearchBox";
-            this.facSearchBox.Size = new System.Drawing.Size(264, 30);
+            this.facSearchBox.Size = new System.Drawing.Size(177, 23);
             this.facSearchBox.TabIndex = 28;
             // 
             // facSearchLabel
             // 
             this.facSearchLabel.AutoSize = true;
             this.facSearchLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.facSearchLabel.Location = new System.Drawing.Point(43, 93);
+            this.facSearchLabel.Location = new System.Drawing.Point(29, 62);
+            this.facSearchLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.facSearchLabel.Name = "facSearchLabel";
-            this.facSearchLabel.Size = new System.Drawing.Size(141, 29);
+            this.facSearchLabel.Size = new System.Drawing.Size(97, 19);
             this.facSearchLabel.TabIndex = 28;
             this.facSearchLabel.Text = "Username :";
             // 
@@ -1139,8 +1160,9 @@
             this.facLstHeader.Controls.Add(this.facLstLabel);
             this.facLstHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.facLstHeader.Location = new System.Drawing.Point(0, 0);
+            this.facLstHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.facLstHeader.Name = "facLstHeader";
-            this.facLstHeader.Size = new System.Drawing.Size(656, 61);
+            this.facLstHeader.Size = new System.Drawing.Size(437, 41);
             this.facLstHeader.TabIndex = 17;
             // 
             // facLst
@@ -1164,7 +1186,7 @@
             this.facLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.facLst.EnableHeadersVisualStyles = false;
             this.facLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facLst.Location = new System.Drawing.Point(-26, 210);
+            this.facLst.Location = new System.Drawing.Point(-17, 140);
             this.facLst.Margin = new System.Windows.Forms.Padding(0);
             this.facLst.MultiSelect = false;
             this.facLst.Name = "facLst";
@@ -1172,7 +1194,7 @@
             this.facLst.RowHeadersWidth = 30;
             this.facLst.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.facLst.RowTemplate.Height = 28;
-            this.facLst.Size = new System.Drawing.Size(664, 297);
+            this.facLst.Size = new System.Drawing.Size(443, 198);
             this.facLst.TabIndex = 26;
             this.facLst.Visible = false;
             // 
@@ -1189,9 +1211,10 @@
             this.manCrsLstContainer.Controls.Add(this.manCrsLstHeader);
             this.manCrsLstContainer.Controls.Add(this.manCrsLst);
             this.manCrsLstContainer.Controls.Add(this.dataGridView2);
-            this.manCrsLstContainer.Location = new System.Drawing.Point(1020, 378);
+            this.manCrsLstContainer.Location = new System.Drawing.Point(680, 252);
+            this.manCrsLstContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.manCrsLstContainer.Name = "manCrsLstContainer";
-            this.manCrsLstContainer.Size = new System.Drawing.Size(821, 1126);
+            this.manCrsLstContainer.Size = new System.Drawing.Size(548, 751);
             this.manCrsLstContainer.TabIndex = 36;
             this.manCrsLstContainer.Visible = false;
             // 
@@ -1204,10 +1227,10 @@
             this.removeCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeCrs.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeCrs.ForeColor = System.Drawing.Color.White;
-            this.removeCrs.Location = new System.Drawing.Point(421, 258);
+            this.removeCrs.Location = new System.Drawing.Point(281, 172);
             this.removeCrs.Margin = new System.Windows.Forms.Padding(0);
             this.removeCrs.Name = "removeCrs";
-            this.removeCrs.Size = new System.Drawing.Size(152, 42);
+            this.removeCrs.Size = new System.Drawing.Size(101, 28);
             this.removeCrs.TabIndex = 31;
             this.removeCrs.Text = "Remove";
             this.removeCrs.UseVisualStyleBackColor = false;
@@ -1222,10 +1245,10 @@
             this.changeCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.changeCrs.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeCrs.ForeColor = System.Drawing.Color.White;
-            this.changeCrs.Location = new System.Drawing.Point(221, 258);
+            this.changeCrs.Location = new System.Drawing.Point(147, 172);
             this.changeCrs.Margin = new System.Windows.Forms.Padding(0);
             this.changeCrs.Name = "changeCrs";
-            this.changeCrs.Size = new System.Drawing.Size(152, 42);
+            this.changeCrs.Size = new System.Drawing.Size(101, 28);
             this.changeCrs.TabIndex = 30;
             this.changeCrs.Text = "Change";
             this.changeCrs.UseVisualStyleBackColor = false;
@@ -1236,10 +1259,10 @@
             this.manTitleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.manTitleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.manTitleBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.manTitleBox.Location = new System.Drawing.Point(196, 138);
+            this.manTitleBox.Location = new System.Drawing.Point(131, 92);
             this.manTitleBox.Margin = new System.Windows.Forms.Padding(0);
             this.manTitleBox.Name = "manTitleBox";
-            this.manTitleBox.Size = new System.Drawing.Size(236, 30);
+            this.manTitleBox.Size = new System.Drawing.Size(159, 23);
             this.manTitleBox.TabIndex = 29;
             // 
             // manTitleLabel
@@ -1247,10 +1270,10 @@
             this.manTitleLabel.AutoSize = true;
             this.manTitleLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manTitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.manTitleLabel.Location = new System.Drawing.Point(16, 139);
+            this.manTitleLabel.Location = new System.Drawing.Point(11, 93);
             this.manTitleLabel.Margin = new System.Windows.Forms.Padding(0);
             this.manTitleLabel.Name = "manTitleLabel";
-            this.manTitleLabel.Size = new System.Drawing.Size(77, 29);
+            this.manTitleLabel.Size = new System.Drawing.Size(51, 19);
             this.manTitleLabel.TabIndex = 28;
             this.manTitleLabel.Text = "Title :";
             // 
@@ -1263,10 +1286,10 @@
             this.manCrsSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.manCrsSearch.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manCrsSearch.ForeColor = System.Drawing.Color.White;
-            this.manCrsSearch.Location = new System.Drawing.Point(21, 258);
+            this.manCrsSearch.Location = new System.Drawing.Point(14, 172);
             this.manCrsSearch.Margin = new System.Windows.Forms.Padding(0);
             this.manCrsSearch.Name = "manCrsSearch";
-            this.manCrsSearch.Size = new System.Drawing.Size(152, 42);
+            this.manCrsSearch.Size = new System.Drawing.Size(101, 28);
             this.manCrsSearch.TabIndex = 20;
             this.manCrsSearch.Text = "Search";
             this.manCrsSearch.UseVisualStyleBackColor = false;
@@ -1277,10 +1300,10 @@
             this.manCrsIDBox.BackColor = System.Drawing.Color.White;
             this.manCrsIDBox.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manCrsIDBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.manCrsIDBox.Location = new System.Drawing.Point(196, 73);
+            this.manCrsIDBox.Location = new System.Drawing.Point(131, 49);
             this.manCrsIDBox.Margin = new System.Windows.Forms.Padding(0);
             this.manCrsIDBox.Name = "manCrsIDBox";
-            this.manCrsIDBox.Size = new System.Drawing.Size(283, 30);
+            this.manCrsIDBox.Size = new System.Drawing.Size(190, 23);
             this.manCrsIDBox.TabIndex = 19;
             // 
             // manCrsIDLabel
@@ -1288,9 +1311,10 @@
             this.manCrsIDLabel.AutoSize = true;
             this.manCrsIDLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manCrsIDLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.manCrsIDLabel.Location = new System.Drawing.Point(16, 77);
+            this.manCrsIDLabel.Location = new System.Drawing.Point(11, 51);
+            this.manCrsIDLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.manCrsIDLabel.Name = "manCrsIDLabel";
-            this.manCrsIDLabel.Size = new System.Drawing.Size(140, 29);
+            this.manCrsIDLabel.Size = new System.Drawing.Size(95, 19);
             this.manCrsIDLabel.TabIndex = 18;
             this.manCrsIDLabel.Text = "Course ID :";
             // 
@@ -1300,8 +1324,9 @@
             this.manCrsLstHeader.Controls.Add(this.manCrsLstLabel);
             this.manCrsLstHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.manCrsLstHeader.Location = new System.Drawing.Point(0, 0);
+            this.manCrsLstHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.manCrsLstHeader.Name = "manCrsLstHeader";
-            this.manCrsLstHeader.Size = new System.Drawing.Size(819, 60);
+            this.manCrsLstHeader.Size = new System.Drawing.Size(546, 40);
             this.manCrsLstHeader.TabIndex = 17;
             // 
             // manCrsLstLabel
@@ -1309,9 +1334,10 @@
             this.manCrsLstLabel.AutoSize = true;
             this.manCrsLstLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manCrsLstLabel.ForeColor = System.Drawing.Color.White;
-            this.manCrsLstLabel.Location = new System.Drawing.Point(3, 12);
+            this.manCrsLstLabel.Location = new System.Drawing.Point(2, 8);
+            this.manCrsLstLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.manCrsLstLabel.Name = "manCrsLstLabel";
-            this.manCrsLstLabel.Size = new System.Drawing.Size(290, 33);
+            this.manCrsLstLabel.Size = new System.Drawing.Size(201, 22);
             this.manCrsLstLabel.TabIndex = 16;
             this.manCrsLstLabel.Text = "Course List for SP15";
             // 
@@ -1348,7 +1374,7 @@
             this.manCrsLst.DefaultCellStyle = dataGridViewCellStyle17;
             this.manCrsLst.EnableHeadersVisualStyles = false;
             this.manCrsLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.manCrsLst.Location = new System.Drawing.Point(12, 325);
+            this.manCrsLst.Location = new System.Drawing.Point(8, 217);
             this.manCrsLst.Margin = new System.Windows.Forms.Padding(0);
             this.manCrsLst.Name = "manCrsLst";
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1363,7 +1389,7 @@
             this.manCrsLst.RowHeadersWidth = 30;
             this.manCrsLst.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.manCrsLst.RowTemplate.Height = 28;
-            this.manCrsLst.Size = new System.Drawing.Size(795, 756);
+            this.manCrsLst.Size = new System.Drawing.Size(530, 504);
             this.manCrsLst.TabIndex = 13;
             this.manCrsLst.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.manCrsLstCellValueChanged);
             this.manCrsLst.CurrentCellDirtyStateChanged += new System.EventHandler(this.manCrsLstCurrentCellDirtyStateChanged);
@@ -1380,12 +1406,11 @@
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.EnableHeadersVisualStyles = false;
             this.dataGridView2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.dataGridView2.Location = new System.Drawing.Point(677, 850);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView2.Location = new System.Drawing.Point(451, 567);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 30;
             this.dataGridView2.RowTemplate.Height = 28;
-            this.dataGridView2.Size = new System.Drawing.Size(215, 195);
+            this.dataGridView2.Size = new System.Drawing.Size(143, 130);
             this.dataGridView2.TabIndex = 27;
             this.dataGridView2.Visible = false;
             // 
@@ -1399,9 +1424,10 @@
             this.manStdLstContainer.Controls.Add(this.manStdSearchText);
             this.manStdLstContainer.Controls.Add(this.menStdSearch);
             this.manStdLstContainer.Controls.Add(this.manChangeAdvisor);
-            this.manStdLstContainer.Location = new System.Drawing.Point(288, 378);
+            this.manStdLstContainer.Location = new System.Drawing.Point(192, 252);
+            this.manStdLstContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.manStdLstContainer.Name = "manStdLstContainer";
-            this.manStdLstContainer.Size = new System.Drawing.Size(658, 488);
+            this.manStdLstContainer.Size = new System.Drawing.Size(439, 326);
             this.manStdLstContainer.TabIndex = 37;
             this.manStdLstContainer.Visible = false;
             // 
@@ -1437,7 +1463,7 @@
             this.manStdLst.DefaultCellStyle = dataGridViewCellStyle21;
             this.manStdLst.EnableHeadersVisualStyles = false;
             this.manStdLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.manStdLst.Location = new System.Drawing.Point(10, 187);
+            this.manStdLst.Location = new System.Drawing.Point(7, 125);
             this.manStdLst.Margin = new System.Windows.Forms.Padding(0);
             this.manStdLst.MultiSelect = false;
             this.manStdLst.Name = "manStdLst";
@@ -1446,7 +1472,7 @@
             this.manStdLst.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.manStdLst.RowTemplate.Height = 28;
             this.manStdLst.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.manStdLst.Size = new System.Drawing.Size(637, 286);
+            this.manStdLst.Size = new System.Drawing.Size(425, 191);
             this.manStdLst.TabIndex = 35;
             this.manStdLst.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.manStdLstCellValueChanged);
             this.manStdLst.CurrentCellDirtyStateChanged += new System.EventHandler(this.manStdLstCurrentCellDirtyStateChanged);
@@ -1460,10 +1486,10 @@
             this.removeStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeStd.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeStd.ForeColor = System.Drawing.Color.White;
-            this.removeStd.Location = new System.Drawing.Point(490, 128);
+            this.removeStd.Location = new System.Drawing.Point(327, 85);
             this.removeStd.Margin = new System.Windows.Forms.Padding(0);
             this.removeStd.Name = "removeStd";
-            this.removeStd.Size = new System.Drawing.Size(152, 33);
+            this.removeStd.Size = new System.Drawing.Size(101, 26);
             this.removeStd.TabIndex = 27;
             this.removeStd.Text = "Remove";
             this.removeStd.UseVisualStyleBackColor = false;
@@ -1475,8 +1501,9 @@
             this.manStdLstHeader.Controls.Add(this.label1);
             this.manStdLstHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.manStdLstHeader.Location = new System.Drawing.Point(0, 0);
+            this.manStdLstHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.manStdLstHeader.Name = "manStdLstHeader";
-            this.manStdLstHeader.Size = new System.Drawing.Size(656, 61);
+            this.manStdLstHeader.Size = new System.Drawing.Size(437, 41);
             this.manStdLstHeader.TabIndex = 17;
             // 
             // label1
@@ -1485,9 +1512,10 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(0, 12);
+            this.label1.Location = new System.Drawing.Point(0, 8);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 33);
+            this.label1.Size = new System.Drawing.Size(132, 22);
             this.label1.TabIndex = 18;
             this.label1.Text = "Students List";
             // 
@@ -1495,9 +1523,10 @@
             // 
             this.manStdSearchLabel.AutoSize = true;
             this.manStdSearchLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.manStdSearchLabel.Location = new System.Drawing.Point(16, 77);
+            this.manStdSearchLabel.Location = new System.Drawing.Point(11, 51);
+            this.manStdSearchLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.manStdSearchLabel.Name = "manStdSearchLabel";
-            this.manStdSearchLabel.Size = new System.Drawing.Size(141, 29);
+            this.manStdSearchLabel.Size = new System.Drawing.Size(97, 19);
             this.manStdSearchLabel.TabIndex = 18;
             this.manStdSearchLabel.Text = "Username :";
             // 
@@ -1508,10 +1537,10 @@
             this.manStdSearchText.BackColor = System.Drawing.Color.White;
             this.manStdSearchText.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manStdSearchText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.manStdSearchText.Location = new System.Drawing.Point(180, 78);
+            this.manStdSearchText.Location = new System.Drawing.Point(120, 52);
             this.manStdSearchText.Margin = new System.Windows.Forms.Padding(0);
             this.manStdSearchText.Name = "manStdSearchText";
-            this.manStdSearchText.Size = new System.Drawing.Size(264, 30);
+            this.manStdSearchText.Size = new System.Drawing.Size(177, 23);
             this.manStdSearchText.TabIndex = 21;
             // 
             // menStdSearch
@@ -1523,10 +1552,10 @@
             this.menStdSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.menStdSearch.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menStdSearch.ForeColor = System.Drawing.Color.White;
-            this.menStdSearch.Location = new System.Drawing.Point(111, 129);
+            this.menStdSearch.Location = new System.Drawing.Point(74, 86);
             this.menStdSearch.Margin = new System.Windows.Forms.Padding(0);
             this.menStdSearch.Name = "menStdSearch";
-            this.menStdSearch.Size = new System.Drawing.Size(152, 33);
+            this.menStdSearch.Size = new System.Drawing.Size(101, 26);
             this.menStdSearch.TabIndex = 21;
             this.menStdSearch.Text = "Search";
             this.menStdSearch.UseVisualStyleBackColor = false;
@@ -1538,10 +1567,10 @@
             this.manActions.Controls.Add(this.createCrs);
             this.manActions.Controls.Add(this.createUser);
             this.manActions.Controls.Add(this.manQuickCommands);
-            this.manActions.Location = new System.Drawing.Point(0, 428);
+            this.manActions.Location = new System.Drawing.Point(0, 285);
             this.manActions.Margin = new System.Windows.Forms.Padding(0);
             this.manActions.Name = "manActions";
-            this.manActions.Size = new System.Drawing.Size(254, 240);
+            this.manActions.Size = new System.Drawing.Size(169, 160);
             this.manActions.TabIndex = 30;
             this.manActions.Visible = false;
             // 
@@ -1555,10 +1584,10 @@
             this.createCrs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.createCrs.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createCrs.ForeColor = System.Drawing.Color.White;
-            this.createCrs.Location = new System.Drawing.Point(0, 160);
+            this.createCrs.Location = new System.Drawing.Point(0, 107);
             this.createCrs.Margin = new System.Windows.Forms.Padding(0);
             this.createCrs.Name = "createCrs";
-            this.createCrs.Size = new System.Drawing.Size(254, 80);
+            this.createCrs.Size = new System.Drawing.Size(169, 53);
             this.createCrs.TabIndex = 29;
             this.createCrs.Text = "Create Course";
             this.createCrs.UseVisualStyleBackColor = false;
@@ -1574,10 +1603,10 @@
             this.createUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.createUser.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createUser.ForeColor = System.Drawing.Color.White;
-            this.createUser.Location = new System.Drawing.Point(0, 80);
+            this.createUser.Location = new System.Drawing.Point(0, 53);
             this.createUser.Margin = new System.Windows.Forms.Padding(0);
             this.createUser.Name = "createUser";
-            this.createUser.Size = new System.Drawing.Size(254, 80);
+            this.createUser.Size = new System.Drawing.Size(169, 53);
             this.createUser.TabIndex = 24;
             this.createUser.Text = "Create User";
             this.createUser.UseVisualStyleBackColor = false;
@@ -1591,7 +1620,7 @@
             this.manQuickCommands.Location = new System.Drawing.Point(0, 0);
             this.manQuickCommands.Margin = new System.Windows.Forms.Padding(0);
             this.manQuickCommands.Name = "manQuickCommands";
-            this.manQuickCommands.Size = new System.Drawing.Size(254, 80);
+            this.manQuickCommands.Size = new System.Drawing.Size(169, 53);
             this.manQuickCommands.TabIndex = 0;
             this.manQuickCommands.Text = "Quick Commands";
             this.manQuickCommands.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1605,9 +1634,10 @@
             this.manFacLstContainer.Controls.Add(this.manFacSearchLabel);
             this.manFacLstContainer.Controls.Add(this.manFacSearchBox);
             this.manFacLstContainer.Controls.Add(this.manFacSearch);
-            this.manFacLstContainer.Location = new System.Drawing.Point(295, 940);
+            this.manFacLstContainer.Location = new System.Drawing.Point(197, 627);
+            this.manFacLstContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.manFacLstContainer.Name = "manFacLstContainer";
-            this.manFacLstContainer.Size = new System.Drawing.Size(658, 488);
+            this.manFacLstContainer.Size = new System.Drawing.Size(439, 326);
             this.manFacLstContainer.TabIndex = 38;
             this.manFacLstContainer.Visible = false;
             // 
@@ -1620,10 +1650,10 @@
             this.removeFac.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeFac.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removeFac.ForeColor = System.Drawing.Color.White;
-            this.removeFac.Location = new System.Drawing.Point(490, 128);
+            this.removeFac.Location = new System.Drawing.Point(327, 85);
             this.removeFac.Margin = new System.Windows.Forms.Padding(0);
             this.removeFac.Name = "removeFac";
-            this.removeFac.Size = new System.Drawing.Size(152, 33);
+            this.removeFac.Size = new System.Drawing.Size(101, 26);
             this.removeFac.TabIndex = 27;
             this.removeFac.Text = "Remove";
             this.removeFac.UseVisualStyleBackColor = false;
@@ -1635,8 +1665,9 @@
             this.manFacLstHeader.Controls.Add(this.manFacLstLabel);
             this.manFacLstHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.manFacLstHeader.Location = new System.Drawing.Point(0, 0);
+            this.manFacLstHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.manFacLstHeader.Name = "manFacLstHeader";
-            this.manFacLstHeader.Size = new System.Drawing.Size(656, 61);
+            this.manFacLstHeader.Size = new System.Drawing.Size(437, 41);
             this.manFacLstHeader.TabIndex = 17;
             // 
             // manFacLstLabel
@@ -1645,9 +1676,10 @@
             this.manFacLstLabel.AutoSize = true;
             this.manFacLstLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manFacLstLabel.ForeColor = System.Drawing.Color.White;
-            this.manFacLstLabel.Location = new System.Drawing.Point(0, 12);
+            this.manFacLstLabel.Location = new System.Drawing.Point(0, 8);
+            this.manFacLstLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.manFacLstLabel.Name = "manFacLstLabel";
-            this.manFacLstLabel.Size = new System.Drawing.Size(194, 33);
+            this.manFacLstLabel.Size = new System.Drawing.Size(133, 22);
             this.manFacLstLabel.TabIndex = 18;
             this.manFacLstLabel.Text = "Faculties List";
             // 
@@ -1684,7 +1716,7 @@
             this.manFacLst.DefaultCellStyle = dataGridViewCellStyle24;
             this.manFacLst.EnableHeadersVisualStyles = false;
             this.manFacLst.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.manFacLst.Location = new System.Drawing.Point(10, 187);
+            this.manFacLst.Location = new System.Drawing.Point(7, 125);
             this.manFacLst.Margin = new System.Windows.Forms.Padding(0);
             this.manFacLst.MultiSelect = false;
             this.manFacLst.Name = "manFacLst";
@@ -1693,16 +1725,17 @@
             this.manFacLst.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.manFacLst.RowTemplate.Height = 28;
             this.manFacLst.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.manFacLst.Size = new System.Drawing.Size(637, 286);
+            this.manFacLst.Size = new System.Drawing.Size(425, 191);
             this.manFacLst.TabIndex = 26;
             // 
             // manFacSearchLabel
             // 
             this.manFacSearchLabel.AutoSize = true;
             this.manFacSearchLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.manFacSearchLabel.Location = new System.Drawing.Point(16, 77);
+            this.manFacSearchLabel.Location = new System.Drawing.Point(11, 51);
+            this.manFacSearchLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.manFacSearchLabel.Name = "manFacSearchLabel";
-            this.manFacSearchLabel.Size = new System.Drawing.Size(141, 29);
+            this.manFacSearchLabel.Size = new System.Drawing.Size(97, 19);
             this.manFacSearchLabel.TabIndex = 18;
             this.manFacSearchLabel.Text = "Username :";
             // 
@@ -1711,10 +1744,10 @@
             this.manFacSearchBox.BackColor = System.Drawing.Color.White;
             this.manFacSearchBox.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manFacSearchBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.manFacSearchBox.Location = new System.Drawing.Point(180, 78);
+            this.manFacSearchBox.Location = new System.Drawing.Point(120, 52);
             this.manFacSearchBox.Margin = new System.Windows.Forms.Padding(0);
             this.manFacSearchBox.Name = "manFacSearchBox";
-            this.manFacSearchBox.Size = new System.Drawing.Size(264, 30);
+            this.manFacSearchBox.Size = new System.Drawing.Size(177, 23);
             this.manFacSearchBox.TabIndex = 21;
             // 
             // manFacSearch
@@ -1726,21 +1759,21 @@
             this.manFacSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.manFacSearch.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.manFacSearch.ForeColor = System.Drawing.Color.White;
-            this.manFacSearch.Location = new System.Drawing.Point(292, 128);
+            this.manFacSearch.Location = new System.Drawing.Point(195, 85);
             this.manFacSearch.Margin = new System.Windows.Forms.Padding(0);
             this.manFacSearch.Name = "manFacSearch";
-            this.manFacSearch.Size = new System.Drawing.Size(152, 33);
+            this.manFacSearch.Size = new System.Drawing.Size(101, 26);
             this.manFacSearch.TabIndex = 21;
             this.manFacSearch.Text = "Search";
             this.manFacSearch.UseVisualStyleBackColor = false;
             // 
             // admMainpage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1950, 1049);
+            this.ClientSize = new System.Drawing.Size(1283, 699);
             this.Controls.Add(this.manFacLstContainer);
             this.Controls.Add(this.manActions);
             this.Controls.Add(this.manCrsLstContainer);
@@ -1758,6 +1791,7 @@
             this.Controls.Add(this.showEnrolledStd);
             this.Controls.Add(this.footer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "admMainpage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "admMainpage";
