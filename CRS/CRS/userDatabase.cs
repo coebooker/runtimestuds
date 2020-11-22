@@ -15,18 +15,19 @@ namespace CRS
             stdLst = new List<student>();
             facLst = new List<faculty>();
             adminLst = new List<admin>();
-            macLst = new List<manager>();
+            manLst = new List<manager>();
 
             string line;
             System.IO.StreamReader input = new System.IO.StreamReader(filepath);
             while ((line = input.ReadLine()) != null)
             {
-                string username = utilities.readInChunk(ref line);
-                string password = utilities.readInChunk(ref line);
-                string firstName = utilities.readInChunk(ref line);
-                string middleName = utilities.readInChunk(ref line);
-                string lastName = utilities.readInChunk(ref line);
-                string status = utilities.readInChunk(ref line);
+                string username = line.Substring(0, 10).Trim();
+                string password = line.Substring(11, 10).Trim();
+                string firstName = line.Substring(22, 10).Trim();
+                string middleName = line.Substring(38, 15).Trim();
+                string lastName = line.Substring(54, 15).Trim();
+                int index = line.LastIndexOf(" ");
+                string status = line.Substring(70, 10).Trim();
 
                 if (status == "faculty")
                 {
@@ -41,7 +42,7 @@ namespace CRS
                 else if (status == "manager")
                 {
                     manager man = new manager(firstName, middleName, lastName, username, password);
-                    macLst.Add(man);
+                    manLst.Add(man);
                 }
                 else
                 {
@@ -89,6 +90,7 @@ namespace CRS
 
 
         // Change the database
+        //----------------------------------------
         public void addCrsToStd(string crsID, string nextSemester, ref courseDatabase crsDB, student currentStudent)
         {
             foreach (course crs in crsDB.getCourseList())
@@ -106,23 +108,23 @@ namespace CRS
             string fileLine = username.PadRight(11) + password.PadRight(11) + fname.PadRight(16) + mname.PadRight(16) + lname.PadRight(16) + status.PadRight(10);
             if (status == "admin")
             {
-                admin newAdmin = new admin(fname, mname, lname, username, password);
-                addAdmin(fileLine, filepath, ref newAdmin);
+                admin newAdm = new admin(fname, mname, lname, username, password);
+                adminLst.Add(newAdm);
             }
             else if (status == "faculty")
             {
-                faculty newFaculty = new faculty(fname, mname, lname, username, password);
-                addFaculty(fileLine, filepath, ref newFaculty);
+                faculty newFac = new faculty(fname, mname, lname, username, password);
+                facLst.Add(newFac);
             }
             else if (status == "manager")
             {
-                manager newManager = new manager(fname, mname, lname, username, password);
-                addManager(fileLine, filepath, ref newManager);
+                manager newMan = new manager(fname, mname, lname, username, password);
+                manLst.Add(newMan);
             }
             else
             {
-                student newStudent = new student(fname, mname, lname, status, username, password);
-                addStudent(fileLine, filepath, ref newStudent);
+                student newStd = new student(fname, mname, lname, status, username, password);
+                stdLst.Add(newStd);
             }
         }
         public void changeAdvisor(string stdName, string facName)
@@ -140,15 +142,13 @@ namespace CRS
             fac = getFaculty(curAdvisor);
             fac.removeAdvisee(stdName);
         }
-        public void dropCrsFromStd(string courseID, string nextSemester, ref courseDatabase courseDB, student currentStudent)
+        public void dropCrsFromStd(string courseID, ref courseDatabase courseDB, student currentStudent)
         {
             foreach (course crs in courseDB.getCourseList())
                 if (courseID.Trim() == crs.crsID.Trim())
                 {
-                    course selectedCourse = crs;
-                    selectedCourse.disenrollUser(currentStudent);
-                    course courseDeleting = selectedCourse;
-                    currentStudent.dropCrsFromNext(courseDeleting);
+                    currentStudent.dropCrsFromNext(crs);
+                    crs.disenrollUser(currentStudent);
                     return;
                 }
         }
@@ -173,63 +173,31 @@ namespace CRS
             // Remove the student from the database
             stdLst.Remove(std);
 
-            //Updates the UserDB.in file to remove the student from it
-            string[] userLines = File.ReadAllLines(filepath);
-            string[] newUserLinesArr;
-            List<string> newUserLines = new List<string>();
-            foreach (string userString in userLines)
-            {
-                string currentUsername = userString.Substring(0, 10);
-                if (currentUsername == username)
-                {
-                    //skips the iteration if it’s the course that’s being deleted
-                    continue;
-                }
-                else
-                {
-                    newUserLines.Add(userString);
-                }
-                newUserLinesArr = newUserLines.ToArray();
-                File.WriteAllLines(filepath, newUserLinesArr);
-            }
-        }
-        public void addAdmin(string fileline, string filepath, ref admin newAdmin)
-        {
-            using (StreamWriter sw = File.AppendText(filepath))
-            {
-                sw.WriteLine(fileline);
-            }
-            adminLst.Add(newAdmin);
-        }
-        public void addFaculty(string fileline, string filepath, ref faculty newFaculty)
-        {
-            using (StreamWriter sw = File.AppendText(filepath))
-            {
-                sw.WriteLine(fileline);
-            }
-            facLst.Add(newFaculty);
-        }
-        public void addManager(string fileline, string filepath, ref manager newManager)
-        {
-            using (StreamWriter sw = File.AppendText(filepath))
-            {
-                sw.WriteLine(fileline);
-            }
-            macLst.Add(newManager);
-        }
-        public void addStudent(string fileline, string filepath, ref student newStudent)
-        {
-            using (StreamWriter sw = File.AppendText(filepath))
-            {
-                sw.WriteLine(fileline);
-            }
-            stdLst.Add(newStudent);
+            ////Updates the UserDB.in file to remove the student from it
+            //string[] userLines = File.ReadAllLines(filepath);
+            //string[] newUserLinesArr;
+            //List<string> newUserLines = new List<string>();
+            //foreach (string userString in userLines)
+            //{
+            //    string currentUsername = userString.Substring(0, 10);
+            //    if (currentUsername == username)
+            //    {
+            //        //skips the iteration if it’s the course that’s being deleted
+            //        continue;
+            //    }
+            //    else
+            //    {
+            //        newUserLines.Add(userString);
+            //    }
+            //    newUserLinesArr = newUserLines.ToArray();
+            //    File.WriteAllLines(filepath, newUserLinesArr);
+            //}
         }
         public void removeFac(string facultyUsername, string userFilepath, string courseFilepath, ref courseDatabase coursedb)
         {
             //Loops through their advisees and changes the students' advisor to "Staff"
             faculty currectFac = getFaculty(facultyUsername);
-            foreach (student currentStudent in currectFac.getAdviseesLst())
+            foreach (student currentStudent in currectFac.adviseesLst)
                 currentStudent.setAdvisor("Staff");
 
             //Loops through their courses and the instructor to "Staff", also needs to update the file
@@ -281,44 +249,57 @@ namespace CRS
         public bool isValidUser(string username, string password, ref string usertype)
         {
             foreach (student std in stdLst)
-                if (std.username.ToLower() == username && std.password.ToLower() == password)
+                if (std.username.ToLower() == username && std.password == password)
                 {
                     usertype = "student";
                     return true;
                 }
             foreach (faculty fac in facLst)
-                if (fac.username.ToLower() == username && fac.password.ToLower() == password)
+                if (fac.username.ToLower() == username && fac.password == password)
                 {
                     usertype = "faculty";
                     return true;
                 }
             foreach (admin adm in adminLst)
-                if (adm.username.ToLower() == username && adm.password.ToLower() == password)
+                if (adm.username.ToLower() == username && adm.password == password)
                 {
                     usertype = "admin";
                     return true;
                 }
+            foreach(manager man in manLst)
+            {
+                if (man.username.ToLower() == username && man.password == password)
+                {
+                    usertype = "manager";
+                    return true;
+                }
+            }
             return false;
         }
         public void addPrevCourses(string filepath, ref courseDatabase crsDB, string nextSemester)
-        // PRE : Course database has already been initialized
         {
             string line;
             System.IO.StreamReader input = new System.IO.StreamReader(filepath);
             while ((line = input.ReadLine()) != null)
             {
-                string username = utilities.readInChunk(ref line);
-                int courseNum = int.Parse(utilities.readInChunk(ref line));
+                string username = line.Substring(0, 10).Trim();
+                string courseNumStr = line.Substring(11, 2).Trim();
+                int courseNum = int.Parse(courseNumStr);
+                int loc = 14;
 
                 student std = stdLst.Find(s => s.username.ToLower() == username.ToLower());
 
                 for (int i = 0; i < courseNum; i++)
                 {
-                    string crsID = utilities.readInChunk(ref line);
-                    string semester = utilities.readInChunk(ref line);
-                    float credit = float.Parse(utilities.readInChunk(ref line));
-                    string grade = utilities.readInChunk(ref line);
-
+                    string crsID = line.Substring(loc, 10).Trim();
+                    loc += 11;
+                    string semester = line.Substring(loc, 3).Trim();
+                    loc += 4;
+                    string creditStr = line.Substring(loc, 4).Trim();
+                    float credit = float.Parse(creditStr);
+                    loc += 4;
+                    string grade = line.Substring(loc, 3).Trim().ToString();
+                    loc += 5;
                     if (semester == nextSemester)
                     {
                         course crs = crsDB.getCourse(crsID);
@@ -339,56 +320,10 @@ namespace CRS
             }
             input.Close();
         }
-
-
-        //public void addPrevCourses(string filepath, ref courseDatabase crsDB, string nextSemester)
-        //{
-        //    string line;
-        //    System.IO.StreamReader input = new System.IO.StreamReader(filepath);
-        //    while ((line = input.ReadLine()) != null)
-        //    {
-        //        string username = line.Substring(0, 10).Trim();
-        //        string courseNumStr = line.Substring(11, 2).Trim();
-        //        int courseNum = int.Parse(courseNumStr);
-        //        int loc = 14;
-
-        //        student std = StudentsLst.Find(s => s.username.ToLower() == username.ToLower());
-
-        //        for (int i = 0; i < courseNum; i++)
-        //        {
-        //            string crsID = line.Substring(loc, 10).Trim();
-        //            loc += 11;
-        //            string semester = line.Substring(loc, 3).Trim();
-        //            loc += 4;
-        //            string creditStr = line.Substring(loc, 4).Trim();
-        //            float credit = float.Parse(creditStr);
-        //            loc += 4;
-        //            string grade = line.Substring(loc, 3).Trim().ToString();
-        //            loc += 5;
-        //            if (semester == nextSemester)
-        //            {
-        //                course crs = crsDB.getCourse(crsID);
-        //                std.addClassToNext(crs);
-        //                crs.enrollUser(std);
-        //            }
-        //            else if (semester == "F14")
-        //            {
-        //                previousCourse pcrs = new previousCourse(username, crsID, semester, credit, grade);
-        //                std.addClassToCurrent(pcrs);
-        //            }
-        //            else
-        //            {
-        //                previousCourse currentCourse = new previousCourse(username, crsID, semester, credit, grade);
-        //                std.createCrsHist(currentCourse);
-        //            }
-        //        }
-        //    }
-        //    input.Close();
-        //}
-
+        
         private List<student> stdLst;
         private List<faculty> facLst;
         private List<admin> adminLst;
-        public List<manager> macLst { get; private set; }
+        public List<manager> manLst { get; private set; }
     }
 }

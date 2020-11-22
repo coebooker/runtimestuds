@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CRS
 {
-    public partial class addedCourse : Form
+    public partial class addedCrs : Form
     {
-        public addedCourse(string courseAdded)
+        public addedCrs(string courseAdded)
         {
             InitializeComponent();
             string tempString = courseAdded + " has been added";

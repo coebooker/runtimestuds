@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CRS
 {
-    public partial class admAddUser : Form
+    public partial class admCreateUser : Form
     {
         public string uname;
         public string pword;
@@ -18,15 +18,18 @@ namespace CRS
         public string fName;
         public string mName;
         public string lName;
+        private userDatabase usrDB;
 
-        public admAddUser(userDatabase usrDB)
+        public admCreateUser(userDatabase usrDB)
         {
             InitializeComponent();
+            this.usrDB = usrDB;
 
-            List < faculty > facultyList = usrDB.getFacultyList();
-
-            foreach (faculty fac in facultyList)
-                advisor.Items.Add(fac.fname + fac.lname);
+            foreach (faculty fac in usrDB.getFacultyList())
+            {
+                advisor.Items.Add(fac.fname + " " + fac.lname);
+                advisor.AutoCompleteCustomSource.Add(fac.fname + " " + fac.lname);
+            }
         }
 
         private void confirmClick(object sender, EventArgs e)
@@ -36,12 +39,32 @@ namespace CRS
                     "Invalid Form.", 
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+
+            // Duplicate check
+            foreach (student std in usrDB.getStudentList())
+                if (username.Text.Trim().ToLower() == std.username.Trim().ToLower()
+                    && password.Text.Trim() == std.password.Trim())
+                {
+                    MessageBox.Show("The (username, password) pair is already taken.",
+                    "Invalid input",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    return;
+                }
+
             this.uname = username.Text;
             this.pword = password.Text;
             if (userType.Text == "Student")
-                this.uType = advisor.Text;
+            {
+                foreach (faculty fac in usrDB.getFacultyList())
+                    if (fac.fname + " " + fac.lname == advisor.Text)
+                    {
+                        uType = fac.username;
+                        break;
+                    }
+            }
             else
-                this.uType = userType.Text;
+                this.uType = userType.Text.ToLower();
             this.fName = fname.Text;
             if (mname.Text == "Middle Name")
                 this.mName = "";

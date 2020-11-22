@@ -25,7 +25,7 @@ namespace CRS
             table.Columns.Add("GPA");
             table.Columns.Add("Credits");
 
-            foreach (student std in fac.getAdviseesLst())
+            foreach (student std in fac.adviseesLst)
                 table.Rows.Add(std.username, std.fname, std.lname, std.GPA, std.totalCredits);
 
             advissesLst.DataSource = table;

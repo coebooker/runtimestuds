@@ -1,6 +1,6 @@
 ﻿namespace CRS
 {
-    partial class addedCourse
+    partial class addedCrs
     {
         /// <summary>
         /// Required designer variable.

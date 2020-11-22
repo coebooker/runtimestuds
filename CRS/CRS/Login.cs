@@ -14,6 +14,8 @@ namespace CRS
     {
         private userDatabase usrDB;
         private courseDatabase crsDB;
+        private ComboBox cb;
+        private TextBox tb;
         private string uname;
         private string utype;
         bool flag = false;
@@ -68,7 +70,7 @@ namespace CRS
         {
             uname = username.Text.ToLower();
             utype = "student";
-            string password = this.password.Text.ToLower();
+            string password = this.password.Text;
 
             if (usrDB.isValidUser(uname, password, ref utype))
             {
@@ -77,14 +79,14 @@ namespace CRS
                 {
                     if (!flag)
                     {
-                        var form = new admMainpage(usrDB, @"..\..\courseDB.in", @"..\..\historyDB.in");
+                        var form = new admMainpage(usrDB, @"..\..\courseDB.in", @"..\..\historyDB.in", utype);
                         form.ShowDialog();
                         usrDB = form.usrDB;
                         crsDB = form.crsDB;
                     }
                     else
                     {
-                        var form = new admMainpage(usrDB, crsDB);
+                        var form = new admMainpage(usrDB, crsDB, utype);
                         form.ShowDialog();
                         usrDB = form.usrDB;
                         crsDB = form.crsDB;
@@ -94,14 +96,14 @@ namespace CRS
                 {
                     if (!flag)
                     {
-                        var form = new mainpage(utype, uname, usrDB, @"..\..\courseDB.in", @"..\..\historyDB.in");
+                        var form = new mainpage(utype, uname, usrDB);
                         form.ShowDialog();
                         usrDB = form.usrDB;
                         crsDB = form.crsDB;
                     }
                     else
                     {
-                        var form = new mainpage(utype, uname, usrDB, crsDB);
+                        var form = new mainpage(utype, uname, usrDB, crsDB, cb, tb);
                         form.ShowDialog();
                         usrDB = form.usrDB;
                         crsDB = form.crsDB;
@@ -140,6 +142,10 @@ namespace CRS
                 {
                     student std = usrDB.getStudent(uname);
                     std.updateHistoryFile(@"..\..\historyDB.in");
+                }
+                else if (utype == "admin" || utype == "manager")
+                {
+                    return;
                 }
             }
         }

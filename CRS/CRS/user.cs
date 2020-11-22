@@ -18,8 +18,8 @@ namespace CRS
     public class student : baseUser
     {
         public string advisor;
-        public float GPA;
-        public float totalCredits;
+        public float GPA = 0;
+        public float totalCredits = 0;
         public List<course> registeredCrs;
         public List<previousCourse> currentCrs;
         public List<previousCourse> pastCrs;
@@ -114,40 +114,61 @@ namespace CRS
         }
         public void calculateGPA()
         {
-            List<float> GPACredits = new List<float>();
+            List<previousCourse> creditCrsLst = new List<previousCourse>();
+            float gradedCredits = 0;
+            float gradePoint = 0;
             foreach (previousCourse oldCrs in pastCrs)
             {
-                string currentGrade = oldCrs.grade;
-                if (currentGrade.Substring(0, 1) == "R")
+                string grade = oldCrs.grade.Trim();
+                // No credit 
+                if (grade == "F" || grade.StartsWith("W") || grade == "U" || grade == "X" ||
+                    grade == "O" || grade == "I")
                 {
-                    string gradeStr = currentGrade.Substring(1);
-                    bool applicableGrade = gradeDict.ContainsKey(gradeStr);
-                    if (applicableGrade)
-                    {
-                        float currentGPA = gradeDict[gradeStr];
-                        GPACredits.Add(currentGPA);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-
+                    continue;
                 }
+                // Bears credits
                 else
                 {
-                    bool applicableGrade = gradeDict.ContainsKey(currentGrade);
-                    if (applicableGrade)
-                    {
-                        float currentGPA = gradeDict[currentGrade];
-                        GPACredits.Add(currentGPA);
-                    }
+                    if (grade == "S" || grade == "EQ")
+                        totalCredits += oldCrs.credit;
                     else
                     {
-                        continue;
+                        if (creditCrsLst.Count != 0)
+                        {
+                            bool found = false;
+                            foreach (previousCourse pcrs in creditCrsLst)
+                            {
+                                if (pcrs.crsID.Trim() == oldCrs.crsID.Trim())
+                                {
+                                    if (oldCrs.grade.StartsWith("R"))
+                                    {
+                                        creditCrsLst.Remove(pcrs);
+                                        creditCrsLst.Add(oldCrs);
+                                        found = true;
+                                        break;
+                                    }
+                                    else
+                                        found = true;
+                                }
+                            }
+                            if (!found)
+                                creditCrsLst.Add(oldCrs);
+                        }
+                        else
+                            creditCrsLst.Add(oldCrs);
                     }
                 }
             }
-            this.GPA = GPACredits.Sum() / GPACredits.Count();
+            foreach (previousCourse pcrs in creditCrsLst)
+            {
+                totalCredits += pcrs.credit;
+                gradedCredits += pcrs.credit;
+                if (pcrs.grade.StartsWith("R"))
+                    gradePoint += gradeDict[pcrs.grade.Substring(1)] * pcrs.credit;
+                else
+                    gradePoint += gradeDict[pcrs.grade] * pcrs.credit;
+            }
+            GPA = gradePoint / gradedCredits;
         }
         public validity isValidAdd(course crsBngAdded)
         {
@@ -298,26 +319,14 @@ namespace CRS
     public class faculty : baseUser
     {
         public List<course> nextSemesterCourses = new List<course>();
+        public List<student> adviseesLst = new List<student>();
         public faculty(string f, string m, string l, string usrname, string psw)
         {
-            courseSchedule = new List<course>();
-            adviseesLst = new List<student>();
             fname = f;
             mname = m;
             lname = l;
             username = usrname;
             password = psw;
-
-        }
-
-        public List<student> getAdviseesLst()
-        {
-            return adviseesLst;
-        }
-        //Returns a list of the courses this faculty is scheduled to teach next semester
-        public List<course> getNextSemesterCourses(ref courseDatabase courseDB)
-        {
-            return nextSemesterCourses;
         }
 
         public void addAdvisee(student std)
@@ -333,13 +342,10 @@ namespace CRS
                     return;
                 }
         }
-        public void removeCrsFromSch(course removedCrs)
+        public void removeCrsFromNext(course crs)
         {
-            courseSchedule.Remove(removedCrs);
+            nextSemesterCourses.Remove(crs);
         }
-
-        private List<course> courseSchedule;
-        private List<student> adviseesLst;
     }
     public class admin : baseUser
     {

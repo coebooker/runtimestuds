@@ -1,6 +1,6 @@
 ﻿namespace CRS
 {
-    partial class admAddUser
+    partial class admCreateUser
     {
         /// <summary>
         /// Required designer variable.
@@ -55,7 +55,7 @@
             // unameLabel
             // 
             this.unameLabel.AutoSize = true;
-            this.unameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unameLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unameLabel.ForeColor = System.Drawing.Color.White;
             this.unameLabel.Location = new System.Drawing.Point(164, 177);
             this.unameLabel.Name = "unameLabel";
@@ -66,18 +66,18 @@
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLabel.ForeColor = System.Drawing.Color.White;
             this.passwordLabel.Location = new System.Drawing.Point(164, 238);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(154, 32);
+            this.passwordLabel.Size = new System.Drawing.Size(152, 32);
             this.passwordLabel.TabIndex = 1;
             this.passwordLabel.Text = "Password :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(164, 421);
             this.label3.Name = "label3";
@@ -88,7 +88,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(164, 543);
             this.label4.Name = "label4";
@@ -99,22 +99,22 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(164, 482);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(197, 32);
+            this.label5.Size = new System.Drawing.Size(195, 32);
             this.label5.TabIndex = 4;
             this.label5.Text = "Middle Name :";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(164, 299);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(159, 32);
+            this.label6.Size = new System.Drawing.Size(154, 32);
             this.label6.TabIndex = 5;
             this.label6.Text = "User Type :";
             // 
@@ -125,6 +125,7 @@
             this.username.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.username.ForeColor = System.Drawing.Color.Silver;
             this.username.Location = new System.Drawing.Point(382, 174);
+            this.username.MaxLength = 10;
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(255, 39);
             this.username.TabIndex = 6;
@@ -139,6 +140,7 @@
             this.password.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password.ForeColor = System.Drawing.Color.Silver;
             this.password.Location = new System.Drawing.Point(382, 235);
+            this.password.MaxLength = 10;
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(255, 39);
             this.password.TabIndex = 7;
@@ -153,6 +155,7 @@
             this.fname.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fname.ForeColor = System.Drawing.Color.Silver;
             this.fname.Location = new System.Drawing.Point(382, 419);
+            this.fname.MaxLength = 15;
             this.fname.Name = "fname";
             this.fname.Size = new System.Drawing.Size(255, 39);
             this.fname.TabIndex = 9;
@@ -167,6 +170,7 @@
             this.mname.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mname.ForeColor = System.Drawing.Color.Silver;
             this.mname.Location = new System.Drawing.Point(382, 480);
+            this.mname.MaxLength = 15;
             this.mname.Name = "mname";
             this.mname.Size = new System.Drawing.Size(255, 39);
             this.mname.TabIndex = 10;
@@ -181,6 +185,7 @@
             this.lname.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lname.ForeColor = System.Drawing.Color.Silver;
             this.lname.Location = new System.Drawing.Point(382, 541);
+            this.lname.MaxLength = 15;
             this.lname.Name = "lname";
             this.lname.Size = new System.Drawing.Size(255, 39);
             this.lname.TabIndex = 11;
@@ -246,16 +251,18 @@
             // advisorLabel
             // 
             this.advisorLabel.AutoSize = true;
-            this.advisorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.advisorLabel.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.advisorLabel.ForeColor = System.Drawing.Color.White;
             this.advisorLabel.Location = new System.Drawing.Point(164, 360);
             this.advisorLabel.Name = "advisorLabel";
-            this.advisorLabel.Size = new System.Drawing.Size(132, 32);
+            this.advisorLabel.Size = new System.Drawing.Size(131, 32);
             this.advisorLabel.TabIndex = 15;
             this.advisorLabel.Text = "Advisor : ";
             // 
             // advisor
             // 
+            this.advisor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.advisor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.advisor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.advisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.advisor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -322,7 +329,7 @@
             this.label10.TabIndex = 21;
             this.label10.Text = "*";
             // 
-            // admAddUser
+            // admCreateUser
             // 
             this.AcceptButton = this.confirm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -351,7 +358,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.unameLabel);
-            this.Name = "admAddUser";
+            this.Name = "admCreateUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "admAddUser";
             this.ResumeLayout(false);

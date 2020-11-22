@@ -208,6 +208,42 @@ namespace UF
 {
     public static class utilities
     {
+        public static string encodeTime(string from, string to)
+        {
+            // Convert them to military time
+            if (from.EndsWith("PM"))
+            {
+                int hour = Convert.ToInt32(from.Substring(0, 1));
+                hour += 12;
+                from = hour.ToString() + from.Substring(1);
+            }
+            if (to.EndsWith("PM"))
+            {
+                int hour = Convert.ToInt32(from.Substring(0, 1));
+                hour += 12;
+                to = hour.ToString() + to.Substring(1);
+            }
+
+            // Get rid of AM and PM
+            from = from.Substring(0, from.Length - 2);
+            to = to.Substring(0, to.Length - 2);
+
+
+            // Convert them to floating point number
+            int index = from.IndexOf(":");
+            float fromHour = Convert.ToInt32(from.Substring(0, index));
+            if (from.EndsWith("30"))
+                fromHour += 0.5f;
+            string tt = Convert.ToInt32(fromHour * 2).ToString();
+
+            index = to.IndexOf(":");
+            float toHour = Convert.ToInt32(to.Substring(0, index));
+            if (to.EndsWith("30"))
+                toHour += 0.5f;
+            string l = Convert.ToInt32((toHour - fromHour) / 0.5).ToString();
+
+            return tt + l;
+        }
         public static string readInChunk(ref string l)
         {
             int index = l.IndexOf(" ");

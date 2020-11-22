@@ -48,6 +48,34 @@ namespace CRS
             }
 
         }
+        public courseDatabase(string filepath, ref userDatabase userDB)
+        {
+            this.crsLst = new List<course>();
+            string line;
+            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
+            while ((line = input.ReadLine()) != null)
+            {
+                string code = line.Substring(0, 10).Trim();
+                string title = line.Substring(11, 15).Trim();
+                string instructor = line.Substring(27, 10).Trim();
+                string credit = line.Substring(38, 4).Trim();
+                int seats = Convert.ToInt32(line.Substring(43, 3).Trim());
+                int num_time_blocks = int.Parse(line.Substring(47, 1).Trim());
+                int index = 49;
+                List<string> BlockLst = new List<string>();
+                for (int i = 0; i < num_time_blocks; i++)
+                {
+                    string time_block = line.Substring(index, 5);
+                    BlockLst.Add(time_block);
+                    index += 6;
+                }
+                course crs = new course(code, title, instructor, credit, seats, num_time_blocks, BlockLst);
+                crsLst.Add(crs);
+                faculty courseFac = userDB.getFaculty(instructor.Trim());
+                courseFac.nextSemesterCourses.Add(crs);
+            }
+
+        }
 
 
         // Gets the faculty's next semester coures
@@ -78,38 +106,41 @@ namespace CRS
 
 
         // Change the database
-        public void removeCrs(string crsID, string nextSemester, string filepath)
+        public void removeCrs(string crsID, string filepath, ref userDatabase usrDB)
         {
-            // Remove the course from the list
+            // Remove the course from the offering
             course removedCrs = getCourse(crsID);
             crsLst.Remove(removedCrs);
 
             // Remove the course from students' schedule
             List<student> enrolledStdLst = removedCrs.getStudents();
             foreach (student std in enrolledStdLst)
-            {
                 std.dropCrsFromNext(removedCrs);
-            }
 
-            //Updates the coursedb.in file to remove the removed course from it
-            string[] courseLines = File.ReadAllLines(filepath);
-            string[] newCourseLinesArr;
-            List<string> newCourseLines = new List<string>();
-            foreach (string courseString in courseLines)
-            {
-                string courseID = courseString.Substring(4, 10);
-                if (courseID == removedCrs.crsID)
-                {
-                    //skips the iteration if it’s the course that’s being deleted
-                    continue;
-                }
-                else
-                {
-                    newCourseLines.Add(courseString);
-                }
-                newCourseLinesArr = newCourseLines.ToArray();
-                File.WriteAllLines(filepath, newCourseLinesArr);
-            }
+            // Remove the course from faculties' schedule
+            faculty fac = usrDB.getFaculty(removedCrs.instructor);
+            fac.removeCrsFromNext(removedCrs);
+
+            ////Updates the coursedb.in file to remove the removed course from it
+            //string[] courseLines = File.ReadAllLines(filepath);
+            //string[] newCourseLinesArr;
+            //List<string> newCourseLines = new List<string>();
+            //foreach (string courseString in courseLines)
+            //{
+            //    string courseID = courseString.Substring(0, 10).Trim();
+            //    //string courseID = courseString.Substring(4, 10);
+            //    if (courseID == removedCrs.crsID.Trim())
+            //        continue;   // Skip the iteration if the course is being deleted
+            //    else
+            //        newCourseLines.Add(courseString);
+
+            //    newCourseLinesArr = newCourseLines.ToArray();
+            //    File.WriteAllLines(filepath, newCourseLinesArr);
+            //}
+        }
+        public void addCrs(course crs, string filepath)
+        {
+            crsLst.Add(crs);
         }
         public void changeCourse(string newInstructor, string courseID, List<string> newTimeBlocks, course changedCourse, string filepath)
         {

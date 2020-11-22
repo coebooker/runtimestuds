@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addedCourse.cs">
+    <Compile Include="addedCrs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addedCourse.Designer.cs">
-      <DependentUpon>addedCourse.cs</DependentUpon>
+    <Compile Include="addedCrs.Designer.cs">
+      <DependentUpon>addedCrs.cs</DependentUpon>
     </Compile>
     <Compile Include="admAddCrs.cs">
       <SubType>Form</SubType>
@@ -59,11 +59,23 @@
     <Compile Include="admAddCrs.Designer.cs">
       <DependentUpon>admAddCrs.cs</DependentUpon>
     </Compile>
-    <Compile Include="admAddUser.cs">
+    <Compile Include="admCreateCrs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="admAddUser.Designer.cs">
-      <DependentUpon>admAddUser.cs</DependentUpon>
+    <Compile Include="admCreateCrs.Designer.cs">
+      <DependentUpon>admCreateCrs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="admCreateUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admCreateUser.Designer.cs">
+      <DependentUpon>admCreateUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="admChangeAdvisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admChangeAdvisor.Designer.cs">
+      <DependentUpon>admChangeAdvisor.cs</DependentUpon>
     </Compile>
     <Compile Include="admCrsHist.cs">
       <SubType>Form</SubType>
@@ -113,6 +125,12 @@
     <Compile Include="facMainpage.Designer.cs">
       <DependentUpon>facMainpage.cs</DependentUpon>
     </Compile>
+    <Compile Include="stdCurSch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="stdCurSch.Designer.cs">
+      <DependentUpon>stdCurSch.cs</DependentUpon>
+    </Compile>
     <Compile Include="units.cs" />
     <Compile Include="courseDatabase.cs" />
     <Compile Include="Login.cs">
@@ -137,14 +155,20 @@
     </Compile>
     <Compile Include="user.cs" />
     <Compile Include="userDatabase.cs" />
-    <EmbeddedResource Include="addedCourse.resx">
-      <DependentUpon>addedCourse.cs</DependentUpon>
+    <EmbeddedResource Include="addedCrs.resx">
+      <DependentUpon>addedCrs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="admAddUser.resx">
-      <DependentUpon>admAddUser.cs</DependentUpon>
+    <EmbeddedResource Include="admCreateCrs.resx">
+      <DependentUpon>admCreateCrs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="admCreateUser.resx">
+      <DependentUpon>admCreateUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="admAdvisees.resx">
       <DependentUpon>admAdvisees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="admChangeAdvisor.resx">
+      <DependentUpon>admChangeAdvisor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="admCrsHist.resx">
       <DependentUpon>admCrsHist.cs</DependentUpon>
@@ -166,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="stdCurSch.resx">
+      <DependentUpon>stdCurSch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="stdMainpage.resx">
       <DependentUpon>stdMainpage.cs</DependentUpon>
