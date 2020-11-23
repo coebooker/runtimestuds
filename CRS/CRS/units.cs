@@ -59,6 +59,7 @@ namespace CRS
         private List<string> timeBlocks;
         private List<classTime> time_blocks_alternative;
         private List<student> enrolledStudents = new List<student>();
+        private List<string> preReqLst = new List<string>();
         public course(string crsID, string ttl, string ist, string crdt, int sea, int num_time_b, List<string> time_bs)
         {
             this.crsID = crsID;
@@ -83,7 +84,10 @@ namespace CRS
                 time_blocks_alternative.Add(timeOfBlock);
             }
         }
-
+        public void addPreReqs(List<string> newPreReqs)
+        {
+            preReqLst = newPreReqs;
+        }
         public List<classTime> getClassTime()
         {
             return time_blocks_alternative;

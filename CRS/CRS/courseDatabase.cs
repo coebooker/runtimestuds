@@ -91,6 +91,36 @@ namespace CRS
         {
             return crsLst;
         }
+        public void getPreReqs(string filepath)
+        {
+            string[] preReqLines = File.ReadAllLines(filepath);
+            foreach (string preReqString in preReqLines) {
+                List<string> preReqList = new List<string>();
+                string currentCourseStr = preReqString.Substring(0, 7).Trim();
+                course currentCourse = getCourse(currentCourseStr);
+                //Converts string to int
+                int numPreReqsStr = Int32.Parse(preReqString.Substring(8, 1));
+                int index = 10;
+                for(int i = 0; i < numPreReqsStr; i++)
+                {
+                    string courseCode = preReqString.Substring(index, 7).Trim();
+                    preReqList.Add(courseCode);
+                }
+                currentCourse.addPreReqs(preReqList);
+                
+            }
+            //{
+            //    string courseID = courseString.Substring(0, 10).Trim();
+            //    //string courseID = courseString.Substring(4, 10);
+            //    if (courseID == removedCrs.crsID.Trim())
+            //        continue;   // Skip the iteration if the course is being deleted
+            //    else
+            //        newCourseLines.Add(courseString);
+
+            //    newCourseLinesArr = newCourseLines.ToArray();
+            //    File.WriteAllLines(filepath, newCourseLinesArr);
+
+        }
         public course getCourse(string courseID)
         {
             course crs = crsLst[0]; // Default value
