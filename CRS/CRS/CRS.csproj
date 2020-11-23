@@ -59,6 +59,18 @@
     <Compile Include="admAddCrs.Designer.cs">
       <DependentUpon>admAddCrs.cs</DependentUpon>
     </Compile>
+    <Compile Include="admAdviseeSch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admAdviseeSch.Designer.cs">
+      <DependentUpon>admAdviseeSch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="admChangeCrs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admChangeCrs.Designer.cs">
+      <DependentUpon>admChangeCrs.cs</DependentUpon>
+    </Compile>
     <Compile Include="admCreateCrs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,12 +94,6 @@
     </Compile>
     <Compile Include="admCrsHist.Designer.cs">
       <DependentUpon>admCrsHist.cs</DependentUpon>
-    </Compile>
-    <Compile Include="admAdvisees.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="admAdvisees.Designer.cs">
-      <DependentUpon>admAdvisees.cs</DependentUpon>
     </Compile>
     <Compile Include="admEnrolledStd.cs">
       <SubType>Form</SubType>
@@ -158,14 +164,17 @@
     <EmbeddedResource Include="addedCrs.resx">
       <DependentUpon>addedCrs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="admAdviseeSch.resx">
+      <DependentUpon>admAdviseeSch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="admChangeCrs.resx">
+      <DependentUpon>admChangeCrs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="admCreateCrs.resx">
       <DependentUpon>admCreateCrs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="admCreateUser.resx">
       <DependentUpon>admCreateUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="admAdvisees.resx">
-      <DependentUpon>admAdvisees.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="admChangeAdvisor.resx">
       <DependentUpon>admChangeAdvisor.cs</DependentUpon>
@@ -187,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="changeAdvisor.resx">
       <DependentUpon>changeAdvisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="facMainpage.resx">
+      <DependentUpon>facMainpage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

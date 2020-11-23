@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CRS
@@ -15,61 +11,218 @@ namespace CRS
         public userDatabase usrDB;
         public courseDatabase crsDB;
         string nextSemester = "S15";
-        string currentSemester = "F14";
         string stdUsername = "";
-        List<int> addCrsLst = new List<int>();
-        List<int> dropCrsLst = new List<int>();
+        string facUsername = "";
+        List<string> addCrsLst = new List<string>();
+        List<string> dropCrsLst = new List<string>();
         List<string> manSelectedCrsLst = new List<string>();
         List<string> manSelectedStdLst = new List<string>();
         List<int> manSelectedFacLst = new List<int>();
 
-        public admMainpage(userDatabase usrDB, string cpath, string ppath, string usertype)
+        public admMainpage(userDatabase usrDB, string ppath, string usertype)
         {
+            // Store attributes
             InitializeComponent();
-            crsDB = new courseDatabase(cpath, ref usrDB);
-            usrDB.addPrevCourses(ppath, ref crsDB, nextSemester);
+            crsDB = new courseDatabase(ref usrDB);
+            usrDB.addPrevCourses(ref crsDB, nextSemester);
             this.usrDB = usrDB;
+
+            // If the user is admin, hide managers' interactions
             if (usertype == "admin")
                 manSelect.Visible = false;
+
+            // Add usernames to search boxes for auto completion
             foreach (student std in usrDB.getStudentList())
             {
                 stdSearchBox.AutoCompleteCustomSource.Add(std.username);
-                manStdSearchText.AutoCompleteCustomSource.Add(std.username);
+                manStdSearchBox.AutoCompleteCustomSource.Add(std.username);
+            }
+            foreach(faculty fac in usrDB.getFacultyList())
+            {
+                facSearchBox.AutoCompleteCustomSource.Add(fac.username);
+                manFacSearchBox.AutoCompleteCustomSource.Add(fac.username);
+            }
+            foreach (course crs in crsDB.getCourseList())
+            {
+                crsIDBox.AutoCompleteCustomSource.Add(crs.crsID);
+                manCrsIDBox.AutoCompleteCustomSource.Add(crs.crsID);
             }
         }
         public admMainpage(userDatabase usrDB, courseDatabase crsDB, string usertype)
         {
+            InitializeComponent();
             this.usrDB = usrDB;
             this.crsDB = crsDB;
-            InitializeComponent();
+
+            // Hide managers' interactions if the user is an administrator
             if (usertype == "admin")
                 manSelect.Visible = false;
+
+            // Add usernames to search boxes for auto completion
+            foreach (student std in usrDB.getStudentList())
+            {
+                stdSearchBox.AutoCompleteCustomSource.Add(std.username);
+                manStdSearchBox.AutoCompleteCustomSource.Add(std.username);
+            }
+            foreach (faculty fac in usrDB.getFacultyList())
+            {
+                facSearchBox.AutoCompleteCustomSource.Add(fac.username);
+                manFacSearchBox.AutoCompleteCustomSource.Add(fac.username);
+            }
         }
+
+
 
         public void createCrsLst()
         {
-            if (crsLst.DataSource == null)
-            {
-                DataTable table = new DataTable();
-                table.Columns.Add("Course ID", typeof(string));
-                table.Columns.Add("Title", typeof(string));
-                table.Columns.Add("Faculty", typeof(string));
-                table.Columns.Add("Credits", typeof(string));
-                table.Columns.Add("Seats", typeof(string));
-                table.Columns.Add("Schedule", typeof(string));
+            DataTable table = new DataTable();
+            table.Columns.Add("Course ID", typeof(string));
+            table.Columns.Add("Title", typeof(string));
+            table.Columns.Add("Instructor", typeof(string));
+            table.Columns.Add("Credits", typeof(string));
+            table.Columns.Add("Seats", typeof(string));
+            table.Columns.Add("Schedule", typeof(string));
 
-                foreach (course crs in crsDB.getCourseList())
-                    table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats + " / " + crs.maxSeats, crs.getBlocks());
+            crsLst.DataSource = table;
 
-                crsLst.DataSource = table;
+            DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            btn.ValueType = typeof(bool);
+            crsLst.Columns.Insert(0, btn);
+            crsLst.Columns[0].HeaderText = "Add";
+            crsLst.Columns[0].Name = "Add";
+            crsLst.ClearSelection();
 
-                DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
-                btn.ValueType = typeof(bool);
-                crsLst.Columns.Insert(0, btn);
-                crsLst.Columns[0].HeaderText = "Add";
-                crsLst.Columns[0].Name = "Add";
-            }
+            foreach (DataGridViewColumn col in crsLst.Columns)
+                col.ReadOnly = true;
+            crsLst.Columns[0].ReadOnly = false;
         }
+
+        // Create table frames for students' interactions (Not populating)
+        //--------------------------------------------------------------------
+        public void createStdLst()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Username");
+            table.Columns.Add("First Name");
+            table.Columns.Add("Last Name");
+            table.Columns.Add("Advisor");
+            table.Columns.Add("GPA");
+            table.Columns.Add("Credits");
+
+            stdLst.DataSource = table;
+
+            DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            btn.ValueType = typeof(bool);
+            stdLst.Columns.Insert(0, btn);
+            stdLst.Columns[0].HeaderText = "Select";
+            stdLst.Columns[0].Name = "Select";
+            stdLst.ClearSelection();
+
+            foreach (DataGridViewColumn col in stdLst.Columns)
+                col.ReadOnly = true;
+            stdLst.Columns[0].ReadOnly = false;
+        } 
+        public void createStdSch()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Course ID", typeof(string));
+            table.Columns.Add("Title", typeof(string));
+            table.Columns.Add("Instructor", typeof(string));
+            table.Columns.Add("Credits", typeof(string));
+            table.Columns.Add("Schedule", typeof(string));
+
+            stdSch.DataSource = table;
+
+            DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            stdSch.Columns.Insert(0, btn);
+            stdSch.Columns[0].HeaderText = "Drop";
+            stdSch.Columns[0].Name = "Drop";
+            stdSch.ClearSelection();
+
+            foreach (DataGridViewColumn col in stdSch.Columns)
+                col.ReadOnly = true;
+            stdSch.Columns[0].ReadOnly = false;
+        } 
+        public void createGradeHist()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Course ID", typeof(string));
+            table.Columns.Add("Semester", typeof(string));
+            table.Columns.Add("Credits", typeof(string));
+            table.Columns.Add("Grade", typeof(string));
+
+            gradeHist.DataSource = table;
+        }
+
+
+        // Create table frames for faculties' interactions (Not populating)
+        //----------------------------------------------------------------------
+        public void createFacLst()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Username");
+            table.Columns.Add("First Name");
+            table.Columns.Add("Last Name");
+
+            facLst.DataSource = table;
+
+            DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            btn.ValueType = typeof(bool);
+            facLst.Columns.Insert(0, btn);
+            facLst.Columns[0].HeaderText = "Select";
+            facLst.Columns[0].Name = "Select";
+            facLst.ClearSelection();
+
+            foreach (DataGridViewColumn col in facLst.Columns)
+                col.ReadOnly = true;
+            facLst.Columns[0].ReadOnly = false;
+        }
+        public void createFacSch()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Course ID", typeof(string));
+            table.Columns.Add("Title", typeof(string));
+            table.Columns.Add("Schedule", typeof(string));
+
+            facSch.DataSource = table;
+
+            DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            btn.ValueType = typeof(bool);
+            facSch.Columns.Insert(0, btn);
+            facSch.Columns[0].HeaderText = "Select";
+            facSch.Columns[0].Name = "Select";
+            facSch.ClearSelection();
+
+            foreach (DataGridViewColumn col in facSch.Columns)
+                col.ReadOnly = true;
+            facSch.Columns[0].ReadOnly = false;
+        }
+        public void createAdviseeLst()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Username", typeof(string));
+            table.Columns.Add("First Name", typeof(string));
+            table.Columns.Add("Last Name", typeof(string));
+            table.Columns.Add("GPA", typeof(string));
+            table.Columns.Add("Credits", typeof(string));
+
+            adviseeLst.DataSource = table;
+
+            DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            btn.ValueType = typeof(bool);
+            adviseeLst.Columns.Insert(0, btn);
+            adviseeLst.Columns[0].HeaderText = "Select";
+            adviseeLst.Columns[0].Name = "Select";
+            adviseeLst.ClearSelection();
+
+            foreach (DataGridViewColumn col in adviseeLst.Columns)
+                col.ReadOnly = true;
+            adviseeLst.Columns[0].ReadOnly = false;
+        }
+
+
+        // Create table frames for managers' interactions (Not populating)
+        //--------------------------------------------------------------------
         public void createManCrsLst()
         {
             DataTable table = new DataTable();
@@ -80,166 +233,90 @@ namespace CRS
             table.Columns.Add("Seats", typeof(string));
             table.Columns.Add("Schedule", typeof(string));
 
-            foreach (course crs in crsDB.getCourseList())
-                table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats + " / " + crs.maxSeats, crs.getBlocks());
-
             manCrsLst.DataSource = table;
-            manCrsLst.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            manCrsLst.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            int width = manCrsLst.Columns[5].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            manCrsLst.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            manCrsLst.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            manCrsLst.Columns[5].Width = width;
 
             DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
             btn.ValueType = typeof(bool);
             manCrsLst.Columns.Insert(0, btn);
             manCrsLst.Columns[0].HeaderText = "Select";
             manCrsLst.Columns[0].Name = "Select";
+
+            foreach (DataGridViewColumn col in manCrsLst.Columns)
+                col.ReadOnly = true;
+            manCrsLst.Columns[0].ReadOnly = false;
         }
         public void createManStdLst()
-        {
-            if (manStdLst.DataSource == null)
-            {
-                DataTable table = new DataTable();
-                table.Columns.Add("Username");
-                table.Columns.Add("First Name");
-                table.Columns.Add("Last Name");
-                table.Columns.Add("Advisor");
-                table.Columns.Add("GPA");
-                table.Columns.Add("Credits");
-
-                manStdLst.DataSource = table;
-                DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
-                btn.ValueType = typeof(bool);
-                manStdLst.Columns.Insert(0, btn);
-                manStdLst.Columns[0].HeaderText = "Select";
-                manStdLst.Columns[0].Name = "Select";
-                manStdLst.ClearSelection();
-            }
-        }
-        public void createManFacLst()
-        {
-
-        }
-
-
-        // Create tables for students' interactions
-        //--------------------------------------------------------------------
-        public void createStdLst()
-        {
-            if (stdLst.DataSource == null)
-            {
-                DataTable table = new DataTable();
-                table.Columns.Add("Username");
-                table.Columns.Add("First Name");
-                table.Columns.Add("Last Name");
-                table.Columns.Add("Advisor");
-                table.Columns.Add("GPA");
-                table.Columns.Add("Credits");
-                
-                stdLst.DataSource = table;
-
-                DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
-                btn.ValueType = typeof(bool);
-                stdLst.Columns.Insert(0, btn);
-                stdLst.Columns[0].HeaderText = "Select";
-                stdLst.Columns[0].Name = "Select";
-                stdLst.ClearSelection();
-            }
-        } // Create the frame of the table
-        public void createStdSch()
-        {
-            if (stdSch.DataSource == null)
-            {
-                DataTable table = new DataTable();
-                table.Columns.Add("Course ID", typeof(string));
-                table.Columns.Add("Title", typeof(string));
-                table.Columns.Add("Instructor", typeof(string));
-                table.Columns.Add("Credits", typeof(string));
-                table.Columns.Add("Seats", typeof(string));
-                table.Columns.Add("Schedule", typeof(string));
-
-                stdSch.DataSource = table;
-
-                DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
-                stdSch.Columns.Insert(0, btn);
-                stdSch.Columns[0].HeaderText = "Drop";
-                stdSch.Columns[0].Name = "Drop";
-                stdSch.ClearSelection();
-            }
-        } // Create the frame of the table
-        public void createGradeHist()
-        {
-            if (gradeHist.DataSource == null)
-            {
-                DataTable table = new DataTable();
-                table.Columns.Add("Course ID", typeof(string));
-                table.Columns.Add("Semester", typeof(string));
-                table.Columns.Add("Credits", typeof(string));
-                table.Columns.Add("Grade", typeof(string));
-
-                gradeHist.DataSource = table;
-            }
-        }// Create the frame of the table
-
-
-
-        // Create tables for faculties' interactions
-        //----------------------------------------------------------------------
-        public void createFacLst()
         {
             DataTable table = new DataTable();
             table.Columns.Add("Username");
             table.Columns.Add("First Name");
             table.Columns.Add("Last Name");
-            //table.Columns.Add("Number of Courses teaching");
+            table.Columns.Add("Advisor");
+            table.Columns.Add("GPA");
+            table.Columns.Add("Credits");
 
-            foreach (faculty fac in usrDB.getFacultyList())
-                table.Rows.Add(fac.username, fac.fname, fac.lname);
+            manStdLst.DataSource = table;
 
-            stdLst.DataSource = table;
-            stdLst.Columns["Username"].Visible = false;
+            DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            btn.ValueType = typeof(bool);
+            manStdLst.Columns.Insert(0, btn);
+            manStdLst.Columns[0].HeaderText = "Select";
+            manStdLst.Columns[0].Name = "Select";
+            manStdLst.ClearSelection();
+
+            foreach (DataGridViewColumn col in manStdLst.Columns)
+                col.ReadOnly = true;
+            manStdLst.Columns[0].ReadOnly = false;
         }
-        public void createFacSch()
+        public void createManFacLst()
         {
             DataTable table = new DataTable();
-            table.Columns.Add("Course ID", typeof(string));
-            table.Columns.Add("Title", typeof(string));
-            table.Columns.Add("Schedule", typeof(string));
+            table.Columns.Add("Username");
+            table.Columns.Add("First Name");
+            table.Columns.Add("Last Name");
 
-            facSch.DataSource = table;
-        }   // Create the frame of the table
+            manFacLst.DataSource = table;
+
+            DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
+            btn.ValueType = typeof(bool);
+            manFacLst.Columns.Insert(0, btn);
+            manFacLst.Columns[0].HeaderText = "Select";
+            manFacLst.Columns[0].Name = "Select";
+            manFacLst.ClearSelection();
+
+            foreach (DataGridViewColumn col in manFacLst.Columns)
+                col.ReadOnly = true;
+            manFacLst.Columns[0].ReadOnly = false;
+        }
 
 
-        // Select the user type
+        // Select the user type (Populate tables at the same time)
         //-----------------------------------------------------------------
         private void stdSelectClick(object sender, System.EventArgs e)
         {
             // Populate the student list
-            createStdLst();
+            if (stdLst.DataSource == null)
+                createStdLst();
             DataTable table = (DataTable)stdLst.DataSource;
             table.Rows.Clear();
             foreach (student std in usrDB.getStudentList())
                 table.Rows.Add(std.username, std.fname, std.lname, std.advisor, std.GPA, std.totalCredits);
-            
-            createStdSch();
-            createGradeHist();
 
             // Populate the list of courses
-            createCrsLst();
+            if (crsLst.DataSource == null)
+                createCrsLst();
             table = (DataTable)crsLst.DataSource;
             table.Rows.Clear();
             foreach (course crs in crsDB.getCourseList())
-                table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats, crs.getBlocks());
+                table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats + " / " + crs.maxSeats, crs.getBlocks());
             crsLst.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             crsLst.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            int width = crsLst.Columns[5].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            crsLst.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            int width = crsLst.Columns["Schedule"].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            crsLst.Columns["Schedule"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             crsLst.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            crsLst.Columns[5].Width = width;
+            crsLst.Columns["Schedule"].Width = width;
 
-
+            // Mark student tag button
             stdSelect.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             facSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             manSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
@@ -247,41 +324,84 @@ namespace CRS
             // Display tables for students' interactions
             stdLstContainer.Visible = true;
             crsLstContainer.Visible = true;
+            addCrs.Visible = true;
+            crsLst.Columns[0].Visible = true;
             stdActions.Visible = true;
-            stdActions.BringToFront();
-            stdLst.ClearSelection();
-            stdSch.ClearSelection();
 
             // Hide tables
+            stdSchContainer.Visible = false;
+            gradeHistContainer.Visible = false;
             manActions.Visible = false;
             manCrsLstContainer.Visible = false;
             manStdLstContainer.Visible = false;
             manFacLstContainer.Visible = false;
+            //facActions.Visible = false;
             facLstContainer.Visible = false;
+            facSchContainer.Visible = false;
+            adviseeLstContainer.Visible = false;
+            addCrsLst.Clear();
+            dropCrsLst.Clear();
+            manSelectedCrsLst.Clear();
+            manSelectedStdLst.Clear();
+            manSelectedFacLst.Clear();
+            stdUsername = "";
+            facUsername = "";
+
+            stdLst.ClearSelection();
         }
         private void facSelectClick(object sender, System.EventArgs e)
         {
-            createFacLst();
-            createFacSch();
+            // Populate the list of faculties
+            if (facLst.DataSource == null)
+                createFacLst();
+            DataTable table = (DataTable)facLst.DataSource;
+            table.Rows.Clear();
+            foreach (faculty fac in usrDB.getFacultyList())
+                table.Rows.Add(fac.username, fac.fname, fac.lname);
 
+            // Populate the list of courses
+            if (crsLst.DataSource == null)
+                createCrsLst();
+            table = (DataTable)crsLst.DataSource;
+            table.Rows.Clear();
+            foreach (course crs in crsDB.getCourseList())
+                table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats + " / " + crs.maxSeats, crs.getBlocks());
+            crsLst.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            crsLst.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            int width = crsLst.Columns["Schedule"].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            crsLst.Columns["Schedule"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            crsLst.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            crsLst.Columns["Schedule"].Width = width;
+
+            // Mark faculty tag
             facSelect.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             stdSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             manSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
 
-
-            // Hide everything of students' interactions
+            // Hide everything else
+            crsLst.Columns[0].Visible = false;
+            addCrs.Visible = false;
+            facSchContainer.Visible = false;
+            adviseeLstContainer.Visible = false;
             stdLstContainer.Visible = false;
+            gradeHistContainer.Visible = false;
             stdActions.Visible = false;
+            stdSchContainer.Visible = false;
+            manActions.Visible = false;
+            manStdLstContainer.Visible = false;
+            manCrsLstContainer.Visible = false;
+            manFacLstContainer.Visible = false;
 
             facLstContainer.Visible = true;
-            //facActions.Visible = true;
-            //facActions.BringToFront();
-            stdSearch.Visible = true;
-            stdSearchBox.Visible = true;
-            stdSearchLabel.Visible = true;
-            crsLst.Columns["Remove"].Visible = false;
-
-            gradeHist.Visible = false;
+            crsLstContainer.Visible = true;
+            facActions.Visible = true;
+            addCrsLst.Clear();
+            dropCrsLst.Clear();
+            manSelectedCrsLst.Clear();
+            manSelectedStdLst.Clear();
+            manSelectedFacLst.Clear();
+            stdUsername = "";
+            facUsername = "";
         }
         private void manSelectClick(object sender, EventArgs e)
         {
@@ -291,7 +411,14 @@ namespace CRS
             DataTable table = (DataTable)manCrsLst.DataSource;
             table.Rows.Clear();
             foreach (course crs in crsDB.getCourseList())
-                table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats, crs.getBlocks());
+                table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats + " / " + crs.maxSeats, crs.getBlocks());
+
+            manCrsLst.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            manCrsLst.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            int width = manCrsLst.Columns["Schedule"].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            manCrsLst.Columns["Schedule"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            manCrsLst.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            manCrsLst.Columns["Schedule"].Width = width;
 
             // Populate the student list for managers
             if (manStdLst.DataSource == null)
@@ -301,49 +428,87 @@ namespace CRS
             foreach (student std in usrDB.getStudentList())
                 table.Rows.Add(std.username, std.fname, std.lname, std.advisor, std.GPA, std.totalCredits);
 
-
+            // Populate the faculty list for managers
             if (manFacLst.DataSource == null)
                 createManFacLst();
+            table = (DataTable)manFacLst.DataSource;
+            table.Rows.Clear();
+            foreach (faculty fac in usrDB.getFacultyList())
+                table.Rows.Add(fac.username, fac.fname, fac.lname);
 
+            // Mark manager tag
             manSelect.BackColor = Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             facSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             stdSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
 
+            //
             crsLstContainer.Visible = false;
             stdLstContainer.Visible = false;
             stdSchContainer.Visible = false;
             gradeHistContainer.Visible = false;
             stdActions.Visible = false;
+            facLstContainer.Visible = false;
+            facSchContainer.Visible = false;
+            adviseeLstContainer.Visible = false;
+            facActions.Visible = false;
             manCrsLstContainer.Visible = true;
             manStdLstContainer.Visible = true;
             manFacLstContainer.Visible = true;
             manActions.Visible = true;
-           
+            addCrsLst.Clear();
+            dropCrsLst.Clear();
+            manSelectedCrsLst.Clear();
+            manSelectedStdLst.Clear();
+            manSelectedFacLst.Clear();
+            stdUsername = "";
+            facUsername = "";
         }
 
 
         // Student interactions
         //---------------------------------------------------------
+        private void stdConfirmClick(object sender, EventArgs e)
+        {
+            if (stdLst.SelectedRows.Count == 0)
+                MessageBox.Show("Select a student from the list below.",
+                    "No student selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            else
+            {
+                stdUsername = stdLst.SelectedRows[0].Cells["Username"].Value.ToString().Trim();
+                student std = usrDB.getStudent(stdUsername);
+
+                // Populate the student schedule
+                if (stdSch.DataSource == null)
+                    createStdSch();
+                DataTable table = (DataTable)stdSch.DataSource;
+                table.Rows.Clear();
+                foreach (course crs in std.registeredCrs)
+                    table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.getBlocks());
+
+                // Populate the student's course history
+                if (gradeHist.DataSource == null)
+                    createGradeHist();
+                table = (DataTable)gradeHist.DataSource;
+                foreach (previousCourse pcrs in std.pastCrs)
+                    table.Rows.Add(pcrs.crsID, pcrs.semester, pcrs.credit, pcrs.grade);
+                gpa.Text = "GPA :" + std.GPA.ToString();
+                credits.Text = "Credits :" + std.totalCredits.ToString();
+
+                stdLstContainer.Visible = false;
+                stdSchContainer.Visible = true;
+                gradeHistContainer.Visible = true;
+            }
+        }
         private void crsSearchClick(object sender, EventArgs e)
         {
             string crsID = crsIDBox.Text.Trim();
 
-            if (stdActions.Visible)
-                for (int i = 0; i < stdLst.RowCount; i++)
+            if (crsLst.Visible)
+                for (int i = 0; i < crsLst.RowCount; i++)
                     if (crsLst.Rows[i].Cells["Course ID"].Value.ToString().Trim() == crsID)
                     {
-                        if (addCrsLst.Contains(i))
-                        {
-                            addCrsLst.Remove(i);
-                            for (int l = 0; l < addCrsLst.Count; l++)
-                                if (addCrsLst[l] < i)
-                                    addCrsLst[l] += 1;
-                            addCrsLst.Add(0);
-                        }
-                        else
-                            for (int l = 0; l < addCrsLst.Count; l++)
-                                if (addCrsLst[l] < i)
-                                    addCrsLst[l] += 1;
                         DataTable table = (DataTable)crsLst.DataSource;
                         DataRow dr = table.Rows[i];
                         DataRow nr = table.NewRow();
@@ -353,98 +518,51 @@ namespace CRS
                         break;
                     }
         }
-        private void stdConfirmClick(object sender, EventArgs e)
-        {
-            if (stdLst.SelectedRows.Count == 0)
-                MessageBox.Show("Select a student from the list",
-                    "No student selected",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            else
-            {
-                stdUsername = stdLst.SelectedRows[0].Cells["Username"].Value.ToString();
-                student std = usrDB.getStudent(stdUsername);
-
-                // Update the student schedule
-                DataTable table = (DataTable)stdSch.DataSource;
-                if (table != null)
-                    table.Rows.Clear();
-                foreach (course crs in std.registeredCrs)
-                    table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.seats, crs.getBlocks());
-
-                stdSch.DataSource = table;
-
-                // Update the student's course history
-                DataTable t = (DataTable)gradeHist.DataSource;
-                if (t != null)
-                    t.Rows.Clear();
-                foreach (previousCourse pcrs in std.pastCrs)
-                    t.Rows.Add(pcrs.crsID, pcrs.semester, pcrs.credit, pcrs.grade);
-
-                gradeHist.DataSource = t;
-                crsLstContainer.Visible = true;
-                stdLstContainer.Visible = false;
-                stdSchContainer.Visible = true;
-                gradeHistContainer.Visible = true;
-            }
-        }
         private void addCrsClick(object sender, EventArgs e)
         {
             int count = addCrsLst.Count;
-
             if (count == 0)
-                MessageBox.Show("Select a class",
-                    "No Class",
+                MessageBox.Show("Select classes",
+                    "No class selected",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             else
             {
-                List<DataGridViewRow> rowList = new List<DataGridViewRow>();
-                foreach (int i in addCrsLst)
-                    rowList.Add(crsLst.Rows[i]);
-
-                for (int i = 0; i < count; i++)
+                foreach (string crsID in addCrsLst)
                 {
-                    // Get the course id
-                    DataGridViewRow r = rowList[i];
-                    string crsID = r.Cells["Course ID"].Value.ToString().Trim();
-
                     // Add the course to the student
                     student std = usrDB.getStudent(stdUsername);
-                    usrDB.addCrsToStd(crsID, "S15", ref crsDB, std);
+                    usrDB.addCrsToStd(crsID, nextSemester, ref crsDB, std);
 
-                    // Update the course list table
+                    // Update the course list and student schedule
                     foreach (DataGridViewRow row in crsLst.Rows)
-                    {
-                        if (row.Cells["Course ID"].Value.ToString().Trim() == crsID)
-                        {
+                        if (row.Cells["Course ID"].Value.ToString().ToString() == crsID)
                             if (row.Visible)
                             {
-                                course crs = crsDB.getCourse(row.Cells["Course ID"].Value.ToString());
+                                course crs = crsDB.getCourse(crsID);
                                 row.Cells["Seats"].Value = crs.seats + " / " + crs.maxSeats;
+                                DataTable table = (DataTable)stdSch.DataSource;
+                                table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.getBlocks());
                                 break;
                             }
-                        }
-                    }
-
-                    course Crs = crsDB.getCourse(crsID);
-                    DataTable table = (DataTable)stdSch.DataSource;
-                    table.Rows.Add(Crs.crsID, Crs.title, Crs.instructor, Crs.credit, Crs.seats, Crs.getBlocks());
                 }
 
-                for (int i = 0; i < stdSch.Rows.Count; i++)
+                crsLst.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                crsLst.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                crsLst.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                int width = crsLst.Columns["Schedule"].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+                crsLst.Columns["Schedule"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                crsLst.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+                crsLst.Columns["Schedule"].Width = width;
+
+                crsLst.ClearSelection();
+                for (int i = 0; i < crsLst.Rows.Count; i++)
                     crsLst.Rows[i].Cells["Add"].Value = null;
-
-                dropCrsLst.Clear();
-                stdSch.ClearSelection();
-
-                stdSch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                stdSch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                stdSch.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                int width = stdSch.Columns[5].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-                stdSch.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                stdSch.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-                stdSch.Columns[5].Width = width;
+                addCrsLst.Clear();
+                MessageBox.Show("Adding courses successfully executed.",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
         }
         private void dropCrsClick(object sender, EventArgs e)
@@ -458,114 +576,58 @@ namespace CRS
                     MessageBoxIcon.Error);
             else
             {
-                List<DataGridViewRow> rowList = new List<DataGridViewRow>();
-                foreach (int i in dropCrsLst)
-                    rowList.Add(stdSch.Rows[i]);
-
-                for (int i = 0; i < count; i++)
+                foreach (string crsID in dropCrsLst)
                 {
-                    // Get the course id
-                    DataGridViewRow r = rowList[i];
-                    string crsID = r.Cells["Course ID"].Value.ToString().Trim();
-
                     // Drop the course from the student
                     student std = usrDB.getStudent(stdUsername);
                     usrDB.dropCrsFromStd(crsID, ref crsDB, std);
 
-                    // Update the course list table
+                    // Update the course list
                     foreach (DataGridViewRow row in crsLst.Rows)
-                    {
                         if (row.Cells["Course ID"].Value.ToString().Trim() == crsID)
-                        {
                             if (row.Visible)
                             {
-                                course crs = crsDB.getCourse(row.Cells["Course ID"].Value.ToString());
+                                course crs = crsDB.getCourse(crsID);
                                 row.Cells["Seats"].Value = crs.seats + " / " + crs.maxSeats;
-                                break;
                             }
-                        }
-                    }
 
-                }
-
-                foreach (DataGridViewRow row in rowList)
-                    for (int l = 0; l < stdSch.Rows.Count; l++)
-                        if (row.Cells["Course ID"].Value.ToString().Trim() == stdSch.Rows[l].Cells["Course ID"].Value.ToString().Trim())
+                    // Update the student table
+                    foreach (DataGridViewRow row in stdSch.Rows)
+                        if (row.Cells["Course ID"].Value.ToString().Trim() == crsID)
                         {
-                            stdSch.Rows.RemoveAt(l);
+                            stdSch.Rows.Remove(row);
                             break;
                         }
+                }
 
+                // Update the course list too because when we made the change to the table above
+                // It messed up things
                 for (int i = 0; i < stdSch.Rows.Count; i++)
                     stdSch.Rows[i].Cells["Drop"].Value = null;
+                for (int i = 0; i < crsLst.RowCount; i++)
+                    crsLst.Rows[i].Cells["Add"].Value = null;
 
                 dropCrsLst.Clear();
+                addCrsLst.Clear();
                 stdSch.ClearSelection();
+            }
+        }
+        private void curSchClick(object sender, EventArgs e)
+        {
+            if (stdLst.SelectedRows.Count == 0)
+                MessageBox.Show("Select a student from the list",
+                    "No student selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            else
+            {
+                string username = stdLst.SelectedRows[0].Cells["Username"].Value.ToString().Trim();
+                student std = usrDB.getStudent(username);
 
-                stdSch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                stdSch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                stdSch.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                int width = stdSch.Columns[5].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-                stdSch.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                stdSch.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-                stdSch.Columns[5].Width = width;
-            }
-        }
-        private void stdSchCellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            int rowIndex = e.RowIndex;
-            if (rowIndex == -1)
-                return;
-            if (Convert.ToBoolean(stdSch.Rows[rowIndex].Cells[0].Value) == true)
-                dropCrsLst.Add(rowIndex);
-            else
-                dropCrsLst.Remove(rowIndex);
-        }
-        private void stdSchCurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            if (stdSch.IsCurrentCellDirty)
-            {
-                stdSch.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-        }
-        private void crsLstCellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            int rowIndex = e.RowIndex;
-            if (rowIndex == -1)
-                return;
-            if (Convert.ToBoolean(crsLst.Rows[rowIndex].Cells["Add"].Value) == true && !addCrsLst.Contains(rowIndex))
-                addCrsLst.Add(rowIndex);
-            else
-                addCrsLst.Remove(rowIndex);
-        }
-        private void crsLstCurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            if (crsLst.IsCurrentCellDirty)
-            {
-                crsLst.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-        }
-        private void stdLstCurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            if (stdLst.IsCurrentCellDirty)
-            {
-                stdLst.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            }
-        }
-        private void stdLstCellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int rowIndex = e.RowIndex;
-            if (rowIndex < 0)
-                return;
-            for (int i = 0; i < stdLst.RowCount; i++)
-            {
-                if (i == rowIndex)
-                {
-                    stdLst.Rows[rowIndex].Selected = true;
-                    stdLst.Rows[rowIndex].Cells[0].Value = true;
-                }
-                else
-                    stdLst.Rows[i].Cells[0].Value = false;
+                string message = std.fname + " " + std.lname + " is taking the following courses :\n";
+                foreach (previousCourse pcrs in std.currentCrs)
+                    message += "    " + pcrs.crsID + "   " + pcrs.credit + " credits" + "\n";
+                MessageBox.Show(message, "Current Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void showGradeHistClick(object sender, EventArgs e)
@@ -659,174 +721,128 @@ namespace CRS
         }
         private void stdViewCrsLstClick(object sender, EventArgs e)
         {
-            crsLstContainer.Visible = true;
             ScrollControlIntoView(crsLst);
         }
 
+        private void crsLstCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            string crsID = crsLst.Rows[rowIndex].Cells["Course ID"].Value.ToString().Trim();
+            if (Convert.ToBoolean(crsLst.Rows[rowIndex].Cells["Add"].Value) == true)
+            {
+                if (!addCrsLst.Contains(crsID))
+                    addCrsLst.Add(crsID);
+                else
+                    return;
+            }
+            else
+                addCrsLst.Remove(crsID);
+        }
+        private void stdSchCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            string crsID = stdSch.Rows[rowIndex].Cells["Course ID"].Value.ToString().Trim();
+            if (Convert.ToBoolean(stdSch.Rows[rowIndex].Cells["Select"].Value) == true)
+            {
+                if (!dropCrsLst.Contains(crsID))
+                    dropCrsLst.Add(crsID);
+                else
+                    return;
+            }
+            else
+                dropCrsLst.Remove(crsID);
+        }
+        private void stdLstCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            for (int i = 0; i < stdLst.RowCount; i++)
+            {
+                if (i == rowIndex)
+                {
+                    stdLst.Rows[rowIndex].Selected = true;
+                    stdLst.Rows[rowIndex].Cells[0].Value = true;
+                }
+                else
+                    stdLst.Rows[i].Cells[0].Value = null;
+            }
+        }
+
+        private void stdSchCurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (stdSch.IsCurrentCellDirty)
+                stdSch.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+        private void crsLstCurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (crsLst.IsCurrentCellDirty)
+                crsLst.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+        private void stdLstCurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (stdLst.IsCurrentCellDirty)
+            {
+                stdLst.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
 
 
         // Faculty interactions
         //----------------------------------------------------------------------
-        private void facSelected(object sender, DataGridViewCellEventArgs e)
+        private void facConfirmClick(object sender, EventArgs e)
         {
-            if (stdLst.SelectedRows.Count == 1)
+            if (facLst.SelectedRows.Count == 0)
+                MessageBox.Show("Select a faculty from the list",
+                    "No faculty selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            else
             {
-                string username = stdLst.SelectedRows[0].Cells["Username"].Value.ToString().Trim();
+                facUsername = facLst.SelectedRows[0].Cells["Username"].Value.ToString();
+                faculty fac = usrDB.getFaculty(facUsername);
 
-                // Get the list of courses the faculty is scheduled to teach
-                List<course> crsLst = new List<course>();
-                foreach (course crs in crsDB.getCourseList())
-                    if (crs.instructor.Trim() == username)
-                        crsLst.Add(crs);
-
-                // Update the faculty schedule table
+                // Populate the faculty schedule
+                if (facSch.DataSource == null)
+                    createFacSch();
                 DataTable table = (DataTable)facSch.DataSource;
                 table.Rows.Clear();
-                foreach (course crs in crsLst)
+                foreach (course crs in fac.nextSemesterCourses)
                     table.Rows.Add(crs.crsID, crs.title, crs.getBlocks());
+
+                facSch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                facSch.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                int width = facSch.Columns["Schedule"].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+                facSch.Columns["Schedule"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                facSch.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+                facSch.Columns["Schedule"].Width = width;
+
+                // Populate the advisees list
+                if (adviseeLst.DataSource == null)
+                    createAdviseeLst();
+                table = (DataTable)adviseeLst.DataSource;
+                table.Rows.Clear();
+                foreach (student std in fac.adviseesLst)
+                    table.Rows.Add(std.username, std.fname, std.lname, std.GPA, std.totalCredits);
+
+                facSchContainer.Visible = true;
+                adviseeLstContainer.Visible = true;
+                facLstContainer.Visible = false;
             }
         }
-        private void showEnrolledStdClick(object sender, EventArgs e)
+        private void facSearchClick(object sender, EventArgs e)
         {
-            if (facSch.SelectedRows.Count == 1)
-            {
-                string crsID = facSch.SelectedRows[0].Cells["Course ID"].Value.ToString();
-                course crs = crsDB.getCourse(crsID);
-                new admEnrolledStd(crs).Show();
-            }
-            else
-                MessageBox.Show("Select a class from the schedule list",
-                    "No class selected",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-        }
-        private void showAdviseesClick(object sender, EventArgs e)
-        {
-            if (stdLst.SelectedRows.Count == 1)
-            {
-                string username = stdLst.SelectedRows[0].Cells["Username"].Value.ToString();
-                faculty fac = usrDB.getFaculty(username);
-                new admAdvisees(fac, usrDB).Show();
-            }
-            else
-                MessageBox.Show("Select a faculty from the faculties list",
-                    "No faculty selected",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-        }
-        private void checkAdviseeScheduleClick(object sender, EventArgs e)
-        {
-            if (stdLst.SelectedRows.Count == 1)
-            {
-                string username = stdLst.SelectedRows[0].Cells["Username"].Value.ToString();
-                faculty fac = usrDB.getFaculty(username);
-                new admAdvisees(fac, usrDB);
-            }
-            else
-                MessageBox.Show("Select a faculty from the faculties list",
-                    "No faculty selected",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-        }
+            string username = facSearchBox.Text.ToLower().Trim();
 
-
-        // Manager interactions
-        //----------------------------------------------------------------------
-        private void removeFacClick(object sender, EventArgs e)
-        {
-            if (stdLst.SelectedRows.Count == 1)
-            {
-                string username = stdLst.SelectedRows[0].Cells["Username"].Visible.ToString();
-                usrDB.removeStd(username, ref crsDB, "filepath");
-            }
-            else
-                MessageBox.Show("Select a faculty from the faculties list",
-                    "No faculty selected",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-        }
-        private void admChangeAdvisorClick(object sender, EventArgs e)
-        {
-            if (stdLst.SelectedRows.Count == 0)
-                MessageBox.Show("Select a student from the list",
-                    "No student selected",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            else
-            {
-                stdUsername = stdLst.SelectedRows[0].Cells["Username"].Value.ToString().Trim();
-                student std = usrDB.getStudent(stdUsername);
-                var form = new admChangeAdvisor(usrDB, std.advisor);
-                form.ShowDialog();
-                if (form.DialogResult == DialogResult.OK)
-                {
-                    string newAdvisor = form.newAdvisor;
-                    std.setAdvisor(newAdvisor);
-
-                    stdLst.SelectedRows[0].Cells["Advisor"].Value = std.advisor;
-                    stdLst.SelectedRows[0].Cells["Select"].Value = null;
-
-                    MessageBox.Show("The advisor has been changed.",
-                        "Advisor changed",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                }
-                else
-                    MessageBox.Show("The advisor was not changed.",
-                        "No change made",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-            }
-        }
-        private void createUserClick(object sender, EventArgs e)
-        {
-            var form = new admCreateUser(usrDB);
-            form.ShowDialog();
-            if (form.DialogResult == DialogResult.OK)
-            {
-                usrDB.addUser(form.uname, form.pword, form.fName, form.mName, form.lName, form.uType, @"..\..\userDB.in");
-                if (form.uType.ToLower().Trim() == "student")
-                {
-                    List<student> tempLst = usrDB.getStudentList();
-                    int length = tempLst.Count;
-                    student newStd = tempLst[length - 1];
-
-                    // Update the student list table
-                    DataTable table = (DataTable)manStdLst.DataSource;
-                    table.Rows.Add(newStd.username, newStd.fname, newStd.lname, newStd.advisor, newStd.GPA, newStd.totalCredits);
-                }
-            }
-            else
-                MessageBox.Show("No users have been added.",
-                        "No change made",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-        }
-        private void createCrsClick(object sender, EventArgs e)
-        {
-            var form = new admCreateCrs(crsDB, usrDB);
-            form.ShowDialog();
-            if (form.DialogResult == DialogResult.OK)
-                crsDB.addCrs(form.crs, @"..\..\courseDB.in");
-            else
-                MessageBox.Show("No courses have been added.",
-                        "No change made",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-        }
-        private void changeCrsClick(object sender, EventArgs e)
-        {
-
-        }
-        private void manCrsSearchClick(object sender, EventArgs e)
-        {
-            string crsID = manCrsIDBox.Text.Trim();
-
-            if (manActions.Visible)
-                for (int i = 0; i < manCrsLst.RowCount; i++)
-                    if (manCrsLst.Rows[i].Cells["Course ID"].Value.ToString().Trim() == crsID)
+            if (facActions.Visible)
+                for (int i = 0; i < facLst.RowCount; i++)
+                    if (facLst.Rows[i].Cells["Username"].Value.ToString().Trim().ToLower() == username)
                     {
-                        DataTable table = (DataTable)manCrsLst.DataSource;
+                        DataTable table = (DataTable)facLst.DataSource;
                         DataRow dr = table.Rows[i];
                         DataRow nr = table.NewRow();
                         nr.ItemArray = dr.ItemArray;
@@ -835,76 +851,153 @@ namespace CRS
                         break;
                     }
         }
-
-
-        // Confirmed
-        private void removeStdClick(object sender, EventArgs e)
+        private void viewEnrolledStdsClick(object sender, EventArgs e)
         {
-            int count = manSelectedStdLst.Count;
-            if (count == 0)
+            if (facSch.SelectedRows.Count == 0)
+                MessageBox.Show("Select a class from the schedule list",
+                                "No class selected",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            else
             {
-                MessageBox.Show("Select students from the list below",
+                string crsID = facSch.SelectedRows[0].Cells["Course ID"].Value.ToString();
+                course crs = crsDB.getCourse(crsID);
+                new admEnrolledStd(crs).Show();
+            }
+        }
+        private void checkAdviseeScheduleClick(object sender, EventArgs e)
+        {
+            if (adviseeLst.SelectedRows.Count == 0)
+                MessageBox.Show("Select a student from the adivsees list.",
                     "No student selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            else
+            {
+                string username = adviseeLst.SelectedRows[0].Cells["Username"].Value.ToString();
+                student std = usrDB.getStudent(username);
+                new admAdviseeSch(std).ShowDialog();
+            }
+        }
+        private void curAdviseeSchClick(object sender, EventArgs e)
+        {
+            if (adviseeLst.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Select an advisee from the list.",
+                    "No advisee selected",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
             }
+            string username = adviseeLst.SelectedRows[0].Cells["Username"].Value.ToString().Trim();
+            student std = usrDB.getStudent(username);
 
-            // Confirmation
-            string message = "Are you sure you want to remove :\n";
-            foreach (string uname in manSelectedStdLst)
-                message += "    " + uname + "\n";
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                MessageBox.Show("No students have been removed.",
-                    "Cancel",
+            string message = std.fname + " " + std.lname + " is taking the following courses :\n";
+            foreach (previousCourse pcrs in std.currentCrs)
+                message += "    " + pcrs.crsID + "   " + pcrs.credit + " credits" + "\n";
+            MessageBox.Show(message, "Current Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
+        private void facViewCrsLstClick(object sender, EventArgs e)
+        {
+            ScrollControlIntoView(crsLst);
+        }
+        private void facViewSchClick(object sender, EventArgs e)
+        {
+            if (!facSch.Visible)
+                MessageBox.Show("Select a faculty from the list.",
+                    "No faculty selected",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             else
-            {
-                List<int> indexList = new List<int>();  // For later when removing rows
-                foreach (string uname in manSelectedStdLst)
-                    foreach (DataGridViewRow row in manStdLst.Rows)
-                        if (row.Cells["Username"].Value.ToString().Trim() == uname.Trim())
-                        {
-                            usrDB.removeStd(uname, ref crsDB, @"..\..\userDB.in");
-                            indexList.Add(row.Index);
-                            break;
-                        }
-
-                // Remove the students from table
-                for (int i = 0; i < indexList.Count; i++)
-                {
-                    manStdLst.Rows.RemoveAt(indexList[i]);
-                    for (int l = i + 1; l < indexList.Count; l++)
-                        if (indexList[l] > indexList[i])
-                            indexList[l] -= 1;
-                }
-
-                manSelectedStdLst.Clear();
-                manStdLst.ClearSelection();
-
-                MessageBox.Show("Removal succesfully executed.",
-                    "Success",
+                ScrollControlIntoView(facSch);
+        }
+        private void facViewAdviseesClick(object sender, EventArgs e)
+        {
+            if (!adviseeLst.Visible)
+                MessageBox.Show("Select a faculty from the list.",
+                    "No faculty selected",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
-            }
+            else
+                ScrollControlIntoView(adviseeLst);
         }
-        private void manStdLstCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void facScrollToTopClick(object sender, EventArgs e)
+        {
+            ScrollControlIntoView(header);
+        }
+
+
+        private void facLstCellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            if (rowIndex == -1)
+            if (rowIndex < 0)
                 return;
-            string uname = manStdLst.Rows[rowIndex].Cells["Username"].Value.ToString().Trim();
-            if (Convert.ToBoolean(manStdLst.Rows[rowIndex].Cells["Select"].Value) == true)
+            for (int i = 0; i < facLst.RowCount; i++)
             {
-                if (!manSelectedStdLst.Contains(uname))
-                    manSelectedStdLst.Add(uname);
+                if (i == rowIndex)
+                {
+                    facLst.Rows[rowIndex].Selected = true;
+                    facLst.Rows[rowIndex].Cells["Select"].Value = true;
+                }
                 else
-                    return;
+                    facLst.Rows[i].Cells["Select"].Value = null;
             }
-            else
-                manSelectedStdLst.Remove(uname);
         }
+        private void facSchCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            for (int i = 0; i < facSch.RowCount; i++)
+            {
+                if (i == rowIndex)
+                {
+                    facSch.Rows[rowIndex].Selected = true;
+                    facSch.Rows[rowIndex].Cells["Select"].Value = true;
+                }
+                else
+                    facSch.Rows[i].Cells["Select"].Value = null;
+            }
+        }
+        private void adviseeLstCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex < 0)
+                return;
+            for (int i = 0; i < adviseeLst.RowCount; i++)
+            {
+                if (i == rowIndex)
+                {
+                    adviseeLst.Rows[rowIndex].Selected = true;
+                    adviseeLst.Rows[rowIndex].Cells["Select"].Value = true;
+                }
+                else
+                    adviseeLst.Rows[i].Cells["Select"].Value = null;
+            }
+        }
+
+
+        private void facLstCurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (facLst.IsCurrentCellDirty)
+                facLst.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+        private void facSchCurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (facSch.IsCurrentCellDirty)
+                facSch.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+        private void adviseeLstCurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (adviseeLst.IsCurrentCellDirty)
+                adviseeLst.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+
+        // Manager interactions
+        //----------------------------------------------------------------------
         private void removeCrsClick(object sender, EventArgs e)
         {
             int count = manSelectedCrsLst.Count;
@@ -920,7 +1013,7 @@ namespace CRS
             {
                 string message = "Are you sure you want to remove :\n";
                 foreach (string crsID in manSelectedCrsLst)
-                    message += "    " + crsID + "\n";
+                    message += "     " + crsID + "\n";
                 if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 {
                     MessageBox.Show("No courses have been removed.",
@@ -959,21 +1052,38 @@ namespace CRS
                     MessageBoxIcon.Information);
             }
         }
-        private void manCrsLstCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void admChangeAdvisorClick(object sender, EventArgs e)
         {
-            int rowIndex = e.RowIndex;
-            if (rowIndex == -1)
-                return;
-            string crsID = manCrsLst.Rows[rowIndex].Cells["Course ID"].Value.ToString().Trim();
-            if (Convert.ToBoolean(manCrsLst.Rows[rowIndex].Cells["Select"].Value) == true)
-            {
-                if (!manSelectedCrsLst.Contains(crsID))
-                    manSelectedCrsLst.Add(crsID);
-                else
-                    return;
-            }
+            if (stdLst.SelectedRows.Count == 0)
+                MessageBox.Show("Select a student from the list",
+                    "No student selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             else
-                manSelectedCrsLst.Remove(crsID);
+            {
+                stdUsername = stdLst.SelectedRows[0].Cells["Username"].Value.ToString().Trim();
+                student std = usrDB.getStudent(stdUsername);
+                var form = new admChangeAdvisor(usrDB, std.advisor);
+                form.ShowDialog();
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    string newAdvisor = form.newAdvisor;
+                    usrDB.changeAdvisor(std.username.Trim(), newAdvisor.Trim());
+
+                    stdLst.SelectedRows[0].Cells["Advisor"].Value = std.advisor;
+                    stdLst.SelectedRows[0].Cells["Select"].Value = null;
+
+                    MessageBox.Show("The advisor has been changed.",
+                        "Advisor changed",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("The advisor was not changed.",
+                        "No change made",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+            }
         }
         private void manChangeAdvisorClick(object sender, EventArgs e)
         {
@@ -1030,20 +1140,217 @@ namespace CRS
                         MessageBoxIcon.Information);
             }
         }
-
-
-
-        // Utilities 
-        private void stdScrollToTopClick(object sender, EventArgs e)
+        private void createCrsClick(object sender, EventArgs e)
         {
-            ScrollControlIntoView(header);
+            var form = new admCreateCrs(crsDB, usrDB);
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+            {
+                crsDB.addCrs(form.crs, @"..\..\courseDB.in");
+                MessageBox.Show("Course successfully created.",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                DataTable table = (DataTable)manCrsLst.DataSource;
+                table.Rows.Add(form.crs.crsID, form.crs.title, form.crs.instructor, form.crs.credit, form.crs.seats + " / " + form.crs.seats, form.crs.getBlocks());
+                manCrsIDBox.AutoCompleteCustomSource.Add(form.crs.crsID.Trim());
+                crsIDBox.AutoCompleteCustomSource.Add(form.crs.crsID.Trim());
+            }
+            else
+                MessageBox.Show("No courses have been added.",
+                        "No change made",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+        }
+        private void removeStdClick(object sender, EventArgs e)
+        {
+            int count = manSelectedStdLst.Count;
+            if (count == 0)
+            {
+                MessageBox.Show("Select students from the list below",
+                    "No student selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            // Confirmation
+            string message = "Are you sure you want to remove :\n";
+            foreach (string uname in manSelectedStdLst)
+                message += "       " + uname + "\n";
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                MessageBox.Show("No students have been removed.",
+                    "Cancel",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            else
+            {
+                List<int> indexList = new List<int>();  // For later when removing rows
+                foreach (string uname in manSelectedStdLst)
+                    foreach (DataGridViewRow row in manStdLst.Rows)
+                        if (row.Cells["Username"].Value.ToString().Trim() == uname.Trim())
+                        {
+                            usrDB.removeStd(uname, ref crsDB);
+                            indexList.Add(row.Index);
+                            break;
+                        }
+
+                // Remove the students from table
+                for (int i = 0; i < indexList.Count; i++)
+                {
+                    manStdLst.Rows.RemoveAt(indexList[i]);
+                    for (int l = i + 1; l < indexList.Count; l++)
+                        if (indexList[l] > indexList[i])
+                            indexList[l] -= 1;
+                }
+
+                // Update the course list
+
+                manSelectedStdLst.Clear();
+                manStdLst.ClearSelection();
+
+                MessageBox.Show("Removal succesfully executed.",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
 
+        private void removeFacClick(object sender, EventArgs e)
+        {
+            if (stdLst.SelectedRows.Count == 1)
+            {
+                string username = stdLst.SelectedRows[0].Cells["Username"].Visible.ToString();
+                usrDB.removeStd(username, ref crsDB);
+            }
+            else
+                MessageBox.Show("Select a faculty from the faculties list",
+                    "No faculty selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+        private void createUserClick(object sender, EventArgs e)
+        {
+            var form = new admCreateUser(usrDB);
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+                usrDB.addUser(form.uname, form.pword, form.fName, form.mName, form.lName, form.uType, @"..\..\userDB.in");
+            else
+                MessageBox.Show("No users have been added.",
+                        "No change made",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+        }
+        private void manCrsSearchClick(object sender, EventArgs e)
+        {
+            string crsID = manCrsIDBox.Text.Trim();
 
+            if (manCrsLst.Visible)
+                for (int i = 0; i < manCrsLst.RowCount; i++)
+                    if (manCrsLst.Rows[i].Cells["Course ID"].Value.ToString().Trim() == crsID)
+                    {
+                        DataTable table = (DataTable)manCrsLst.DataSource;
+                        DataRow dr = table.Rows[i];
+                        DataRow nr = table.NewRow();
+                        nr.ItemArray = dr.ItemArray;
+                        table.Rows.Remove(dr);
+                        table.Rows.InsertAt(nr, 0);
+                        break;
+                    }
+        }
+        private void changeCrsClick(object sender, EventArgs e)
+        {
+            if (manSelectedCrsLst.Count == 0)
+            {
+                MessageBox.Show("Select courses from the list below",
+                        "No course selected",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                ScrollControlIntoView(manCrsLst);
+            }
+            else if (manSelectedCrsLst.Count >= 2)
+            {
+                MessageBox.Show("To change a course, select one at a time",
+                    "Vague",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            else
+            {
+                course crs = crsDB.getCourse(manSelectedCrsLst[0]);
+                var form = new admChangeCrs(crs, usrDB);
+                form.ShowDialog();
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    crsDB.changeCourse(crs.crsID, form.crs.instructor, form.crs.timeBlocks);
+                    foreach (DataGridViewRow row in manCrsLst.Rows)
+                        if (row.Cells["Course ID"].Value.ToString().Trim() == crs.crsID.Trim())
+                        {
+                            row.Cells["Schedule"].Value = crs.getBlocks();
+                            row.Cells["Instructor"].Value = crs.instructor;
+                            row.Cells["Select"].Value = null;
+                            break;
+                        }
+                }
+                else
+                    MessageBox.Show("No changes have been added.",
+                        "No change made",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+            }
 
+        }
+        private void manStdSearchClick(object sender, EventArgs e)
+        {
+            string username = manStdSearchBox.Text.ToLower().Trim();
 
+            if (manStdLst.Visible)
+                for (int i = 0; i < manStdLst.RowCount; i++)
+                    if (manStdLst.Rows[i].Cells["Username"].Value.ToString().Trim().ToLower() == username)
+                    {
+                        DataTable table = (DataTable)manStdLst.DataSource;
+                        DataRow dr = table.Rows[i];
+                        DataRow nr = table.NewRow();
+                        nr.ItemArray = dr.ItemArray;
+                        table.Rows.Remove(dr);
+                        table.Rows.InsertAt(nr, 0);
+                        break;
+                    }
+        }
 
-        // Don't change these
+        private void manCrsLstCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex == -1)
+                return;
+            string crsID = manCrsLst.Rows[rowIndex].Cells["Course ID"].Value.ToString().Trim();
+            if (Convert.ToBoolean(manCrsLst.Rows[rowIndex].Cells["Select"].Value) == true)
+            {
+                if (!manSelectedCrsLst.Contains(crsID))
+                    manSelectedCrsLst.Add(crsID);
+                else
+                    return;
+            }
+            else
+                manSelectedCrsLst.Remove(crsID);
+        }
+        private void manStdLstCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex == -1)
+                return;
+            string uname = manStdLst.Rows[rowIndex].Cells["Username"].Value.ToString().Trim();
+            if (Convert.ToBoolean(manStdLst.Rows[rowIndex].Cells["Select"].Value) == true)
+            {
+                if (!manSelectedStdLst.Contains(uname))
+                    manSelectedStdLst.Add(uname);
+                else
+                    return;
+            }
+            else
+                manSelectedStdLst.Remove(uname);
+        }
+
         private void manStdLstCurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (manStdLst.IsCurrentCellDirty)
@@ -1061,6 +1368,14 @@ namespace CRS
         private void logoutClick(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void stdScrollToTopClick(object sender, EventArgs e)
+        {
+            ScrollControlIntoView(header);
+        }
+        private void manScrollToTopCLick(object sender, EventArgs e)
+        {
+            ScrollControlIntoView(header);
         }
     }
 }

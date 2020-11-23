@@ -128,7 +128,7 @@
             this.username.MaxLength = 10;
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(255, 39);
-            this.username.TabIndex = 6;
+            this.username.TabIndex = 0;
             this.username.Text = "Username";
             this.username.Enter += new System.EventHandler(this.usernameEnter);
             this.username.Leave += new System.EventHandler(this.usernameLeave);
@@ -143,7 +143,7 @@
             this.password.MaxLength = 10;
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(255, 39);
-            this.password.TabIndex = 7;
+            this.password.TabIndex = 1;
             this.password.Text = "Password";
             this.password.Enter += new System.EventHandler(this.passwordEnter);
             this.password.Leave += new System.EventHandler(this.passwordLeave);
@@ -158,7 +158,7 @@
             this.fname.MaxLength = 15;
             this.fname.Name = "fname";
             this.fname.Size = new System.Drawing.Size(255, 39);
-            this.fname.TabIndex = 9;
+            this.fname.TabIndex = 4;
             this.fname.Text = "First Name";
             this.fname.Enter += new System.EventHandler(this.fnameEnter);
             this.fname.Leave += new System.EventHandler(this.fnameLeave);
@@ -173,7 +173,7 @@
             this.mname.MaxLength = 15;
             this.mname.Name = "mname";
             this.mname.Size = new System.Drawing.Size(255, 39);
-            this.mname.TabIndex = 10;
+            this.mname.TabIndex = 5;
             this.mname.Text = "Middle Name";
             this.mname.Enter += new System.EventHandler(this.mnameEnter);
             this.mname.Leave += new System.EventHandler(this.mnameLeave);
@@ -188,7 +188,7 @@
             this.lname.MaxLength = 15;
             this.lname.Name = "lname";
             this.lname.Size = new System.Drawing.Size(255, 39);
-            this.lname.TabIndex = 11;
+            this.lname.TabIndex = 6;
             this.lname.Text = "Last Name";
             this.lname.Enter += new System.EventHandler(this.lnameEnter);
             this.lname.Leave += new System.EventHandler(this.lnameLeave);
@@ -204,6 +204,13 @@
             // 
             // userType
             // 
+            this.userType.AutoCompleteCustomSource.AddRange(new string[] {
+            "Student",
+            "Faculty",
+            "Admin",
+            "Manager"});
+            this.userType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.userType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.userType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.userType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userType.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -212,27 +219,29 @@
             this.userType.Items.AddRange(new object[] {
             "Student",
             "Faculty",
-            "Administrator",
+            "Admin",
             "Manager"});
             this.userType.Location = new System.Drawing.Point(382, 296);
             this.userType.Margin = new System.Windows.Forms.Padding(0);
             this.userType.Name = "userType";
             this.userType.Size = new System.Drawing.Size(255, 40);
-            this.userType.TabIndex = 0;
+            this.userType.TabIndex = 2;
             // 
             // confirm
             // 
             this.confirm.AutoSize = true;
-            this.confirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.confirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.confirm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.confirm.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.confirm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
+            this.confirm.FlatAppearance.BorderSize = 0;
+            this.confirm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.confirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirm.ForeColor = System.Drawing.Color.White;
             this.confirm.Location = new System.Drawing.Point(277, 612);
             this.confirm.Name = "confirm";
             this.confirm.Size = new System.Drawing.Size(246, 44);
-            this.confirm.TabIndex = 13;
+            this.confirm.TabIndex = 7;
             this.confirm.Text = "Register the User";
             this.confirm.UseVisualStyleBackColor = false;
             this.confirm.Click += new System.EventHandler(this.confirmClick);
@@ -272,7 +281,7 @@
             this.advisor.Margin = new System.Windows.Forms.Padding(0);
             this.advisor.Name = "advisor";
             this.advisor.Size = new System.Drawing.Size(255, 40);
-            this.advisor.TabIndex = 16;
+            this.advisor.TabIndex = 3;
             // 
             // label2
             // 

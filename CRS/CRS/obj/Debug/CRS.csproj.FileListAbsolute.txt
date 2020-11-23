@@ -139,14 +139,12 @@ C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admCrsHist.resour
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.AdminStudentSelect.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admMainpage.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.LoginForm.resources
-C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.mainpage.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.Properties.Resources.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.csproj.GenerateResource.cache
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.csproj.CoreCompileInputs.cache
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.exe
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.pdb
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admStdSch.resources
-C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admAdvisees.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admEnrolledStd.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.changeAdvisor.resources
 C:\Users\cmbooker\Source\Repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admAddUser.resources
@@ -159,3 +157,7 @@ C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admChangeAdvisor.
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.addedCrs.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admCreateCrs.resources
 C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.stdCurSch.resources
+C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admChangeCrs.resources
+C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.admAdviseeSch.resources
+C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.facMainpage.resources
+C:\Users\mikit\source\repos\runtimestuds\CRS\CRS\obj\Debug\CRS.stdMainpage.resources

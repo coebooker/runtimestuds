@@ -55,9 +55,9 @@ namespace CRS
         public string credit;
         public int seats;
         public int maxSeats;
-        private int num_time;
-        private List<string> timeBlocks;
-        private List<classTime> time_blocks_alternative;
+        public int num_time;
+        public List<string> timeBlocks;
+        public List<classTime> time_blocks_alternative;
         private List<student> enrolledStudents = new List<student>();
         public course(string crsID, string ttl, string ist, string crdt, int sea, int num_time_b, List<string> time_bs)
         {
@@ -109,6 +109,7 @@ namespace CRS
             return enrolledStudents;
         }
 
+
         public void disenrollUser(student currentStudent)
         {
             student std = enrolledStudents.Find(s => currentStudent.username == s.username);
@@ -122,38 +123,31 @@ namespace CRS
         }
 
 
-        public string Decode(string encoded)
+        public static string Decode(string schEncoded)
         {
-            int days = Convert.ToInt32(encoded.Substring(0, 2));
-            int time = Convert.ToInt32(encoded.Substring(2, 2));
-            int length = Convert.ToInt32(encoded.Substring(4, 1));
+            int days = Convert.ToInt32(schEncoded.Substring(0, 2));
+            int startingTime = Convert.ToInt32(schEncoded.Substring(2, 2));
+            int length = Convert.ToInt32(schEncoded.Substring(4, 1));
 
-            //string outputDecoded = string.Format("{0, -5}: {1,-30}", DecodeDay(days), DecodeTime(time, length));
-            string outputDecoded = DecodeDay(days) + " : " + DecodeTime(time, length);
-            return outputDecoded;
+            return DecodeDay(days) + " : " + DecodeTime(startingTime, length);
         }
-        public string Decode2(string encoded)
+        public static string DecodeDay(int dayEncoded)
         {
-            return "placeholder";
-        }
-        public string DecodeDay(int dayEncoded)
-        {
-            int dayEncodedCopy = dayEncoded;
-            string[] dayInWeek = { "F", "R", "W", "T", "M" };
+            string[] dayList = { "F", "R", "W", "T", "M" };
             int baseNumber = 16;
-            string daysClasses = "";
+            string days = "";
             for (int i = 0; i < 5; i++)
             {
-                if (dayEncodedCopy >= baseNumber)
+                if (dayEncoded >= baseNumber)
                 {
-                    daysClasses = dayInWeek[i] + daysClasses;
-                    dayEncodedCopy = dayEncodedCopy - baseNumber;
+                    dayEncoded -= baseNumber;
+                    days = dayList[i] + days;
                 }
                 baseNumber = baseNumber / 2;
             }
-            return daysClasses;
+            return days;
         }
-        public string DecodeTime(int timeEncoded, int lengthEncoded)
+        public static string DecodeTime(int timeEncoded, int lengthEncoded)
         {
             string ampm = "AM";
             string endampm = "AM";
@@ -225,8 +219,8 @@ namespace UF
             }
 
             // Get rid of AM and PM
-            from = from.Substring(0, from.Length - 2);
-            to = to.Substring(0, to.Length - 2);
+            from = from.Substring(0, from.Length - 2).Trim();
+            to = to.Substring(0, to.Length - 2).Trim();
 
 
             // Convert them to floating point number

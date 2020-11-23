@@ -62,7 +62,7 @@ namespace CRS
         }
         public void setAdvisor(string advisorStr)
         {
-            advisor = advisorStr;
+            advisor = advisorStr.Trim();
         }
 
 
@@ -168,32 +168,31 @@ namespace CRS
                 else
                     gradePoint += gradeDict[pcrs.grade] * pcrs.credit;
             }
-            GPA = gradePoint / gradedCredits;
+            float f = gradePoint / gradedCredits;
+            float fc = (float)Math.Round(f * 100f) / 100f;
+            GPA = fc;
         }
         public validity isValidAdd(course crsBngAdded)
         {
             bool validAdd = true;
             bool warning = false;
             string warningMessage = "";
-            double crntSmstCrdt = 0.00;
+            double nextSmstCrd = 0.00;
 
             List<classTime> timeBlocksAdding = crsBngAdded.getClassTime();
 
             // Totals current semester credit & checks if course is already taken this semester
-            foreach (course currentCourse in registeredCrs)
+            foreach (course crs in registeredCrs)
             {
-                crntSmstCrdt += Convert.ToDouble(currentCourse.credit);
-                if (crsBngAdded.crsID.Trim().Substring(0, crsBngAdded.crsID.Trim().Length - 3) == currentCourse.crsID.Trim().Substring(0, currentCourse.crsID.Trim().Length - 3))
+                nextSmstCrd += Convert.ToDouble(crs.credit);
+                if (crsBngAdded.crsID.Trim().Substring(0, crsBngAdded.crsID.Trim().Length - 3) == crs.crsID.Trim().Substring(0, crs.crsID.Trim().Length - 3))
                 {
                     validAdd = false;
                     warningMessage = "You have already enrolled in this course this semester";
                 }
 
-                // Test warningMessage = crsBngAdded.crsID.Trim() + currentCourse.crsID.Trim();
-                // Test validAdd = false;
 
-
-                List<classTime> timeBlocksCurrent = currentCourse.getClassTime();
+                List<classTime> timeBlocksCurrent = crs.getClassTime();
 
                 foreach (classTime eachCurrentBlock in timeBlocksCurrent)
                     foreach (classTime eachAddingBlock in timeBlocksAdding)
@@ -203,12 +202,9 @@ namespace CRS
                             double startB = eachAddingBlock.getStartTime();
                             double endA = eachCurrentBlock.getEndTime();
                             double endB = eachAddingBlock.getEndTime();
-
-
+                            
                             if (!(startA == endB || startB == endA))
                             {
-                                //    |-----|   A
-                                // |-----|      B
                                 if (startA >= startB)
                                     if (startA <= endB)
                                     {
@@ -216,10 +212,7 @@ namespace CRS
                                         if (validAdd)
                                             warningMessage = "There is a time overlap";
                                     }
-
-
-                                // |-----|      A
-                                //    |-----|   B
+                                
                                 if (startB >= startA)
                                     if (startB <= endA)
                                     {
@@ -233,8 +226,8 @@ namespace CRS
 
 
 
-            // Checks if total credit for current semester is above 5.00
-            if (crntSmstCrdt + Convert.ToDouble(crsBngAdded.credit.Trim()) >= 5.00)
+            // Checks if total credit for next semester is above 5.00
+            if (nextSmstCrd + Convert.ToDouble(crsBngAdded.credit.Trim()) >= 5.00)
             {
                 validAdd = false;
                 warningMessage = "You can not enroll in more than 5.00 credits worth of courses";
@@ -242,13 +235,25 @@ namespace CRS
 
             // Checks if course has been taken previously
             if (validAdd)
+            {
+                bool found = false;
                 foreach (previousCourse prvCrs in pastCrs)
                     if (prvCrs.crsID.Trim().Substring(0, prvCrs.crsID.Trim().Length - 3) == crsBngAdded.crsID.Trim().Substring(0, crsBngAdded.crsID.Trim().Length - 3))
                     {
                         warning = true;
+                        found = true;
                         if (validAdd)
                             warningMessage = "You have already taken this course previously";
                     }
+                if (!found)
+                    foreach (previousCourse pcrs in currentCrs)
+                        if (pcrs.crsID.Trim().Substring(0, pcrs.crsID.Trim().Length - 3) == crsBngAdded.crsID.Trim().Substring(0, crsBngAdded.crsID.Trim().Length - 3))
+                        {
+                            warning = true;
+                            if (validAdd)
+                                warningMessage = "You are taking this course this semester.";
+                        }
+            }
 
             //check number of seats avaialble
             if (crsBngAdded.seats == 0)

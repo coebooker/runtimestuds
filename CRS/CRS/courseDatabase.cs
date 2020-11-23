@@ -46,13 +46,14 @@ namespace CRS
                 if (!tb.AutoCompleteCustomSource.Contains(title))
                     tb.AutoCompleteCustomSource.Add(title);
             }
+            input.Close();
 
         }
-        public courseDatabase(string filepath, ref userDatabase userDB)
+        public courseDatabase(ref userDatabase userDB)
         {
             this.crsLst = new List<course>();
             string line;
-            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
+            System.IO.StreamReader input = new System.IO.StreamReader(@"..\..\courseDB.in");
             while ((line = input.ReadLine()) != null)
             {
                 string code = line.Substring(0, 10).Trim();
@@ -74,9 +75,27 @@ namespace CRS
                 faculty courseFac = userDB.getFaculty(instructor.Trim());
                 courseFac.nextSemesterCourses.Add(crs);
             }
-
+            input.Close();
         }
 
+        public void updateDatabase()
+        {
+            List<string> CourseDBString = new List<string>();
+            foreach (course currentCourse in crsLst)
+            {
+                string currentLine = currentCourse.crsID.PadRight(11) + currentCourse.title.PadRight(16) + currentCourse.instructor.PadRight(11) + currentCourse.credit.PadRight(5) + currentCourse.maxSeats.ToString().PadRight(4);
+                int courseBlocks = currentCourse.timeBlocks.Count();
+                currentLine += courseBlocks.ToString().PadRight(2);
+                foreach (string timeblock in currentCourse.timeBlocks)
+                {
+                    currentLine += timeblock.PadRight(6);
+                }
+                CourseDBString.Add(currentLine);
+            }
+            string[] newCourseLinesArr;
+            newCourseLinesArr = CourseDBString.ToArray();
+            File.WriteAllLines(@"..\..\courseDB.in", newCourseLinesArr);
+        }
 
         // Gets the faculty's next semester coures
         public List<course> getNextFacCrsLst(string username)
@@ -142,36 +161,24 @@ namespace CRS
         {
             crsLst.Add(crs);
         }
-        public void changeCourse(string newInstructor, string courseID, List<string> newTimeBlocks, course changedCourse, string filepath)
+        public void changeCourse(string crsID, string newInstructor, List<string> timeBlocks)
         {
-            changedCourse.setInstructor(newInstructor);
-            changedCourse.setTimeBlocks(newTimeBlocks);
+            course tempCrs = getCourse(crsID);
+            tempCrs.instructor = newInstructor;
+            tempCrs.timeBlocks = timeBlocks;
+            tempCrs.num_time = timeBlocks.Count;
+            tempCrs.time_blocks_alternative.Clear();
 
-            //Opens courseDB file to change the course
-            string[] CourseLines = File.ReadAllLines(filepath);
-            string[] newCourseLinesArr;
-            List<string> newCourseLines = new List<string>();
-            foreach (string line in CourseLines)
+            foreach (string timeBlock in tempCrs.timeBlocks)
             {
-                string currentCourseID = line.Substring(0, 10).Trim();
-                if (currentCourseID == courseID)
-                {
-                    string courseBeforeBlocks = line.Substring(0, 47);
-                    string blockNum = newTimeBlocks.Count().ToString() + " ";
-                    foreach (string timeBlocks in newTimeBlocks)
-                    {
-                        blockNum += timeBlocks.PadRight(6);
-                    }
-                    //Making the blockNum subtring to it's length -1 cuts off the last space that shouldn't be there
-                    string newCourseLine = courseBeforeBlocks + blockNum.Substring(0, blockNum.Length - 1);
-                    newCourseLines.Add(newCourseLine);
-                }
-                else
-                {
-                    newCourseLines.Add(line);
-                }
-                newCourseLinesArr = newCourseLines.ToArray();
-                System.IO.File.WriteAllLines(filepath, newCourseLinesArr);
+                List<char> days = new List<char>();
+                days.AddRange(course.DecodeDay(Convert.ToInt32(timeBlock.Substring(0, 2))));
+
+                double startTime = Convert.ToDouble(timeBlock.Substring(2, 2)) / 2;
+                double endTime = startTime + Convert.ToDouble(timeBlock.Substring(4, 1)) * 0.5;
+
+                classTime timeOfBlock = new classTime(days, startTime, endTime);
+                tempCrs.time_blocks_alternative.Add(timeOfBlock);
             }
         }
     }

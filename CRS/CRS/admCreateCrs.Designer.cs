@@ -47,7 +47,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.facLst = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.creditBox = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -64,6 +63,7 @@
             this.confirm = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.crsIDBox = new System.Windows.Forms.TextBox();
+            this.creditBox = new System.Windows.Forms.TextBox();
             this.seatBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -130,7 +130,7 @@
             this.WA.Location = new System.Drawing.Point(764, 639);
             this.WA.Name = "WA";
             this.WA.Size = new System.Drawing.Size(140, 27);
-            this.WA.TabIndex = 23;
+            this.WA.TabIndex = 7;
             this.WA.Text = "Wednesday";
             this.WA.UseVisualStyleBackColor = true;
             // 
@@ -142,7 +142,7 @@
             this.RA.Location = new System.Drawing.Point(946, 639);
             this.RA.Name = "RA";
             this.RA.Size = new System.Drawing.Size(117, 27);
-            this.RA.TabIndex = 24;
+            this.RA.TabIndex = 8;
             this.RA.Text = "Thursday";
             this.RA.UseVisualStyleBackColor = true;
             // 
@@ -154,7 +154,7 @@
             this.FA.Location = new System.Drawing.Point(1105, 639);
             this.FA.Name = "FA";
             this.FA.Size = new System.Drawing.Size(91, 27);
-            this.FA.TabIndex = 25;
+            this.FA.TabIndex = 9;
             this.FA.Text = "Friday";
             this.FA.UseVisualStyleBackColor = true;
             // 
@@ -204,7 +204,7 @@
             this.startingTimeA.Location = new System.Drawing.Point(593, 707);
             this.startingTimeA.Name = "startingTimeA";
             this.startingTimeA.Size = new System.Drawing.Size(230, 28);
-            this.startingTimeA.TabIndex = 28;
+            this.startingTimeA.TabIndex = 10;
             // 
             // endingTimeA
             // 
@@ -230,7 +230,7 @@
             this.endingTimeA.Location = new System.Drawing.Point(969, 707);
             this.endingTimeA.Name = "endingTimeA";
             this.endingTimeA.Size = new System.Drawing.Size(230, 28);
-            this.endingTimeA.TabIndex = 29;
+            this.endingTimeA.TabIndex = 11;
             // 
             // label7
             // 
@@ -304,13 +304,6 @@
             this.label16.TabIndex = 50;
             this.label16.Text = "* Seats :";
             // 
-            // creditBox
-            // 
-            this.creditBox.Location = new System.Drawing.Point(399, 406);
-            this.creditBox.Name = "creditBox";
-            this.creditBox.Size = new System.Drawing.Size(230, 26);
-            this.creditBox.TabIndex = 3;
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -368,7 +361,7 @@
             this.endingTimeB.Location = new System.Drawing.Point(986, 935);
             this.endingTimeB.Name = "endingTimeB";
             this.endingTimeB.Size = new System.Drawing.Size(230, 28);
-            this.endingTimeB.TabIndex = 61;
+            this.endingTimeB.TabIndex = 18;
             // 
             // startingTimeB
             // 
@@ -394,7 +387,7 @@
             this.startingTimeB.Location = new System.Drawing.Point(610, 935);
             this.startingTimeB.Name = "startingTimeB";
             this.startingTimeB.Size = new System.Drawing.Size(230, 28);
-            this.startingTimeB.TabIndex = 60;
+            this.startingTimeB.TabIndex = 17;
             // 
             // label9
             // 
@@ -426,7 +419,7 @@
             this.FB.Location = new System.Drawing.Point(1122, 867);
             this.FB.Name = "FB";
             this.FB.Size = new System.Drawing.Size(91, 27);
-            this.FB.TabIndex = 57;
+            this.FB.TabIndex = 16;
             this.FB.Text = "Friday";
             this.FB.UseVisualStyleBackColor = true;
             // 
@@ -438,7 +431,7 @@
             this.RB.Location = new System.Drawing.Point(963, 867);
             this.RB.Name = "RB";
             this.RB.Size = new System.Drawing.Size(117, 27);
-            this.RB.TabIndex = 56;
+            this.RB.TabIndex = 15;
             this.RB.Text = "Thursday";
             this.RB.UseVisualStyleBackColor = true;
             // 
@@ -450,7 +443,7 @@
             this.WB.Location = new System.Drawing.Point(781, 867);
             this.WB.Name = "WB";
             this.WB.Size = new System.Drawing.Size(140, 27);
-            this.WB.TabIndex = 55;
+            this.WB.TabIndex = 14;
             this.WB.Text = "Wednesday";
             this.WB.UseVisualStyleBackColor = true;
             // 
@@ -462,7 +455,7 @@
             this.TB.Location = new System.Drawing.Point(629, 867);
             this.TB.Name = "TB";
             this.TB.Size = new System.Drawing.Size(110, 27);
-            this.TB.TabIndex = 54;
+            this.TB.TabIndex = 13;
             this.TB.Text = "Tuesday";
             this.TB.UseVisualStyleBackColor = true;
             // 
@@ -474,7 +467,7 @@
             this.MB.Location = new System.Drawing.Point(481, 867);
             this.MB.Name = "MB";
             this.MB.Size = new System.Drawing.Size(106, 27);
-            this.MB.TabIndex = 53;
+            this.MB.TabIndex = 12;
             this.MB.Text = "Monday";
             this.MB.UseVisualStyleBackColor = true;
             // 
@@ -501,7 +494,7 @@
             this.confirm.Location = new System.Drawing.Point(517, 1053);
             this.confirm.Name = "confirm";
             this.confirm.Size = new System.Drawing.Size(278, 44);
-            this.confirm.TabIndex = 64;
+            this.confirm.TabIndex = 19;
             this.confirm.Text = "Create the Course";
             this.confirm.UseVisualStyleBackColor = false;
             this.confirm.Click += new System.EventHandler(this.confirmClick);
@@ -522,6 +515,13 @@
             this.crsIDBox.Size = new System.Drawing.Size(230, 26);
             this.crsIDBox.TabIndex = 0;
             // 
+            // creditBox
+            // 
+            this.creditBox.Location = new System.Drawing.Point(399, 406);
+            this.creditBox.Name = "creditBox";
+            this.creditBox.Size = new System.Drawing.Size(230, 26);
+            this.creditBox.TabIndex = 3;
+            // 
             // seatBox
             // 
             this.seatBox.Location = new System.Drawing.Point(399, 490);
@@ -537,6 +537,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             this.ClientSize = new System.Drawing.Size(1338, 1050);
             this.Controls.Add(this.seatBox);
+            this.Controls.Add(this.creditBox);
             this.Controls.Add(this.crsIDBox);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.confirm);
@@ -553,7 +554,6 @@
             this.Controls.Add(this.MB);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.creditBox);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.facLst);
             this.Controls.Add(this.label15);
@@ -602,7 +602,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox facLst;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox creditBox;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -619,6 +618,7 @@
         private System.Windows.Forms.Button confirm;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox crsIDBox;
+        private System.Windows.Forms.TextBox creditBox;
         private System.Windows.Forms.TextBox seatBox;
     }
 }

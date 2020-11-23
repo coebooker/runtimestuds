@@ -79,10 +79,11 @@ namespace CRS
                 {
                     if (!flag)
                     {
-                        var form = new admMainpage(usrDB, @"..\..\courseDB.in", @"..\..\historyDB.in", utype);
+                        var form = new admMainpage(usrDB, @"..\..\historyDB.in", utype);
                         form.ShowDialog();
                         usrDB = form.usrDB;
                         crsDB = form.crsDB;
+                        usrDB.updateDatabase();
                     }
                     else
                     {
@@ -94,19 +95,39 @@ namespace CRS
                 }
                 else
                 {
-                    if (!flag)
+                    if (utype == "faculty")
                     {
-                        var form = new mainpage(utype, uname, usrDB);
-                        form.ShowDialog();
-                        usrDB = form.usrDB;
-                        crsDB = form.crsDB;
+                        if (!flag)
+                        {
+                            var form = new facMainpage(uname, usrDB);
+                            form.ShowDialog();
+                            usrDB = form.usrDB;
+                            crsDB = form.crsDB;
+                        }
+                        else
+                        {
+                            var form = new facMainpage(uname, usrDB, crsDB);
+                            form.ShowDialog();
+                            usrDB = form.usrDB;
+                            crsDB = form.crsDB;
+                        }
                     }
                     else
                     {
-                        var form = new mainpage(utype, uname, usrDB, crsDB, cb, tb);
-                        form.ShowDialog();
-                        usrDB = form.usrDB;
-                        crsDB = form.crsDB;
+                        if (!flag)
+                        {
+                            var form = new stdMainpage(uname, usrDB);
+                            form.ShowDialog();
+                            usrDB = form.usrDB;
+                            crsDB = form.crsDB;
+                        }
+                        else
+                        {
+                            var form = new stdMainpage(uname, usrDB, crsDB);
+                            form.ShowDialog();
+                            usrDB = form.usrDB;
+                            crsDB = form.crsDB;
+                        }
                     }
                 }
                 username.Text = "Username";
@@ -138,15 +159,8 @@ namespace CRS
         {
             if (flag)
             {
-                if (utype == "student")
-                {
-                    student std = usrDB.getStudent(uname);
-                    std.updateHistoryFile(@"..\..\historyDB.in");
-                }
-                else if (utype == "admin" || utype == "manager")
-                {
-                    return;
-                }
+                usrDB.updateDatabase();
+                crsDB.updateDatabase();
             }
         }
     }

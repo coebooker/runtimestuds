@@ -45,6 +45,7 @@ namespace CRS
                 return;
             }
 
+            // Check if there is any time specified
             if (!MA.Checked && !MB.Checked && !TA.Checked && !TB.Checked && !WA.Checked && !WB.Checked
                 && !RA.Checked && !RB.Checked && !FA.Checked && !FB.Checked)
             {
@@ -55,6 +56,7 @@ namespace CRS
                 return;
             }
 
+            // Day duplicate over multiple time blocks
             if ((MA.Checked && MB.Checked) || (TA.Checked && TB.Checked) || (WA.Checked && WB.Checked)
                 || (RA.Checked && RB.Checked) || (FA.Checked && FB.Checked))
             {
@@ -65,6 +67,7 @@ namespace CRS
                 return;
             }
 
+            // Check the presence of starting and ending time.
             if (MA.Checked || TA.Checked || WA.Checked || RA.Checked || FA.Checked)
                 if (startingTimeA.Text == "" || endingTimeA.Text == "")
                 {
@@ -74,6 +77,7 @@ namespace CRS
                         MessageBoxIcon.Error);
                     return;
                 }
+            
 
             string crsID = crsIDBox.Text;
             // Search for duplicate course ID
@@ -87,7 +91,7 @@ namespace CRS
                     return;
                 }
 
-            string title = titleBox.Text;
+            string title = titleBox.Text.Trim();
             string instructor = facLst.Text.Trim();
             faculty inst = usrDB.getFacultyList()[0];
             foreach (faculty fac in usrDB.getFacultyList())
@@ -100,20 +104,20 @@ namespace CRS
             try
             {
                 if (Convert.ToSingle(credits) == 0)
-                {
                     MessageBox.Show("No credits given.",
                         "Warning",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
-                };
             }
             catch
             {
-                MessageBox.Show("Credits have to be number.",
-                    "Invalid input",
+                MessageBox.Show("Credits have to be a number.",
+                    "Warning",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
             }
+
             int seats = 0;
             try
             {
@@ -121,10 +125,11 @@ namespace CRS
             }
             catch
             {
-                MessageBox.Show("Seats have to be number.",
-                    "Invalid input",
+                MessageBox.Show("Seats have to be a number.",
+                    "Warning",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
             }
 
             // Get the course time block
@@ -177,10 +182,23 @@ namespace CRS
             {
                 List<string> lst = new List<string>();
                 lst.Add(timeBlockA);
-                crs = new course(crsID, title, instructor, credits, seats, 1, lst);
+                crs = new course(crsID, title, inst.username, credits, seats, 1, lst);
             }
-            this.DialogResult = DialogResult.OK;
-            Close();
+            string message;
+            message = "Course ID : " + crs.crsID + "\n";
+            message += "Title : " + crs.title + "\n";
+            message += "Instructor : " + crs.instructor + "\n";
+            message += "Credits : " + crs.credit.ToString() + "\n";
+            message += "Seats : " + crs.seats.ToString() + "\n";
+            message += crs.getBlocks() + "\n";
+            message += "Are you sure?";
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                MessageBox.Show("Canceled the creation.", "Cancel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {
+                this.DialogResult = DialogResult.OK;
+                Close();
+            }
         }
     }
 }

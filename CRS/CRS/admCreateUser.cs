@@ -24,6 +24,7 @@ namespace CRS
         {
             InitializeComponent();
             this.usrDB = usrDB;
+            confirm.FlatAppearance.CheckedBackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
 
             foreach (faculty fac in usrDB.getFacultyList())
             {
@@ -34,21 +35,49 @@ namespace CRS
 
         private void confirmClick(object sender, EventArgs e)
         {
+            // Required fields check
             if (username.Text == "" || password.Text == "" || userType.Text == "" || fname.Text == "" || lname.Text == "")
+            {
                 MessageBox.Show("Required field missing.",
-                    "Invalid Form.", 
+                    "Invalid Form.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
+            }
 
-            // Duplicate check
-            foreach (student std in usrDB.getStudentList())
-                if (username.Text.Trim().ToLower() == std.username.Trim().ToLower()
-                    && password.Text.Trim() == std.password.Trim())
-                {
-                    MessageBox.Show("The (username, password) pair is already taken.",
-                    "Invalid input",
+            // If student, the presence of an advisor
+            if (userType.Text == "Student" && advisor.Text == "")
+            {
+                MessageBox.Show("Specify an advisor.",
+                    "Invalid Form.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
+            }
+
+            // Duplicate check: same user username is invalid
+            foreach (student std in usrDB.getStudentList())
+                if (std.username.Trim().ToLower() == username.Text.Trim().ToLower())
+                {
+                    MessageBox.Show("The username is already taken.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            foreach (faculty fac in usrDB.getFacultyList())
+                if (fac.username.Trim().ToLower() == username.Text.Trim().ToLower())
+                {
+                    MessageBox.Show("The username is already taken.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            foreach (admin adm in usrDB.getAdminList())
+                if (adm.username.Trim().ToLower() == username.Text.Trim().ToLower())
+                {
+                    MessageBox.Show("The username is already taken.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            foreach (manager man in usrDB.getManagerList())
+                if (man.username.Trim().ToLower() == username.Text.Trim().ToLower())
+                {
+                    MessageBox.Show("The username is already taken.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -65,6 +94,7 @@ namespace CRS
             }
             else
                 this.uType = userType.Text.ToLower();
+
             this.fName = fname.Text;
             if (mname.Text == "Middle Name")
                 this.mName = "";

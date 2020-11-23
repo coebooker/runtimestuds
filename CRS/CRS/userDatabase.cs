@@ -27,7 +27,7 @@ namespace CRS
                 string middleName = line.Substring(38, 15).Trim();
                 string lastName = line.Substring(54, 15).Trim();
                 int index = line.LastIndexOf(" ");
-                string status = line.Substring(70, 10).Trim();
+                string status = line.Substring(70).Trim();
 
                 if (status == "faculty")
                 {
@@ -60,6 +60,47 @@ namespace CRS
                     }
             input.Close();
         }
+        public void updateDatabase()
+        {
+            List<String> UserDBString = new List<String>();
+            List<String> histString = new List<String>();
+            foreach (student std in stdLst)
+            {
+                string currentLine = std.username.PadRight(11) + std.password.PadRight(11) + std.fname.PadRight(16) + std.mname.PadRight(16) + std.lname.PadRight(16) + std.advisor.PadRight(10);
+                UserDBString.Add(currentLine);
+                string username = std.username;
+                int numCrs = std.pastCrs.Count + std.currentCrs.Count + std.registeredCrs.Count;
+                string hist = username.PadRight(11) + numCrs.ToString().PadRight(3);
+                foreach (previousCourse pcrs in std.pastCrs)
+                    hist += pcrs.crsID.PadRight(11) + pcrs.semester.PadRight(4) + pcrs.credit.ToString().PadRight(5) + pcrs.grade.PadRight(4);
+                foreach (previousCourse pcrs in std.currentCrs)
+                    hist += pcrs.crsID.PadRight(11) + "F14 " + pcrs.credit.ToString().PadRight(5) + "N   ";
+                foreach (course crs in std.registeredCrs)
+                    hist += crs.crsID.PadRight(11) + "S15 " + crs.credit.ToString().PadRight(5) + "N   ";
+                histString.Add(hist);
+            }
+            foreach (faculty currentFaculty in facLst)
+            {
+                string currentLine = currentFaculty.username.PadRight(11) + currentFaculty.password.PadRight(11) + currentFaculty.fname.PadRight(16) + currentFaculty.mname.PadRight(16) + currentFaculty.lname.PadRight(16) + "faculty".PadRight(10);
+                UserDBString.Add(currentLine);
+            }
+            foreach (admin currentAdmin in adminLst)
+            {
+                string currentLine = currentAdmin.username.PadRight(11) + currentAdmin.password.PadRight(11) + currentAdmin.fname.PadRight(16) + currentAdmin.mname.PadRight(16) + currentAdmin.lname.PadRight(16) + "admin".PadRight(10);
+                UserDBString.Add(currentLine);
+            }
+            foreach (manager currentManager in manLst)
+            {
+                string currentLine = currentManager.username.PadRight(11) + currentManager.password.PadRight(11) + currentManager.fname.PadRight(16) + currentManager.mname.PadRight(16) + currentManager.lname.PadRight(16) + "manager".PadRight(10);
+                UserDBString.Add(currentLine);
+            }
+            string[] newUserLinesArr;
+            newUserLinesArr = UserDBString.ToArray();
+            string[] newHistLinesArr;
+            newHistLinesArr = histString.ToArray();
+            File.WriteAllLines(@"..\..\userDB.in", newUserLinesArr);
+            File.WriteAllLines(@"..\..\historyDB.in", newHistLinesArr);
+        }
 
 
         // Retrieve information from the user database
@@ -70,6 +111,14 @@ namespace CRS
         public List<faculty> getFacultyList()
         {
             return facLst;
+        }
+        public List<admin> getAdminList()
+        {
+            return adminLst;
+        }
+        public List<manager> getManagerList()
+        {
+            return manLst;
         }
         public student getStudent(string username)
         {
@@ -125,6 +174,9 @@ namespace CRS
             {
                 student newStd = new student(fname, mname, lname, status, username, password);
                 stdLst.Add(newStd);
+                foreach (faculty fac in facLst)
+                    if (newStd.advisor.Trim() == fac.username.Trim())
+                        fac.addAdvisee(newStd);
             }
         }
         public void changeAdvisor(string stdName, string facName)
@@ -152,7 +204,7 @@ namespace CRS
                     return;
                 }
         }
-        public void removeStd(string username, ref courseDatabase crsDB, string filepath)
+        public void removeStd(string username, ref courseDatabase crsDB)
         {
             student std = getStudent(username);
 
@@ -172,26 +224,6 @@ namespace CRS
 
             // Remove the student from the database
             stdLst.Remove(std);
-
-            ////Updates the UserDB.in file to remove the student from it
-            //string[] userLines = File.ReadAllLines(filepath);
-            //string[] newUserLinesArr;
-            //List<string> newUserLines = new List<string>();
-            //foreach (string userString in userLines)
-            //{
-            //    string currentUsername = userString.Substring(0, 10);
-            //    if (currentUsername == username)
-            //    {
-            //        //skips the iteration if it’s the course that’s being deleted
-            //        continue;
-            //    }
-            //    else
-            //    {
-            //        newUserLines.Add(userString);
-            //    }
-            //    newUserLinesArr = newUserLines.ToArray();
-            //    File.WriteAllLines(filepath, newUserLinesArr);
-            //}
         }
         public void removeFac(string facultyUsername, string userFilepath, string courseFilepath, ref courseDatabase coursedb)
         {
@@ -276,10 +308,10 @@ namespace CRS
             }
             return false;
         }
-        public void addPrevCourses(string filepath, ref courseDatabase crsDB, string nextSemester)
+        public void addPrevCourses(ref courseDatabase crsDB, string nextSemester)
         {
             string line;
-            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
+            System.IO.StreamReader input = new System.IO.StreamReader(@"..\..\historyDB.in");
             while ((line = input.ReadLine()) != null)
             {
                 string username = line.Substring(0, 10).Trim();
@@ -298,7 +330,11 @@ namespace CRS
                     string creditStr = line.Substring(loc, 4).Trim();
                     float credit = float.Parse(creditStr);
                     loc += 4;
-                    string grade = line.Substring(loc, 3).Trim().ToString();
+                    string grade;
+                    if ((line.Length - loc) >= 3)
+                        grade = line.Substring(loc, 3).Trim().ToString();
+                    else
+                        grade = line.Substring(loc).Trim().ToString();
                     loc += 5;
                     if (semester == nextSemester)
                     {
@@ -319,6 +355,8 @@ namespace CRS
                 }
             }
             input.Close();
+            foreach (student std in stdLst)
+                std.calculateGPA();
         }
         
         private List<student> stdLst;
