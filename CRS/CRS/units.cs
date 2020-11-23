@@ -159,19 +159,29 @@ namespace CRS
                 endampm = ampm;
                 timeInMin = timeInMin - 720;
             }
+            else if (timeInMin == 720)
+            {
+                ampm = "PM";
+                endampm = "PM";
+            }
 
             int timeHour = timeInMin / 60;
             int timeMin = timeInMin % 60;
 
             int lenMin = 30 * lengthEncoded;
             int endTimeInMin = lenMin + timeInMin;
-            if (lenMin + timeInMin > 720)
+            if (endTimeInMin > 720)
             {
                 endTimeInMin = endTimeInMin - 720;
-                if (ampm == "AM")
-                    endampm = "PM";
-                else
-                    endampm = "AM";
+                //if (ampm == "AM")
+                //    endampm = "PM";
+                //else
+                //    endampm = "AM";
+                endampm = "PM";
+            }
+            else if (endTimeInMin == 720)
+            {
+                endampm = "PM";
             }
 
             int endTimeHour = endTimeInMin / 60;
@@ -205,13 +215,13 @@ namespace UF
         public static string encodeTime(string from, string to)
         {
             // Convert them to military time
-            if (from.EndsWith("PM"))
+            if (from.EndsWith("PM") != from.StartsWith("12"))
             {
                 int hour = Convert.ToInt32(from.Substring(0, 1));
                 hour += 12;
                 from = hour.ToString() + from.Substring(1);
             }
-            if (to.EndsWith("PM"))
+            if (to.EndsWith("PM") != to.StartsWith("12"))
             {
                 int hour = Convert.ToInt32(from.Substring(0, 1));
                 hour += 12;

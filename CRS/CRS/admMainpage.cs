@@ -532,6 +532,21 @@ namespace CRS
                 {
                     // Add the course to the student
                     student std = usrDB.getStudent(stdUsername);
+                    validity v = std.isValidAdd(crsDB.getCourse(crsID.Trim()));
+                    if (!v.valid)
+                    {
+                        if (MessageBox.Show(crsID + "\n" + v.message + "\n\nAre you sure you want to continue?", "Invalid Add", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                            ;
+                        else
+                        {
+                            MessageBox.Show("No courses have been added.",
+                                "Cancel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+                    if (v.warning)
+                        MessageBox.Show(v.message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                     usrDB.addCrsToStd(crsID, nextSemester, ref crsDB, std);
 
                     // Update the course list and student schedule
@@ -559,8 +574,8 @@ namespace CRS
                 for (int i = 0; i < crsLst.Rows.Count; i++)
                     crsLst.Rows[i].Cells["Add"].Value = null;
                 addCrsLst.Clear();
-                MessageBox.Show("Adding courses successfully executed.",
-                    "Success",
+                MessageBox.Show("The process completed.",
+                    "Done",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
@@ -704,11 +719,11 @@ namespace CRS
         }
         private void stdSearchClick(object sender, EventArgs e)
         {
-            string username = stdSearchBox.Text.ToLower().Trim();
+            string username = stdSearchBox.Text.Trim().ToLower();   // Needed ToLower()
 
             if (stdActions.Visible)
                 for (int i = 0; i < stdLst.RowCount; i++)
-                    if (stdLst.Rows[i].Cells["Username"].Value.ToString().Trim().ToLower() == username)
+                    if (stdLst.Rows[i].Cells["Username"].Value.ToString().Trim() == username)
                     {
                         DataTable table = (DataTable)stdLst.DataSource;
                         DataRow dr = table.Rows[i];
@@ -840,7 +855,7 @@ namespace CRS
 
             if (facActions.Visible)
                 for (int i = 0; i < facLst.RowCount; i++)
-                    if (facLst.Rows[i].Cells["Username"].Value.ToString().Trim().ToLower() == username)
+                    if (facLst.Rows[i].Cells["Username"].Value.ToString().Trim() == username)
                     {
                         DataTable table = (DataTable)facLst.DataSource;
                         DataRow dr = table.Rows[i];
@@ -1241,7 +1256,7 @@ namespace CRS
             {
                 foreach (string uname in manSelectedFacLst)
                     foreach (DataGridViewRow row in manFacLst.Rows)
-                        if (row.Cells["Username"].Value.ToString().Trim().ToLower() == uname.Trim().ToLower())
+                        if (row.Cells["Username"].Value.ToString().Trim() == uname.Trim())
                         {
                             usrDB.removeFac(uname);
                             crsDB.removeFac(uname); // Lowered in the function
@@ -1252,18 +1267,18 @@ namespace CRS
                 foreach (string fac in manSelectedFacLst)
                 {
                     foreach (DataGridViewRow row in manFacLst.Rows)
-                        if (fac.Trim().ToLower() == row.Cells["Username"].Value.ToString().Trim().ToLower())
+                        if (fac.Trim() == row.Cells["Username"].Value.ToString().Trim())
                         {
                             manFacLst.Rows.Remove(row);
                             break;
                         }
                     
                     foreach(DataGridViewRow row in manCrsLst.Rows)
-                        if (row.Cells["Instructor"].Value.ToString().ToLower().Trim() == fac.ToLower().Trim())
+                        if (row.Cells["Instructor"].Value.ToString().Trim() == fac.Trim())
                             row.Cells["Instructor"].Value = "Staff";
 
                     foreach (DataGridViewRow row in manStdLst.Rows)
-                        if (row.Cells["Advisor"].Value.ToString().ToLower().Trim() == fac.ToLower().Trim())
+                        if (row.Cells["Advisor"].Value.ToString().Trim() == fac.Trim())
                             row.Cells["Advisor"].Value = "Staff";
                 }
 
@@ -1318,7 +1333,7 @@ namespace CRS
         {
             if (manSelectedCrsLst.Count == 0)
             {
-                MessageBox.Show("Select courses from the list below",
+                MessageBox.Show("Select a course from the list below",
                         "No course selected",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
@@ -1334,19 +1349,38 @@ namespace CRS
             else
             {
                 course crs = crsDB.getCourse(manSelectedCrsLst[0]);
+                string oldInstructor = crs.instructor;
                 var form = new admChangeCrs(crs, usrDB);
                 form.ShowDialog();
                 if (form.DialogResult == DialogResult.OK)
                 {
-                    crsDB.changeCourse(crs.crsID, form.crs.instructor, form.crs.timeBlocks);
-                    foreach (DataGridViewRow row in manCrsLst.Rows)
-                        if (row.Cells["Course ID"].Value.ToString().Trim() == crs.crsID.Trim())
-                        {
-                            row.Cells["Schedule"].Value = crs.getBlocks();
-                            row.Cells["Instructor"].Value = crs.instructor;
-                            row.Cells["Select"].Value = null;
-                            break;
-                        }
+                    if (crs.instructor != oldInstructor)
+                    {
+                        crsDB.changeCourse(crs.crsID, crs.instructor, form.crs.timeBlocks);
+                        foreach (DataGridViewRow row in manCrsLst.Rows)
+                            if (row.Cells["Course ID"].Value.ToString().Trim() == crs.crsID.Trim())
+                            {
+                                row.Cells["Schedule"].Value = crs.getBlocks();
+                                row.Cells["Instructor"].Value = crs.instructor;
+                                row.Cells["Select"].Value = null;
+                                break;
+                            }
+                        usrDB.changeInstrutor(crsDB, crs.instructor.ToLower(), oldInstructor, crs.crsID);
+                    }
+                    else
+                    {
+                        crsDB.changeCourse(crs.crsID, form.crs.instructor, form.crs.timeBlocks);
+                        foreach (DataGridViewRow row in manCrsLst.Rows)
+                            if (row.Cells["Course ID"].Value.ToString().Trim() == crs.crsID.Trim())
+                            {
+                                row.Cells["Schedule"].Value = crs.getBlocks();
+                                row.Cells["Instructor"].Value = crs.instructor;
+                                row.Cells["Select"].Value = null;
+                                break;
+                            }
+                        usrDB.changeTime(crs.crsID, crs.instructor, crsDB);
+                    }
+                    MessageBox.Show("The process complete.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                     MessageBox.Show("No changes have been added.",
@@ -1358,11 +1392,11 @@ namespace CRS
         }
         private void manStdSearchClick(object sender, EventArgs e)
         {
-            string username = manStdSearchBox.Text.ToLower().Trim();
+            string username = manStdSearchBox.Text.ToLower().Trim();    // Needed ToLower()
 
             if (manStdLst.Visible)
                 for (int i = 0; i < manStdLst.RowCount; i++)
-                    if (manStdLst.Rows[i].Cells["Username"].Value.ToString().Trim().ToLower() == username)
+                    if (manStdLst.Rows[i].Cells["Username"].Value.ToString().Trim() == username)
                     {
                         DataTable table = (DataTable)manStdLst.DataSource;
                         DataRow dr = table.Rows[i];

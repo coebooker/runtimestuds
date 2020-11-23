@@ -67,51 +67,6 @@ namespace CRS
 
 
         // Utility functions
-        public void updateHistoryFile(string filepath)
-        {
-            List<string> newLines = new List<string>();
-
-            // Read in all the lines in the file and store them in an array
-            string[] lines = File.ReadAllLines(filepath);
-
-            foreach (string user in lines)
-            {
-                string currentUsername = user.Substring(0, 10);
-                if (currentUsername.Trim().ToLower() == username.ToLower())
-                {
-                    string newLine = "";
-                    newLine += currentUsername + ' ';
-                    int numCourses = pastCrs.Count() + registeredCrs.Count() + currentCrs.Count();
-                    newLine += String.Format("{0,-2}", numCourses.ToString());
-                    foreach (previousCourse currentCourse in pastCrs)
-                    {
-                        newLine += " " + currentCourse.crsID.PadRight(11);
-                        newLine += currentCourse.semester + ' ';
-                        newLine += currentCourse.credit.ToString().PadRight(5);
-                        newLine += currentCourse.grade.PadRight(3);
-                    }
-                    foreach (course crs in registeredCrs)
-                    {
-                        newLine += " " + crs.crsID.PadRight(11);
-                        newLine += "S15 ";
-                        newLine += crs.credit.ToString().PadRight(5);
-                        newLine += "N  ";
-                    }
-                    foreach(previousCourse currentCourse in currentCrs)
-                    {
-                        newLine += " " + currentCourse.crsID.PadRight(11);
-                        newLine += currentCourse.semester + ' ';
-                        newLine += currentCourse.credit.ToString().PadRight(5);
-                        newLine += currentCourse.grade.PadRight(3);
-                    }
-                    newLines.Add(newLine);
-                }
-                else
-                    newLines.Add(user);
-            }
-            string[] lineArr = newLines.ToArray();
-            System.IO.File.WriteAllLines(filepath, lineArr);
-        }
         public void calculateGPA()
         {
             List<previousCourse> creditCrsLst = new List<previousCourse>();
@@ -341,7 +296,7 @@ namespace CRS
         public void removeAdvisee(string username)
         {
             foreach (student advisee in adviseesLst)
-                if (username.ToLower().Trim() == advisee.username.ToLower().Trim())
+                if (username.Trim().ToLower() == advisee.username.Trim())
                 {
                     adviseesLst.Remove(advisee);
                     return;

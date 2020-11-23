@@ -315,6 +315,7 @@
             // 
             this.confirm.AutoSize = true;
             this.confirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.confirm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.confirm.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.confirm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(165)))), ((int)(((byte)(142)))));
             this.confirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

@@ -28,7 +28,7 @@ namespace CRS
 
         private void confirmClick(object sender, EventArgs e)
         {
-            newAdvisor = facLst.Text;
+            newAdvisor = facLst.Text.Trim().ToLower();  // Needed ToLower()
             if (newAdvisor == "")
                 MessageBox.Show("Select a new advisor.",
                     "No advisor selected",

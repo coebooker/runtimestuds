@@ -66,9 +66,9 @@ namespace CRS
         }
         private void loginClick(object sender, EventArgs e)
         {
-            uname = username.Text;
+            uname = username.Text.Trim().ToLower();
             utype = "student";
-            string password = this.password.Text;
+            string password = this.password.Text.Trim();
 
             if (usrDB.isValidUser(uname, password, ref utype))
             {

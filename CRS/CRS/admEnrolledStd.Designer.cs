@@ -93,7 +93,6 @@
             this.label1.Size = new System.Drawing.Size(308, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "Enrolled Students for ";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // admEnrolledStd
             // 

@@ -54,34 +54,34 @@ namespace CRS
                     MessageBoxIcon.Error);
                 return;
             }
-
+            
             // Duplicate check: same user username is invalid
             foreach (student std in usrDB.getStudentList())
-                if (std.username.Trim().ToLower() == username.Text.Trim().ToLower())
+                if (std.username.Trim() == username.Text.Trim().ToLower())
                 {
                     MessageBox.Show("The username is already taken.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             foreach (faculty fac in usrDB.getFacultyList())
-                if (fac.username.Trim().ToLower() == username.Text.Trim().ToLower())
+                if (fac.username.Trim() == username.Text.Trim().ToLower())
                 {
                     MessageBox.Show("The username is already taken.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             foreach (admin adm in usrDB.getAdminList())
-                if (adm.username.Trim().ToLower() == username.Text.Trim().ToLower())
+                if (adm.username.Trim() == username.Text.Trim().ToLower())
                 {
                     MessageBox.Show("The username is already taken.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             foreach (manager man in usrDB.getManagerList())
-                if (man.username.Trim().ToLower() == username.Text.Trim().ToLower())
+                if (man.username.Trim() == username.Text.Trim().ToLower())
                 {
                     MessageBox.Show("The username is already taken.", "Duplicate", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-            this.uname = username.Text;
+            this.uname = username.Text.ToLower();
             this.pword = password.Text;
             if (userType.Text == "Student")
             {

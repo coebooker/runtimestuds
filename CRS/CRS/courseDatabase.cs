@@ -12,43 +12,6 @@ namespace CRS
         private List<course> crsLst;
 
         // Class constructor
-        public courseDatabase(string filepath, ref ComboBox cb, ref TextBox tb, ref userDatabase userDB)
-        {
-            this.crsLst = new List<course>();
-            string line;
-            System.IO.StreamReader input = new System.IO.StreamReader(filepath);
-            while ((line = input.ReadLine()) != null)
-            {
-                string code = line.Substring(0, 10).Trim();
-                string title = line.Substring(11, 15).Trim();
-                string instructor = line.Substring(27, 10).Trim();
-                string credit = line.Substring(38, 4).Trim();
-                int seats = Convert.ToInt32(line.Substring(43, 3).Trim());
-                int num_time_blocks = int.Parse(line.Substring(47, 1).Trim());
-                int index = 49;
-                List<string> BlockLst = new List<string>();
-                for (int i = 0; i < num_time_blocks; i++)
-                {
-                    string time_block = line.Substring(index, 5);
-                    BlockLst.Add(time_block);
-                    index += 6;
-                }
-                course crs = new course(code, title, instructor, credit, seats, num_time_blocks, BlockLst);
-                crsLst.Add(crs);
-                faculty courseFac = userDB.getFaculty(instructor.Trim());
-                courseFac.nextSemesterCourses.Add(crs);
-                index = code.IndexOf('-');
-                if (!cb.Items.Contains(code.Substring(0, index)))
-                {
-                    cb.Items.Add(code.Substring(0, index));
-                    cb.AutoCompleteCustomSource.Add(code.Substring(0, index));
-                }
-                if (!tb.AutoCompleteCustomSource.Contains(title))
-                    tb.AutoCompleteCustomSource.Add(title);
-            }
-            input.Close();
-
-        }
         public courseDatabase(ref userDatabase userDB)
         {
             this.crsLst = new List<course>();
@@ -58,7 +21,7 @@ namespace CRS
             {
                 string code = line.Substring(0, 10).Trim();
                 string title = line.Substring(11, 15).Trim();
-                string instructor = line.Substring(27, 10).Trim();
+                string instructor = line.Substring(27, 10).Trim().ToLower();
                 string credit = line.Substring(38, 4).Trim();
                 int seats = Convert.ToInt32(line.Substring(43, 3).Trim());
                 int num_time_blocks = int.Parse(line.Substring(47, 1).Trim());
@@ -102,7 +65,7 @@ namespace CRS
         {
             List<course> crsLst = new List<course>();
             foreach (course crs in this.crsLst)
-                if (crs.instructor.ToLower() == username)
+                if (crs.instructor == username)
                     crsLst.Add(crs);
             return crsLst;
         }
@@ -161,7 +124,7 @@ namespace CRS
         {
             username = username.Trim().ToLower();
             foreach (course crs in crsLst)
-                if (crs.instructor.Trim().ToLower() == username)
+                if (crs.instructor.Trim() == username)
                     crs.instructor = "Staff";
         }
         public void addCrs(course crs, string filepath)

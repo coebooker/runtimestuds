@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CRS
@@ -74,56 +69,59 @@ namespace CRS
 
         private void confirmClick(object sender, EventArgs e)
         {
-
-            // Remove specified time slots
-            foreach (string timeslot in timeSlots)
+            if (MessageBox.Show("Confirmation : \nMake sure you input the right information.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                crs.timeBlocks.Remove(timeslot);
-                crs.num_time -= 1;
-            }
-
-            // Check if time is specified
-            if (MA.Checked || TA.Checked || WA.Checked || RA.Checked || FA.Checked)
-            {
-                if (startingTimeA.Text == "" || endingTimeA.Text == "")
+                // Remove specified time slots
+                foreach (string timeslot in timeSlots)
                 {
-                    MessageBox.Show("Specify the starting and ending time.",
-                        "No time specified",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return;
+                    crs.timeBlocks.Remove(timeslot);
+                    crs.num_time -= 1;
                 }
-                else
-                {
-                    int dd = 0;
-                    if (MA.Checked)
-                        dd += 1;
-                    if (TA.Checked)
-                        dd += 2;
-                    if (WA.Checked)
-                        dd += 4;
-                    if (RA.Checked)
-                        dd += 8;
-                    if (FA.Checked)
-                        dd += 16;
 
-                    string day;
-                    if (dd < 10)
-                        day = "0" + dd.ToString();
+                // Check if time is specified
+                if (MA.Checked || TA.Checked || WA.Checked || RA.Checked || FA.Checked)
+                {
+                    if (startingTimeA.Text == "" || endingTimeA.Text == "")
+                    {
+                        MessageBox.Show("Specify the starting and ending time.",
+                            "No time specified",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
                     else
-                        day = dd.ToString();
+                    {
+                        int dd = 0;
+                        if (MA.Checked)
+                            dd += 1;
+                        if (TA.Checked)
+                            dd += 2;
+                        if (WA.Checked)
+                            dd += 4;
+                        if (RA.Checked)
+                            dd += 8;
+                        if (FA.Checked)
+                            dd += 16;
 
-                    string timeBlock = day + UF.utilities.encodeTime(startingTimeA.Text, endingTimeA.Text);
-                    crs.timeBlocks.Add(timeBlock);
+                        string day;
+                        if (dd < 10)
+                            day = "0" + dd.ToString();
+                        else
+                            day = dd.ToString();
+
+                        string timeBlock = day + UF.utilities.encodeTime(startingTimeA.Text, endingTimeA.Text);
+                        crs.timeBlocks.Add(timeBlock);
+                    }
                 }
-            }
 
-            if (facLst.Text != "")
-                foreach (faculty fac in usrDB.getFacultyList())
-                    if (fac.fname + " " + fac.lname == facLst.Text.Trim())
-                        crs.setInstructor(fac.username);
-            DialogResult = DialogResult.OK;
-            Close();
+                if (facLst.Text != "")
+                    foreach (faculty fac in usrDB.getFacultyList())
+                        if (fac.fname + " " + fac.lname == facLst.Text.Trim())
+                            crs.setInstructor(fac.username);
+
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
     }
 }

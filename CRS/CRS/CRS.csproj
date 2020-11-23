@@ -47,18 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addedCrs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="addedCrs.Designer.cs">
-      <DependentUpon>addedCrs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="admAddCrs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="admAddCrs.Designer.cs">
-      <DependentUpon>admAddCrs.cs</DependentUpon>
-    </Compile>
     <Compile Include="admAdviseeSch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,23 +77,11 @@
     <Compile Include="admChangeAdvisor.Designer.cs">
       <DependentUpon>admChangeAdvisor.cs</DependentUpon>
     </Compile>
-    <Compile Include="admCrsHist.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="admCrsHist.Designer.cs">
-      <DependentUpon>admCrsHist.cs</DependentUpon>
-    </Compile>
     <Compile Include="admEnrolledStd.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="admEnrolledStd.Designer.cs">
       <DependentUpon>admEnrolledStd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AdminStudentSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AdminStudentSelect.Designer.cs">
-      <DependentUpon>AdminStudentSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="admMainpage.cs">
       <SubType>Form</SubType>
@@ -113,29 +89,11 @@
     <Compile Include="admMainpage.Designer.cs">
       <DependentUpon>admMainpage.cs</DependentUpon>
     </Compile>
-    <Compile Include="admStdSch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="admStdSch.Designer.cs">
-      <DependentUpon>admStdSch.cs</DependentUpon>
-    </Compile>
-    <Compile Include="changeAdvisor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="changeAdvisor.Designer.cs">
-      <DependentUpon>changeAdvisor.cs</DependentUpon>
-    </Compile>
     <Compile Include="facMainpage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="facMainpage.Designer.cs">
       <DependentUpon>facMainpage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="stdCurSch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="stdCurSch.Designer.cs">
-      <DependentUpon>stdCurSch.cs</DependentUpon>
     </Compile>
     <Compile Include="units.cs" />
     <Compile Include="courseDatabase.cs" />
@@ -153,17 +111,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="stdAddCrs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="stdAddCrs.Designer.cs">
-      <DependentUpon>stdAddCrs.cs</DependentUpon>
-    </Compile>
     <Compile Include="user.cs" />
     <Compile Include="userDatabase.cs" />
-    <EmbeddedResource Include="addedCrs.resx">
-      <DependentUpon>addedCrs.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="admAdviseeSch.resx">
       <DependentUpon>admAdviseeSch.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,32 +128,17 @@
     <EmbeddedResource Include="admChangeAdvisor.resx">
       <DependentUpon>admChangeAdvisor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="admCrsHist.resx">
-      <DependentUpon>admCrsHist.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="admEnrolledStd.resx">
       <DependentUpon>admEnrolledStd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminStudentSelect.resx">
-      <DependentUpon>AdminStudentSelect.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="admMainpage.resx">
       <DependentUpon>admMainpage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="admStdSch.resx">
-      <DependentUpon>admStdSch.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="changeAdvisor.resx">
-      <DependentUpon>changeAdvisor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="facMainpage.resx">
       <DependentUpon>facMainpage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="stdCurSch.resx">
-      <DependentUpon>stdCurSch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="stdMainpage.resx">
       <DependentUpon>stdMainpage.cs</DependentUpon>

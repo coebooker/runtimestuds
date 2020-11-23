@@ -40,7 +40,7 @@ namespace CRS
 
         private void butClick(object sender, EventArgs e)
         {
-            MessageBox.Show(std.timeCheck(), "Time Conflict", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(std.timeCheck(), "Conflict Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

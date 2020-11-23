@@ -21,13 +21,12 @@ namespace CRS
             System.IO.StreamReader input = new System.IO.StreamReader(filepath);
             while ((line = input.ReadLine()) != null)
             {
-                string username = line.Substring(0, 10).Trim();
+                string username = line.Substring(0, 10).Trim().ToLower();
                 string password = line.Substring(11, 10).Trim();
                 string firstName = line.Substring(22, 10).Trim();
                 string middleName = line.Substring(38, 15).Trim();
                 string lastName = line.Substring(54, 15).Trim();
-                int index = line.LastIndexOf(" ");
-                string status = line.Substring(70).Trim();
+                string status = line.Substring(70).Trim().ToLower();
 
                 if (status == "faculty")
                 {
@@ -60,6 +59,38 @@ namespace CRS
                     }
             input.Close();
         }
+        public bool isValidUser(string username, string password, ref string usertype)
+        {
+            foreach (student std in stdLst)
+                if (std.username == username && std.password == password)
+                {
+                    usertype = "student";
+                    return true;
+                }
+            foreach (faculty fac in facLst)
+                if (fac.username == username && fac.password == password)
+                {
+                    usertype = "faculty";
+                    return true;
+                }
+            foreach (admin adm in adminLst)
+                if (adm.username == username && adm.password == password)
+                {
+                    usertype = "admin";
+                    return true;
+                }
+            foreach (manager man in manLst)
+            {
+                if (man.username == username && man.password == password)
+                {
+                    usertype = "manager";
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         public void updateDatabase()
         {
             List<String> UserDBString = new List<String>();
@@ -124,7 +155,7 @@ namespace CRS
         {
             student std = stdLst[0]; // Default value
             foreach (student stu in stdLst)
-                if (stu.username.ToLower() == username.ToLower())
+                if (stu.username.Trim() == username.Trim().ToLower())
                     return stu;
             return std;
         }
@@ -132,7 +163,7 @@ namespace CRS
         {
             faculty fac = facLst[0]; // Default value
             foreach (faculty f in facLst)
-                if (f.username.ToLower() == username.ToLower())
+                if (f.username.Trim() == username.ToLower())
                     return f;
             return fac;
         }
@@ -235,48 +266,59 @@ namespace CRS
             // Remove the faculty
             facLst.Remove(fac);
         }
-        public bool isValidUser(string username, string password, ref string usertype)
+        public void changeInstrutor(courseDatabase crsDB, string newInstructor, string oldInstructor, string crsID)
         {
-            foreach (student std in stdLst)
-                if (std.username.ToLower() == username && std.password == password)
-                {
-                    usertype = "student";
-                    return true;
-                }
             foreach (faculty fac in facLst)
-                if (fac.username.ToLower() == username && fac.password == password)
-                {
-                    usertype = "faculty";
-                    return true;
-                }
-            foreach (admin adm in adminLst)
-                if (adm.username.ToLower() == username && adm.password == password)
-                {
-                    usertype = "admin";
-                    return true;
-                }
-            foreach(manager man in manLst)
             {
-                if (man.username.ToLower() == username && man.password == password)
-                {
-                    usertype = "manager";
-                    return true;
-                }
+                bool newI = false;
+                bool oldI = false;
+                if (!newI)
+                    if (fac.username.Trim() == newInstructor.Trim())
+                    {
+                        course crs = crsDB.getCourse(crsID);
+                        fac.nextSemesterCourses.Add(crs);
+                        newI = true;
+                    }
+                if (!oldI)
+                    if (fac.username.Trim() == oldInstructor.Trim())
+                    {
+                        foreach (course crs in fac.nextSemesterCourses)
+                            if (crs.crsID == crsID.Trim())
+                            {
+                                fac.nextSemesterCourses.Remove(crs);
+                                oldI = true;
+                                break;
+                            }    
+                    }
+                if (oldI && newI)
+                    break;
             }
-            return false;
         }
+        public void changeTime(string crsID, string instructor, courseDatabase crsDB)
+        {
+            foreach (faculty fac in facLst)
+                if (fac.username == instructor.Trim())
+                    foreach (course crs in fac.nextSemesterCourses)
+                        if (crs.crsID.Trim() == crsID.Trim())
+                        {
+                            course curCrs = crsDB.getCourse(crsID);
+                            crs.timeBlocks = curCrs.timeBlocks;
+
+                        }
+        }
+        
         public void addPrevCourses(ref courseDatabase crsDB, string nextSemester)
         {
             string line;
             System.IO.StreamReader input = new System.IO.StreamReader(@"..\..\historyDB.in");
             while ((line = input.ReadLine()) != null)
             {
-                string username = line.Substring(0, 10).Trim();
+                string username = line.Substring(0, 10).Trim().ToLower();   // Needed ToLower()
                 string courseNumStr = line.Substring(11, 2).Trim();
                 int courseNum = int.Parse(courseNumStr);
                 int loc = 14;
 
-                student std = stdLst.Find(s => s.username.ToLower() == username.ToLower());
+                student std = stdLst.Find(s => s.username.Trim() == username);
 
                 for (int i = 0; i < courseNum; i++)
                 {

@@ -68,6 +68,7 @@
             // 
             this.confirm.AutoSize = true;
             this.confirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.confirm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.confirm.FlatAppearance.BorderSize = 0;
             this.confirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.confirm.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
