@@ -157,6 +157,13 @@ namespace CRS
             //    File.WriteAllLines(filepath, newCourseLinesArr);
             //}
         }
+        public void removeFac(string username)
+        {
+            username = username.Trim().ToLower();
+            foreach (course crs in crsLst)
+                if (crs.instructor.Trim().ToLower() == username)
+                    crs.instructor = "Staff";
+        }
         public void addCrs(course crs, string filepath)
         {
             crsLst.Add(crs);

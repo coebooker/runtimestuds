@@ -14,8 +14,6 @@ namespace CRS
     {
         private userDatabase usrDB;
         private courseDatabase crsDB;
-        private ComboBox cb;
-        private TextBox tb;
         private string uname;
         private string utype;
         bool flag = false;
@@ -68,7 +66,7 @@ namespace CRS
         }
         private void loginClick(object sender, EventArgs e)
         {
-            uname = username.Text.ToLower();
+            uname = username.Text;
             utype = "student";
             string password = this.password.Text;
 

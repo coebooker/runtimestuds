@@ -17,7 +17,7 @@ namespace CRS
         List<string> dropCrsLst = new List<string>();
         List<string> manSelectedCrsLst = new List<string>();
         List<string> manSelectedStdLst = new List<string>();
-        List<int> manSelectedFacLst = new List<int>();
+        List<string> manSelectedFacLst = new List<string>();
 
         public admMainpage(userDatabase usrDB, string ppath, string usertype)
         {
@@ -228,7 +228,7 @@ namespace CRS
             DataTable table = new DataTable();
             table.Columns.Add("Course ID", typeof(string));
             table.Columns.Add("Title", typeof(string));
-            table.Columns.Add("Faculty", typeof(string));
+            table.Columns.Add("Instructor", typeof(string));
             table.Columns.Add("Credits", typeof(string));
             table.Columns.Add("Seats", typeof(string));
             table.Columns.Add("Schedule", typeof(string));
@@ -746,7 +746,7 @@ namespace CRS
             if (rowIndex < 0)
                 return;
             string crsID = stdSch.Rows[rowIndex].Cells["Course ID"].Value.ToString().Trim();
-            if (Convert.ToBoolean(stdSch.Rows[rowIndex].Cells["Select"].Value) == true)
+            if (Convert.ToBoolean(stdSch.Rows[rowIndex].Cells["Drop"].Value) == true)
             {
                 if (!dropCrsLst.Contains(crsID))
                     dropCrsLst.Add(crsID);
@@ -1218,16 +1218,72 @@ namespace CRS
 
         private void removeFacClick(object sender, EventArgs e)
         {
-            if (stdLst.SelectedRows.Count == 1)
+            int count = manSelectedFacLst.Count;
+            if (count == 0)
             {
-                string username = stdLst.SelectedRows[0].Cells["Username"].Visible.ToString();
-                usrDB.removeStd(username, ref crsDB);
-            }
-            else
-                MessageBox.Show("Select a faculty from the faculties list",
+                MessageBox.Show("Select faculties from the list below",
                     "No faculty selected",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
+            }
+
+            // Confirmation
+            string message = "Are you sure you want to remove :\n";
+            foreach (string uname in manSelectedFacLst)
+                message += "              " + uname + "\n";
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                MessageBox.Show("No faculties have been removed.",
+                    "Cancel",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            else
+            {
+                foreach (string uname in manSelectedFacLst)
+                    foreach (DataGridViewRow row in manFacLst.Rows)
+                        if (row.Cells["Username"].Value.ToString().Trim().ToLower() == uname.Trim().ToLower())
+                        {
+                            usrDB.removeFac(uname);
+                            crsDB.removeFac(uname); // Lowered in the function
+                            break;
+                        }
+
+                // Remove the faculties from table and update the course list
+                foreach (string fac in manSelectedFacLst)
+                {
+                    foreach (DataGridViewRow row in manFacLst.Rows)
+                        if (fac.Trim().ToLower() == row.Cells["Username"].Value.ToString().Trim().ToLower())
+                        {
+                            manFacLst.Rows.Remove(row);
+                            break;
+                        }
+                    
+                    foreach(DataGridViewRow row in manCrsLst.Rows)
+                        if (row.Cells["Instructor"].Value.ToString().ToLower().Trim() == fac.ToLower().Trim())
+                            row.Cells["Instructor"].Value = "Staff";
+
+                    foreach (DataGridViewRow row in manStdLst.Rows)
+                        if (row.Cells["Advisor"].Value.ToString().ToLower().Trim() == fac.ToLower().Trim())
+                            row.Cells["Advisor"].Value = "Staff";
+                }
+
+                foreach (DataGridViewRow row in manCrsLst.Rows)
+                    row.Cells["Select"].Value = null;
+                foreach (DataGridViewRow row in manFacLst.Rows)
+                    row.Cells["Select"].Value = null;
+                foreach (DataGridViewRow row in manStdLst.Rows)
+                    row.Cells["Select"].Value = null;
+
+                manSelectedCrsLst.Clear();
+                manSelectedFacLst.Clear();
+                manSelectedStdLst.Clear();
+                manFacLst.ClearSelection();
+
+                MessageBox.Show("Process complete.",
+                    "Complete",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
         private void createUserClick(object sender, EventArgs e)
         {
@@ -1350,6 +1406,22 @@ namespace CRS
             else
                 manSelectedStdLst.Remove(uname);
         }
+        private void manFacLstCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex == -1)
+                return;
+            string uname = manFacLst.Rows[rowIndex].Cells["Username"].Value.ToString().Trim();
+            if (Convert.ToBoolean(manFacLst.Rows[rowIndex].Cells["Select"].Value) == true)
+            {
+                if (!manSelectedFacLst.Contains(uname))
+                    manSelectedFacLst.Add(uname);
+                else
+                    return;
+            }
+            else
+                manSelectedFacLst.Remove(uname);
+        }
 
         private void manStdLstCurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -1363,6 +1435,13 @@ namespace CRS
             if (manCrsLst.IsCurrentCellDirty)
             {
                 manCrsLst.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+        private void manFacCurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (manFacLst.IsCurrentCellDirty)
+            {
+                manFacLst.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
         }
         private void logoutClick(object sender, EventArgs e)

@@ -225,58 +225,15 @@ namespace CRS
             // Remove the student from the database
             stdLst.Remove(std);
         }
-        public void removeFac(string facultyUsername, string userFilepath, string courseFilepath, ref courseDatabase coursedb)
+        public void removeFac(string username)
         {
             //Loops through their advisees and changes the students' advisor to "Staff"
-            faculty currectFac = getFaculty(facultyUsername);
-            foreach (student currentStudent in currectFac.adviseesLst)
-                currentStudent.setAdvisor("Staff");
+            faculty fac = getFaculty(username);
+            foreach (student std in fac.adviseesLst)
+                std.setAdvisor("Staff");
 
-            //Loops through their courses and the instructor to "Staff", also needs to update the file
-            List<course> courseLst = coursedb.getNextFacCrsLst(facultyUsername);
-            foreach (course currentCourse in courseLst)
-                currentCourse.setInstructor("Staff");
-
-            //Updates the UserDB.in file to remove the faculty member from it
-            string[] userLines = File.ReadAllLines(userFilepath);
-            string[] newUserLinesArr;
-            List<string> newUserLines = new List<string>();
-            foreach (string userString in userLines)
-            {
-                string username = userString.Substring(0, 10);
-                if (facultyUsername == username)
-                {
-                    //skips the iteration if it’s the course that’s being deleted
-                    continue;
-                }
-                else
-                    newUserLines.Add(userString);
-
-                newUserLinesArr = newUserLines.ToArray();
-                File.WriteAllLines(userFilepath, newUserLinesArr);
-            }
-            //Changes the all of this instructor's courses in courseDB.in instructor to "Staff"
-            string[] CourseLines = File.ReadAllLines(courseFilepath);
-            string[] newCourseLinesArr;
-            List<string> newCourseLines = new List<string>();
-            foreach (string courseString in userLines)
-            {
-                string username = courseString.Substring(31, 10).Trim();
-                if (facultyUsername == username)
-                {
-                    //if this function doesn't work the first thing to check will be grabbing 31 characters, not sure if it should be 30 or 31 depends on how the compiler handles it
-                    string beforeInstructor = courseString.Substring(0, 31);
-                    string afterInstructor = courseString.Substring(42);
-                    string newCourseString = beforeInstructor + "Staff      " + afterInstructor;
-                    newCourseLines.Add(newCourseString);
-                }
-                else
-                {
-                    newCourseLines.Add(courseString);
-                }
-                newCourseLinesArr = newUserLines.ToArray();
-                File.WriteAllLines(courseFilepath, newCourseLinesArr);
-            }
+            // Remove the faculty
+            facLst.Remove(fac);
         }
         public bool isValidUser(string username, string password, ref string usertype)
         {
