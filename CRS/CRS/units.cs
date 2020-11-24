@@ -59,6 +59,9 @@ namespace CRS
         public List<string> timeBlocks;
         public List<classTime> time_blocks_alternative;
         private List<student> enrolledStudents = new List<student>();
+        public List<string> preReqLst = new List<string>();
+
+        // Class constructor
         public course(string crsID, string ttl, string ist, string crdt, int sea, int num_time_b, List<string> time_bs)
         {
             this.crsID = crsID;
@@ -84,14 +87,10 @@ namespace CRS
             }
         }
 
+        // Retrieve information from objects
         public List<classTime> getClassTime()
         {
             return time_blocks_alternative;
-        }
-        public void setTimeBlocks(List<string> newTimeBlocks)
-        {
-            timeBlocks = newTimeBlocks;
-            //Shige if you could implement the time class list here that'd be pretty cash money
         }
         public void setInstructor(string instructorUsername)
         {
@@ -109,7 +108,7 @@ namespace CRS
             return enrolledStudents;
         }
 
-
+        // Enroll and disenroll users
         public void disenrollUser(student currentStudent)
         {
             student std = enrolledStudents.Find(s => currentStudent.username == s.username);
@@ -123,6 +122,7 @@ namespace CRS
         }
 
 
+        // Schedule Decoders
         public static string Decode(string schEncoded)
         {
             int days = Convert.ToInt32(schEncoded.Substring(0, 2));
@@ -153,13 +153,13 @@ namespace CRS
             string endampm = "AM";
             float tempMin = Convert.ToSingle(timeEncoded) / 2;
             int timeInMin = Convert.ToInt32(tempMin * 60.0);
-            if (timeInMin > 720)
+            if (timeInMin >= 780)
             {
                 ampm = "PM";
                 endampm = ampm;
                 timeInMin = timeInMin - 720;
             }
-            else if (timeInMin == 720)
+            else if (780 > timeInMin && timeInMin >= 720)
             {
                 ampm = "PM";
                 endampm = "PM";
@@ -170,16 +170,12 @@ namespace CRS
 
             int lenMin = 30 * lengthEncoded;
             int endTimeInMin = lenMin + timeInMin;
-            if (endTimeInMin > 720)
+            if (endTimeInMin >= 780)
             {
                 endTimeInMin = endTimeInMin - 720;
-                //if (ampm == "AM")
-                //    endampm = "PM";
-                //else
-                //    endampm = "AM";
                 endampm = "PM";
             }
-            else if (endTimeInMin == 720)
+            else if (780 > endTimeInMin && endTimeInMin >= 720)
             {
                 endampm = "PM";
             }
@@ -208,6 +204,7 @@ namespace CRS
     }
 }
 
+// Define utility functions
 namespace UF
 {
     public static class utilities
@@ -247,16 +244,6 @@ namespace UF
             string l = Convert.ToInt32((toHour - fromHour) / 0.5).ToString();
 
             return tt + l;
-        }
-        public static string readInChunk(ref string l)
-        {
-            int index = l.IndexOf(" ");
-            if (index == -1)
-                return l;
-            string s = l.Substring(0, index);
-            l = l.Substring(index);
-            l = l.Trim();
-            return s;
         }
     }
 }

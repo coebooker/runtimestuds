@@ -15,7 +15,7 @@ namespace CRS
         public admEnrolledStd(course crs)
         {
             InitializeComponent();
-            label1.Text += crs.crsID;
+            label.Text += crs.crsID;
 
             DataTable table = new DataTable();
             table.Columns.Add("First Name");
@@ -25,7 +25,7 @@ namespace CRS
             foreach (student std in crs.getStudents())
                 table.Rows.Add(std.fname, std.lname, std.advisor);
 
-            lst.DataSource = table;
+            stdLst.DataSource = table;
         }
     }
 }

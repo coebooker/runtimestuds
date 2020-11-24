@@ -21,23 +21,23 @@ namespace CRS
             foreach (string crsBlock in crs.timeBlocks)
                 table.Rows.Add(course.Decode(crsBlock), crsBlock);
 
-            schedule.DataSource = table;
+            crsSch.DataSource = table;
 
             DataGridViewCheckBoxColumn btn = new DataGridViewCheckBoxColumn();
             btn.ValueType = typeof(bool);
-            schedule.Columns.Insert(0, btn);
-            schedule.Columns[0].HeaderText = "Remove";
-            schedule.Columns[0].Name = "Remove";
+            crsSch.Columns.Insert(0, btn);
+            crsSch.Columns[0].HeaderText = "Remove";
+            crsSch.Columns[0].Name = "Remove";
 
-            foreach (DataGridViewColumn col in schedule.Columns)
+            foreach (DataGridViewColumn col in crsSch.Columns)
                 col.ReadOnly = true;
-            schedule.Columns[0].ReadOnly = false;
-            schedule.Columns["Code"].Visible = false;
+            crsSch.Columns[0].ReadOnly = false;
+            crsSch.Columns["Code"].Visible = false;
 
             foreach(faculty fac in usrDB.getFacultyList())
             {
-                facLst.Items.Add(fac.fname + " " + fac.lname);
-                facLst.AutoCompleteCustomSource.Add(fac.fname + " " + fac.lname);
+                facDropDown.Items.Add(fac.fname + " " + fac.lname);
+                facDropDown.AutoCompleteCustomSource.Add(fac.fname + " " + fac.lname);
             }
             this.crs = crs;
             this.usrDB = usrDB;
@@ -48,8 +48,8 @@ namespace CRS
             int rowIndex = e.RowIndex;
             if (rowIndex == -1)
                 return;
-            string timeSlot = schedule.Rows[rowIndex].Cells["Code"].Value.ToString().Trim();
-            if (Convert.ToBoolean(schedule.Rows[rowIndex].Cells["Remove"].Value) == true)
+            string timeSlot = crsSch.Rows[rowIndex].Cells["Code"].Value.ToString().Trim();
+            if (Convert.ToBoolean(crsSch.Rows[rowIndex].Cells["Remove"].Value) == true)
             {
                 if (!timeSlots.Contains(timeSlot))
                     timeSlots.Add(timeSlot);
@@ -61,9 +61,9 @@ namespace CRS
         }
         private void schduleCurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            if (schedule.IsCurrentCellDirty)
+            if (crsSch.IsCurrentCellDirty)
             {
-                schedule.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                crsSch.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
         }
 
@@ -114,9 +114,9 @@ namespace CRS
                     }
                 }
 
-                if (facLst.Text != "")
+                if (facDropDown.Text != "")
                     foreach (faculty fac in usrDB.getFacultyList())
-                        if (fac.fname + " " + fac.lname == facLst.Text.Trim())
+                        if (fac.fname + " " + fac.lname == facDropDown.Text.Trim())
                             crs.setInstructor(fac.username);
 
                 DialogResult = DialogResult.OK;

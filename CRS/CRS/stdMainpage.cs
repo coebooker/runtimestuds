@@ -24,6 +24,7 @@ namespace CRS
             // Store attributes
             InitializeComponent();
             crsDB = new courseDatabase(ref usrDB);
+            crsDB.getPreReqs(@"..\..\preReq.in");
             this.usrDB = usrDB;
             this.usrDB.addPrevCourses(ref this.crsDB, "S15");
             std = usrDB.getStudent(username);
@@ -39,6 +40,7 @@ namespace CRS
             createGradeHist();
             createStdSch();
 
+            // Clear selections on tables
             gradeHist.ClearSelection();
             stdSch.ClearSelection();
 
@@ -63,9 +65,11 @@ namespace CRS
             createGradeHist();
             createStdSch();
 
+            // Clear selections on tables
             gradeHist.ClearSelection();
             stdSch.ClearSelection();
 
+            // Auto completion source
             foreach (course crs in crsDB.getCourseList())
                 crsIDBox.AutoCompleteCustomSource.Add(crs.crsID);
         }
@@ -159,7 +163,53 @@ namespace CRS
             {
                 foreach (string crsID in addCrsLst)
                 {
+                    Dictionary<string, float> gradeDict = new Dictionary<string, float>()
+                        {
+                            {"A",4.0f},
+                            {"A-",3.7f},
+                            {"B+",3.3f},
+                            {"B",3.0f},
+                            {"B-",2.7f},
+                            {"C+",2.3f},
+                            {"C",2.0f},
+                            {"C-",1.7f},
+                            {"D+",1.3f},
+                            {"D",1.0f},
+                            {"D-",0.7f}
+                        };
                     course crs = crsDB.getCourse(crsID);
+                    bool preReq = true;
+                    List<string> preReqLst = crs.preReqLst;
+                    foreach (string courseID in preReqLst)
+                    {
+                        bool temp = false;
+                        foreach (previousCourse pcrs in std.pastCrs)
+                            if (courseID == pcrs.crsID.Substring(0, courseID.Length) && gradeDict.ContainsKey(pcrs.grade))
+                            {
+                                temp = true;
+                                break;
+                            }
+                        if (!temp)
+                        {
+                            foreach (previousCourse pcrs in std.currentCrs)
+                                if (courseID == pcrs.crsID.Substring(0, courseID.Length))
+                                {
+                                    temp = true;
+                                    break;
+                                }
+                            if (!temp)
+                            {
+                                preReq = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (!preReq)
+                    {
+                        MessageBox.Show("You're missing prerequisites.", "Requirement", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }    
                     validity v = std.isValidAdd(crs);
                     if (v.valid)
                     {
@@ -201,8 +251,8 @@ namespace CRS
                 for (int i = 0; i < crsLst.Rows.Count; i++)
                     crsLst.Rows[i].Cells["Add"].Value = null;
                 addCrsLst.Clear();
-                MessageBox.Show("Adding courses successfully executed.",
-                    "Success",
+                MessageBox.Show("The process completed.",
+                    "Done",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }

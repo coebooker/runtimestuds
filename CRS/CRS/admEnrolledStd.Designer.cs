@@ -31,27 +31,27 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.lst = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.lst)).BeginInit();
+            this.stdLst = new System.Windows.Forms.DataGridView();
+            this.label = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.stdLst)).BeginInit();
             this.SuspendLayout();
             // 
             // lst
             // 
-            this.lst.AllowUserToAddRows = false;
-            this.lst.AllowUserToDeleteRows = false;
-            this.lst.AllowUserToResizeColumns = false;
-            this.lst.AllowUserToResizeRows = false;
+            this.stdLst.AllowUserToAddRows = false;
+            this.stdLst.AllowUserToDeleteRows = false;
+            this.stdLst.AllowUserToResizeColumns = false;
+            this.stdLst.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-            this.lst.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.lst.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.stdLst.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.stdLst.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.lst.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.lst.BackgroundColor = System.Drawing.Color.White;
-            this.lst.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lst.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.stdLst.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.stdLst.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.stdLst.BackgroundColor = System.Drawing.Color.White;
+            this.stdLst.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.stdLst.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -59,8 +59,8 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.lst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.lst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.stdLst.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.stdLst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -68,31 +68,31 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lst.DefaultCellStyle = dataGridViewCellStyle3;
-            this.lst.EnableHeadersVisualStyles = false;
-            this.lst.Location = new System.Drawing.Point(64, 91);
-            this.lst.Margin = new System.Windows.Forms.Padding(0);
-            this.lst.MultiSelect = false;
-            this.lst.Name = "lst";
-            this.lst.ReadOnly = true;
-            this.lst.RowHeadersVisible = false;
-            this.lst.RowHeadersWidth = 62;
-            this.lst.RowTemplate.Height = 28;
-            this.lst.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lst.Size = new System.Drawing.Size(513, 323);
-            this.lst.TabIndex = 0;
+            this.stdLst.DefaultCellStyle = dataGridViewCellStyle3;
+            this.stdLst.EnableHeadersVisualStyles = false;
+            this.stdLst.Location = new System.Drawing.Point(64, 91);
+            this.stdLst.Margin = new System.Windows.Forms.Padding(0);
+            this.stdLst.MultiSelect = false;
+            this.stdLst.Name = "lst";
+            this.stdLst.ReadOnly = true;
+            this.stdLst.RowHeadersVisible = false;
+            this.stdLst.RowHeadersWidth = 62;
+            this.stdLst.RowTemplate.Height = 28;
+            this.stdLst.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.stdLst.Size = new System.Drawing.Size(513, 323);
+            this.stdLst.TabIndex = 0;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.label1.Location = new System.Drawing.Point(58, 28);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(308, 33);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Enrolled Students for ";
+            this.label.AutoSize = true;
+            this.label.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.label.Location = new System.Drawing.Point(58, 28);
+            this.label.Margin = new System.Windows.Forms.Padding(0);
+            this.label.Name = "label1";
+            this.label.Size = new System.Drawing.Size(308, 33);
+            this.label.TabIndex = 1;
+            this.label.Text = "Enrolled Students for ";
             // 
             // admEnrolledStd
             // 
@@ -100,12 +100,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(640, 450);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lst);
+            this.Controls.Add(this.label);
+            this.Controls.Add(this.stdLst);
             this.Name = "admEnrolledStd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "admEnrolledStd";
-            ((System.ComponentModel.ISupportInitialize)(this.lst)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stdLst)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,7 +113,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView lst;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView stdLst;
+        private System.Windows.Forms.Label label;
     }
 }

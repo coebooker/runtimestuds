@@ -36,6 +36,7 @@ namespace CRS
             foreach (course crs in crsDB.getCourseList())
                 crsIDBox.AutoCompleteCustomSource.Add(crs.crsID);
 
+            // Clear selection of tables
             facSch.ClearSelection();
             adviseeLst.ClearSelection();
         }
@@ -57,8 +58,11 @@ namespace CRS
             // Auto complete
             foreach (course crs in crsDB.getCourseList())
                 crsIDBox.AutoCompleteCustomSource.Add(crs.crsID);
-        }
 
+            // Clear selection of tables
+            facSch.ClearSelection();
+            adviseeLst.ClearSelection();
+        }
         public void createCrsLst()
         {
             DataTable table = new DataTable();

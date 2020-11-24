@@ -19,16 +19,16 @@ namespace CRS
             InitializeComponent();
             foreach (faculty fac in usrDB.getFacultyList())
             {
-                facLst.Items.Add(fac.username);
-                facLst.AutoCompleteCustomSource.Add(fac.username);
+                facDropDown.Items.Add(fac.username);
+                facDropDown.AutoCompleteCustomSource.Add(fac.username);
             }
 
-            curAdv.Text += advisor;
+            currentAdvisor.Text += advisor;
         }
 
         private void confirmClick(object sender, EventArgs e)
         {
-            newAdvisor = facLst.Text.Trim().ToLower();  // Needed ToLower()
+            newAdvisor = facDropDown.Text.Trim().ToLower();  // Needed ToLower()
             if (newAdvisor == "")
                 MessageBox.Show("Select a new advisor.",
                     "No advisor selected",

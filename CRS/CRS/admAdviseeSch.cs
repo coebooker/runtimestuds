@@ -27,15 +27,15 @@ namespace CRS
             foreach (course crs in std.registeredCrs)
                 table.Rows.Add(crs.crsID, crs.title, crs.instructor, crs.credit, crs.getBlocks());
 
-            lst.DataSource = table;
+            adviseeSch.DataSource = table;
             this.std = std;
 
-            lst.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            lst.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            int width = lst.Columns["Schedule"].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
-            lst.Columns["Schedule"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            lst.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            lst.Columns["Schedule"].Width = width;
+            adviseeSch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            adviseeSch.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            int width = adviseeSch.Columns["Schedule"].GetPreferredWidth(DataGridViewAutoSizeColumnMode.AllCells, true);
+            adviseeSch.Columns["Schedule"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            adviseeSch.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            adviseeSch.Columns["Schedule"].Width = width;
         }
 
         private void butClick(object sender, EventArgs e)

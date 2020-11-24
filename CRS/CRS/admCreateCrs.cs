@@ -27,15 +27,15 @@ namespace CRS
 
             foreach (faculty fac in usrDB.getFacultyList())
             {
-                facLst.Items.Add(fac.fname + " " + fac.lname);
-                facLst.AutoCompleteCustomSource.Add(fac.fname + " " + fac.lname);
+                facDropDown.Items.Add(fac.fname + " " + fac.lname);
+                facDropDown.AutoCompleteCustomSource.Add(fac.fname + " " + fac.lname);
             }
         }
 
         private void confirmClick(object sender, EventArgs e)
         {
             // Search for missing fields
-            if (crsIDBox.Text == "" || titleBox.Text == "" || facLst.Text == "" ||
+            if (crsIDBox.Text == "" || titleBox.Text == "" || facDropDown.Text == "" ||
                 creditBox.Text == "" || seatBox.Text == "")
             {
                 MessageBox.Show("Required fields missing.",
@@ -92,7 +92,7 @@ namespace CRS
                 }
 
             string title = titleBox.Text.Trim();
-            string instructor = facLst.Text.Trim();
+            string instructor = facDropDown.Text.Trim();
             faculty inst = usrDB.getFacultyList()[0];
             foreach (faculty fac in usrDB.getFacultyList())
                 if (fac.fname + " " + fac.lname == instructor)

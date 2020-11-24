@@ -24,6 +24,7 @@ namespace CRS
             // Store attributes
             InitializeComponent();
             crsDB = new courseDatabase(ref usrDB);
+            crsDB.getPreReqs(@"..\..\preReq.in");
             usrDB.addPrevCourses(ref crsDB, nextSemester);
             this.usrDB = usrDB;
 
@@ -335,7 +336,7 @@ namespace CRS
             manCrsLstContainer.Visible = false;
             manStdLstContainer.Visible = false;
             manFacLstContainer.Visible = false;
-            //facActions.Visible = false;
+            facActions.Visible = false;
             facLstContainer.Visible = false;
             facSchContainer.Visible = false;
             adviseeLstContainer.Visible = false;
@@ -441,7 +442,7 @@ namespace CRS
             facSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             stdSelect.BackColor = Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
 
-            //
+            // Hide tables and so on
             crsLstContainer.Visible = false;
             stdLstContainer.Visible = false;
             stdSchContainer.Visible = false;
@@ -451,6 +452,8 @@ namespace CRS
             facSchContainer.Visible = false;
             adviseeLstContainer.Visible = false;
             facActions.Visible = false;
+
+            // Show tables
             manCrsLstContainer.Visible = true;
             manStdLstContainer.Visible = true;
             manFacLstContainer.Visible = true;
@@ -530,8 +533,61 @@ namespace CRS
             {
                 foreach (string crsID in addCrsLst)
                 {
-                    // Add the course to the student
                     student std = usrDB.getStudent(stdUsername);
+
+                    Dictionary<string, float> gradeDict = new Dictionary<string, float>()
+                        {
+                            {"A",4.0f},
+                            {"A-",3.7f},
+                            {"B+",3.3f},
+                            {"B",3.0f},
+                            {"B-",2.7f},
+                            {"C+",2.3f},
+                            {"C",2.0f},
+                            {"C-",1.7f},
+                            {"D+",1.3f},
+                            {"D",1.0f},
+                            {"D-",0.7f}
+                        };
+                    course Crs = crsDB.getCourse(crsID);
+                    bool preReq = true;
+                    List<string> preReqLst = Crs.preReqLst;
+                    foreach (string courseID in preReqLst)
+                    {
+                        bool temp = false;
+                        foreach (previousCourse pcrs in std.pastCrs)
+                            if (courseID == pcrs.crsID.Substring(0, courseID.Length) && gradeDict.ContainsKey(pcrs.grade))
+                            {
+                                temp = true;
+                                break;
+                            }
+                        if (!temp)
+                        {
+                            foreach (previousCourse pcrs in std.currentCrs)
+                                if (courseID == pcrs.crsID.Substring(0, courseID.Length))
+                                {
+                                    temp = true;
+                                    break;
+                                }
+                            if (!temp)
+                            {
+                                preReq = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (!preReq)
+                    {
+                        if (MessageBox.Show("The student's missing prerequisites.\nContinue?", "Requirement",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                            ;
+                        else
+                        {
+                            MessageBox.Show("You canceled the operation.", "Cancel",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
                     validity v = std.isValidAdd(crsDB.getCourse(crsID.Trim()));
                     if (!v.valid)
                     {

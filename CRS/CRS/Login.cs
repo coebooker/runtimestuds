@@ -16,7 +16,7 @@ namespace CRS
         private courseDatabase crsDB;
         private string uname;
         private string utype;
-        bool flag = false;
+        bool flag = false;  // Flag to check if at least one mainpage was open
 
         public LoginForm()
         {

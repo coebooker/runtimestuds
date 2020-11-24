@@ -11,7 +11,7 @@ namespace CRS
     {
         private List<course> crsLst;
 
-        // Class constructor
+        // Construct the database and update it
         public courseDatabase(ref userDatabase userDB)
         {
             this.crsLst = new List<course>();
@@ -40,7 +40,36 @@ namespace CRS
             }
             input.Close();
         }
-
+        public void getPreReqs(string filepath)
+        {
+            string[] preReqLines = File.ReadAllLines(filepath);
+            foreach (string preReqString in preReqLines)
+            {
+                List<string> preReqList = new List<string>();
+                string currentCourseStr = preReqString.Substring(0, 7).Trim();
+                List<course> courseList = new List<course>();
+                foreach (course crs in crsLst)
+                    if (currentCourseStr == crs.crsID.Substring(0, currentCourseStr.Length))
+                    {
+                        courseList.Add(crs);
+                    } 
+                //Converts string to int
+                int numPreReqsStr = Int32.Parse(preReqString.Substring(8, 1));
+                int index = 10;
+                for (int i = 0; i < numPreReqsStr; i++)
+                {
+                    string courseCode;
+                    if (index + 7 > preReqString.Length)
+                        courseCode = preReqString.Substring(index).Trim();
+                    else
+                        courseCode = preReqString.Substring(index, 7).Trim();
+                    preReqList.Add(courseCode);
+                    index += 8;
+                }
+                foreach (course crs in courseList)
+                    crs.preReqLst = preReqList;
+            }
+        }
         public void updateDatabase()
         {
             List<string> CourseDBString = new List<string>();
@@ -60,15 +89,8 @@ namespace CRS
             File.WriteAllLines(@"..\..\courseDB.in", newCourseLinesArr);
         }
 
+
         // Gets the faculty's next semester coures
-        public List<course> getNextFacCrsLst(string username)
-        {
-            List<course> crsLst = new List<course>();
-            foreach (course crs in this.crsLst)
-                if (crs.instructor == username)
-                    crsLst.Add(crs);
-            return crsLst;
-        }
         public List<course> getCourseList()
         {
             return crsLst;

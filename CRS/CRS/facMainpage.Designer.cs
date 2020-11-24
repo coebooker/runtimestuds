@@ -608,7 +608,7 @@
             this.label1.Location = new System.Drawing.Point(5, 1600);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1768, 100);
+            this.label1.Size = new System.Drawing.Size(1742, 100);
             this.label1.TabIndex = 52;
             // 
             // facMainpage

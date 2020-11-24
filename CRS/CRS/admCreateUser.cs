@@ -111,14 +111,6 @@ namespace CRS
                 username.ForeColor = Color.White;
             }
         }
-        private void usernameLeave(object sender, EventArgs e)
-        {
-            if (username.Text == "")
-            {
-                username.Text = "Username";
-                username.ForeColor = Color.Silver;
-            }
-        }
         private void passwordEnter(object sender, EventArgs e)
         {
             if (password.Text == "Password")
@@ -126,15 +118,6 @@ namespace CRS
                 password.Text = "";
                 password.ForeColor = Color.White;
                 password.PasswordChar = '*';
-            }
-        }
-        private void passwordLeave(object sender, EventArgs e)
-        {
-            if (password.Text == "")
-            {
-                password.PasswordChar = '\0';
-                password.Text = "Password";
-                password.ForeColor = Color.Silver;
             }
         }
         private void fnameEnter(object sender, EventArgs e)
@@ -145,27 +128,11 @@ namespace CRS
                 fname.ForeColor = Color.White;
             }
         }
-        private void fnameLeave(object sender, EventArgs e)
-        {
-            if (fname.Text == "")
-            {
-                fname.Text = "First Name";
-                fname.ForeColor = Color.Silver;
-            }
-        }
         private void mnameEnter(object sender, EventArgs e)
         {
             if (mname.Text == "Middle Name")
             {
                 mname.Text = "";
-                mname.ForeColor = Color.White;
-            }
-        }
-        private void mnameLeave(object sender, EventArgs e)
-        {
-            if (mname.Text == "")
-            {
-                mname.Text = "Middle Name";
                 mname.ForeColor = Color.White;
             }
         }
@@ -175,14 +142,6 @@ namespace CRS
             {
                 lname.Text = "";
                 lname.ForeColor = Color.White;
-            }
-        }
-        private void lnameLeave(object sender, EventArgs e)
-        {
-            if (lname.Text == "")
-            {
-                lname.Text = "Last Name";
-                lname.ForeColor = Color.Silver;
             }
         }
     }

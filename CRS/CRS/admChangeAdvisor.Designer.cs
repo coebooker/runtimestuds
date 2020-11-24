@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.facLst = new System.Windows.Forms.ComboBox();
+            this.facDropDown = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.curAdv = new System.Windows.Forms.Label();
+            this.currentAdvisor = new System.Windows.Forms.Label();
             this.confirm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // facLst
             // 
-            this.facLst.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.facLst.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.facLst.FormattingEnabled = true;
-            this.facLst.Location = new System.Drawing.Point(302, 160);
-            this.facLst.Name = "facLst";
-            this.facLst.Size = new System.Drawing.Size(121, 28);
-            this.facLst.TabIndex = 0;
+            this.facDropDown.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.facDropDown.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.facDropDown.FormattingEnabled = true;
+            this.facDropDown.Location = new System.Drawing.Point(302, 160);
+            this.facDropDown.Name = "facLst";
+            this.facDropDown.Size = new System.Drawing.Size(121, 28);
+            this.facDropDown.TabIndex = 0;
             // 
             // label1
             // 
@@ -56,13 +56,13 @@
             // 
             // curAdv
             // 
-            this.curAdv.AutoSize = true;
-            this.curAdv.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.curAdv.Location = new System.Drawing.Point(99, 100);
-            this.curAdv.Name = "curAdv";
-            this.curAdv.Size = new System.Drawing.Size(178, 24);
-            this.curAdv.TabIndex = 2;
-            this.curAdv.Text = "Current Advisor : ";
+            this.currentAdvisor.AutoSize = true;
+            this.currentAdvisor.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentAdvisor.Location = new System.Drawing.Point(99, 100);
+            this.currentAdvisor.Name = "curAdv";
+            this.currentAdvisor.Size = new System.Drawing.Size(178, 24);
+            this.currentAdvisor.TabIndex = 2;
+            this.currentAdvisor.Text = "Current Advisor : ";
             // 
             // confirm
             // 
@@ -88,9 +88,9 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(522, 354);
             this.Controls.Add(this.confirm);
-            this.Controls.Add(this.curAdv);
+            this.Controls.Add(this.currentAdvisor);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.facLst);
+            this.Controls.Add(this.facDropDown);
             this.Name = "admChangeAdvisor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Change Advisor Form";
@@ -101,9 +101,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox facLst;
+        private System.Windows.Forms.ComboBox facDropDown;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label curAdv;
+        private System.Windows.Forms.Label currentAdvisor;
         private System.Windows.Forms.Button confirm;
     }
 }

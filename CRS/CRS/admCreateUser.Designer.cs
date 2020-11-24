@@ -131,7 +131,6 @@
             this.username.TabIndex = 0;
             this.username.Text = "Username";
             this.username.Enter += new System.EventHandler(this.usernameEnter);
-            this.username.Leave += new System.EventHandler(this.usernameLeave);
             // 
             // password
             // 
@@ -146,7 +145,6 @@
             this.password.TabIndex = 1;
             this.password.Text = "Password";
             this.password.Enter += new System.EventHandler(this.passwordEnter);
-            this.password.Leave += new System.EventHandler(this.passwordLeave);
             // 
             // fname
             // 
@@ -161,7 +159,6 @@
             this.fname.TabIndex = 4;
             this.fname.Text = "First Name";
             this.fname.Enter += new System.EventHandler(this.fnameEnter);
-            this.fname.Leave += new System.EventHandler(this.fnameLeave);
             // 
             // mname
             // 
@@ -176,7 +173,6 @@
             this.mname.TabIndex = 5;
             this.mname.Text = "Middle Name";
             this.mname.Enter += new System.EventHandler(this.mnameEnter);
-            this.mname.Leave += new System.EventHandler(this.mnameLeave);
             // 
             // lname
             // 
@@ -191,7 +187,6 @@
             this.lname.TabIndex = 6;
             this.lname.Text = "Last Name";
             this.lname.Enter += new System.EventHandler(this.lnameEnter);
-            this.lname.Leave += new System.EventHandler(this.lnameLeave);
             // 
             // panel1
             // 

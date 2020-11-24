@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
-            this.schedule = new System.Windows.Forms.DataGridView();
+            this.crsSch = new System.Windows.Forms.DataGridView();
             this.label = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,9 +48,9 @@
             this.MA = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.facLst = new System.Windows.Forms.ComboBox();
+            this.facDropDown = new System.Windows.Forms.ComboBox();
             this.confirm = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.schedule)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.crsSch)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -59,7 +59,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1405, 90);
+            this.panel1.Size = new System.Drawing.Size(1431, 90);
             this.panel1.TabIndex = 14;
             // 
             // label12
@@ -67,23 +67,23 @@
             this.label12.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label12.Location = new System.Drawing.Point(0, 799);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(1405, 155);
+            this.label12.Size = new System.Drawing.Size(1431, 155);
             this.label12.TabIndex = 88;
             // 
-            // schedule
+            // crsSch
             // 
-            this.schedule.AllowUserToAddRows = false;
-            this.schedule.AllowUserToDeleteRows = false;
-            this.schedule.AllowUserToResizeColumns = false;
-            this.schedule.AllowUserToResizeRows = false;
+            this.crsSch.AllowUserToAddRows = false;
+            this.crsSch.AllowUserToDeleteRows = false;
+            this.crsSch.AllowUserToResizeColumns = false;
+            this.crsSch.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-            this.schedule.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.schedule.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.schedule.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.schedule.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.schedule.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.schedule.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.crsSch.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.crsSch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.crsSch.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.crsSch.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.crsSch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.crsSch.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -91,8 +91,8 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.schedule.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.schedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.crsSch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.crsSch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -100,17 +100,17 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.schedule.DefaultCellStyle = dataGridViewCellStyle3;
-            this.schedule.EnableHeadersVisualStyles = false;
-            this.schedule.Location = new System.Drawing.Point(206, 210);
-            this.schedule.Name = "schedule";
-            this.schedule.RowHeadersVisible = false;
-            this.schedule.RowHeadersWidth = 62;
-            this.schedule.RowTemplate.Height = 28;
-            this.schedule.Size = new System.Drawing.Size(424, 174);
-            this.schedule.TabIndex = 89;
-            this.schedule.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.scheduleCellValueChanged);
-            this.schedule.CurrentCellDirtyStateChanged += new System.EventHandler(this.schduleCurrentCellDirtyStateChanged);
+            this.crsSch.DefaultCellStyle = dataGridViewCellStyle3;
+            this.crsSch.EnableHeadersVisualStyles = false;
+            this.crsSch.Location = new System.Drawing.Point(206, 210);
+            this.crsSch.Name = "crsSch";
+            this.crsSch.RowHeadersVisible = false;
+            this.crsSch.RowHeadersWidth = 62;
+            this.crsSch.RowTemplate.Height = 28;
+            this.crsSch.Size = new System.Drawing.Size(424, 174);
+            this.crsSch.TabIndex = 89;
+            this.crsSch.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.scheduleCellValueChanged);
+            this.crsSch.CurrentCellDirtyStateChanged += new System.EventHandler(this.schduleCurrentCellDirtyStateChanged);
             // 
             // label
             // 
@@ -301,15 +301,15 @@
             this.label1.TabIndex = 103;
             this.label1.Text = "Instructor :";
             // 
-            // facLst
+            // facDropDown
             // 
-            this.facLst.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.facLst.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.facLst.FormattingEnabled = true;
-            this.facLst.Location = new System.Drawing.Point(384, 662);
-            this.facLst.Name = "facLst";
-            this.facLst.Size = new System.Drawing.Size(284, 31);
-            this.facLst.TabIndex = 104;
+            this.facDropDown.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.facDropDown.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
+            this.facDropDown.FormattingEnabled = true;
+            this.facDropDown.Location = new System.Drawing.Point(384, 662);
+            this.facDropDown.Name = "facDropDown";
+            this.facDropDown.Size = new System.Drawing.Size(284, 31);
+            this.facDropDown.TabIndex = 104;
             // 
             // confirm
             // 
@@ -335,9 +335,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(1431, 712);
+            this.ClientSize = new System.Drawing.Size(1457, 712);
             this.Controls.Add(this.confirm);
-            this.Controls.Add(this.facLst);
+            this.Controls.Add(this.facDropDown);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -352,13 +352,13 @@
             this.Controls.Add(this.MA);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label);
-            this.Controls.Add(this.schedule);
+            this.Controls.Add(this.crsSch);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.panel1);
             this.Name = "admChangeCrs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Change Course";
-            ((System.ComponentModel.ISupportInitialize)(this.schedule)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.crsSch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,7 +367,7 @@
         #endregion
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridView schedule;
+        private System.Windows.Forms.DataGridView crsSch;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -382,7 +382,7 @@
         private System.Windows.Forms.CheckBox MA;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox facLst;
+        private System.Windows.Forms.ComboBox facDropDown;
         private System.Windows.Forms.Button confirm;
     }
 }

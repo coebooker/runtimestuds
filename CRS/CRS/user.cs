@@ -317,8 +317,6 @@ namespace CRS
             username = usrname;
             password = psw;
         }
-        private List<course> CourseSchedule = new List<course>();
-        private List<course> RegisteredCourses = new List<course>();
     }
     public class manager : admin
     {

@@ -45,7 +45,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.titleBox = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.facLst = new System.Windows.Forms.ComboBox();
+            this.facDropDown = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,7 +73,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1312, 90);
+            this.panel1.Size = new System.Drawing.Size(1338, 90);
             this.panel1.TabIndex = 13;
             // 
             // label1
@@ -283,15 +283,15 @@
             this.label15.TabIndex = 46;
             this.label15.Text = "* Instructor :";
             // 
-            // facLst
+            // facDropDown
             // 
-            this.facLst.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.facLst.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.facLst.FormattingEnabled = true;
-            this.facLst.Location = new System.Drawing.Point(399, 321);
-            this.facLst.Name = "facLst";
-            this.facLst.Size = new System.Drawing.Size(230, 28);
-            this.facLst.TabIndex = 2;
+            this.facDropDown.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.facDropDown.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.facDropDown.FormattingEnabled = true;
+            this.facDropDown.Location = new System.Drawing.Point(399, 321);
+            this.facDropDown.Name = "facDropDown";
+            this.facDropDown.Size = new System.Drawing.Size(230, 28);
+            this.facDropDown.TabIndex = 2;
             // 
             // label16
             // 
@@ -504,7 +504,7 @@
             this.label12.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label12.Location = new System.Drawing.Point(0, 1097);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(1312, 119);
+            this.label12.Size = new System.Drawing.Size(1338, 119);
             this.label12.TabIndex = 65;
             this.label12.Text = "label12";
             // 
@@ -535,7 +535,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(49)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(1338, 1050);
+            this.ClientSize = new System.Drawing.Size(1364, 1050);
             this.Controls.Add(this.seatBox);
             this.Controls.Add(this.creditBox);
             this.Controls.Add(this.crsIDBox);
@@ -555,7 +555,7 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.facLst);
+            this.Controls.Add(this.facDropDown);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.titleBox);
             this.Controls.Add(this.label14);
@@ -600,7 +600,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox titleBox;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox facLst;
+        private System.Windows.Forms.ComboBox facDropDown;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label2;
