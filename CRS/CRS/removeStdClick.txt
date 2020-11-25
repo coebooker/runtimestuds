@@ -1,0 +1,50 @@
+//int count = manSelectedStdLst.Count;
+            //if (count == 0)
+            //{
+            //    MessageBox.Show("Select a student from the list below",
+            //        "No student selected",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Error);
+            //    return;
+            //}
+            //string message = "Are you sure you want to remove :\n";
+            //foreach (int i in manSelectedStdLst)
+            //    message += "   " + manStdLst.Rows[i].Cells["Username"].Value.ToString() + "\n";
+            //if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            //    MessageBox.Show("No students have been removed.",
+            //        "Cancel",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Information);
+            //else
+            //{
+            //    List<DataGridViewRow> rowList = new List<DataGridViewRow>();
+            //    foreach (int i in manSelectedStdLst)
+            //        rowList.Add(manStdLst.Rows[i]);
+
+            //    for (int i = 0; i < count; i++)
+            //    {
+            //        // Get the student's username
+            //        stdUsername = rowList[i].Cells["Username"].Value.ToString().Trim();
+
+            //        // Remove the student from the user database
+            //        usrDB.removeStd(stdUsername, ref crsDB, @"..\..\userDB.in");
+            //    }
+
+            //    // Update the student list
+            //    foreach (DataGridViewRow row in rowList)
+            //        for (int l = 0; l < manStdLst.RowCount; l++)
+            //            if (row.Cells["Username"].Value.ToString().Trim() == manStdLst.Rows[l].Cells["Username"].Value.ToString().Trim())
+            //            {
+            //                manStdLst.Rows.RemoveAt(l);
+            //                break;
+            //            }
+
+            //    // Clear the selection
+            //    for (int i = 0; i < manStdLst.RowCount; i++)
+            //        manStdLst.Rows[i].Cells["Select"].Value = null;
+
+            //    manSelectedStdLst.Clear();
+            //    manStdLst.ClearSelection();
+            //}
+
+            

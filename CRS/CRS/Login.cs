@@ -13,22 +13,24 @@ namespace CRS
     public partial class LoginForm : Form
     {
         private userDatabase usrDB;
-        string upath;
-        string cpath;
-        string ppath;
-        public LoginForm(string upath, string cpath, string ppath)
+        private courseDatabase crsDB;
+        private string uname;
+        private string utype;
+        bool flag = false;  // Flag to check if at least one mainpage was open
+
+        public LoginForm()
         {
             InitializeComponent();
-            this.upath = upath;
-            this.cpath = cpath;
-            this.ppath = ppath;
-            usrDB = new userDatabase(upath);
+            usrDB = new userDatabase(@"..\..\userDB.in");
 
+            // Make the close button transparent
             Bitmap bmp = ((Bitmap)close.BackgroundImage);
+            bmp.MakeTransparent();
+            bmp = ((Bitmap)pictureBox2.BackgroundImage);
             bmp.MakeTransparent();
         }
 
-        private void UsernameEnter(object sender, EventArgs e)
+        private void usernameEnter(object sender, EventArgs e)
         {
             if (username.Text == "Username")
             {
@@ -36,8 +38,7 @@ namespace CRS
                 username.ForeColor = Color.White;
             }
         }
-
-        private void UsernameLeave(object sender, EventArgs e)
+        private void usernameLeave(object sender, EventArgs e)
         {
             if (username.Text == "")
             {
@@ -45,8 +46,7 @@ namespace CRS
                 username.ForeColor = Color.Silver;
             }
         }
-
-        private void PasswordEnter(object sender, EventArgs e)
+        private void passwordEnter(object sender, EventArgs e)
         {
             if (password.Text == "Password")
             {
@@ -55,8 +55,7 @@ namespace CRS
                 password.ForeColor = Color.White;
             }
         }
-
-        private void PasswordLeave(object sender, EventArgs e)
+        private void passwordLeave(object sender, EventArgs e)
         {
             if (password.Text == "")
             {
@@ -65,23 +64,78 @@ namespace CRS
                 password.ForeColor = Color.Silver;
             }
         }
-
-        private void LoginClick(object sender, EventArgs e)
+        private void loginClick(object sender, EventArgs e)
         {
-            string usertype = "student";    //Default
-            string username = this.username.Text.ToLower();
-            string password = this.password.Text.ToLower();
+            uname = username.Text.Trim().ToLower();
+            utype = "student";
+            string password = this.password.Text.Trim();
 
-            if (usrDB.isValidUser(username, password, ref usertype))
+            if (usrDB.isValidUser(uname, password, ref utype))
             {
-                this.Hide();
-                if (usertype == "admin")
-                    new admMainpage(usrDB, cpath, ppath).ShowDialog();
-                else if (usertype == "manager")
-                    return;
+                Hide();
+                if (utype == "admin" || utype == "manager")
+                {
+                    if (!flag)
+                    {
+                        var form = new admMainpage(usrDB, @"..\..\historyDB.in", utype);
+                        form.ShowDialog();
+                        usrDB = form.usrDB;
+                        crsDB = form.crsDB;
+                        usrDB.updateDatabase();
+                    }
+                    else
+                    {
+                        var form = new admMainpage(usrDB, crsDB, utype);
+                        form.ShowDialog();
+                        usrDB = form.usrDB;
+                        crsDB = form.crsDB;
+                    }    
+                }
                 else
-                    new mainpage(usertype, username, usrDB, upath, cpath, ppath).ShowDialog();
-                this.Close();
+                {
+                    if (utype == "faculty")
+                    {
+                        if (!flag)
+                        {
+                            var form = new facMainpage(uname, usrDB);
+                            form.ShowDialog();
+                            usrDB = form.usrDB;
+                            crsDB = form.crsDB;
+                        }
+                        else
+                        {
+                            var form = new facMainpage(uname, usrDB, crsDB);
+                            form.ShowDialog();
+                            usrDB = form.usrDB;
+                            crsDB = form.crsDB;
+                        }
+                    }
+                    else
+                    {
+                        if (!flag)
+                        {
+                            var form = new stdMainpage(uname, usrDB);
+                            form.ShowDialog();
+                            usrDB = form.usrDB;
+                            crsDB = form.crsDB;
+                        }
+                        else
+                        {
+                            var form = new stdMainpage(uname, usrDB, crsDB);
+                            form.ShowDialog();
+                            usrDB = form.usrDB;
+                            crsDB = form.crsDB;
+                        }
+                    }
+                }
+                username.Text = "Username";
+                username.ForeColor = Color.Silver;
+                this.password.Text = "Password";
+                this.password.PasswordChar = '\0';
+                this.password.ForeColor = Color.Silver;
+
+                flag = true;
+                Show();
             }
             else
             {
@@ -94,10 +148,18 @@ namespace CRS
                 this.password.ForeColor = Color.White;
             }
         }
-
         private void close_click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
+        }
+
+        private void loginClosing(object sender, FormClosingEventArgs e)
+        {
+            if (flag)
+            {
+                usrDB.updateDatabase();
+                crsDB.updateDatabase();
+            }
         }
     }
 }

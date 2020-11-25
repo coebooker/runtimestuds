@@ -56,8 +56,8 @@ namespace CRS
             this.username.Size = new System.Drawing.Size(360, 53);
             this.username.TabIndex = 0;
             this.username.Text = "Username";
-            this.username.Enter += new System.EventHandler(this.UsernameEnter);
-            this.username.Leave += new System.EventHandler(this.UsernameLeave);
+            this.username.Enter += new System.EventHandler(this.usernameEnter);
+            this.username.Leave += new System.EventHandler(this.usernameLeave);
             // 
             // password
             // 
@@ -70,8 +70,8 @@ namespace CRS
             this.password.Size = new System.Drawing.Size(360, 53);
             this.password.TabIndex = 1;
             this.password.Text = "Password";
-            this.password.Enter += new System.EventHandler(this.PasswordEnter);
-            this.password.Leave += new System.EventHandler(this.PasswordLeave);
+            this.password.Enter += new System.EventHandler(this.passwordEnter);
+            this.password.Leave += new System.EventHandler(this.passwordLeave);
             // 
             // login
             // 
@@ -79,7 +79,7 @@ namespace CRS
             this.login.Cursor = System.Windows.Forms.Cursors.Hand;
             this.login.FlatAppearance.BorderSize = 0;
             this.login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.login.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.login.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.login.ForeColor = System.Drawing.Color.White;
             this.login.Location = new System.Drawing.Point(47, 404);
             this.login.Name = "login";
@@ -87,7 +87,7 @@ namespace CRS
             this.login.TabIndex = 3;
             this.login.Text = "Login";
             this.login.UseVisualStyleBackColor = false;
-            this.login.Click += new System.EventHandler(this.LoginClick);
+            this.login.Click += new System.EventHandler(this.loginClick);
             // 
             // panel1
             // 
@@ -115,11 +115,11 @@ namespace CRS
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(176, 38);
+            this.label1.Location = new System.Drawing.Point(152, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 37);
+            this.label1.Size = new System.Drawing.Size(226, 46);
             this.label1.TabIndex = 0;
             this.label1.Text = "USER LOGIN";
             // 
@@ -162,6 +162,7 @@ namespace CRS
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.loginClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.close)).EndInit();

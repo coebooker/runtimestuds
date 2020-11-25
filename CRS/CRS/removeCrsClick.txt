@@ -1,0 +1,56 @@
+int count = manSelectedCrsLst.Count;
+            if (count == 0)
+            {
+                MessageBox.Show("Select courses from the list below",
+                        "No course selected",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                ScrollControlIntoView(manCrsLst);
+            }
+            else
+            {
+                string message = "Are you sure you want to remove :\n";
+                foreach (string crsID in manSelectedCrsLst)
+                    message += "    " + crsID + "\n";
+                if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                {
+                    MessageBox.Show("No courses have been removed.",
+                        "Cancel",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
+
+                List<DataGridViewRow> rowList = new List<DataGridViewRow>();
+                foreach (int i in manSelectedCrsLst)
+                    rowList.Add(manCrsLst.Rows[i]);
+
+                for (int i = 0; i < count; i++)
+                {
+                    // Get the course ID
+                    string crsID = rowList[i].Cells["Course ID"].Value.ToString().Trim();
+
+                    // Remove the course from the course database
+                    crsDB.removeCrs(crsID, @"..\..\courseDB.in", ref usrDB);
+
+                    // Update the listing of courses
+                    for (int l = 0; l < manCrsLst.RowCount; l++)
+                        if (crsID == manCrsLst.Rows[l].Cells["Course ID"].Value.ToString().Trim())
+                        {
+                            manCrsLst.Rows.RemoveAt(l);
+                            break;
+                        }
+                }
+
+                // Clear the selection
+                for (int i = 0; i < manCrsLst.RowCount; i++)
+                    manCrsLst.Rows[i].Cells["Select"].Value = null;
+
+                manSelectedCrsLst.Clear();
+                manCrsLst.ClearSelection();
+
+                MessageBox.Show("Removal successfully executed.",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
